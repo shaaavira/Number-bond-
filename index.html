@@ -236,42 +236,43 @@
             background: #fffbeb;
             border: 3px solid #fde047;
             border-radius: 20px;
-            padding: 10px 20px;
+            padding: 10px 18px;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
-            min-height: 70px;
-            max-width: 860px;
+            gap: 14px;
+            min-height: 85px;
+            max-width: 950px;
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 6px 16px rgba(0,0,0,0.04);
-            overflow-x: auto;
+            flex-wrap: wrap; /* Supaya otomatis menyesuaikan jika turun baris */
         }
 
         .emoji-side {
             font-size: 38px;
-            letter-spacing: 4px;
-            line-height: 1.2;
+            letter-spacing: 3px;
+            line-height: 1.25;
             white-space: nowrap;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.9);
-            padding: 6px 16px;
+            padding: 6px 14px;
             border-radius: 12px;
             border: 2px dashed #fcd34d;
         }
 
-        /* Mode sedang untuk LE3 (cukup kecil agar muat 20, tapi tetap pas dan jelas dilihat anak) */
-        .emoji-side.medium-mode {
-            font-size: 34px !important;
-            letter-spacing: 3px !important;
-            flex-wrap: wrap;
+        /* Khusus mode LE3: Ukuran pas 38px tapi dibungkus rapi fleksibel agar muat sampai 20 */
+        .emoji-side.le3-mode {
+            font-size: 38px !important;
+            letter-spacing: 2px !important;
+            flex-wrap: wrap !important;
             max-width: 440px;
             justify-content: center;
-            gap: 3px;
-            padding: 6px 12px;
+            gap: 2px;
+            padding: 6px 10px;
+            white-space: normal !important;
         }
 
         /* LAYOUT UTAMA */
@@ -955,18 +956,18 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Atur ilustrasi gambar (CT disembunyikan, LE3 menggunakan mode sedang agar pas dilihat)
+            // Atur ilustrasi gambar (CT disembunyikan, LE3 menggunakan mode le3-mode ukuran 38px)
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
                 
                 if (kategoriPilihan === 'LE3') {
-                    visualGroupLeft.classList.add('medium-mode');
-                    visualGroupRight.classList.add('medium-mode');
+                    visualGroupLeft.classList.add('le3-mode');
+                    visualGroupRight.classList.add('le3-mode');
                 } else {
-                    visualGroupLeft.classList.remove('medium-mode');
-                    visualGroupRight.classList.remove('medium-mode');
+                    visualGroupLeft.classList.remove('le3-mode');
+                    visualGroupRight.classList.remove('le3-mode');
                 }
 
                 if (posisiKosong === 2) {

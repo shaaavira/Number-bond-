@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <!-- Diperbarui ke CDN jsDelivr yang lebih stabil untuk Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -702,8 +701,9 @@ Uswa"></textarea>
         const visualGroupLeft = document.getElementById('visual-group-left');
         const visualGroupRight = document.getElementById('visual-group-right');
 
-        // MEMBUAT OBJEK AUDIO DARI FILE LOKAL Hore.mp3
+        // MEMUAT AUDIO DI AWAL (PRELOAD) UNTUK MENGHILANGKAN DELAY
         const audioBenar = new Audio('Hore.mp3');
+        audioBenar.load();
 
         const circlePalettes = [
             { top: '#ff6b81', bottom: '#2ed573' }, 
@@ -740,10 +740,10 @@ Uswa"></textarea>
             } catch(e) {}
         }
 
-        // FUNGSI MEMUTAR SUARA Hore.mp3
+        // FUNGSI MEMUTAR SUARA Hore.mp3 SECARA INSTAN TANPA DELAY
         function playClappingAndCheer() {
             try {
-                audioBenar.currentTime = 0; // Reset ke awal biar bisa diputar berulang
+                audioBenar.currentTime = 0; 
                 audioBenar.play().catch(e => {
                     console.log("Audio diblokir browser atau file tidak ditemukan.");
                 });
@@ -987,6 +987,7 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
+                // Suara dan Confetti dipanggil bersamaan secara instan
                 playClappingAndCheer();
                 triggerConfetti();
                 

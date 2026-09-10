@@ -29,7 +29,7 @@
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 550px;
+            max-width: 600px;
             text-align: center;
             border: 5px solid #ff7675;
             position: relative;
@@ -47,11 +47,12 @@
         .subtitle {
             font-size: 14px;
             color: #636e72;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 700;
         }
 
-        .stats-bar {
+        /* Papan Skor 3 Anak */
+        .leaderboard {
             display: flex;
             justify-content: space-around;
             background: #ffeaa7;
@@ -60,7 +61,29 @@
             margin-bottom: 20px;
             font-weight: 700;
             color: #d35400;
+            font-size: 14px;
+        }
+
+        .player-score {
+            text-align: center;
+            background: white;
+            padding: 5px 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .player-score span {
+            display: block;
+            font-family: 'Fredoka One', cursive;
             font-size: 16px;
+            color: #e17055;
+        }
+
+        .level-info {
+            font-weight: 700;
+            color: #636e72;
+            font-size: 14px;
+            margin-bottom: 15px;
         }
 
         /* Number Bond Visual (Pohon Angka) */
@@ -68,7 +91,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
         }
 
@@ -84,7 +107,6 @@
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
-        /* Lingkaran Atas (Total/Hasil) - Default Warna Pink */
         .top-circle {
             background: #ff7675;
             color: white;
@@ -92,7 +114,7 @@
             margin-bottom: 25px; 
         }
 
-        /* --- GARIS BENTUK ATAP RUMAH (/\) --- */
+        /* Garis Bentuk Atap Rumah (/\) */
         .branch-lines {
             width: 200px;  
             height: 35px;  
@@ -126,14 +148,12 @@
             width: 260px; 
         }
 
-        /* Lingkaran Bawah (Bagian-bagian) - Default Warna Biru */
         .part-circle {
             background: #74b9ff;
             color: white;
             border: 4px dashed #81ecec;
         }
 
-        /* --- KELAS SERAGAM UNTUK INPUT ABU-ABU (Berlaku Atas & Bawah) --- */
         .input-box-wrapper {
             background: #dfe6e9 !important;
             border: 4px solid #b2bec3 !important;
@@ -153,7 +173,6 @@
             border-radius: 50%;
         }
 
-        /* Menghilangkan spinner default input type=number */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -165,7 +184,7 @@
 
         /* Kontrol Input & Tombol */
         .input-section {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .btn {
@@ -186,18 +205,64 @@
             box-shadow: 0 1px 0 #00a884;
         }
 
+        /* Bagian Pilih Siapa yang Cepat */
+        #picker-section {
+            background: #f1f2f6;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 10px;
+            border: 2px dashed #ced6e0;
+        }
+
+        .picker-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 16px;
+            color: #2f3640;
+            margin-bottom: 10px;
+        }
+
+        .name-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-name {
+            background-color: #0984e3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #074985;
+            transition: all 0.1s ease;
+        }
+
+        .btn-name:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #074985;
+        }
+
+        .btn-name:nth-child(2) { background-color: #e84393; box-shadow: 0 4px 0 #a21253; }
+        .btn-name:nth-child(2):active { box-shadow: 0 1px 0 #a21253; }
+
+        .btn-name:nth-child(3) { background-color: #fdcb6e; color: #2d3436; box-shadow: 0 4px 0 #e1b12c; }
+        .btn-name:nth-child(3):active { box-shadow: 0 1px 0 #e1b12c; }
+
         /* Feedback Pesan */
         #feedback {
             font-family: 'Fredoka One', cursive;
-            font-size: 20px;
-            margin-top: 15px;
-            min-height: 30px;
+            font-size: 18px;
+            margin-top: 10px;
+            min-height: 25px;
         }
 
         .correct { color: #00b894; }
         .wrong { color: #d63031; }
 
-        /* Tampilan Selesai / Game Over */
+        /* Tampilan Selesai / Pemenang */
         .hidden {
             display: none !important;
         }
@@ -216,6 +281,16 @@
             font-size: 40px;
             margin-bottom: 5px;
         }
+
+        #winner-text {
+            font-family: 'Fredoka One', cursive;
+            font-size: 22px;
+            color: #d63031;
+            margin: 15px 0;
+            background: #ffeaa7;
+            padding: 10px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -223,24 +298,23 @@
     <div class="game-container">
         <!-- Halaman Bermain -->
         <div id="game-screen">
-            <div class="mascot">🚀🦊</div>
-            <h1>Number Bond Ratusan</h1>
-            <div class="subtitle">Tentukan angka yang hilang pada pohon angka!</div>
+            <div class="mascot">🚀⚡</div>
+            <h1>Cepat-Cepetan Number Bond</h1>
+            <div class="subtitle">Siapa yang paling cepat menjawab?</div>
 
-            <div class="stats-bar">
-                <span id="score-text">Skor: 0</span>
-                <span id="level-text">Soal: 1 / 10</span>
+            <!-- Papan Skor 3 Anak -->
+            <div class="leaderboard">
+                <div class="player-score">Dawai <span id="score-dawai">0</span></div>
+                <div class="player-score">Alif <span id="score-alif">0</span></div>
+                <div class="player-score">Nahda <span id="score-nahda">0</span></div>
             </div>
+
+            <div class="level-info" id="level-text">Soal: 1 / 10</div>
 
             <!-- Pohon Number Bond -->
             <div class="bond-container">
-                <!-- Total Atas -->
                 <div id="top-val" class="circle top-circle">500</div>
-                
-                <!-- Garis Penghubung (Bentuk /\ ) -->
                 <div class="branch-lines"></div>
-
-                <!-- Bagian Bawah -->
                 <div class="bottom-circles">
                     <div id="left-val" class="circle part-circle">200</div>
                     <div id="right-val" class="circle part-circle">300</div>
@@ -251,62 +325,83 @@
                 <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
             </div>
 
+            <!-- Pilihan Nama Anak Muncul Jika Benar -->
+            <div id="picker-section" class="hidden">
+                <div class="picker-title">Siapa yang duluan menjawab benar? ⏱️</div>
+                <div class="name-buttons">
+                    <button class="btn-name" onclick="tambahSkorAnak('dawai')">Dawai 👦</button>
+                    <button class="btn-name" onclick="tambahSkorAnak('alif')">Alif 👦</button>
+                    <button class="btn-name" onclick="tambahSkorAnak('nahda')">Nahda 👧</button>
+                </div>
+            </div>
+
             <div id="feedback"></div>
         </div>
 
         <!-- Halaman Hasil Akhir -->
         <div id="result-screen" class="hidden modal">
-            <div class="mascot">🏆🎉</div>
-            <h1>Hebat Sekali!</h1>
-            <p class="subtitle">Kamu telah menyelesaikan petualangan Number Bond!</p>
-            <h2 id="final-score" style="font-family: 'Fredoka One'; color: #00b894; font-size: 36px; margin: 20px 0;">Skor Akhir: 100</h2>
+            <div class="mascot">🏆👑</div>
+            <h1>Permainan Selesai!</h1>
+            <div id="winner-text">Pemenangnya adalah...</div>
             <button class="btn" onclick="mulaiGame()">Main Lagi 🔄</button>
         </div>
     </div>
 
     <script>
-        let skor = 0;
+        let skorDawai = 0;
+        let skorAlif = 0;
+        let skorNahda = 0;
+        
         let soalKe = 1;
         let totalSoal = 10;
         let jawabanBenar = 0;
-        let posisiKosong = 0; // 0 = kanan, 1 = kiri, 2 = atas
+        let posisiKosong = 0; 
 
         const topValEl = document.getElementById('top-val');
         const leftValEl = document.getElementById('left-val');
         const rightValEl = document.getElementById('right-val');
         const feedbackEl = document.getElementById('feedback');
-        const scoreText = document.getElementById('score-text');
         const levelText = document.getElementById('level-text');
         
         const gameScreen = document.getElementById('game-screen');
         const resultScreen = document.getElementById('result-screen');
-        const finalScore = document.getElementById('final-score');
+        const pickerSection = document.getElementById('picker-section');
+        const winnerText = document.getElementById('winner-text');
 
         function mulaiGame() {
-            skor = 0;
+            skorDawai = 0;
+            skorAlif = 0;
+            skorNahda = 0;
             soalKe = 1;
+            
+            updatePapanSkor();
             gameScreen.classList.remove('hidden');
             resultScreen.classList.add('hidden');
+            pickerSection.classList.add('hidden');
+            
             buatSoalBaru();
+        }
+
+        function updatePapanSkor() {
+            document.getElementById('score-dawai').innerText = skorDawai;
+            document.getElementById('score-alif').innerText = skorAlif;
+            document.getElementById('score-nahda').innerText = skorNahda;
         }
 
         function buatSoalBaru() {
             feedbackEl.innerHTML = '';
+            pickerSection.classList.add('hidden');
             document.getElementById('submit-btn').style.display = 'inline-block';
             
-            scoreText.innerText = `Skor: ${skor}`;
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
-            // Generate angka: total ratusan acak (misal 200 - 900)
             let total = Math.floor(Math.random() * 7 + 2) * 100;
             let bagianA = Math.floor(Math.random() * (total/10 - 2) + 1) * 10; 
             if (total - bagianA < 20) { bagianA = total - 120; }
-
             let bagianB = total - bagianA;
 
             posisiKosong = Math.floor(Math.random() * 3);
 
-            // Reset kelas dan isi elemen kembali normal
             topValEl.className = "circle top-circle";
             leftValEl.className = "circle part-circle";
             rightValEl.className = "circle part-circle";
@@ -316,21 +411,18 @@
             rightValEl.innerHTML = '';
 
             if (posisiKosong === 2) {
-                // Atas kosong (Tanya Total) -> Berubah jadi abu-abu input box
                 topValEl.classList.add('input-box-wrapper');
                 topValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 leftValEl.innerText = bagianA;
                 rightValEl.innerText = bagianB;
                 jawabanBenar = total;
             } else if (posisiKosong === 1) {
-                // Kiri kosong (Tanya Bagian) -> Berubah jadi abu-abu input box
                 topValEl.innerText = total;
                 leftValEl.classList.add('input-box-wrapper');
                 leftValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 rightValEl.innerText = bagianB;
                 jawabanBenar = bagianA;
             } else {
-                // Kanan kosong (Tanya Bagian) -> Berubah jadi abu-abu input box
                 topValEl.innerText = total;
                 leftValEl.innerText = bagianA;
                 rightValEl.classList.add('input-box-wrapper');
@@ -362,22 +454,53 @@
             document.getElementById('submit-btn').style.display = 'none';
 
             if (jawabanUser === jawabanBenar) {
-                skor += 10;
-                feedbackEl.innerHTML = "<span class='correct'>Benar! Luar Biasa! 🎉</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Benar! Siapa yang paling cepat? 👇</span>";
+                pickerSection.classList.remove('hidden'); // Munculkan pilihan nama anak
             } else {
-                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat. Jawabannya: ${jawabanBenar} 💡</span>`;
+                feedbackEl.innerHTML = `<span class='wrong'>Wah salah. Jawabannya: ${jawabanBenar} 💡</span>`;
+                setTimeout(() => {
+                    lanjutkanSoal();
+                }, 2000);
             }
+        }
+
+        function tambahSkorAnak(nama) {
+            if (nama === 'dawai') skorDawai += 10;
+            if (nama === 'alif') skorAlif += 10;
+            if (nama === 'nahda') skorNahda += 10;
+            
+            updatePapanSkor();
+            pickerSection.classList.add('hidden');
+            feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${nama.toUpperCase()}! 🌟</span>`;
 
             setTimeout(() => {
-                soalKe++;
-                if (soalKe > totalSoal) {
-                    gameScreen.classList.add('hidden');
-                    resultScreen.classList.remove('hidden');
-                    finalScore.innerText = `Skor Akhir: ${skor}`;
+                lanjutkanSoal();
+            }, 1500);
+        }
+
+        function lanjutkanSoal() {
+            soalKe++;
+            if (soalKe > totalSoal) {
+                gameScreen.classList.add('hidden');
+                resultScreen.classList.remove('hidden');
+                
+                // Tentukan Pemenang
+                let maksSkor = Math.max(skorDawai, skorAlif, skorNahda);
+                let pemenang = [];
+                if (skorDawai === maksSkor) pemenang.push("Dawai");
+                if (skorAlif === maksSkor) pemenang.push("Alif");
+                if (skorNahda === maksSkor) pemenang.push("Nahda");
+
+                if (maksSkor === 0) {
+                    winnerText.innerHTML = `Belum ada poin yang terkumpul! Ayo coba lagi.`;
+                } else if (pemenang.length > 1) {
+                    winnerText.innerHTML = `Hasil Seri! 🤝<br>Antara: ${pemenang.join(" & ")} (${maksSkor} Poin)`;
                 } else {
-                    buatSoalBaru();
+                    winnerText.innerHTML = `🎉 Selamat Kepada <b>${pemenang[0]}</b>!<br>Pemenang Tercepat dengan ${maksSkor} Poin! 🏆`;
                 }
-            }, 2000);
+            } else {
+                buatSoalBaru();
+            }
         }
 
         mulaiGame();

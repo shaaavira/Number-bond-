@@ -17,11 +17,11 @@
             --bg-gradient: linear-gradient(135deg, #1b4d3e 0%, #0d2818 100%);
         }
 
-        /* TEMA DINAMIS: DEFAULT & LE1 HIJAU, LE2 BIRU, LE3 COKLAT, CT ABU-ABU BATU NETHER */
+        /* TEMA HIJAU MINECRAFT UNTUK SEMUA PILIHAN */
         body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #1b4d3e 0%, #0d2818 100%); } /* Hijau Lumut Minecraft */
-        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); } /* Biru Laut/Intan */
-        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #78350f 0%, #451a03 100%); } /* Coklat Kayu/Tanah */
-        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #374151 0%, #111827 100%); } /* Abu-abu Netherite/Batu */
+        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #15803d 0%, #064e3b 100%); } /* Hijau Daun Hutan */
+        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #0478575 0%, #022c22 100%); } /* Hijau Zamrud Emerald */
+        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #065f46 0%, #064e3b 100%); } /* Hijau Potion */
 
         body {
             background: var(--bg-gradient);
@@ -49,13 +49,13 @@
         }
 
         .game-container {
-            background: #1e293b; 
+            background: #143628; 
             color: #f8fafc;
             backdrop-filter: blur(16px);
             padding: 16px 24px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255,255,255,0.15);
-            border: 4px solid #64748b; 
+            border: 4px solid #166534; 
             width: 100%;
             max-width: 1080px;
             height: 98vh;
@@ -73,8 +73,8 @@
             position: absolute;
             top: 14px;
             left: 18px;
-            background: #475569; 
-            border: 2px solid #94a3b8;
+            background: #166534; 
+            border: 2px solid #22c55e;
             padding: 6px 14px;
             font-family: 'Press Start 2P', monospace;
             font-size: 9px;
@@ -84,12 +84,12 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 4px 0 #1e293b;
+            box-shadow: 0 4px 0 #052e16;
             z-index: 100;
             transition: all 0.15s ease;
         }
-        .btn-back:hover { background: #64748b; transform: translateY(-1px); }
-        .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #1e293b; }
+        .btn-back:hover { background: #15803d; transform: translateY(-1px); }
+        .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #052e16; }
 
         .title-header-wrapper {
             display: flex;
@@ -101,15 +101,15 @@
 
         h1 {
             font-family: 'Press Start 2P', monospace;
-            color: #38bdf8; 
+            color: #4ade80; 
             font-size: 17px;
             margin: 0;
-            text-shadow: 2px 2px #0f172a;
+            text-shadow: 2px 2px #052e16;
         }
 
         .subtitle {
             font-size: 11px;
-            color: #cbd5e1;
+            color: #bbf7d0;
             margin: 3px 0 5px 0;
             font-weight: 700;
         }
@@ -127,8 +127,8 @@
         }
 
         .lobby-hero-card {
-            background: #334155;
-            border: 3px solid #64748b;
+            background: #166534;
+            border: 3px solid #22c55e;
             border-radius: 10px;
             padding: 10px 20px;
             width: 100%;
@@ -147,7 +147,7 @@
         .lobby-hero-sub {
             font-size: 11px;
             font-weight: 700;
-            color: #e2e8f0;
+            color: #dcfce7;
             margin-top: 4px;
         }
 
@@ -161,8 +161,8 @@
         }
 
         .lobby-section-box {
-            background: #0f172a;
-            border: 2px solid #475569;
+            background: #064e3b;
+            border: 2px solid #047857;
             border-radius: 10px;
             padding: 12px 16px;
             text-align: left;
@@ -175,7 +175,7 @@
         .lobby-section-title {
             font-family: 'Press Start 2P', monospace;
             font-size: 10px;
-            color: #38bdf8;
+            color: #4ade80;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
@@ -193,14 +193,14 @@
         }
 
         .cat-card {
-            background: #1e293b;
-            border: 3px solid #64748b;
+            background: #143628;
+            border: 3px solid #166534;
             border-radius: 8px;
             padding: 12px 8px;
             cursor: pointer;
             text-align: center;
             transition: all 0.15s ease;
-            box-shadow: 0 4px 0 #0f172a;
+            box-shadow: 0 4px 0 #052e16;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -208,13 +208,13 @@
             align-items: center;
         }
 
-        .cat-card:hover { transform: translateY(-2px); border-color: #38bdf8; }
-        .cat-card:active { transform: translateY(1px); box-shadow: 0 1px 0 #0f172a; }
+        .cat-card:hover { transform: translateY(-2px); border-color: #4ade80; }
+        .cat-card:active { transform: translateY(1px); box-shadow: 0 1px 0 #052e16; }
         
         .cat-card.selected {
-            background: #047857;
-            border-color: #34d399;
-            box-shadow: 0 4px 0 #065f46, 0 6px 16px rgba(4, 120, 87, 0.4);
+            background: #15803d;
+            border-color: #4ade80;
+            box-shadow: 0 4px 0 #166534, 0 6px 16px rgba(21, 128, 61, 0.4);
             transform: translateY(-2px);
         }
 
@@ -230,7 +230,7 @@
             color: #f1f5f9;
         }
         .cat-card.selected .cat-title { color: #ffffff; }
-        .cat-desc { font-size: 11px; color: #cbd5e1; font-weight: 700; margin-top: 3px;}
+        .cat-desc { font-size: 11px; color: #bbf7d0; font-weight: 700; margin-top: 3px;}
 
         /* KOTAK INPUT NAMA LEBIH LUAS */
         #lobby-screen textarea {
@@ -238,7 +238,7 @@
             flex: 1;
             min-height: 140px; 
             padding: 10px 12px;
-            border: 2px solid #64748b;
+            border: 2px solid #166534;
             border-radius: 8px;
             font-family: 'Outfit', sans-serif;
             font-size: 14px;
@@ -247,20 +247,20 @@
             resize: none;
             outline: none;
             color: #f1f5f9;
-            background: #1e293b;
+            background: #143628;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
             transition: all 0.2s ease;
             display: block;
             margin: 0 auto; 
         }
         #lobby-screen textarea:focus { 
-            border-color: #38bdf8; 
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25), inset 0 2px 4px rgba(0,0,0,0.5); 
+            border-color: #4ade80; 
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25), inset 0 2px 4px rgba(0,0,0,0.5); 
         }
 
         .input-hint {
             font-size: 10px;
-            color: #94a3b8;
+            color: #86efac;
             margin-top: 4px;
             font-weight: 700;
             display: flex;
@@ -270,7 +270,7 @@
         }
 
         .btn-start-game {
-            background: #15803d; 
+            background: #166534; 
             color: white;
             border: none;
             padding: 12px 28px;
@@ -278,13 +278,13 @@
             font-size: 11px;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 5px 0 #166534, 0 8px 16px rgba(21, 128, 61, 0.4);
+            box-shadow: 0 5px 0 #052e16, 0 8px 16px rgba(22, 101, 52, 0.4);
             transition: all 0.15s ease;
             margin-top: 4px;
             width: 100%;
         }
-        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #166534; }
-        .btn-start-game:active { transform: translateY(2px); box-shadow: 0 1px 0 #166534; }
+        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #052e16; }
+        .btn-start-game:active { transform: translateY(2px); box-shadow: 0 1px 0 #052e16; }
 
         /* LEADERBOARD PIXEL */
         .leaderboard {
@@ -292,12 +292,12 @@
             flex-wrap: nowrap;
             justify-content: center;
             gap: 8px;
-            background: #0f172a;
+            background: #064e3b;
             padding: 6px 14px;
             border-radius: 8px;
             margin: 3px 0;
             overflow-x: auto;
-            border: 2px solid #d97706; 
+            border: 2px solid #166534; 
             width: 100%;
             max-width: 900px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
@@ -305,13 +305,13 @@
 
         .player-score {
             text-align: center;
-            background: #1e293b;
+            background: #143628;
             padding: 5px 12px;
             border-radius: 6px;
             font-size: 10px;
             font-weight: 700;
             color: #facc15;
-            border: 2px solid #475569;
+            border: 2px solid #166534;
             white-space: nowrap;
             flex-shrink: 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
@@ -322,26 +322,26 @@
             display: block;
             font-family: 'Press Start 2P', monospace;
             font-size: 11px;
-            color: #38bdf8;
+            color: #4ade80;
             margin-top: 2px;
         }
 
         .level-info {
             font-family: 'Press Start 2P', monospace;
-            color: #34d399;
+            color: #4ade80;
             font-size: 9px;
             margin: 3px 0;
-            background: #0f172a;
+            background: #064e3b;
             padding: 5px 12px;
             border-radius: 6px;
-            border: 2px solid #34d399;
+            border: 2px solid #166534;
             display: inline-block;
         }
 
         /* KOTAK ILUSTRASI GAMBAR */
         .visual-illustration-box {
-            background: #0f172a;
-            border: 3px solid #64748b;
+            background: #064e3b;
+            border: 3px solid #166534;
             border-radius: 8px;
             padding: 8px 16px;
             margin: 6px auto;
@@ -364,10 +364,10 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            background: #1e293b;
+            background: #143628;
             padding: 5px 10px;
             border-radius: 6px;
-            border: 2px dashed #94a3b8;
+            border: 2px dashed #166534;
             max-width: 360px;
             gap: 2px;
         }
@@ -399,8 +399,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #0f172a;
-            border: 2px solid #64748b;
+            background: #064e3b;
+            border: 2px solid #166534;
             border-radius: 8px;
             padding: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -429,7 +429,7 @@
             font-weight: 900;
             font-size: 24px;
             color: #ffffff;
-            border: 4px solid #0f172a;
+            border: 4px solid #052e16;
             box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 3px 0 rgba(255,255,255,0.3);
             transition: background 0.5s ease;
             position: relative;
@@ -451,7 +451,7 @@
             width: 5px; 
             height: 56px; 
             border-radius: 2px;
-            background-color: #92400e; 
+            background-color: #3f6212; 
             border: 1px solid #1f2937;
         }
         .branch-lines::before { left: 18px; transform: rotate(30deg); transform-origin: top center; }
@@ -489,11 +489,11 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 12px;
             color: #f1f5f9;
-            background: #1e293b;
+            background: #143628;
             padding: 8px 12px;
             border-radius: 6px;
             margin-bottom: 6px;
-            border: 2px dashed #94a3b8;
+            border: 2px dashed #166534;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
             width: 100%;
         }
@@ -510,19 +510,19 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 13px;
             color: #ffffff;
-            background: #0f172a;
-            border: 2px solid #64748b;
+            background: #064e3b;
+            border: 2px solid #166534;
             border-radius: 4px;
             outline: none;
             transition: all 0.15s ease;
         }
         .form-input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+            border-color: #4ade80;
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25);
         }
 
         .btn {
-            background-color: #0369a1; 
+            background-color: #166534; 
             color: white;
             border: none;
             padding: 8px 18px;
@@ -530,32 +530,32 @@
             font-size: 9px;
             border-radius: 6px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #0c4a6e;
+            box-shadow: 0 4px 0 #052e16;
             transition: all 0.15s ease;
         }
-        .btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #0c4a6e; }
-        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #0c4a6e; }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #052e16; }
+        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #052e16; }
 
         .btn-next {
-            background-color: #d97706; 
-            box-shadow: 0 4px 0 #b45309;
+            background-color: #15803d; 
+            box-shadow: 0 4px 0 #166534;
         }
-        .btn-next:hover { box-shadow: 0 5px 0 #b45309; }
-        .btn-next:active { box-shadow: 0 1px 0 #b45309; }
+        .btn-next:hover { box-shadow: 0 5px 0 #166534; }
+        .btn-next:active { box-shadow: 0 1px 0 #166534; }
 
         .btn-retry {
-            background-color: #dc2626; 
-            box-shadow: 0 4px 0 #991b1b;
+            background-color: #1b4332; 
+            box-shadow: 0 4px 0 #081c15;
         }
-        .btn-retry:hover { box-shadow: 0 5px 0 #991b1b; }
-        .btn-retry:active { box-shadow: 0 1px 0 #991b1b; }
+        .btn-retry:hover { box-shadow: 0 5px 0 #081c15; }
+        .btn-retry:active { box-shadow: 0 1px 0 #081c15; }
 
         .btn-recheck {
-            background-color: #7c3aed; 
-            box-shadow: 0 4px 0 #5b21b6;
+            background-color: #0f766e; 
+            box-shadow: 0 4px 0 #134e4a;
         }
-        .btn-recheck:hover { box-shadow: 0 5px 0 #5b21b6; }
-        .btn-recheck:active { box-shadow: 0 1px 0 #5b21b6; }
+        .btn-recheck:hover { box-shadow: 0 5px 0 #134e4a; }
+        .btn-recheck:active { box-shadow: 0 1px 0 #134e4a; }
 
         .input-section {
             display: flex;
@@ -566,7 +566,7 @@
         }
 
         #picker-section {
-            background: #1e293b;
+            background: #143628;
             padding: 8px;
             border-radius: 6px;
             margin-top: 6px;
@@ -591,7 +591,7 @@
         }
 
         .btn-name {
-            background-color: #047857; 
+            background-color: #15803d; 
             color: white;
             border: none;
             padding: 5px 10px;
@@ -599,11 +599,11 @@
             font-size: 8px;
             border-radius: 4px;
             cursor: pointer;
-            box-shadow: 0 3px 0 #065f46;
+            box-shadow: 0 3px 0 #166534;
             transition: all 0.1s ease;
         }
         .btn-name:hover { transform: translateY(-1px); }
-        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #065f46; }
+        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #166534; }
 
         #feedback {
             font-family: 'Press Start 2P', monospace;
@@ -612,7 +612,7 @@
             min-height: 18px;
         }
 
-        .correct { color: #34d399; }
+        .correct { color: #4ade80; }
         .wrong { color: #f87171; }
         .hidden { display: none !important; }
 
@@ -633,7 +633,7 @@
             font-weight: 800;
             color: #f1f5f9;
             margin: 6px 0;
-            background: #0f172a;
+            background: #064e3b;
             padding: 14px;
             border-radius: 8px;
             border: 3px dashed #facc15;
@@ -643,20 +643,20 @@
         #welcome-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.88);
+            background: rgba(6, 78, 59, 0.88);
             display: flex; justify-content: center; align-items: center;
             z-index: 99999; backdrop-filter: blur(8px);
         }
 
         .welcome-card {
-            background: #1e293b; padding: 26px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%;
+            background: #143628; padding: 26px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%;
             box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-            border: 4px solid #64748b;
+            border: 4px solid #166534;
             z-index: 100000;
             position: relative;
         }
-        .welcome-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #38bdf8; margin-bottom: 8px; line-height: 1.4; text-shadow: 1px 1px #000; }
-        .welcome-desc { font-size: 11px; color: #cbd5e1; margin-bottom: 14px; font-weight: 700; line-height: 1.4; }
+        .welcome-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #4ade80; margin-bottom: 8px; line-height: 1.4; text-shadow: 1px 1px #000; }
+        .welcome-desc { font-size: 11px; color: #dcfce7; margin-bottom: 14px; font-weight: 700; line-height: 1.4; }
     </style>
 </head>
 <body class="theme-LE1">
@@ -665,7 +665,7 @@
         <div class="welcome-card">
             <div style="font-size: 32px; margin-bottom: 6px;">🎮✨</div>
             <div class="welcome-title">CRAFTING NUMBER BOND!</div>
-            <div class="welcome-desc">Petualangan matematika seru penuh warna! Siap berhitung bersama jagoan cilik? 🚀</div>
+            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! Siap berhitung bersama jagoan cilik? 🚀</div>
             <button class="btn" id="welcome-btn" type="button">Start Game 🎮</button>
         </div>
     </div>
@@ -760,7 +760,7 @@ Creeper"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #cbd5e1; margin-bottom: 5px;">Math Calculation Formula:</div>
+                    <div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #bbf7d0; margin-bottom: 5px;">Math Calculation Formula:</div>
                     
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
@@ -777,13 +777,13 @@ Creeper"></textarea>
                     </div>
 
                     <div id="formula-check-section" class="hidden" style="margin-top: 5px; display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%;">
-                        <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Rumus 🔍</button>
+                        <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Rumus Crafting 🔍</button>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Level ➔</button>
                     </div>
 
                     <div id="picker-section" class="hidden">
                         <div id="feedback"></div>
-                        <div class="picker-title" id="picker-title-text" style="margin-top: 3px;">Siapa yang mendapat XP? 👇</div>
+                        <div class="picker-title" id="picker-title-text" style="margin-top: 3px;">Siapa player yang mendapat XP? 👇</div>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
@@ -797,7 +797,7 @@ Creeper"></textarea>
         <!-- RESULT -->
         <div id="result-screen" class="hidden" style="width: 100%;">
             <div style="font-size: 32px; margin-bottom: 4px;">🏆🎉</div>
-            <h1 style="font-family: 'Press Start 2P', monospace; font-size: 15px;">VICTORY!</h1>
+            <h1 style="font-family: 'Press Start 2P', monospace; font-size: 15px;">VICTORY SURVIVAL!</h1>
             <div id="winner-text">Pemenangnya adalah...</div>
             <button class="btn btn-next" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
         </div>
@@ -847,11 +847,11 @@ Creeper"></textarea>
         audioBenar.load();
 
         const circlePalettes = [
-            { top: '#d97706', bottom: '#0284c7' }, 
-            { top: '#dc2626', bottom: '#059669' }, 
-            { top: '#7c3aed', bottom: '#ea580c' }, 
-            { top: '#0284c7', bottom: '#4f46e5' }, 
-            { top: '#db2777', bottom: '#0d9488' }  
+            { top: '#15803d', bottom: '#166534' }, 
+            { top: '#047857', bottom: '#065f46' }, 
+            { top: '#166534', bottom: '#0f766e' }, 
+            { top: '#14532d', bottom: '#047857' }, 
+            { top: '#15803d', bottom: '#065f46' }  
         ];
 
         const additionPairs = [
@@ -1012,7 +1012,7 @@ Creeper"></textarea>
             daftarPemain.forEach((p, index) => {
                 let skorDiv = document.createElement('div');
                 skorDiv.className = 'player-score';
-                skorDiv.innerHTML = `⭐ ${p.nama} <span id="score-val-${index}">0</span>`;
+                skorDiv.innerHTML = `⭐ ${p.nama} <span id="score-val-${index}">0 XP</span>`;
                 lbContainer.appendChild(skorDiv);
 
                 let btn = document.createElement('button');
@@ -1025,7 +1025,7 @@ Creeper"></textarea>
 
         function updatePapanSkor() {
             daftarPemain.forEach((p, index) => {
-                document.getElementById(`score-val-${index}`).innerText = p.skor;
+                document.getElementById(`score-val-${index}`).innerText = `${p.skor} XP`;
             });
         }
 
@@ -1044,7 +1044,7 @@ Creeper"></textarea>
             nextBtn.classList.add('hidden');
             isSalahSesi = false;
             
-            levelText.innerText = `Level: ${soalKe} / ${totalSoal}`;
+            levelText.innerText = `Crafting Level: ${soalKe} / ${totalSoal}`;
 
             formVal1.value = ''; 
             formVal2.value = ''; 
@@ -1170,10 +1170,10 @@ Creeper"></textarea>
                 recheckBtn.classList.add('hidden');
                 
                 isSalahSesi = false;
-                pickerTitleText.innerText = "Siapa paling cepat benar? (+10 XP): 👇";
+                pickerTitleText.innerText = "Siapa player yang mendapat XP? (+10 XP): 👇";
                 
                 feedbackOutside.innerHTML = ""; 
-                feedbackEl.innerHTML = "<span class='correct'>Hebat! Benar! ✨</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Crafting Sempurna! Benar! ✨</span>";
                 pickerSection.classList.remove('hidden'); 
                 
                 formulaCheckSection.classList.remove('hidden');
@@ -1185,7 +1185,7 @@ Creeper"></textarea>
                 submitBtn.style.display = 'none';
                 isSalahSesi = true;
 
-                feedbackOutside.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di bawah untuk perbaiki. 💪</span>`;
+                feedbackOutside.innerHTML = `<span class='wrong'>Belum pas! Klik tombol di bawah untuk perbaiki materialnya. 💪</span>`;
                 retryBtn.classList.remove('hidden');
             }
         }
@@ -1201,7 +1201,7 @@ Creeper"></textarea>
                 activeInput.focus();
             }
 
-            feedbackOutside.innerHTML = "<span class='wrong'>Betulkan jawabannya bersama tim, lalu klik Periksa Lagi! ✍️</span>";
+            feedbackOutside.innerHTML = "<span class='wrong'>Diskusikan bersama tim, lalu klik Periksa Lagi! ✍️</span>";
             recheckBtn.classList.remove('hidden');
         }
 
@@ -1221,7 +1221,7 @@ Creeper"></textarea>
                 pickerTitleText.innerText = "Pilih player yang membetulkan jawaban (+5 XP): 👇";
                 
                 feedbackOutside.innerHTML = "";
-                feedbackEl.innerHTML = "<span class='correct'>Mantap! Lingkaran sudah benar. 👏</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Mantap! Lingkaran berhasil diperbaiki. 👏</span>";
                 pickerSection.classList.remove('hidden');
                 
                 formulaCheckSection.classList.remove('hidden');
@@ -1240,7 +1240,7 @@ Creeper"></textarea>
             let v3 = parseInt(formVal3.value);
 
             if (isNaN(v1) || isNaN(v2) || isNaN(v3)) {
-                feedbackOutside.innerHTML = "<span class='wrong'>Lengkapi semua kotak rumus! 📝</span>";
+                feedbackOutside.innerHTML = "<span class='wrong'>Lengkapi semua kotak rumus crafting! 📝</span>";
                 return;
             }
 
@@ -1262,7 +1262,7 @@ Creeper"></textarea>
             if (isFormulaCorrect) {
                 playClappingAndCheer();
                 triggerConfetti();
-                feedbackOutside.innerHTML = "<span class='correct'>Rumus perhitungan benar! 🌟🎉</span>";
+                feedbackOutside.innerHTML = "<span class='correct'>Rumus perhitungan crafting benar! 🌟🎉</span>";
             } else {
                 playSound('wrong');
                 triggerFlashRed();
@@ -1302,12 +1302,12 @@ Creeper"></textarea>
                 let pemenang = daftarPemain.filter(p => p.skor === maksSkor);
 
                 if (maksSkor === 0) {
-                    winnerText.innerHTML = `Belum ada XP yang terkumpul! Ayo coba lagi petualangannya. 🤗`;
+                    winnerText.innerHTML = `Belum ada XP yang terkumpul! Ayo coba lagi petualangan survival-nya. 🤗`;
                 } else if (pemenang.length > 1) {
                     let namaPemenang = pemenang.map(p => p.nama).join(" & ");
                     winnerText.innerHTML = `Victory Bersama! 🤝<br>Player hebat: ${namaPemenang} (${maksSkor} XP)`;
                 } else {
-                    winnerText.innerHTML = `🎉 Selamat Kepada Player <b>${pemenang[0].nama}</b>!<br>Master Math dengan perolehan ${maksSkor} XP! 🌟👑`;
+                    winnerText.innerHTML = `🎉 Selamat Kepada Player <b>${pemenang[0].nama}</b>!<br>Master Survival dengan perolehan ${maksSkor} XP! 🌟👑`;
                 }
             } else {
                 buatSoalBaru();

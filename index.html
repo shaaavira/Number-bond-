@@ -596,7 +596,7 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK ILUSTRASI GAMBAR YANG SINKRON DENGAN KAKI KIRI & KANAN -->
+            <!-- KOTAK ILUSTRASI GAMBAR SINKRON KIRI & KANAN -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
                     <div id="visual-group-left" class="emoji-side"></div>
@@ -696,15 +696,15 @@ Uswa"></textarea>
 
         let audioCtx = null;
 
-        const brightGemasPalettes = [
-            { top: '#ff6b81', bottom1: '#2ed573', bottom2: '#1e90ff' },
-            { top: '#ff4757', bottom1: '#ffa502', bottom2: '#2ed573' },
-            { top: '#9b59b6', bottom1: '#3498db', bottom2: '#e67e22' },
-            { top: '#e84393', bottom1: '#00cec9', bottom2: '#6c5ce7' },
-            { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }
+        // Lingkaran kanan & kiri warnanya SAMA, lingkaran atas kontras
+        const circlePalettes = [
+            { top: '#ff6b81', bottom: '#2ed573' }, // Atas Merah Muda, Kiri & Kanan Hijau
+            { top: '#ff4757', bottom: '#1e90ff' }, // Atas Merah, Kiri & Kanan Biru
+            { top: '#9b59b6', bottom: '#e67e22' }, // Atas Ungu, Kiri & Kanan Oranye
+            { top: '#e84393', bottom: '#00cec9' }, // Atas Pink, Kiri & Kanan Toska
+            { top: '#fd79a8', bottom: '#0984e3' }  // Atas Soft Pink, Kiri & Kanan Biru Laut
         ];
 
-        // Pasangan gambar untuk Kiri & Kanan yang akurat sesuai nilai kakinya
         const additionPairs = [
             { left: '👕', right: '👚' }, 
             { left: '🥛', right: '🍵' }, 
@@ -933,14 +933,12 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // SINKRONISASI GAMBAR DENGAN KAKI KIRI & KANAN NUMBER BOND
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
                 let limitCount = 8;
 
-                // Kaki kiri bernilai nilaiBagianA, kaki kanan bernilai nilaiBagianB
                 if (posisiKosong === 2) {
                     let chosenPair = additionPairs[Math.floor(Math.random() * additionPairs.length)];
                     let countLeft = Math.min(nilaiBagianA, limitCount);
@@ -956,11 +954,12 @@ Uswa"></textarea>
                 }
             }
 
-            const palette = brightGemasPalettes[Math.floor(Math.random() * brightGemasPalettes.length)];
+            // PILIH WARNA: LINGKARAN KANAN & KIRI DISAMAKAN
+            const palette = circlePalettes[Math.floor(Math.random() * circlePalettes.length)];
 
             topValEl.style.background = palette.top;
-            leftValEl.style.background = palette.bottom1;
-            rightValEl.style.background = palette.bottom2;
+            leftValEl.style.background = palette.bottom;   // Lingkaran Kiri
+            rightValEl.style.background = palette.bottom;  // Lingkaran Kanan (SAMA PERSIS DENGAN KIRI)
 
             topValEl.innerHTML = '';
             leftValEl.innerHTML = '';

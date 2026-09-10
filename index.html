@@ -240,8 +240,8 @@
             margin-bottom: 4px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 16px;
+            justify-content: space-around; /* Supaya kiri dan kanan terpisah rapi */
+            gap: 20px;
             min-height: 60px;
             max-width: 620px;
             margin-left: auto;
@@ -250,17 +250,25 @@
             overflow-x: auto;
         }
 
-        .emoji-group {
-            font-size: 34px; /* Ukuran gambar besar */
-            letter-spacing: 4px;
+        .emoji-side {
+            font-size: 32px;
+            letter-spacing: 3px;
             line-height: 1;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 2px dashed #fcd34d;
         }
 
-        .visual-divider {
-            font-size: 24px;
+        .vs-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
             font-weight: 900;
-            color: #d35400;
+            color: #d97706;
         }
 
         /* LAYOUT UTAMA */
@@ -596,10 +604,12 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK GAMBAR BESAR (MENYESUAIKAN KAKI NUMBER BOND) -->
+            <!-- KOTAK GAMBAR BESAR (TERPISAH KIRI & KANAN) -->
             <div id="visual-illustration-wrapper" class="hidden">
-                <div class="visual-illustration-box" id="visual-illustration-box">
-                    <!-- Ditampilkan sesuai posisi yang ditanya (kiri atau kanan) -->
+                <div class="visual-illustration-box">
+                    <div id="visual-group-left" class="emoji-side"></div>
+                    <div class="vs-label">Kiri & Kanan</div>
+                    <div id="visual-group-right" class="emoji-side"></div>
                 </div>
             </div>
 
@@ -690,7 +700,8 @@ Uswa"></textarea>
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
-        const visualIllustrationBox = document.getElementById('visual-illustration-box');
+        const visualGroupLeft = document.getElementById('visual-group-left');
+        const visualGroupRight = document.getElementById('visual-group-right');
 
         let audioCtx = null;
 
@@ -702,21 +713,19 @@ Uswa"></textarea>
             { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }
         ];
 
-        // Daftar pasangan Penjumlahan (sejenis tapi dibedakan warna/jenis spesifik)
         const additionPairs = [
-            { a: '👕', b: '👚' }, // Baju merah & baju biru
-            { a: '🥛', b: '🍵' }, // Gelas susu & gelas teh
-            { a: '🍎', b: '🍏' }, // Apel merah & apel hijau
-            { a: '🐓', b: '🐔' }, // Ayam jantan & ayam betina
-            { a: '🍪', b: '🧁' }  // Kue kukis & cupcake
+            { a: '👕', b: '👚' }, 
+            { a: '🥛', b: '🍵' }, 
+            { a: '🍎', b: '🍏' }, 
+            { a: '🐓', b: '🐔' }, 
+            { a: '🍪', b: '🧁' }  
         ];
 
-        // Daftar pasangan Pengurangan (utuh vs dimakan/pecah/digigit)
         const subtractionPairs = [
-            { normal: '🍎', alt: '🍏' }, // Apel utuh & apel dimakan
-            { normal: '🥚', alt: '🍳' }, // Telur utuh & telur pecah
-            { normal: '🥛', alt: '🧃' }, // Gelas utuh & gelas kosong
-            { normal: '🍪', alt: '🍩' }  // Kukis utuh & kukis digigit
+            { normal: '🍎', alt: '🍏' }, 
+            { normal: '🥚', alt: '🍳' }, 
+            { normal: '🥛', alt: '🧃' }, 
+            { normal: '🍪', alt: '🍩' }  
         ];
 
         function initAudio() {
@@ -932,45 +941,34 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Aturan gambar mengikuti kaki number bond:
-            // - Jika posisiKosong === 2 (Atas/Total): Tampilkan kedua kaki secara lengkap (Kiri & Kanan) untuk dijumlahkan.
-            // - Jika posisiKosong === 1 (Kaki Kiri): Tampilkan hanya gambar bagian KAKI KIRI saja yang dihitung.
-            // - Jika posisiKosong === 0 (Kaki Kanan): Tampilkan hanya gambar bagian KAKI KANAN saja yang dihitung.
+            // MAPPING ILUSTRASI KIRI & KANAN SESUAI KAKI NUMBER BOND
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
-                let limitCount = 8; // Batas maksimal gambar agar pas
+                let limitCount = 8;
 
                 if (posisiKosong === 2) {
-                    // Penjumlahan lengkap (menampilkan kiri dan kanan dipisah tanda + atau spasi jelas)
                     let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
                     let countA = Math.min(nilaiBagianA, limitCount);
                     let countB = Math.min(nilaiBagianB, limitCount);
-                    visualIllustrationBox.innerHTML = `
-                        <div class="emoji-group">${chosenAdd.a.repeat(countA)}</div>
-                        <div class="visual-divider">+</div>
-                        <div class="emoji-group">${chosenAdd.b.repeat(countB)}</div>
-                    `;
-                } else if (posisiKosong === 1) {
-                    // Yang ditanya kaki KIRI (index 0 / bagian A)
-                    let countA = Math.min(nilaiBagianA, limitCount);
-                    if (formOperator.innerText === '+') {
-                        let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
-                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenAdd.a.repeat(countA)}</div>`;
-                    } else {
-                        let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
-                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenSub.normal.repeat(countA)}</div>`;
-                    }
+                    visualGroupLeft.innerHTML = chosenAdd.a.repeat(countA);
+                    visualGroupRight.innerHTML = chosenAdd.b.repeat(countB);
                 } else {
-                    // Yang ditanya kaki KANAN (index 0 / bagian B) -> Gambar yang dihitung juga yang di kanan!
-                    let countB = Math.min(nilaiBagianB, limitCount);
-                    if (formOperator.innerText === '+') {
-                        let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
-                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenAdd.b.repeat(countB)}</div>`;
+                    let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
+                    let partA = posisiKosong === 1 ? nilaiBagianA : nilaiBagianB; 
+                    let partB = posisiKosong === 1 ? nilaiBagianB : nilaiBagianA; 
+                    
+                    let countA = Math.min(partA, limitCount);
+                    let countB = Math.min(partB, limitCount);
+
+                    // Sisi kiri merepresentasikan kaki kiri, sisi kanan merepresentasikan kaki kanan
+                    if (posisiKosong === 1) {
+                        visualGroupLeft.innerHTML = chosenSub.alt.repeat(countA);
+                        visualGroupRight.innerHTML = chosenSub.normal.repeat(countB);
                     } else {
-                        let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
-                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenSub.alt.repeat(countB)}</div>`;
+                        visualGroupLeft.innerHTML = chosenSub.normal.repeat(countA);
+                        visualGroupRight.innerHTML = chosenSub.alt.repeat(countB);
                     }
                 }
             }

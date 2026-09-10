@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/canvas-confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -102,7 +102,7 @@
             font-weight: 700;
         }
 
-        /* Lobby / Menu yang Padat & Rapi */
+        /* Lobby */
         #lobby-screen {
             display: flex;
             flex-direction: column;
@@ -263,18 +263,11 @@
             padding: 14px;
         }
 
-        /* Pohon Number Bond Besar */
         .bond-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Efek Animasi Putar & Membesar saat Benar */
-        .bond-celebrate {
-            transform: scale(1.1) rotate(5deg);
         }
 
         .circle {
@@ -393,7 +386,7 @@
             background-color: #ffa502;
             box-shadow: 0 4px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
 
         #picker-section {
             background: #fff9e6;
@@ -616,7 +609,7 @@ Uswa"></textarea>
         let nilaiTotal = 5;
         let nilaiBagianA = 2;
         let nilaiBagianB = 3;
-        let isModeBetulkan = false; // Status apakah sedang sesi betulkan jawaban setelah salah
+        let isModeBetulkan = false;
 
         const topValEl = document.getElementById('top-val');
         const leftValEl = document.getElementById('left-val');
@@ -627,7 +620,6 @@ Uswa"></textarea>
         const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
-        const bondContainerEl = document.getElementById('bond-container-el');
         const pickerTitleText = document.getElementById('picker-title-text');
         
         const lobbyScreen = document.getElementById('lobby-screen');
@@ -661,6 +653,62 @@ Uswa"></textarea>
             }
         }
 
+        // Suara Tepuk Tangan & Nada Sukses menggunakan Web Audio API
+        function playClappingAndCheer() {
+            try {
+                initAudio();
+                let now = audioCtx.currentTime;
+
+                // Suara nada kemenangan ceria (Tring-tring melengking)
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.7);
+
+                // Simulasi Suara Tepuk Tangan (White Noise burst beruntun)
+                for (let i = 0; i < 12; i++) {
+                    let startTime = now + i * 0.05;
+                    let bufferSize = audioCtx.sampleRate * 0.04;
+                    let buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                    let output = buffer.getChannelData(0);
+                    for (let j = 0; j < bufferSize; j++) {
+                        output[j] = Math.random() * 2 - 1;
+                    }
+
+                    let noise = audioCtx.createBufferSource();
+                    noise.buffer = buffer;
+
+                    let filter = audioCtx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.value = 1000 + Math.random() * 800; // Frekuensi tepukan tangan
+
+                    let noiseGain = audioCtx.createGain();
+                    noiseGain.gain.setValueAtTime(0.15, startTime);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.04);
+
+                    noise.connect(filter);
+                    filter.connect(noiseGain);
+                    noiseGain.connect(audioCtx.destination);
+
+                    noise.start(startTime);
+                    noise.stop(startTime + 0.04);
+                }
+            } catch(e) {
+                console.log("Audio simulation error", e);
+            }
+        }
+
         function playSound(type) {
             try {
                 initAudio();
@@ -670,14 +718,7 @@ Uswa"></textarea>
                 gainNode.connect(audioCtx.destination);
                 let now = audioCtx.currentTime;
 
-                if (type === 'correct') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(440, now); 
-                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); 
-                    gainNode.gain.setValueAtTime(0.2, now);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-                    osc.start(now); osc.stop(now + 0.35);
-                } else if (type === 'wrong') {
+                if (type === 'wrong') {
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(140, now);
                     osc.frequency.setValueAtTime(90, now + 0.15);
@@ -685,14 +726,12 @@ Uswa"></textarea>
                     gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                     osc.start(now); osc.stop(now + 0.3);
                 }
-            } catch(e) {
-                console.log("Audio not supported or blocked");
-            }
+            } catch(e) {}
         }
 
         function triggerConfetti() {
             try {
-                confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+                confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
             } catch(e) {}
         }
 
@@ -704,7 +743,7 @@ Uswa"></textarea>
         welcomeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             initAudio();
-            playSound('correct');
+            playClappingAndCheer();
             triggerConfetti();
             welcomeOverlay.classList.add('hidden');
         });
@@ -787,7 +826,6 @@ Uswa"></textarea>
             submitBtn.style.display = 'inline-block';
             nextBtn.classList.add('hidden');
             isModeBetulkan = false;
-            bondContainerEl.classList.remove('bond-celebrate');
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
@@ -822,7 +860,7 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Pilih palet warna acak agar berubah setiap soal
+            // Ganti warna acak di setiap soal
             const randomPalette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
 
             topValEl.style.background = randomPalette.top;
@@ -879,30 +917,28 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
-                // Jawaban Benar
-                playSound('correct');
+                // Jawaban Benar: Mainkan suara tepuk tangan & lempar confetti
+                playClappingAndCheer();
                 triggerConfetti();
+                
                 activeInput.disabled = true;
                 submitBtn.style.display = 'none';
-                bondContainerEl.classList.add('bond-celebrate');
                 
                 isModeBetulkan = false;
                 pickerTitleText.innerText = "Siapa paling cepat benar? 👇";
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih anak yang menjawab: 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
-                // Jawaban Salah
+                // Jawaban Salah: Berikan opsi betulkan jawaban terlebih dahulu
                 playSound('wrong');
                 triggerFlashRed();
 
                 if (!isModeBetulkan) {
-                    // Pertama kali salah: Beri kesempatan anak yang menjawab untuk memperbaikinya (betulkan jawaban)
                     isModeBetulkan = true;
-                    feedbackEl.innerHTML = "<span class='wrong'>Kurang tepat! Mau beri kesempatan betulkan jawaban? Pilih siapa yang ingin memperbaiki: 👇</span>";
-                    pickerTitleText.innerText = "Betulkan jawaban (Poin +5): 👇";
+                    feedbackEl.innerHTML = "<span class='wrong'>Kurang tepat! Silakan betulkan jawaban bersama siswa: 👇</span>";
+                    pickerTitleText.innerText = "Pilih siswa yang membuktikannya (Poin +5): 👇";
                     pickerSection.classList.remove('hidden');
                 } else {
-                    // Jika sudah sesi betulkan tapi masih salah / langsung klik periksa
                     feedbackEl.innerHTML = `<span class='wrong'>Belum tepat. Jawabannya adalah: ${jawabanBenar} 💪</span>`;
                     activeInput.disabled = true;
                     submitBtn.style.display = 'none';
@@ -922,18 +958,17 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
                 nextBtn.classList.remove('hidden');
             } else {
-                // Skenario Betulkan Jawaban setelah Salah (Poin +5 sebagai apresiasi usaha)
+                // Skenario Betulkan Jawaban setelah Salah (Poin +5)
                 daftarPemain[index].skor += 5;
                 updatePapanSkor();
                 
-                // Isi otomatis jawaban benar ke input agar anak melihat bentuk benarnya
                 if (activeInput) {
                     activeInput.value = jawabanBenar;
                     activeInput.disabled = true;
                 }
                 submitBtn.style.display = 'none';
 
-                feedbackEl.innerHTML = `<span class='correct'>Hebat ${daftarPemain[index].nama.toUpperCase()} berhasil betulkan jawaban! Poin +5 👏</span>`;
+                feedbackEl.innerHTML = `<span class='correct'>Kerja bagus ${daftarPemain[index].nama.toUpperCase()} sudah membetulkan jawaban! Poin +5 👏</span>`;
                 nextBtn.classList.remove('hidden');
             }
         }
@@ -943,6 +978,7 @@ Uswa"></textarea>
             if (soalKe > totalSoal) {
                 gameScreen.classList.add('hidden');
                 resultScreen.classList.remove('hidden');
+                playClappingAndCheer();
                 triggerConfetti(); 
                 
                 let maksSkor = Math.max(...daftarPemain.map(p => p.skor));

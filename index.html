@@ -84,12 +84,12 @@
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
-        /* Lingkaran Atas (Total/Hasil) */
+        /* Lingkaran Atas (Total/Hasil) - Default Warna Pink */
         .top-circle {
             background: #ff7675;
             color: white;
             border: 4px dashed #fab1a0;
-            margin-bottom: 25px; /* Jarak pas dengan garis atap */
+            margin-bottom: 25px; 
         }
 
         /* --- GARIS BENTUK ATAP RUMAH (/\) --- */
@@ -104,44 +104,43 @@
             content: '';
             position: absolute;
             top: 0;
-            width: 4px; /* Ketebalan garis */
-            height: 42px; /* Panjang garis */
-            background-color: #a0a0a0; /* Warna garis */
+            width: 4px; 
+            height: 42px; 
+            background-color: #a0a0a0; 
             border-radius: 2px;
         }
 
-        /* Garis Kiri: Miring ke kanan atas / bawah (membentuk sisi kiri 'A') */
         .branch-lines::before {
             left: 35px;
             transform: rotate(35deg);
         }
 
-        /* Garis Kanan: Miring ke kiri atas / bawah (membentuk sisi kanan 'A') */
         .branch-lines::after {
             right: 35px;
             transform: rotate(-35deg);
         }
-        /* --- SELESAI PERBAIKAN GARIS --- */
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 260px; /* Lebar sejajar posisi bawah garis */
+            width: 260px; 
         }
 
-        /* Lingkaran Bawah (Bagian-bagian) */
+        /* Lingkaran Bawah (Bagian-bagian) - Default Warna Biru */
         .part-circle {
             background: #74b9ff;
             color: white;
             border: 4px dashed #81ecec;
         }
 
-        .part-circle.input-box-wrapper {
-            background: #dfe6e9;
-            border: 4px solid #b2bec3;
+        /* --- KELAS SERAGAM UNTUK INPUT ABU-ABU (Berlaku Atas & Bawah) --- */
+        .input-box-wrapper {
+            background: #dfe6e9 !important;
+            border: 4px solid #b2bec3 !important;
+            color: #2d3436 !important;
         }
 
-        .part-circle input {
+        .circle input {
             width: 100%;
             height: 100%;
             border: none;
@@ -244,9 +243,7 @@
                 <!-- Bagian Bawah -->
                 <div class="bottom-circles">
                     <div id="left-val" class="circle part-circle">200</div>
-                    <div id="right-val" class="circle part-circle input-box-wrapper">
-                        <input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">
-                    </div>
+                    <div id="right-val" class="circle part-circle">300</div>
                 </div>
             </div>
 
@@ -309,31 +306,35 @@
 
             posisiKosong = Math.floor(Math.random() * 3);
 
-            leftValEl.classList.remove('input-box-wrapper');
-            rightValEl.classList.remove('input-box-wrapper');
-            topValEl.classList.remove('input-box-wrapper');
+            // Reset kelas dan isi elemen kembali normal
+            topValEl.className = "circle top-circle";
+            leftValEl.className = "circle part-circle";
+            rightValEl.className = "circle part-circle";
 
+            topValEl.innerHTML = '';
             leftValEl.innerHTML = '';
             rightValEl.innerHTML = '';
-            topValEl.innerHTML = '';
 
             if (posisiKosong === 2) {
+                // Atas kosong (Tanya Total) -> Berubah jadi abu-abu input box
                 topValEl.classList.add('input-box-wrapper');
                 topValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 leftValEl.innerText = bagianA;
                 rightValEl.innerText = bagianB;
                 jawabanBenar = total;
             } else if (posisiKosong === 1) {
+                // Kiri kosong (Tanya Bagian) -> Berubah jadi abu-abu input box
+                topValEl.innerText = total;
                 leftValEl.classList.add('input-box-wrapper');
                 leftValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
-                topValEl.innerText = total;
                 rightValEl.innerText = bagianB;
                 jawabanBenar = bagianA;
             } else {
-                rightValEl.classList.add('input-box-wrapper');
-                rightValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
+                // Kanan kosong (Tanya Bagian) -> Berubah jadi abu-abu input box
                 topValEl.innerText = total;
                 leftValEl.innerText = bagianA;
+                rightValEl.classList.add('input-box-wrapper');
+                rightValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 jawabanBenar = bagianB;
             }
 

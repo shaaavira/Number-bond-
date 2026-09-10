@@ -707,7 +707,7 @@ Uswa"></textarea>
         const visualGroupRight = document.getElementById('visual-group-right');
 
         const audioBenar = new Audio('Hore.mp3');
-        audioBenar.volume = 0.6;
+        audioBenar.volume = 0.4; // Volume Hore dikecilkan ke 40%
         audioBenar.load();
 
         const circlePalettes = [
@@ -790,7 +790,7 @@ Uswa"></textarea>
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(140, now);
                     osc.frequency.setValueAtTime(90, now + 0.15);
-                    gainNode.gain.setValueAtTime(0.2, now);
+                    gainNode.gain.setValueAtTime(0.8, now); // Volume suara salah dibesarkan ke 80%
                     gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                     osc.start(now); osc.stop(now + 0.3);
                 }
@@ -1067,8 +1067,8 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. Pilih siswa yang diberi poin: 👇</span>";
                 pickerSection.classList.remove('hidden');
             } else {
-                playSound('wrong');       // Efek suara salah saat pemeriksaan ulang keliru
-                triggerFlashRed();        // Layar berkedip merah
+                playSound('wrong');       
+                triggerFlashRed();        
                 feedbackEl.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
             }
         }

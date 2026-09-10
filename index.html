@@ -231,7 +231,7 @@
             color: #2ed573;
             font-size: 13px;
             font-weight: 800;
-            margin: 4px 0 2px 0;
+            margin: 2px 0;
             background: #eafaf1;
             padding: 3px 12px;
             border-radius: 12px;
@@ -239,13 +239,13 @@
             display: inline-block;
         }
 
-        /* KOTAK ILUSTRASI GAMBAR */
+        /* KOTAK ILUSTRASI GAMBAR (Disempurnakan margin-nya agar pas di tengah-tengah secara simetris) */
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
             border-radius: 18px;
             padding: 10px 18px;
-            margin: 12px auto 14px auto;
+            margin: 10px auto;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -280,7 +280,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 20px;
-            margin: 2px 0;
+            margin: 4px 0;
             flex: 1;
         }
 
@@ -447,7 +447,7 @@
             background-color: #ff7675;
             box-shadow: 0 3px 0 #d63031;
         }
-        .btn-retry:active { box-shadow: 0 2px 0 #d63031; }
+        .btn-retry:active { box-shadow: 0 1px 0 #d63031; }
 
         .btn-recheck {
             background-color: #74b9ff;
@@ -622,7 +622,7 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK ILUSTRASI GAMBAR -->
+            <!-- KOTAK ILUSTRASI GAMBAR (Posisi sudah simetris dan proporsional di tengah) -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
                     <div id="visual-group-left" class="emoji-side"></div>
@@ -965,7 +965,6 @@ Uswa"></textarea>
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
                 
-                // Ukuran emoji sedikit lebih besar khusus untuk LE 1 dan LE 2
                 if (kategoriPilihan === 'LE1' || kategoriPilihan === 'LE2') {
                     visualGroupLeft.style.fontSize = '30px';
                     visualGroupRight.style.fontSize = '30px';

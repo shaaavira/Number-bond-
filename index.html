@@ -26,7 +26,7 @@
             background: var(--bg-gradient);
             font-family: 'Quicksand', sans-serif;
             margin: 0;
-            padding: 10px;
+            padding: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,37 +50,38 @@
         .game-container {
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px);
-            padding: 20px 30px;
-            border-radius: 32px;
+            padding: 15px 25px;
+            border-radius: 28px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 1050px;
             height: 98vh;
-            max-height: 780px;
+            max-height: 740px;
             text-align: center;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            overflow: hidden;
         }
 
         .btn-back {
             position: absolute;
-            top: 16px;
-            left: 20px;
+            top: 12px;
+            left: 16px;
             background: #f1f5f9;
             border: none;
-            padding: 8px 14px;
+            padding: 6px 12px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 15px;
+            font-size: 14px;
             color: #475569;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             box-shadow: 0 3px 0 #cbd5e1;
             z-index: 100;
         }
@@ -89,16 +90,16 @@
         h1 {
             font-family: 'Outfit', sans-serif;
             color: #ff4757;
-            font-size: 30px;
+            font-size: 26px;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: #636e72;
-            margin: 2px 0 8px 0;
+            margin: 2px 0 4px 0;
             font-weight: 700;
         }
 
@@ -110,12 +111,12 @@
             justify-content: center;
             width: 100%;
             flex: 1;
-            gap: 12px;
+            gap: 10px;
         }
 
         .lobby-section-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             color: #2d3436;
             margin-bottom: 4px;
@@ -126,15 +127,15 @@
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 10px;
             width: 100%;
         }
 
         .cat-card {
             background: #ffffff;
             border: 3px solid #f1f5f9;
-            border-radius: 18px;
-            padding: 12px 10px;
+            border-radius: 16px;
+            padding: 10px 8px;
             cursor: pointer;
             text-align: left;
             transition: all 0.2s ease;
@@ -149,21 +150,21 @@
 
         .cat-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 900;
             color: #2d3436;
         }
         .cat-card.selected .cat-title { color: #ff4757; }
-        .cat-desc { font-size: 13px; color: #636e72; font-weight: 700; margin-top: 2px;}
+        .cat-desc { font-size: 12px; color: #636e72; font-weight: 700; margin-top: 2px;}
 
         #lobby-screen textarea {
             width: 100%;
-            height: 90px;
-            padding: 12px;
+            height: 80px;
+            padding: 10px;
             border: 3px solid #e2e8f0;
-            border-radius: 16px;
+            border-radius: 14px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             resize: none;
             outline: none;
@@ -173,9 +174,9 @@
         #lobby-screen textarea:focus { border-color: #ff4757; background: #fff; }
 
         .input-hint {
-            font-size: 13px;
+            font-size: 12px;
             color: #94a3b8;
-            margin: 2px 0 6px 0;
+            margin: 2px 0 4px 0;
             text-align: left;
             width: 100%;
             font-weight: 700;
@@ -186,11 +187,11 @@
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            padding: 10px 18px;
-            border-radius: 20px;
-            margin: 4px 0 8px 0;
+            padding: 8px 14px;
+            border-radius: 16px;
+            margin: 2px 0 4px 0;
             overflow-x: auto;
             border: 3px dashed #f59e0b;
             width: 100%;
@@ -201,9 +202,9 @@
         .player-score {
             text-align: center;
             background: #ffffff;
-            padding: 8px 14px;
-            border-radius: 16px;
-            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 14px;
+            font-size: 12px;
             font-weight: 800;
             color: #64748b;
             border: 3px solid #fde047;
@@ -213,7 +214,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            gap: 1px;
             transition: transform 0.2s ease;
         }
 
@@ -226,7 +227,7 @@
             align-items: center;
             gap: 4px;
             font-family: 'Outfit', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 900;
             color: #334155;
         }
@@ -234,12 +235,12 @@
         .player-score span {
             display: inline-block;
             font-family: 'Outfit', sans-serif;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 900;
             color: #ff4757;
             background: #fff1f2;
-            padding: 1px 10px;
-            border-radius: 10px;
+            padding: 0 8px;
+            border-radius: 8px;
             border: 2px solid #fecdd3;
             animation: pulseScore 2s infinite ease-in-out;
         }
@@ -248,17 +249,16 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.04); }
         }
-        /* -------------------------------- */
 
         .level-info {
             font-family: 'Outfit', sans-serif;
             color: #2ed573;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             background: #eafaf1;
-            padding: 4px 14px;
-            border-radius: 14px;
+            padding: 3px 12px;
+            border-radius: 12px;
             border: 2px solid #2ed573;
             display: inline-block;
         }
@@ -267,50 +267,48 @@
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
-            border-radius: 20px;
-            padding: 10px 18px;
-            margin-bottom: 8px;
+            border-radius: 16px;
+            padding: 6px 14px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            min-height: 85px;
+            gap: 10px;
+            min-height: 70px;
             max-width: 950px;
             margin-left: auto;
             margin-right: auto;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             flex-wrap: wrap; 
         }
 
         .emoji-side {
-            font-size: 38px;
-            letter-spacing: 3px;
-            line-height: 1.25;
+            font-size: 32px;
+            letter-spacing: 2px;
+            line-height: 1.2;
             white-space: nowrap;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.9);
-            padding: 6px 14px;
-            border-radius: 12px;
+            padding: 4px 10px;
+            border-radius: 10px;
             border: 2px dashed #fcd34d;
         }
 
-        /* Khusus mode LE1: Ukuran dibuat lebih besar lagi (50px) karena jumlahnya sedikit (1-5) */
         .emoji-side.le1-mode {
-            font-size: 50px !important;
-            letter-spacing: 4px !important;
-            padding: 6px 16px;
+            font-size: 40px !important;
+            letter-spacing: 3px !important;
+            padding: 4px 12px;
         }
 
-        /* Khusus mode LE3: Ukuran 38px dibungkus rapi fleksibel agar muat sampai 20 */
         .emoji-side.le3-mode {
-            font-size: 38px !important;
+            font-size: 30px !important;
             letter-spacing: 2px !important;
             flex-wrap: wrap !important;
-            max-width: 440px;
+            max-width: 400px;
             justify-content: center;
             gap: 2px;
-            padding: 6px 10px;
+            padding: 4px 8px;
             white-space: normal !important;
         }
 
@@ -320,8 +318,8 @@
             width: 100%;
             justify-content: space-between;
             align-items: center;
-            gap: 24px;
-            margin: 6px 0;
+            gap: 16px;
+            margin: 2px 0;
             flex: 1;
         }
 
@@ -332,7 +330,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 10px;
+            padding: 5px;
         }
 
         .right-side-game {
@@ -343,9 +341,9 @@
             justify-content: center;
             background: #f8fafc;
             border: 3px solid #e2e8f0;
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.03);
+            border-radius: 20px;
+            padding: 12px 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
         /* NUMBER BOND */
@@ -354,34 +352,34 @@
             flex-direction: column;
             align-items: center;
             position: relative;
-            transform: scale(1.15);
-            margin: 15px 0;
+            transform: scale(1.05);
+            margin: 5px 0;
         }
 
         .circle {
-            width: 105px;
-            height: 105px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 40px;
+            font-size: 34px;
             color: #ffffff;
             border: none;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
             transition: background 0.5s ease;
             position: relative;
             z-index: 2;
         }
 
         .branch-lines {
-            width: 140px;  
-            height: 40px;  
+            width: 120px;  
+            height: 35px;  
             position: relative;
-            margin-top: -15px;
-            margin-bottom: -15px;
+            margin-top: -12px;
+            margin-bottom: -12px;
             z-index: 1;
         }
         .branch-lines::before, .branch-lines::after {
@@ -389,17 +387,17 @@
             position: absolute;
             bottom: 0;
             width: 4px; 
-            height: 70px; 
+            height: 60px; 
             border-radius: 2px;
             background-color: #334155;
         }
-        .branch-lines::before { left: 23px; transform: rotate(32deg); transform-origin: top center; }
-        .branch-lines::after { right: 23px; transform: rotate(-32deg); transform-origin: top center; }
+        .branch-lines::before { left: 20px; transform: rotate(32deg); transform-origin: top center; }
+        .branch-lines::after { right: 20px; transform: rotate(-32deg); transform-origin: top center; }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 240px; 
+            width: 200px; 
         }
 
         .circle input {
@@ -410,7 +408,7 @@
             text-align: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 38px;
+            font-size: 32px;
             color: #ffffff;
             outline: none;
             border-radius: 50%;
@@ -426,36 +424,36 @@
             align-items: center;
             justify-content: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 900;
             color: #2f3542;
             background: #ffffff;
-            padding: 14px 20px;
-            border-radius: 16px;
-            margin-bottom: 14px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            margin-bottom: 8px;
             border: 3px dashed #cbd5e1;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             width: 100%;
         }
         
         .formula-box span {
             color: #ff6b81;
             font-weight: 900;
-            font-size: 26px;
-            margin: 0 8px;
+            font-size: 22px;
+            margin: 0 6px;
         }
 
         .form-input {
-            width: 65px;
-            height: 50px;
+            width: 55px;
+            height: 42px;
             text-align: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 900;
             color: #2f3542;
             background: #f8fafc;
             border: 3px solid #cbd5e1;
-            border-radius: 12px;
+            border-radius: 10px;
             outline: none;
         }
         .form-input:focus {
@@ -467,58 +465,58 @@
             background-color: #2ed573;
             color: white;
             border: none;
-            padding: 11px 26px;
+            padding: 9px 22px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 17px;
-            border-radius: 14px;
+            font-size: 15px;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #26af5f;
+            box-shadow: 0 3px 0 #26af5f;
             transition: all 0.1s ease;
         }
-        .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #26af5f; }
+        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #26af5f; }
 
         .btn-next {
             background-color: #ffa502;
-            box-shadow: 0 4px 0 #e67e22;
+            box-shadow: 0 3px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
 
         .btn-retry {
             background-color: #ff7675;
-            box-shadow: 0 4px 0 #d63031;
+            box-shadow: 0 3px 0 #d63031;
         }
-        .btn-retry:active { box-shadow: 0 2px 0 #d63031; }
+        .btn-retry:active { box-shadow: 0 1px 0 #d63031; }
 
         .btn-recheck {
             background-color: #74b9ff;
-            box-shadow: 0 4px 0 #0984e3;
+            box-shadow: 0 3px 0 #0984e3;
         }
-        .btn-recheck:active { box-shadow: 0 2px 0 #0984e3; }
+        .btn-recheck:active { box-shadow: 0 1px 0 #0984e3; }
 
         #picker-section {
             background: #fff9e6;
-            padding: 10px;
-            border-radius: 14px;
-            margin-top: 14px;
+            padding: 8px;
+            border-radius: 12px;
+            margin-top: 8px;
             border: 2px dashed #ffa502;
             width: 100%;
         }
 
         .picker-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             color: #d35400;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .name-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 6px;
-            max-height: 70px;
+            gap: 5px;
+            max-height: 60px;
             overflow-y: auto;
         }
 
@@ -526,11 +524,11 @@
             background-color: #6c5ce7;
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 5px 10px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 14px;
-            border-radius: 10px;
+            font-size: 13px;
+            border-radius: 8px;
             cursor: pointer;
             box-shadow: 0 2px 0 #4834d4;
         }
@@ -539,9 +537,9 @@
         #feedback {
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 15px;
-            margin-top: 8px;
-            min-height: 24px;
+            font-size: 14px;
+            margin-top: 4px;
+            min-height: 20px;
         }
 
         .correct { color: #00b894; }
@@ -549,24 +547,24 @@
         .hidden { display: none !important; }
 
         .mascot {
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 2px;
             animation: floatMascot 3s ease-in-out infinite;
         }
         @keyframes floatMascot {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
+            50% { transform: translateY(-3px); }
         }
 
         #winner-text {
             font-family: 'Outfit', sans-serif;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: #2d3436;
-            margin: 10px 0;
+            margin: 8px 0;
             background: #fff9e6;
-            padding: 16px;
-            border-radius: 16px;
+            padding: 14px;
+            border-radius: 14px;
             border: 3px dashed #ffa502;
             line-height: 1.4;
         }
@@ -580,13 +578,13 @@
         }
 
         .welcome-card {
-            background: white; padding: 26px; border-radius: 26px; text-align: center; max-width: 380px; width: 90%;
+            background: white; padding: 24px; border-radius: 24px; text-align: center; max-width: 360px; width: 90%;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             z-index: 100000;
             position: relative;
         }
-        .welcome-title { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 900; color: #ff4757; margin-bottom: 6px; }
-        .welcome-desc { font-size: 14px; color: #636e72; margin-bottom: 16px; font-weight: 700; }
+        .welcome-title { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; color: #ff4757; margin-bottom: 4px; }
+        .welcome-desc { font-size: 13px; color: #636e72; margin-bottom: 14px; font-weight: 700; }
     </style>
 </head>
 <body class="theme-LE1">
@@ -643,7 +641,7 @@ Uswa"></textarea>
             <div>
                 <button class="btn" onclick="mulaiPermainanDariLobby()">Mulai Bermain! 🌟</button>
             </div>
-            <div id="lobby-error" class="wrong" style="font-size: 13px; font-weight: 800; min-height: 18px;"></div>
+            <div id="lobby-error" class="wrong" style="font-size: 12px; font-weight: 800; min-height: 16px;"></div>
         </div>
 
         <!-- GAME SCREEN -->
@@ -679,7 +677,7 @@ Uswa"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 800; color: #636e72; margin-bottom: 6px;">Papan Tulis Teacher:</div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: #636e72; margin-bottom: 4px;">Papan Tulis Teacher:</div>
                     
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
@@ -696,21 +694,21 @@ Uswa"></textarea>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
-                    <div id="formula-check-section" class="hidden" style="margin-top: 8px;">
+                    <div id="formula-check-section" class="hidden" style="margin-top: 6px;">
                         <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Jawaban Papan Tulis 🔍</button>
                     </div>
 
                     <div id="picker-section" class="hidden">
                         <div id="feedback"></div>
-                        <div class="picker-title" id="picker-title-text" style="margin-top: 6px;">Siapa yang mau diberi skor? 👇</div>
+                        <div class="picker-title" id="picker-title-text" style="margin-top: 4px;">Siapa yang mau diberi skor? 👇</div>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
-                    <div id="feedback-outside" style="min-height: 24px; margin-top: 6px;"></div>
+                    <div id="feedback-outside" style="min-height: 20px; margin-top: 4px; font-size: 13px; font-weight: 800;"></div>
                 </div>
             </div>
 
-            <div style="height: 2px;"></div>
+            <div style="height: 1px;"></div>
         </div>
 
         <!-- RESULT -->

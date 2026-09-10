@@ -56,6 +56,28 @@
             overflow: hidden;
         }
 
+        /* Tombol Kembali (Back) */
+        .btn-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #dfe4ea;
+            border: none;
+            padding: 8px 14px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 13px;
+            color: #57606f;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #ced6e0;
+            transition: all 0.1s ease;
+        }
+
+        .btn-back:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #ced6e0;
+        }
+
         h1 {
             font-family: 'Fredoka One', cursive;
             color: #ff4757;
@@ -325,6 +347,16 @@
             box-shadow: 0 2px 0 #26af5f;
         }
 
+        /* Tombol Next untuk Guru */
+        .btn-next {
+            background-color: #ffa502;
+            box-shadow: 0 6px 0 #e67e22;
+            margin-top: 10px;
+        }
+        .btn-next:active {
+            box-shadow: 0 2px 0 #e67e22;
+        }
+
         /* Bagian Pilih Siapa yang Cepat */
         #picker-section {
             background: #fff9e6;
@@ -449,9 +481,9 @@
             <div class="lobby-section-title">2. Daftar Nama Pemain (Maksimal 10 anak):</div>
             <textarea id="player-input-box" placeholder="Ketik nama anak, pisahkan dengan baris baru (Enter)...
 Contoh:
-Budi
-Ani
-Siti"></textarea>
+Dawai
+Nahda
+Alif"></textarea>
             <div class="input-hint">💡 Tips: Ketik satu nama di setiap baris ya!</div>
             
             <div>
@@ -462,6 +494,7 @@ Siti"></textarea>
 
         <!-- Halaman Bermain -->
         <div id="game-screen" class="hidden">
+            <button class="btn-back" onclick="kembaliKeLobby()">⬅️ Menu</button>
             <div class="mascot">🎨🎪</div>
             <h1 id="game-title-header">Rumah Angka Ceria</h1>
             <div class="subtitle" id="game-category-badge">Kategori: LE 1</div>
@@ -483,6 +516,7 @@ Siti"></textarea>
 
             <div class="input-section">
                 <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
+                <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
             </div>
 
             <!-- Pilihan Nama Anak Muncul Jika Benar -->
@@ -523,6 +557,8 @@ Siti"></textarea>
         const pickerSection = document.getElementById('picker-section');
         const winnerText = document.getElementById('winner-text');
         const lobbyError = document.getElementById('lobby-error');
+        const submitBtn = document.getElementById('submit-btn');
+        const nextBtn = document.getElementById('next-btn');
 
         // --- SISTEM PEMBUAT SUARA (Audio Synthesizer Built-in) ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -621,6 +657,7 @@ Siti"></textarea>
 
         function kembaliKeLobby() {
             resultScreen.classList.add('hidden');
+            gameScreen.classList.add('hidden');
             lobbyScreen.classList.remove('hidden');
         }
 
@@ -654,7 +691,8 @@ Siti"></textarea>
         function buatSoalBaru() {
             feedbackEl.innerHTML = '';
             pickerSection.classList.add('hidden');
-            document.getElementById('submit-btn').style.display = 'inline-block';
+            submitBtn.style.display = 'inline-block';
+            nextBtn.classList.add('hidden');
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
@@ -732,20 +770,19 @@ Siti"></textarea>
             }
 
             activeInput.disabled = true;
-            document.getElementById('submit-btn').style.display = 'none';
+            submitBtn.style.display = 'none';
 
             if (jawabanUser === jawabanBenar) {
                 playSound('correct');
                 triggerConfetti();
-                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Hebat sekali! 🌟</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Siapa yang paling cepat? 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
                 playSound('wrong');
                 triggerFlashRed();
                 feedbackEl.innerHTML = `<span class='wrong'>Wah kurang tepat! Jawabannya: ${jawabanBenar} 💪</span>`;
-                setTimeout(() => {
-                    lanjutkanSoal();
-                }, 2200);
+                // Tampilkan tombol next agar guru bisa membahas dulu sebelum lanjut
+                nextBtn.classList.remove('hidden');
             }
         }
 
@@ -754,10 +791,8 @@ Siti"></textarea>
             updatePapanSkor();
             pickerSection.classList.add('hidden');
             feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🎈</span>`;
-
-            setTimeout(() => {
-                lanjutkanSoal();
-            }, 1500);
+            // Tampilkan tombol next untuk melanjutkan setelah selesai dibahas
+            nextBtn.classList.remove('hidden');
         }
 
         function lanjutkanSoal() {
@@ -776,7 +811,7 @@ Siti"></textarea>
                     let namaPemenang = pemenang.map(p => p.nama).join(" & ");
                     winnerText.innerHTML = `Hasil Seri! 🤝<br>Hebat semua: ${namaPemenang} (${maksSkor} Poin)`;
                 } else {
-                    winnerText.innerHTML = `🎉 Yey! Selamat Kepada <b>${pemenang[0].nama}</b>!<br>Juara Tercepat dengan ${maksSkor} Poin! 🌟🏆`;
+                    winnerText.innerHTML = `🎉 Yey! Selamat <b>${pemenang[0].nama}</b>!<br>Juara Tercepat dengan ${maksSkor} Poin! 🌟🏆`;
                 }
             } else {
                 buatSoalBaru();

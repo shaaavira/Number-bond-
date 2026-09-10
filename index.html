@@ -280,7 +280,7 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 36px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
             transition: background 0.5s ease, border-color 0.5s ease;
         }
 
@@ -297,7 +297,7 @@
             width: 5px; 
             height: 24px; 
             border-radius: 3px;
-            background-color: #1e90ff;
+            background-color: #a4b0be;
         }
         .branch-lines::before { left: 22px; transform: rotate(30deg); }
         .branch-lines::after { right: 22px; transform: rotate(-30deg); }
@@ -317,7 +317,7 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 34px;
-            color: #ffffff;
+            color: #2f3542;
             outline: none;
             border-radius: 50%;
         }
@@ -343,7 +343,7 @@
         }
         
         .formula-box span {
-            color: #ff4757;
+            color: #ff6b81;
             font-weight: 900;
             font-size: 24px;
             margin: 0 6px;
@@ -389,10 +389,16 @@
         .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
 
         .btn-retry {
-            background-color: #e67e22;
-            box-shadow: 0 4px 0 #d35400;
+            background-color: #ff7675;
+            box-shadow: 0 4px 0 #d63031;
         }
-        .btn-retry:active { box-shadow: 0 2px 0 #d35400; }
+        .btn-retry:active { box-shadow: 0 2px 0 #d63031; }
+
+        .btn-recheck {
+            background-color: #74b9ff;
+            box-shadow: 0 4px 0 #0984e3;
+        }
+        .btn-recheck:active { box-shadow: 0 2px 0 #0984e3; }
 
         #picker-section {
             background: #fff9e6;
@@ -421,7 +427,7 @@
         }
 
         .btn-name {
-            background-color: #3742fa;
+            background-color: #6c5ce7;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -430,9 +436,9 @@
             font-size: 13px;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 2px 0 #2f3542;
+            box-shadow: 0 2px 0 #4834d4;
         }
-        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #2f3542; }
+        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #4834d4; }
 
         #feedback {
             font-family: 'Outfit', sans-serif;
@@ -442,8 +448,8 @@
             min-height: 22px;
         }
 
-        .correct { color: #2ed573; }
-        .wrong { color: #ff4757; }
+        .correct { color: #00b894; }
+        .wrong { color: #d63031; }
         .hidden { display: none !important; }
 
         .mascot {
@@ -582,6 +588,7 @@ Uswa"></textarea>
                     <div class="input-section">
                         <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
                         <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Betulkan Jawaban ✍️</button>
+                        <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
@@ -616,7 +623,7 @@ Uswa"></textarea>
         let nilaiTotal = 5;
         let nilaiBagianA = 2;
         let nilaiBagianB = 3;
-        let isSalahSesi = false; // Menandakan apakah soal ini habis dijawab salah
+        let isSalahSesi = false;
 
         const topValEl = document.getElementById('top-val');
         const leftValEl = document.getElementById('left-val');
@@ -637,18 +644,20 @@ Uswa"></textarea>
         const lobbyError = document.getElementById('lobby-error');
         const submitBtn = document.getElementById('submit-btn');
         const retryBtn = document.getElementById('retry-btn');
+        const recheckBtn = document.getElementById('recheck-btn');
         const nextBtn = document.getElementById('next-btn');
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
 
         let audioCtx = null;
 
-        const colorPalettes = [
-            { top: 'linear-gradient(135deg, #ff6b81 0%, #ff4757 100%)', borderTop: '#ff9ff3', bottom: 'linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%)', borderBottom: '#74b9ff' },
-            { top: 'linear-gradient(135deg, #ffa502 0%, #ff7f50 100%)', borderTop: '#ffeaa7', bottom: 'linear-gradient(135deg, #2ed573 0%, #26af5f 100%)', borderBottom: '#7efff5' },
-            { top: 'linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%)', borderTop: '#d2b4de', bottom: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)', borderBottom: '#85c1e9' },
-            { top: 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)', borderTop: '#f5b7b1', bottom: 'linear-gradient(135deg, #f39c12 0%, #d68910 100%)', borderBottom: '#f8c471' },
-            { top: 'linear-gradient(135deg, #00cec9 0%, #0984e3 100%)', borderTop: '#81ecec', bottom: 'linear-gradient(135deg, #fd79a8 0%, #e84393 100%)', borderBottom: '#fab1a0' }
+        // Pilihan palet warna Number Bond yang soft, kalem, dan estetik (nyaman di mata anak)
+        const softColorPalettes = [
+            { top: 'linear-gradient(135deg, #ffb8b8 0%, #ff8787 100%)', borderTop: '#ffd8d8', bottom: 'linear-gradient(135deg, #a5d8ff 0%, #74c0fc 100%)', borderBottom: '#d0ebff' },
+            { top: 'linear-gradient(135deg, #ffec99 0%, #ffd43b 100%)', borderTop: '#fff9db', bottom: 'linear-gradient(135deg, #b2f2bb 0%, #8ce99a 100%)', borderBottom: '#e6fcf5' },
+            { top: 'linear-gradient(135deg, #e599f7 0%, #cc5de8 100%)', borderTop: '#f3d9fa', bottom: 'linear-gradient(135deg, #99e9f2 0%, #38d9a9 100%)', borderBottom: '#e3fafc' },
+            { top: 'linear-gradient(135deg, #ffc078 0%, #ffa94d 100%)', borderTop: '#ffe8cc', bottom: 'linear-gradient(135deg, #74c0fc 0%, #4dabf7 100%)', borderBottom: '#e7f5ff' },
+            { top: 'linear-gradient(135deg, #f06595 0%, #e64980 100%)', borderTop: '#fcc2d7', bottom: 'linear-gradient(135deg, #63e6be 0%, #20c997 100%)', borderBottom: '#c3fae8' }
         ];
 
         function initAudio() {
@@ -827,6 +836,7 @@ Uswa"></textarea>
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             retryBtn.classList.add('hidden');
+            recheckBtn.classList.add('hidden');
             nextBtn.classList.add('hidden');
             isSalahSesi = false;
             
@@ -863,14 +873,15 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            const randomPalette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+            // Memilih warna soft kalem setiap soal baru
+            const softPalette = softColorPalettes[Math.floor(Math.random() * softColorPalettes.length)];
 
-            topValEl.style.background = randomPalette.top;
-            topValEl.style.borderColor = randomPalette.borderTop;
-            leftValEl.style.background = randomPalette.bottom;
-            leftValEl.style.borderColor = randomPalette.borderBottom;
-            rightValEl.style.background = randomPalette.bottom;
-            rightValEl.style.borderColor = randomPalette.borderBottom;
+            topValEl.style.background = softPalette.top;
+            topValEl.style.borderColor = softPalette.borderTop;
+            leftValEl.style.background = softPalette.bottom;
+            leftValEl.style.borderColor = softPalette.borderBottom;
+            rightValEl.style.background = softPalette.bottom;
+            rightValEl.style.borderColor = softPalette.borderBottom;
 
             topValEl.innerHTML = '';
             leftValEl.innerHTML = '';
@@ -903,7 +914,10 @@ Uswa"></textarea>
             const inputs = document.querySelectorAll('input[type="number"]');
             inputs.forEach(inp => {
                 inp.addEventListener("keypress", function(event) {
-                    if (event.key === "Enter") { cekJawaban(); }
+                    if (event.key === "Enter") { 
+                        if (submitBtn.style.display !== 'none') cekJawaban();
+                        else if (!recheckBtn.classList.contains('hidden')) periksaUlangJawaban();
+                    }
                 });
             });
         }
@@ -919,20 +933,21 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
-                // Benar langsung
+                // Jawaban Benar Langsung (Efek confetti + suara tepuk tangan)
                 playClappingAndCheer();
                 triggerConfetti();
                 
                 activeInput.disabled = true;
                 submitBtn.style.display = 'none';
                 retryBtn.classList.add('hidden');
+                recheckBtn.classList.add('hidden');
                 
                 isSalahSesi = false;
                 pickerTitleText.innerText = "Siapa paling cepat benar? (Poin +10): 👇";
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih siswa yang menjawab: 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
-                // Salah: Tampilkan tombol "Betulkan Jawaban" terlebih dahulu
+                // Jawaban Salah: Munculkan tombol Betulkan Jawaban
                 playSound('wrong');
                 triggerFlashRed();
 
@@ -949,29 +964,51 @@ Uswa"></textarea>
             retryBtn.classList.add('hidden');
             const activeInput = document.getElementById('user-input');
             
-            // Masukkan jawaban benar secara otomatis dan aktifkan kembali jika ingin dibetulkan bersama
+            // Buka input agar bisa diketik ulang jawaban yang benar
             if (activeInput) {
-                activeInput.value = jawabanBenar;
+                activeInput.value = '';
                 activeInput.disabled = false;
                 activeInput.focus();
             }
 
-            feedbackEl.innerHTML = "<span class='correct'>Mari periksa kembali! Siapa siswa yang membetulkan? (Poin +5): 👇</span>";
-            pickerTitleText.innerText = "Pilih siswa yang membetulkan jawaban (Poin +5): 👇";
-            pickerSection.classList.remove('hidden');
+            feedbackEl.innerHTML = "<span class='wrong'>Silakan betulkan jawabannya bersama siswa, lalu klik Periksa Lagi! ✍️</span>";
+            recheckBtn.classList.remove('hidden');
+        }
+
+        function periksaUlangJawaban() {
+            const activeInput = document.getElementById('user-input');
+            if (!activeInput) return;
+            const jawabanBaru = parseInt(activeInput.value);
+
+            if (jawabanBaru === jawabanBenar) {
+                // Berhasil betulkan jawaban -> Efek confetti + suara tepuk tangan, lalu pilih siswa untuk diberi poin
+                playClappingAndCheer();
+                triggerConfetti();
+
+                activeInput.disabled = true;
+                recheckBtn.classList.add('hidden');
+
+                pickerTitleText.innerText = "Pilih siswa yang membetulkan jawaban (Poin +5): 👇";
+                feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. Pilih siswa yang diberi poin: 👇</span>";
+                pickerSection.classList.remove('hidden');
+            } else {
+                playSound('wrong');
+                triggerFlashRed();
+                feedbackEl.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
+            }
         }
 
         function aksiPilihAnak(index) {
             pickerSection.classList.add('hidden');
 
             if (!isSalahSesi) {
-                // Pemberian poin benar (10 poin)
+                // Pemberian poin benar langsung (10 poin)
                 daftarPemain[index].skor += 10;
                 updatePapanSkor();
                 feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
                 nextBtn.classList.remove('hidden');
             } else {
-                // Pemberian poin setelah betulkan jawaban (5 poin)
+                // Pemberian poin setelah sukses betulkan jawaban (5 poin)
                 daftarPemain[index].skor += 5;
                 updatePapanSkor();
                 

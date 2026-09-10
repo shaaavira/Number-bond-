@@ -3,182 +3,1311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Belajar Anak</title>
+    <title>Petualangan Number Bond Minecraft!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
     <style>
-        /* Pengaturan Umum & Animasi Transisi */
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-gradient: linear-gradient(135deg, #2E8B57 0%, #0d2818 100%);
+            --container-bg: #143628;
+            --border-main: #3CB371;
+            --btn-main: #00FF7F;
+            --btn-shadow: #052e16;
+            --accent-color: #4ade80;
+        }
+
+        /* TEMA WARNA MODERN & CERIA ANAK-ANAK */
+        body.theme-LE1 { 
+            --bg-gradient: linear-gradient(135deg, #00B4DB 0%, #83F4FF 100%); 
+            --container-bg: #0c2d38;
+            --border-main: #00D2FF;
+            --btn-main: #1CB5E0;
+            --btn-shadow: #041f26;
+            --accent-color: #83F4FF;
+        }
+        body.theme-LE2 { 
+            --bg-gradient: linear-gradient(135deg, #A67B5B 0%, #D79955 100%); 
+            --container-bg: #322216;
+            --border-main: #C49A6C;
+            --btn-main: #D79955;
+            --btn-shadow: #1c120a;
+            --accent-color: #F4E04D;
+        }
+        body.theme-LE3 { 
+            --bg-gradient: linear-gradient(135deg, #FF4E50 0%, #F9D423 100%); 
+            --container-bg: #3d1416;
+            --border-main: #FF6B6B;
+            --btn-main: #FF3366;
+            --btn-shadow: #21080a;
+            --accent-color: #ff94a8;
+        }
+        body.theme-CT  { 
+            --bg-gradient: linear-gradient(135deg, #FF8008 0%, #FFC837 100%); 
+            --container-bg: #3d2410;
+            --border-main: #FFA500;
+            --btn-main: #FF7300;
+            --btn-shadow: #211205;
+            --accent-color: #FFC837;
+        }
+
         body {
+            background: var(--bg-gradient);
+            font-family: 'Outfit', sans-serif;
             margin: 0;
-            padding: 0;
-            font-family: 'Comic Sans MS', 'Bubblegum Sans', 'Poppins', sans-serif;
+            padding: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            transition: background 0.5s ease;
+            width: 100vw;
+            overflow: hidden;
+            transition: background 0.8s ease;
         }
 
-        .container {
-            width: 90%;
-            max-width: 450px;
-            padding: 25px;
-            border-radius: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        body.flash-red {
+            background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%) !important;
+            animation: shake 0.35s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        .game-container {
+            background: var(--container-bg); 
+            color: #f8fafc;
+            backdrop-filter: blur(16px);
+            padding: 16px 24px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255,255,255,0.15);
+            border: 4px solid var(--border-main); 
+            width: 100%;
+            max-width: 1080px;
+            height: 98vh;
+            max-height: 820px;
             text-align: center;
-            color: white;
-            transition: all 0.5s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow-y: auto;
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 14px;
+            left: 18px;
+            background: var(--border-main); 
+            border: 2px solid var(--accent-color);
+            padding: 6px 14px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 0 var(--btn-shadow);
+            z-index: 100;
+            transition: all 0.15s ease;
+        }
+        .btn-back:hover { transform: translateY(-1px); }
+        .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-shadow); }
+
+        .title-header-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0;
         }
 
         h1 {
-            font-size: 26px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Press Start 2P', monospace;
+            color: var(--accent-color); 
+            font-size: 17px;
+            margin: 0;
+            text-shadow: 2px 2px rgba(0,0,0,0.5);
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        .subtitle {
+            font-size: 11px;
+            color: #e2e8f0;
+            margin: 3px 0 5px 0;
+            font-weight: 700;
         }
 
-        /* Tombol Modern & Ceria */
-        .btn {
-            font-family: inherit;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
+        /* LOBBY */
+        #lobby-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            flex: 1;
+            gap: 10px;
+            padding: 4px 0;
+        }
+
+        .lobby-hero-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--border-main);
+            border-radius: 10px;
+            padding: 10px 20px;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .lobby-hero-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            color: var(--accent-color); 
+            margin: 0;
+            text-shadow: 1px 1px #000;
+        }
+
+        .lobby-hero-sub {
+            font-size: 11px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-top: 4px;
+        }
+
+        .lobby-row-container {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .lobby-section-box {
+            background: rgba(0, 0, 0, 0.25);
+            border: 2px solid var(--border-main);
+            border-radius: 10px;
+            padding: 12px 16px;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .lobby-section-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            flex: 1;
+            align-content: center;
+        }
+
+        .cat-card {
+            background: var(--container-bg);
+            border: 3px solid var(--border-main);
+            border-radius: 8px;
+            padding: 12px 8px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin: 5px;
+            text-align: center;
+            transition: all 0.15s ease;
+            box-shadow: 0 4px 0 var(--btn-shadow);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .btn:active {
-            transform: scale(0.95);
+        .cat-card:hover { transform: translateY(-2px); border-color: #fff; }
+        .cat-card:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--btn-shadow); }
+        
+        .cat-card.selected {
+            background: var(--btn-main);
+            border-color: #fff;
+            box-shadow: 0 4px 0 var(--btn-shadow), 0 6px 16px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
         }
 
-        /* --- 1. MENU UTAMA (HIJAU MODERN) --- */
-        body.theme-main {
-            background: linear-gradient(135deg, #A8E063, #56AB2F);
-        }
-        .theme-main .container {
-            background: linear-gradient(135deg, #76B947, #3E8E41);
-        }
-        .theme-main .btn-action {
-            background: linear-gradient(135deg, #6BE585, #22B14C);
+        .cat-emoji {
+            font-size: 26px;
+            margin-bottom: 4px;
+            display: block;
         }
 
-        /* --- 2. LE 1 (BIRU MUDA MODERN) --- */
-        body.theme-le1 {
-            background: linear-gradient(135deg, #89F7FE, #66A6FF);
+        .cat-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            color: #f1f5f9;
         }
-        .theme-le1 .container {
-            background: linear-gradient(135deg, #4FACFE, #00F2FE);
+        .cat-card.selected .cat-title { color: #000; font-weight: 900; }
+        .cat-desc { font-size: 11px; color: #cbd5e1; font-weight: 700; margin-top: 3px;}
+        .cat-card.selected .cat-desc { color: #1e293b; }
+
+        #lobby-screen textarea {
+            width: 100%; 
+            flex: 1;
+            min-height: 140px; 
+            padding: 10px 12px;
+            border: 2px solid var(--border-main);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+            resize: none;
+            outline: none;
+            color: #f1f5f9;
+            background: rgba(0,0,0,0.3);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+            display: block;
+            margin: 0 auto; 
         }
-        .theme-le1 .btn-action {
-            background: linear-gradient(135deg, #00C6FF, #0072FF);
+        #lobby-screen textarea:focus { 
+            border-color: var(--accent-color); 
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25), inset 0 2px 4px rgba(0,0,0,0.5); 
         }
 
-        /* --- 3. LE 2 (COKLAT MUDA MODERN) --- */
-        body.theme-le2 {
-            background: linear-gradient(135deg, #E6C594, #B8860B);
-        }
-        .theme-le2 .container {
-            background: linear-gradient(135deg, #D2B48C, #A0522D);
-        }
-        .theme-le2 .btn-action {
-            background: linear-gradient(135deg, #CD853F, #8B4513);
-        }
-
-        /* --- 4. LE 3 (MERAH MODERN) --- */
-        body.theme-le3 {
-            background: linear-gradient(135deg, #FF9A8E, #FF6A88);
-        }
-        .theme-le3 .container {
-            background: linear-gradient(135deg, #FF5E62, #FF9966);
-        }
-        .theme-le3 .btn-action {
-            background: linear-gradient(135deg, #FF416C, #FF4B2B);
+        .input-hint {
+            font-size: 10px;
+            color: #cbd5e1;
+            margin-top: 4px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
         }
 
-        /* --- 5. CT (ORANYE MODERN) --- */
-        body.theme-ct {
-            background: linear-gradient(135deg, #FFECD2, #FCB69F);
+        .btn-start-game {
+            background: var(--btn-main); 
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 var(--btn-shadow), 0 8px 16px rgba(0, 0, 0, 0.4);
+            transition: all 0.15s ease;
+            margin-top: 4px;
+            width: 100%;
         }
-        .theme-ct .container {
-            background: linear-gradient(135deg, #FFA07A, #FF7F50);
+        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--btn-shadow); }
+        .btn-start-game:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-shadow); }
+
+        .leaderboard {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.25);
+            padding: 6px 14px;
+            border-radius: 8px;
+            margin: 3px 0;
+            overflow-x: auto;
+            border: 2px solid var(--border-main); 
+            width: 100%;
+            max-width: 900px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
         }
-        .theme-ct .btn-action {
-            background: linear-gradient(135deg, #FF8008, #FFC837);
+
+        .player-score {
+            text-align: center;
+            background: var(--container-bg);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #facc15;
+            border: 2px solid var(--border-main);
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
         }
+        .player-score:hover { transform: translateY(-2px); }
+        .player-score span {
+            display: block;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            color: var(--accent-color);
+            margin-top: 2px;
+        }
+
+        .level-info {
+            font-family: 'Press Start 2P', monospace;
+            color: var(--accent-color);
+            font-size: 9px;
+            margin: 3px 0;
+            background: rgba(0,0,0,0.25);
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 2px solid var(--border-main);
+            display: inline-block;
+        }
+
+        .visual-illustration-box {
+            background: rgba(0,0,0,0.25);
+            border: 3px solid var(--border-main);
+            border-radius: 8px;
+            padding: 8px 16px;
+            margin: 6px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            min-height: 58px;
+            max-width: 820px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+            overflow-x: auto;
+        }
+
+        .emoji-side {
+            font-size: 24px;
+            letter-spacing: 2px;
+            line-height: 1.3;
+            white-space: normal;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            background: var(--container-bg);
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 2px dashed var(--border-main);
+            max-width: 360px;
+            gap: 2px;
+        }
+
+        .game-main-layout {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin: 2px 0;
+            flex: 1;
+        }
+
+        .left-side-game {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 4px;
+        }
+
+        .right-side-game {
+            flex: 0.9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.25);
+            border: 2px solid var(--border-main);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            max-height: 440px;
+            overflow-y: auto;
+        }
+
+        .bond-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            transform: scale(1.05);
+            margin: 8px 0;
+        }
+
+        .circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Press Start 2P', monospace;
+            font-weight: 900;
+            font-size: 24px;
+            color: #ffffff;
+            border: 4px solid var(--btn-shadow);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 3px 0 rgba(255,255,255,0.3);
+            transition: background 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .branch-lines {
+            width: 120px;  
+            height: 30px;  
+            position: relative;
+            margin-top: -10px;
+            margin-bottom: -10px;
+            z-index: 1;
+        }
+        .branch-lines::before, .branch-lines::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 5px; 
+            height: 56px; 
+            border-radius: 2px;
+            background-color: var(--border-main); 
+            border: 1px solid rgba(0,0,0,0.5);
+        }
+        .branch-lines::before { left: 18px; transform: rotate(30deg); transform-origin: top center; }
+        .branch-lines::after { right: 18px; transform: rotate(-30deg); transform-origin: top center; }
+
+        .bottom-circles {
+            display: flex;
+            justify-content: space-between;
+            width: 200px; 
+        }
+
+        .circle input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            font-weight: 900;
+            font-size: 22px;
+            color: #ffffff;
+            outline: none;
+            border-radius: 50%;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+
+        .formula-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            color: #f1f5f9;
+            background: var(--container-bg);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            border: 2px dashed var(--border-main);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            width: 100%;
+        }
+        
+        .formula-box span {
+            color: var(--accent-color);
+            margin: 0 5px;
+        }
+
+        .form-input {
+            width: 48px;
+            height: 36px;
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 13px;
+            color: #ffffff;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid var(--border-main);
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.15s ease;
+        }
+        .form-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+        }
+
+        .btn {
+            background-color: var(--btn-main); 
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--btn-shadow);
+            transition: all 0.15s ease;
+        }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 var(--btn-shadow); }
+        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-shadow); }
+
+        .btn-next {
+            background-color: #22c55e; 
+            box-shadow: 0 4px 0 #14532d;
+        }
+        .btn-next:hover { box-shadow: 0 5px 0 #14532d; }
+        .btn-next:active { box-shadow: 0 1px 0 #14532d; }
+
+        .btn-retry {
+            background-color: #eab308; 
+            color: #000;
+            box-shadow: 0 4px 0 #854d0e;
+        }
+        .btn-retry:hover { box-shadow: 0 5px 0 #854d0e; }
+        .btn-retry:active { box-shadow: 0 1px 0 #854d0e; }
+
+        .btn-recheck {
+            background-color: #06b6d4; 
+            color: #000;
+            box-shadow: 0 4px 0 #0e7490;
+        }
+        .btn-recheck:hover { box-shadow: 0 5px 0 #0e7490; }
+        .btn-recheck:active { box-shadow: 0 1px 0 #0e7490; }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+        }
+
+        #picker-section {
+            background: var(--container-bg);
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 6px;
+            border: 2px dashed var(--accent-color);
+            width: 100%;
+        }
+
+        .picker-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .name-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            max-height: 52px;
+            overflow-y: auto;
+        }
+
+        .btn-name {
+            background-color: var(--btn-main); 
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 3px 0 var(--btn-shadow);
+            transition: all 0.1s ease;
+        }
+        .btn-name:hover { transform: translateY(-1px); }
+        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 var(--btn-shadow); }
+
+        #feedback {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            margin-top: 3px;
+            min-height: 18px;
+        }
+
+        .correct { color: #4ade80; }
+        .wrong { color: #f87171; }
+        .hidden { display: none !important; }
+
+        .mascot-inline {
+            font-size: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            animation: floatMascot 3s ease-in-out infinite;
+        }
+        @keyframes floatMascot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        #winner-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            color: #f1f5f9;
+            margin: 6px 0;
+            background: rgba(0,0,0,0.3);
+            padding: 14px;
+            border-radius: 8px;
+            border: 3px dashed var(--accent-color);
+            line-height: 1.4;
+        }
+
+        #welcome-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 99999; backdrop-filter: blur(8px);
+        }
+
+        .welcome-card {
+            background: var(--container-bg); padding: 26px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 4px solid var(--border-main);
+            z-index: 100000;
+            position: relative;
+        }
+        .welcome-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--accent-color); margin-bottom: 8px; line-height: 1.4; text-shadow: 1px 1px #000; }
+        .welcome-desc { font-size: 11px; color: #f1f5f9; margin-bottom: 14px; font-weight: 700; line-height: 1.4; }
     </style>
 </head>
-<body class="theme-main" id="bodyTheme">
+<body class="theme-LE1">
 
-    <div class="container" id="appContainer">
-        <h1 id="appTitle">Menu Utama</h1>
-        
-        <div class="card">
-            <p id="cardText">Kotak Konten / Pertanyaan Game Anak</p>
+    <div id="welcome-overlay">
+        <div class="welcome-card">
+            <div style="font-size: 32px; margin-bottom: 6px;">🎮✨</div>
+            <div class="welcome-title">CRAFTING NUMBER BOND!</div>
+            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! Siap berhitung bersama jagoan cilik? 🚀</div>
+            <button class="btn" id="welcome-btn" type="button">Start Game 🎮</button>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <!-- LOBBY -->
+        <div id="lobby-screen">
+            <div class="lobby-hero-card">
+                <div class="lobby-hero-title">✨ Math Adventure Arena 🚀</div>
+                <div class="lobby-hero-sub">Pilih level kategori petualanganmu dan masukkan nama para player! 🎯</div>
+            </div>
+            
+            <div class="lobby-row-container">
+                <div class="lobby-section-box" style="flex: 1.2;">
+                    <div class="lobby-section-title">🗺️ Kategori Level:</div>
+                    <div class="category-grid">
+                        <div id="card-LE1" class="cat-card selected" onclick="pilihKategori('LE1', this)">
+                            <span class="cat-emoji">💧</span>
+                            <div class="cat-title">LE 1</div>
+                            <div class="cat-desc">Biru Muda</div>
+                        </div>
+                        <div id="card-LE2" class="cat-card" onclick="pilihKategori('LE2', this)">
+                            <span class="cat-emoji">🪵</span>
+                            <div class="cat-title">LE 2</div>
+                            <div class="cat-desc">Coklat</div>
+                        </div>
+                        <div id="card-LE3" class="cat-card" onclick="pilihKategori('LE3', this)">
+                            <span class="cat-emoji">🍎</span>
+                            <div class="cat-title">LE 3</div>
+                            <div class="cat-desc">Merah</div>
+                        </div>
+                        <div id="card-CT" class="cat-card" onclick="pilihKategori('CT', this)">
+                            <span class="cat-emoji">🍊</span>
+                            <div class="cat-title">CT</div>
+                            <div class="cat-desc">Oranye</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lobby-section-box" style="flex: 0.8;">
+                    <div>
+                        <div class="lobby-section-title">✏️ Nama Player:</div>
+                        <textarea id="player-input-box" placeholder="Steve
+Alex
+Creeper"></textarea>
+                        <div class="input-hint">💡 Satu nama per baris (Maks 10)</div>
+                    </div>
+                    <div style="text-align: center; margin-top: 8px;">
+                        <button class="btn-start-game" onclick="mulaiPermainanDariLobby()">Mulai Petualangan! 🎮</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lobby-error" class="wrong" style="font-size: 11px; font-weight: 800; min-height: 14px;"></div>
         </div>
 
-        <!-- Tombol Aksi Utama & Tombol "Periksa Lagi" yang Sebelumnya Hilang -->
-        <div>
-            <button class="btn btn-action" id="mainButton" onclick="ubahTema('le1')">Mulai</button>
-            <button class="btn btn-action" id="btnPeriksa" onclick="aksiPeriksa()">Periksa Lagi</button>
+        <!-- GAME SCREEN -->
+        <div id="game-screen" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; position: relative;">
+            <button class="btn-back" onclick="kembaliKeLobby()">⬅️ Menu</button>
+            
+            <div style="width: 100%;">
+                <div class="title-header-wrapper">
+                    <h1 id="game-title-header">Crafting Number Bond</h1>
+                    <span class="mascot-inline" id="game-mascot">🧱⛏️</span>
+                </div>
+                <div class="subtitle" id="game-category-badge">Kategori: LE 1</div>
+                
+                <div class="leaderboard" id="leaderboard-container"></div>
+                <div class="level-info" id="level-text">Level: 1 / 10</div>
+            </div>
+
+            <div id="visual-illustration-wrapper" class="hidden">
+                <div class="visual-illustration-box">
+                    <div id="visual-group-left" class="emoji-side"></div>
+                    <div id="visual-group-right" class="emoji-side"></div>
+                </div>
+            </div>
+
+            <div class="game-main-layout">
+                <div class="left-side-game">
+                    <div class="bond-container" id="bond-container-el">
+                        <div id="top-val" class="circle"></div>
+                        <div class="branch-lines"></div>
+                        <div class="bottom-circles">
+                            <div id="left-val" class="circle"></div>
+                            <div id="right-val" class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-side-game">
+                    <div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #cbd5e1; margin-bottom: 5px;">Math Calculation Formula:</div>
+                    
+                    <div id="formula-display" class="formula-box">
+                        <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
+                        <span id="form-operator">+</span>
+                        <input type="number" id="form-val2" class="form-input" autocomplete="off" placeholder="?">
+                        <span>=</span>
+                        <input type="number" id="form-val3" class="form-input" autocomplete="off" placeholder="?">
+                    </div>
+
+                    <div class="input-section">
+                        <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
+                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Fix Jawaban ✍️</button>
+                        <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
+                    </div>
+
+                    <div id="formula-check-section" class="hidden" style="margin-top: 5px; display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%;">
+                        <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Rumus Crafting 🔍</button>
+                        <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Level ➔</button>
+                    </div>
+
+                    <div id="picker-section" class="hidden">
+                        <div id="feedback"></div>
+                        <div class="picker-title" id="picker-title-text" style="margin-top: 3px;">Siapa player yang mendapat XP? 👇</div>
+                        <div class="name-buttons" id="name-buttons-container"></div>
+                    </div>
+
+                    <div id="feedback-outside" style="min-height: 18px; margin-top: 3px;"></div>
+                </div>
+            </div>
+
+            <div style="height: 2px;"></div>
         </div>
 
-        <div style="margin-top: 15px; font-size: 14px;">
-            <p>Pilih Tema Tes:</p>
-            <button onclick="ubahTema('main')" style="padding: 5px 10px;">Hijau</button>
-            <button onclick="ubahTema('le1')" style="padding: 5px 10px;">Biru</button>
-            <button onclick="ubahTema('le2')" style="padding: 5px 10px;">Coklat</button>
-            <button onclick="ubahTema('le3')" style="padding: 5px 10px;">Merah</button>
-            <button onclick="ubahTema('ct')" style="padding: 5px 10px;">Oranye</button>
+        <!-- RESULT -->
+        <div id="result-screen" class="hidden" style="width: 100%;">
+            <div style="font-size: 32px; margin-bottom: 4px;">🏆🎉</div>
+            <h1 style="font-family: 'Press Start 2P', monospace; font-size: 15px;">VICTORY SURVIVAL!</h1>
+            <div id="winner-text">Pemenangnya adalah...</div>
+            <button class="btn btn-next" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
         </div>
     </div>
 
     <script>
-        function ubahTema(jenis) {
-            const body = document.getElementById('bodyTheme');
-            const title = document.getElementById('appTitle');
-            const text = document.getElementById('cardText');
-            
-            // Hapus semua kelas tema sebelumnya
-            body.className = '';
+        let kategoriPilihan = 'LE1'; 
+        let daftarPemain = []; 
+        let soalKe = 1;
+        let totalSoal = 10;
+        let jawabanBenar = 0;
+        let posisiKosong = 0; 
+        let isSalahSesi = false;
 
-            if (jenis === 'main') {
-                body.classList.add('theme-main');
-                title.innerText = 'Menu Utama';
-                text.innerText = 'Selamat datang di Menu Utama!';
-            } else if (jenis === 'le1') {
-                body.classList.add('theme-le1');
-                title.innerText = 'Level 1 (LE 1)';
-                text.innerText = 'Ayo selesaikan tantangan Biru Muda ini!';
-            } else if (jenis === 'le2') {
-                body.classList.add('theme-le2');
-                title.innerText = 'Level 2 (LE 2)';
-                text.innerText = 'Hadapi tantangan Coklat Muda yang seru!';
-            } else if (jenis === 'le3') {
-                body.classList.add('theme-le3');
-                title.innerText = 'Level 3 (LE 3)';
-                text.innerText = 'Hati-hati, tantangan Merah dimulai!';
-            } else if (jenis === 'ct') {
-                body.classList.add('theme-ct');
-                title.innerText = 'Challenge Time (CT)';
-                text.innerText = 'Uji kemampuanmu di Oranye ceria!';
+        const topValEl = document.getElementById('top-val');
+        const leftValEl = document.getElementById('left-val');
+        const rightValEl = document.getElementById('right-val');
+        const formVal1 = document.getElementById('form-val1');
+        const formVal2 = document.getElementById('form-val2');
+        const formVal3 = document.getElementById('form-val3');
+        const formOperator = document.getElementById('form-operator');
+        const feedbackEl = document.getElementById('feedback');
+        const feedbackOutside = document.getElementById('feedback-outside');
+        const levelText = document.getElementById('level-text');
+        const pickerTitleText = document.getElementById('picker-title-text');
+        
+        const lobbyScreen = document.getElementById('lobby-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const pickerSection = document.getElementById('picker-section');
+        const formulaCheckSection = document.getElementById('formula-check-section');
+        const winnerText = document.getElementById('winner-text');
+        const lobbyError = document.getElementById('lobby-error');
+        const submitBtn = document.getElementById('submit-btn');
+        const retryBtn = document.getElementById('retry-btn');
+        const recheckBtn = document.getElementById('recheck-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const welcomeOverlay = document.getElementById('welcome-overlay');
+        const welcomeBtn = document.getElementById('welcome-btn');
+        const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
+        const visualGroupLeft = document.getElementById('visual-group-left');
+        const visualGroupRight = document.getElementById('visual-group-right');
+        const gameMascotEl = document.getElementById('game-mascot');
+
+        const audioBenar = new Audio('Hore.mp3');
+        audioBenar.volume = 0.3; 
+        audioBenar.load();
+
+        const additionPairs = [
+            { left: '🪵', right: '🧱' }, 
+            { left: '🍎', right: '🥕' }, 
+            { left: '💎', right: '🪙' }, 
+            { left: '⭐', right: '🌙' }, 
+            { left: '🍎', right: '🍎' }  
+        ];
+
+        const subtractionPairs = [
+            { left: '🧱', right: '💣' }, 
+            { left: '🥩', right: '🦴' }, 
+            { left: '💎', right: '⛏️' }, 
+            { left: '⭐', right: '✨' }  
+        ];
+
+        let audioCtx = null;
+        function initAudio() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            } catch(e) {}
+        }
+
+        function playClickSound() {
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                let now = audioCtx.currentTime;
+                
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(440, now);
+                osc.frequency.exponentialRampToValueAtTime(220, now + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.4, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                
+                osc.start(now);
+                osc.stop(now + 0.1);
+            } catch(e) {}
+        }
+
+        function playClappingAndCheer() {
+            try {
+                audioBenar.currentTime = 1.0; 
+                audioBenar.play().catch(e => {});
+            } catch(e) {}
+        }
+
+        function playSound(type) {
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                let now = audioCtx.currentTime;
+
+                if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(120, now);
+                    osc.frequency.setValueAtTime(70, now + 0.2);
+                    gainNode.gain.setValueAtTime(0.6, now); 
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                }
+            } catch(e) {}
+        }
+
+        function triggerConfetti() {
+            try {
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+                }
+            } catch(e) {}
+        }
+
+        function triggerFlashRed() {
+            document.body.classList.add('flash-red');
+            setTimeout(() => { document.body.classList.remove('flash-red'); }, 350);
+        }
+
+        welcomeBtn.onclick = function() {
+            initAudio();
+            playClickSound(); 
+            welcomeOverlay.classList.add('hidden');
+        };
+
+        function pilihKategori(kode, element) {
+            kategoriPilihan = kode;
+            playClickSound();
+            document.querySelectorAll('.cat-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            document.body.className = `theme-${kode}`;
+        }
+
+        function mulaiPermainanDariLobby() {
+            playClickSound();
+            let textValue = document.getElementById('player-input-box').value.trim();
+            if (!textValue) {
+                lobbyError.innerText = "Masukkan minimal 1 nama player ya! ✨";
+                return;
+            }
+
+            let barisNama = textValue.split('\n').map(n => n.trim()).filter(n => n.length > 0);
+            if (barisNama.length === 0) { lobbyError.innerText = "Nama tidak boleh kosong!"; return; }
+            if (barisNama.length > 10) { lobbyError.innerText = "Maksimal hanya 10 player ya!"; return; }
+
+            lobbyError.innerText = "";
+            daftarPemain = barisNama.map(nama => ({ nama: nama, skor: 0 }));
+            soalKe = 1;
+
+            setupPapanSkorDanTombol();
+
+            let namaKatBadge = "LE 1 (Biru Muda)";
+            let gameMascotEmoji = "💧⭐";
+            if (kategoriPilihan === 'LE2') { namaKatBadge = "LE 2 (Coklat)"; gameMascotEmoji = "🪵🧱"; }
+            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Merah)"; gameMascotEmoji = "🍎🗡️"; }
+            if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Oranye)"; gameMascotEmoji = "🍊🪙"; }
+            
+            document.getElementById('game-category-badge').innerText = `Kategori: ${namaKatBadge}`;
+            gameMascotEl.innerText = gameMascotEmoji;
+
+            lobbyScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            resultScreen.classList.add('hidden');
+
+            buatSoalBaru();
+        }
+
+        function kembaliKeLobby() {
+            playClickSound();
+            resultScreen.classList.add('hidden');
+            gameScreen.classList.add('hidden');
+            lobbyScreen.classList.remove('hidden');
+            document.body.className = `theme-${kategoriPilihan}`;
+        }
+
+        function setupPapanSkorDanTombol() {
+            let lbContainer = document.getElementById('leaderboard-container');
+            let btnContainer = document.getElementById('name-buttons-container');
+            lbContainer.innerHTML = ''; btnContainer.innerHTML = '';
+
+            daftarPemain.forEach((p, index) => {
+                let skorDiv = document.createElement('div');
+                skorDiv.className = 'player-score';
+                skorDiv.innerHTML = `⭐ ${p.nama} <span id="score-val-${index}">0 XP</span>`;
+                lbContainer.appendChild(skorDiv);
+
+                let btn = document.createElement('button');
+                btn.className = 'btn-name';
+                btn.innerText = p.nama;
+                btn.onclick = () => aksiPilihAnak(index);
+                btnContainer.appendChild(btn);
+            });
+        }
+
+        function updatePapanSkor() {
+            daftarPemain.forEach((p, index) => {
+                document.getElementById(`score-val-${index}`).innerText = `${p.skor} XP`;
+            });
+        }
+
+        let nilaiTotal = 5;
+        let nilaiBagianA = 2;
+        let nilaiBagianB = 3;
+
+        function buatSoalBaru() {
+            feedbackEl.innerHTML = '';
+            feedbackOutside.innerHTML = '';
+            pickerSection.classList.add('hidden');
+            formulaCheckSection.classList.add('hidden');
+            submitBtn.style.display = 'inline-block';
+            retryBtn.classList.add('hidden');
+            recheckBtn.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+            isSalahSesi = false;
+            
+            levelText.innerText = `Crafting Level: ${soalKe} / ${totalSoal}`;
+
+            formVal1.value = ''; 
+            formVal2.value = ''; 
+            formVal3.value = '';
+
+            if (kategoriPilihan === 'LE1') {
+                nilaiTotal = Math.floor(Math.random() * 4) + 2; 
+                nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 1)) + 1;
+                nilaiBagianB = nilaiTotal - nilaiBagianA;
+            } else if (kategoriPilihan === 'LE2') {
+                nilaiTotal = Math.floor(Math.random() * 8) + 3; 
+                nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 1)) + 1;
+                nilaiBagianB = nilaiTotal - nilaiBagianA;
+            } else if (kategoriPilihan === 'LE3') {
+                nilaiTotal = Math.floor(Math.random() * 15) + 6; 
+                nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 2)) + 1;
+                nilaiBagianB = nilaiTotal - nilaiBagianA;
+            } else if (kategoriPilihan === 'CT') {
+                nilaiTotal = Math.floor(Math.random() * 7 + 2) * 100;
+                nilaiBagianA = Math.floor(Math.random() * (nilaiTotal/10 - 2) + 1) * 10; 
+                if (nilaiTotal - nilaiBagianA < 20) { nilaiBagianA = nilaiTotal - 120; }
+                nilaiBagianB = nilaiTotal - nilaiBagianA;
+            }
+
+            posisiKosong = Math.floor(Math.random() * 3);
+
+            if (posisiKosong === 2) {
+                formOperator.innerText = '+'; 
+            } else {
+                formOperator.innerText = '-'; 
+            }
+
+            if (kategoriPilihan === 'CT') {
+                visualIllustrationWrapper.classList.add('hidden');
+            } else {
+                visualIllustrationWrapper.classList.remove('hidden');
+                
+                if (posisiKosong === 2) {
+                    let chosenPair = additionPairs[Math.floor(Math.random() * additionPairs.length)];
+                    visualGroupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
+                    visualGroupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
+                } else {
+                    let chosenPair = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
+                    visualGroupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
+                    visualGroupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
+                }
+            }
+
+            topValEl.innerHTML = '';
+            leftValEl.innerHTML = '';
+            rightValEl.innerHTML = '';
+
+            const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
+
+            if (posisiKosong === 2) {
+                topValEl.innerHTML = inputElement;
+                leftValEl.innerText = nilaiBagianA;
+                rightValEl.innerText = nilaiBagianB;
+                jawabanBenar = nilaiTotal;
+            } else if (posisiKosong === 1) {
+                topValEl.innerText = nilaiTotal;
+                leftValEl.innerHTML = inputElement;
+                rightValEl.innerText = nilaiBagianB;
+                jawabanBenar = nilaiBagianA;
+            } else {
+                topValEl.innerText = nilaiTotal;
+                leftValEl.innerText = nilaiBagianA;
+                rightValEl.innerHTML = inputElement;
+                jawabanBenar = nilaiBagianB;
+            }
+
+            setTimeout(() => {
+                const activeInput = document.getElementById('user-input');
+                if (activeInput) activeInput.focus();
+            }, 100);
+            
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(inp => {
+                inp.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") { 
+                        if (submitBtn.style.display !== 'none') cekJawaban();
+                        else if (!recheckBtn.classList.contains('hidden')) periksaUlangJawaban();
+                    }
+                });
+            });
+        }
+
+        function cekJawaban() {
+            playClickSound();
+            const activeInput = document.getElementById('user-input');
+            if (!activeInput) return;
+            const jawabanUser = parseInt(activeInput.value);
+
+            if (isNaN(jawabanUser)) {
+                feedbackOutside.innerHTML = "<span class='wrong'>Isi lingkaran Number Bond dulu ya! ✨</span>";
+                return;
+            }
+
+            if (jawabanUser === jawabanBenar) {
+                playClappingAndCheer();
+                triggerConfetti();
+                
+                activeInput.disabled = true;
+                submitBtn.style.display = 'none';
+                retryBtn.classList.add('hidden');
+                recheckBtn.classList.add('hidden');
+                
+                isSalahSesi = false;
+                pickerTitleText.innerText = "Siapa player yang mendapat XP? (+10 XP): 👇";
+                
+                feedbackOutside.innerHTML = ""; 
+                feedbackEl.innerHTML = "<span class='correct'>Crafting Sempurna! Benar! ✨</span>";
+                pickerSection.classList.remove('hidden'); 
+                formulaCheckSection.classList.remove('hidden');
+            } else {
+                playSound('wrong');
+                triggerFlashRed();
+
+                activeInput.disabled = true;
+                submitBtn.style.display = 'none';
+                isSalahSesi = true;
+
+                feedbackOutside.innerHTML = `<span class='wrong'>Belum pas! Klik tombol di bawah untuk perbaiki materialnya. 💪</span>`;
+                retryBtn.classList.remove('hidden');
             }
         }
 
-        function aksiPeriksa() {
-            alert("Tombol Periksa Lagi diklik! Jawaban sedang diperiksa...");
+        function mulaiBetulkanJawaban() {
+            playClickSound();
+            retryBtn.classList.add('hidden');
+            const activeInput = document.getElementById('user-input');
+            
+            if (activeInput) {
+                activeInput.value = '';
+                activeInput.disabled = false;
+                activeInput.focus();
+            }
+
+            feedbackOutside.innerHTML = "<span class='wrong'>Diskusikan bersama tim, lalu klik Periksa Lagi! ✍️</span>";
+            recheckBtn.classList.remove('hidden'); // TOMBOL PERIKSA LAGI MUNCUL DI SINI!
+        }
+
+        function periksaUlangJawaban() {
+            playClickSound();
+            const activeInput = document.getElementById('user-input');
+            if (!activeInput) return;
+            const jawabanBaru = parseInt(activeInput.value);
+
+            if (jawabanBaru === jawabanBenar) {
+                playClappingAndCheer();
+                triggerConfetti();
+
+                activeInput.disabled = true;
+                recheckBtn.classList.add('hidden');
+
+                pickerTitleText.innerText = "Pilih player yang membetulkan jawaban (+5 XP): 👇";
+                
+                feedbackOutside.innerHTML = "";
+                feedbackEl.innerHTML = "<span class='correct'>Mantap! Lingkaran berhasil diperbaiki. 👏</span>";
+                pickerSection.classList.remove('hidden');
+                formulaCheckSection.classList.remove('hidden');
+            } else {
+                playSound('wrong');       
+                triggerFlashRed();        
+                feedbackOutside.innerHTML = "<span class='wrong'>Masih salah, ayo cek ulang angkanya! 🤔</span>";
+                recheckBtn.classList.remove('hidden');
+            }
+        }
+
+        function cekFormulaJawaban() {
+            playClickSound();
+            let v1 = parseInt(formVal1.value);
+            let v2 = parseInt(formVal2.value);
+            let v3 = parseInt(formVal3.value);
+
+            if (isNaN(v1) || isNaN(v2) || isNaN(v3)) {
+                feedbackOutside.innerHTML = "<span class='wrong'>Lengkapi semua kotak rumus crafting! 📝</span>";
+                return;
+            }
+
+            let isFormulaCorrect = false;
+            if (posisiKosong === 2) {
+                if ((v1 + v2 === v3) && (v1 === nilaiBagianA && v2 === nilaiBagianB && v3 === nilaiTotal)) {
+                    isFormulaCorrect = true;
+                } else if (v1 + v2 === v3) {
+                    isFormulaCorrect = true;
+                }
+            } else {
+                if ((v1 - v2 === v3) && (v1 === nilaiTotal)) {
+                    isFormulaCorrect = true;
+                } else if (v1 - v2 === v3) {
+                    isFormulaCorrect = true;
+                }
+            }
+
+            if (isFormulaCorrect) {
+                playClappingAndCheer();
+                triggerConfetti();
+                feedbackOutside.innerHTML = "<span class='correct'>Rumus perhitungan crafting benar! 🌟🎉</span>";
+            } else {
+                playSound('wrong');
+                triggerFlashRed();
+                feedbackOutside.innerHTML = "<span class='wrong'>Rumus belum tepat, yuk cek lagi! 🧐</span>";
+            }
+        }
+
+        function aksiPilihAnak(index) {
+            playClickSound();
+            pickerSection.classList.add('hidden');
+            feedbackEl.innerHTML = '';
+
+            if (!isSalahSesi) {
+                daftarPemain[index].skor += 10;
+                updatePapanSkor();
+                feedbackOutside.innerHTML = `<span class='correct'>+10 XP untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
+                nextBtn.classList.remove('hidden');
+            } else {
+                daftarPemain[index].skor += 5;
+                updatePapanSkor();
+                feedbackOutside.innerHTML = `<span class='correct'>Keren ${daftarPemain[index].nama.toUpperCase()} berhasil fix! +5 XP 👏</span>`;
+                nextBtn.classList.remove('hidden');
+            }
+        }
+
+        function lanjutkanSoal() {
+            playClickSound();
+            soalKe++;
+            if (soalKe > totalSoal) {
+                gameScreen.classList.add('hidden');
+                resultScreen.classList.remove('hidden');
+                playClappingAndCheer();
+                triggerConfetti(); 
+                
+                let maksSkor = Math.max(...daftarPemain.map(p => p.skor));
+                let pemenang = daftarPemain.filter(p => p.skor === maksSkor);
+
+                if (maksSkor === 0) {
+                    winnerText.innerHTML = `Belum ada XP yang terkumpul! Ayo coba lagi petualangan survival-nya. 🤗`;
+                } else if (pemenang.length > 1) {
+                    let namaPemenang = pemenang.map(p => p.nama).join(" & ");
+                    winnerText.innerHTML = `Victory Bersama! 🤝<br>Player hebat: ${namaPemenang} (${maksSkor} XP)`;
+                } else {
+                    winnerText.innerHTML = `🎉 Selamat Kepada Player <b>${pemenang[0].nama}</b>!<br>Master Survival dengan perolehan ${maksSkor} XP! 🌟👑`;
+                }
+            } else {
+                buatSoalBaru();
+            }
         }
     </script>
-
 </body>
 </html>

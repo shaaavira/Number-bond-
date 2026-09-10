@@ -224,23 +224,25 @@
         .cat-card.selected .cat-title { color: #f43f5e; }
         .cat-desc { font-size: 11px; color: #64748b; font-weight: 800; margin-top: 1px;}
 
-        /* KOTAK INPUT LEBIH LEBAR DAN LEBIH PENDEK (PAS UNTUK 5 BARIS NAMA) */
+        /* KOTAK INPUT NAMA: LEBIH LEBAR KE BAWAH (TINGGI) TAPI PENDEK KE SAMPING (LEBAR KECIL) */
         #lobby-screen textarea {
-            width: 100%;
-            height: 64px; /* Dibuat lebih pendek agar muat estetik 5 baris nama */
-            padding: 8px 14px;
+            width: 280px; /* Pendek ke samping */
+            height: 115px; /* Lebar/panjang ke bawah agar pas muat 5 baris nama */
+            padding: 10px 14px;
             border: 3px solid #cbd5e1;
             border-radius: 16px;
             font-family: 'Quicksand', sans-serif;
             font-size: 14px;
             font-weight: 700;
-            line-height: 1.25;
+            line-height: 1.35;
             resize: none;
             outline: none;
             color: #1e293b;
             background: #ffffff;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
             transition: all 0.2s ease;
+            display: block;
+            margin: 0 auto; /* Supaya posisinya rapi di tengah */
         }
         #lobby-screen textarea:focus { 
             border-color: #f43f5e; 
@@ -255,6 +257,7 @@
             font-weight: 800;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 4px;
         }
 
@@ -703,8 +706,8 @@
                 </div>
             </div>
 
-            <div class="lobby-section-box">
-                <div class="lobby-section-title">✏️ Ketik Nama Pemain / Jagoan Cilik:</div>
+            <div class="lobby-section-box" style="text-align: center;">
+                <div class="lobby-section-title" style="justify-content: center;">✏️ Ketik Nama Pemain / Jagoan Cilik:</div>
                 <textarea id="player-input-box" placeholder="Firgi
 Ara
 Uswa"></textarea>
@@ -876,6 +879,7 @@ Uswa"></textarea>
             } catch(e) {}
         }
 
+        /* SOUND KLIK DIBUAT JAUH LEBIH KENCANG & MANTAP */
         function playClickSound() {
             try {
                 initAudio();
@@ -887,15 +891,15 @@ Uswa"></textarea>
                 let now = audioCtx.currentTime;
                 
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(650, now);
-                osc.frequency.exponentialRampToValueAtTime(320, now + 0.1);
+                osc.frequency.setValueAtTime(800, now);
+                osc.frequency.exponentialRampToValueAtTime(350, now + 0.12);
                 
-                // Volume dikencangkan (gain lebih tinggi)
-                gainNode.gain.setValueAtTime(0.45, now);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                // Gain/volume ditingkatkan agar lebih kencang
+                gainNode.gain.setValueAtTime(0.75, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
                 
                 osc.start(now);
-                osc.stop(now + 0.1);
+                osc.stop(now + 0.12);
             } catch(e) {}
         }
 

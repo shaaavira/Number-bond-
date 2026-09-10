@@ -4,132 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
-    <!-- Memuat Font Lucu dari Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Memuat Font Modern & Ramah Anak dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
     <!-- Memuat Pustaka Confetti untuk Efek Kembang Api -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Default Background Lobby */
+        :root {
+            --primary: #ff6b81;
+            --primary-light: #ffedf0;
+            --secondary: #4facfe;
+            --accent: #ffd166;
+            --bg-gradient: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+        }
+
+        /* Tema Warna Berdasarkan Kategori */
+        body.theme-LE1 {
+            --primary: #ff6b81;
+            --primary-light: #fff0f3;
+            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+        }
+        body.theme-LE2 {
+            --primary: #3b82f6;
+            --primary-light: #eff6ff;
+            --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+        body.theme-LE3 {
+            --primary: #10b981;
+            --primary-light: #ecfdf5;
+            --bg-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+        body.theme-CT {
+            --primary: #f59e0b;
+            --primary-light: #fef3c7;
+            --bg-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%);
+            background: var(--bg-gradient);
             font-family: 'Quicksand', sans-serif;
             margin: 0;
-            padding: 15px;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            transition: background 0.5s ease;
+            transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow-x: hidden;
-        }
-
-        /* --- TEMA WARNA BERDASARKAN KATEGORI --- */
-        body.theme-LE1 {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%) !important;
-        }
-        body.theme-LE2 {
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%) !important;
-        }
-        body.theme-LE3 {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%) !important;
-        }
-        body.theme-CT {
-            background: linear-gradient(135deg, #fbc531 0%, #e1b12c 50%, #fffa65 100%) !important;
         }
 
         /* Efek Kilat Merah saat Salah */
         body.flash-red {
             background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 100%) !important;
-            animation: shake 0.3s ease;
+            animation: shake 0.35s cubic-bezier(.36,.07,.19,.97) both;
         }
 
         @keyframes shake {
-            0% { transform: translate(0, 0); }
-            20% { transform: translate(-12px, 0); }
-            40% { transform: translate(12px, 0); }
-            60% { transform: translate(-12px, 0); }
-            80% { transform: translate(12px, 0); }
-            100% { transform: translate(0, 0); }
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
         }
 
         .game-container {
-            background: rgba(255, 255, 255, 0.96);
-            padding: 40px;
-            border-radius: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
             width: 100%;
-            max-width: 900px;
-            min-height: 600px;
+            max-width: 850px;
+            min-height: 580px;
             text-align: center;
-            border: 8px solid #ff6b81;
-            transition: border-color 0.5s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            transition: all 0.4s ease;
         }
 
-        /* Warna Border Kontainer Sesuai Tema */
-        body.theme-LE1 .game-container { border-color: #ff6b81; }
-        body.theme-LE2 .game-container { border-color: #3498db; }
-        body.theme-LE3 .game-container { border-color: #2ecc71; }
-        body.theme-CT .game-container { border-color: #e67e22; }
-
-        /* Tombol Kembali (Back) */
+        /* Tombol Kembali Modern */
         .btn-back {
             position: absolute;
-            top: 25px;
-            left: 25px;
-            background: #dfe4ea;
+            top: 24px;
+            left: 24px;
+            background: #f1f5f9;
             border: none;
-            padding: 10px 18px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 15px;
-            color: #57606f;
-            border-radius: 15px;
+            padding: 10px 16px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #475569;
+            border-radius: 14px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #ced6e0;
-            transition: all 0.1s ease;
-            z-index: 10;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .btn-back:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #ced6e0;
+        .btn-back:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
         }
 
         h1 {
-            font-family: 'Fredoka One', cursive;
-            color: #ff4757;
-            font-size: 38px;
-            margin-bottom: 8px;
-            text-shadow: 3px 3px 0px #ffeaa7;
-            transition: color 0.5s ease;
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            font-size: 34px;
+            font-weight: 800;
+            margin: 0 0 6px 0;
+            letter-spacing: -0.5px;
+            transition: color 0.4s ease;
         }
 
-        body.theme-LE1 h1 { color: #ff4757; }
-        body.theme-LE2 h1 { color: #0984e3; }
-        body.theme-LE3 h1 { color: #00b894; }
-        body.theme-CT h1 { color: #d35400; }
-
         .subtitle {
-            font-size: 18px;
-            color: #2f3542;
-            margin-bottom: 25px;
+            font-size: 16px;
+            color: var(--text-sub);
+            margin-bottom: 24px;
             font-weight: 700;
         }
 
-        /* Lobby Styling */
+        /* Lobby Styling Modern */
         .lobby-section-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 18px;
-            color: #ff6b81;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
             margin-bottom: 10px;
             text-align: left;
         }
@@ -137,207 +146,212 @@
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 20px;
         }
 
         .cat-card {
-            background: #fff;
-            border: 4px solid #dfe4ea;
+            background: #ffffff;
+            border: 2px solid #f1f5f9;
             border-radius: 20px;
-            padding: 16px;
+            padding: 14px;
             cursor: pointer;
             text-align: left;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
         .cat-card:hover {
-            transform: translateY(-4px);
-            border-color: #ffa502;
-            background: #fff3d6;
+            transform: translateY(-3px);
+            border-color: #cbd5e1;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
 
         .cat-card.selected {
-            background: #ffeaa7;
-            border-color: #ff4757;
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.25);
+            background: var(--primary-light);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
 
         .cat-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 20px;
-            color: #ff4757;
-            margin-bottom: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .cat-card.selected .cat-title {
+            color: var(--primary);
         }
 
         .cat-desc {
-            font-size: 13px;
-            color: #57606f;
+            font-size: 12px;
+            color: var(--text-sub);
             font-weight: 700;
         }
 
         #lobby-screen textarea {
             width: 100%;
-            height: 110px;
-            padding: 15px;
-            border: 4px solid #70a1ff;
+            height: 105px;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
             border-radius: 20px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             resize: none;
             outline: none;
-            margin-bottom: 8px;
-            color: #2f3542;
-            text-align: left;
-            background: #f1f2f6;
+            margin-bottom: 6px;
+            color: var(--text-main);
+            background: #f8fafc;
+            transition: all 0.2s ease;
+        }
+
+        #lobby-screen textarea:focus {
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px var(--primary-light);
         }
 
         .input-hint {
-            font-size: 14px;
-            color: #747d8c;
+            font-size: 13px;
+            color: #94a3b8;
             margin-bottom: 20px;
             text-align: left;
             font-weight: 700;
         }
 
-        /* Papan Skor */
+        /* Papan Skor Modern */
         .leaderboard {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
-            background: #ffeaa7;
-            padding: 15px;
-            border-radius: 25px;
-            margin-bottom: 25px;
-            max-height: 140px;
+            gap: 10px;
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            max-height: 130px;
             overflow-y: auto;
-            border: 4px dashed #fdcb6e;
+            border: 1px solid #e2e8f0;
         }
 
         .player-score {
             text-align: center;
             background: white;
-            padding: 8px 16px;
-            border-radius: 16px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            font-size: 13px;
             font-weight: 700;
-            color: #2f3542;
+            color: var(--text-sub);
+            border: 1px solid #f1f5f9;
         }
 
         .player-score span {
             display: block;
-            font-family: 'Fredoka One', cursive;
-            font-size: 18px;
-            color: #ff4757;
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary);
         }
 
         .level-info {
-            font-family: 'Fredoka One', cursive;
-            color: #2ed573;
-            font-size: 18px;
-            margin-bottom: 20px;
-            background: #eafaf1;
-            padding: 8px 20px;
-            border-radius: 20px;
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            background: var(--primary-light);
+            padding: 6px 16px;
+            border-radius: 30px;
             display: inline-block;
-            border: 2px solid #2ed573;
         }
 
-        /* Pohon Number Bond */
+        /* Pohon Number Bond Modern */
         .bond-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
             position: relative;
         }
 
         .circle {
-            width: 125px;
-            height: 125px;
+            width: 115px;
+            height: 115px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Fredoka One', cursive;
-            font-size: 44px;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 38px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .circle:hover {
-            transform: scale(1.05);
+        .top-circle {
+            background: var(--primary);
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* Warna Lingkaran Atas (Top Circle) Berdasarkan Tema */
-        .top-circle { color: white; margin-bottom: 35px; }
-        body.theme-LE1 .top-circle { background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%); border: 6px solid #ff9ff3; }
-        body.theme-LE2 .top-circle { background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%); border: 6px solid #c7ecee; }
-        body.theme-LE3 .top-circle { background: linear-gradient(135deg, #1dd1a1 0%, #10ac84 100%); border: 6px solid #81ecec; }
-        body.theme-CT .top-circle { background: linear-gradient(135deg, #ff9f43 0%, #ff6b6b 100%); border: 6px solid #feca57; }
-
-        /* Garis Penghubung */
+        /* Garis Penghubung Modern */
         .branch-lines {
-            width: 250px;  
-            height: 35px;  
+            width: 220px;  
+            height: 25px;  
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .branch-lines::before, .branch-lines::after {
             content: '';
             position: absolute;
             top: 0;
-            width: 8px; 
-            height: 48px; 
-            border-radius: 4px;
+            width: 6px; 
+            height: 40px; 
+            border-radius: 3px;
+            background-color: #cbd5e1;
             transition: background-color 0.3s ease;
         }
 
-        body.theme-LE1 .branch-lines::before, body.theme-LE1 .branch-lines::after { background-color: #ffa502; }
-        body.theme-LE2 .branch-lines::before, body.theme-LE2 .branch-lines::after { background-color: #00d2d3; }
-        body.theme-LE3 .branch-lines::before, body.theme-LE3 .branch-lines::after { background-color: #f368e0; }
-        body.theme-CT .branch-lines::before, body.theme-CT .branch-lines::after { background-color: #ee5253; }
-
         .branch-lines::before {
-            left: 45px;
-            transform: rotate(35deg);
+            left: 38px;
+            transform: rotate(32deg);
         }
 
         .branch-lines::after {
-            right: 45px;
-            transform: rotate(-35deg);
+            right: 38px;
+            transform: rotate(-32deg);
         }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 330px; 
+            width: 290px; 
         }
 
-        /* Warna Lingkaran Bawah (Part Circle) Berdasarkan Tema */
-        .part-circle { color: white; }
-        body.theme-LE1 .part-circle { background: linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%); border: 6px solid #74b9ff; }
-        body.theme-LE2 .part-circle { background: linear-gradient(135deg, #54a0ff 0%, #2e86de 100%); border: 6px solid #c8d6e5; }
-        body.theme-LE3 .part-circle { background: linear-gradient(135deg, #ff9ff3 0%, #f368e0 100%); border: 6px solid #ffede1; }
-        body.theme-CT .part-circle { background: linear-gradient(135deg, #0abde3 0%, #00d2d3 100%); border: 6px solid #81ecec; }
+        .part-circle {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 3px solid #e2e8f0;
+        }
 
+        /* Kotak Input Aktif (Teka-teki) */
         .input-box-wrapper {
-            background: #fff200 !important;
-            border: 6px dashed #ffa502 !important;
-            color: #2f3436 !important;
-            animation: pulseBox 1.5s infinite;
+            background: #ffffff !important;
+            border: 4px solid var(--primary) !important;
+            color: var(--text-main) !important;
+            box-shadow: 0 0 0 6px var(--primary-light), 0 10px 25px rgba(0,0,0,0.08) !important;
+            animation: pulseBox 2s infinite ease-in-out;
         }
 
         @keyframes pulseBox {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-            100% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
         }
 
         .circle input {
@@ -346,9 +360,10 @@
             border: none;
             background: transparent;
             text-align: center;
-            font-family: 'Fredoka One', cursive;
-            font-size: 40px;
-            color: #2f3542;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 38px;
+            color: var(--text-main);
             outline: none;
             border-radius: 50%;
         }
@@ -362,182 +377,188 @@
             -moz-appearance: textfield;
         }
 
-        /* Kontrol Input & Tombol */
+        /* Tombol Aksi Utama */
         .input-section {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .btn {
-            background-color: #2ed573;
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 16px 45px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 22px;
-            border-radius: 50px;
+            padding: 14px 38px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            border-radius: 24px;
             cursor: pointer;
-            box-shadow: 0 6px 0 #26af5f;
-            transition: all 0.1s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
 
         .btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #26af5f;
+            transform: translateY(1px);
         }
 
         .btn-next {
-            background-color: #ffa502;
-            box-shadow: 0 6px 0 #e67e22;
-        }
-        .btn-next:active {
-            box-shadow: 0 2px 0 #e67e22;
+            background-color: #0ea5e9;
         }
 
-        /* Bagian Pilih Siapa yang Cepat */
+        /* Pilihan Cepat Nama Anak */
         #picker-section {
-            background: #fff9e6;
-            padding: 20px;
-            border-radius: 25px;
-            margin-top: 15px;
-            border: 4px dashed #ffa502;
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 20px;
+            margin-top: 14px;
+            border: 1px solid #e2e8f0;
         }
 
         .picker-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 18px;
-            color: #e17055;
-            margin-bottom: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
         }
 
         .name-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            max-height: 140px;
+            gap: 8px;
+            max-height: 120px;
             overflow-y: auto;
         }
 
         .btn-name {
-            background-color: #3742fa;
-            color: white;
-            border: none;
-            padding: 12px 22px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 16px;
-            border-radius: 16px;
+            background-color: #ffffff;
+            color: var(--text-main);
+            border: 2px solid #e2e8f0;
+            padding: 10px 18px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 14px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #2f3542;
-            transition: all 0.1s ease;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
 
-        .btn-name:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #2f3542;
+        .btn-name:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         /* Feedback Pesan */
         #feedback {
-            font-family: 'Fredoka One', cursive;
-            font-size: 22px;
-            margin-top: 15px;
-            min-height: 35px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 12px;
+            min-height: 30px;
         }
 
-        .correct { color: #2ed573; text-shadow: 1px 1px 0px #fff; }
-        .wrong { color: #ff4757; text-shadow: 1px 1px 0px #fff; }
+        .correct { color: #10b981; }
+        .wrong { color: #ef4444; }
 
         .hidden {
             display: none !important;
         }
 
-        .modal {
-            animation: bounceIn 0.5s ease;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
         .mascot {
-            font-size: 55px;
-            margin-bottom: 8px;
-            animation: floatMascot 2s ease-in-out infinite;
-            pointer-events: none; 
+            font-size: 48px;
+            margin-bottom: 6px;
+            animation: floatMascot 3s ease-in-out infinite;
         }
 
         @keyframes floatMascot {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
 
         #winner-text {
-            font-family: 'Fredoka One', cursive;
-            font-size: 24px;
-            color: #ff4757;
-            margin: 20px 0;
-            background: #ffeaa7;
-            padding: 20px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 18px 0;
+            background: #f8fafc;
+            padding: 18px;
             border-radius: 20px;
-            border: 4px dashed #fdcb6e;
+            border: 1px solid #e2e8f0;
+            line-height: 1.5;
         }
 
-        /* Overlay Pop-up Selamat Datang */
+        /* Overlay Pop-up Selamat Datang Modern */
         #welcome-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(15, 23, 42, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 999;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .welcome-card {
             background: white;
             padding: 35px 30px;
-            border-radius: 35px;
+            border-radius: 30px;
             text-align: center;
-            max-width: 450px;
+            max-width: 420px;
             width: 90%;
-            border: 6px solid #ff6b81;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            animation: bounceIn 0.5s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            animation: scaleUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .welcome-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 26px;
-            color: #ff4757;
-            margin-bottom: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 10px;
             line-height: 1.3;
         }
 
         .welcome-desc {
-            font-size: 16px;
-            color: #57606f;
-            margin-bottom: 25px;
+            font-size: 15px;
+            color: var(--text-sub);
+            margin-bottom: 24px;
             font-weight: 700;
         }
 
         @media (max-width: 768px) {
-            .game-container {
-                padding: 20px;
-                max-width: 100%;
-            }
-            .category-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            h1 { font-size: 26px; }
-            .circle { width: 95px; height: 95px; font-size: 32px; }
-            .bottom-circles { width: 250px; }
-            .branch-lines { width: 190px; }
+            body { padding: 12px; }
+            .game-container { padding: 20px; max-width: 100%; min-height: 520px; }
+            .category-grid { grid-template-columns: 1fr 1fr; }
+            h1 { font-size: 24px; }
+            .circle { width: 92px; height: 92px; font-size: 30px; }
+            .bottom-circles { width: 230px; }
+            .branch-lines { width: 170px; }
+            .btn-back { top: 16px; left: 16px; padding: 8px 12px; font-size: 13px; }
         }
     </style>
 </head>
@@ -564,34 +585,34 @@
             <div class="category-grid">
                 <div class="cat-card selected" onclick="pilihKategori('LE1', this)">
                     <div class="cat-title">🍎 LE 1</div>
-                    <div class="cat-desc">Number Bond 1 - 5</div>
+                    <div class="cat-desc">Bond 1 - 5</div>
                 </div>
                 <div class="cat-card" onclick="pilihKategori('LE2', this)">
                     <div class="cat-title">⭐ LE 2</div>
-                    <div class="cat-desc">Number Bond 1 - 10</div>
+                    <div class="cat-desc">Bond 1 - 10</div>
                 </div>
                 <div class="cat-card" onclick="pilihKategori('LE3', this)">
                     <div class="cat-title">🚀 LE 3</div>
-                    <div class="cat-desc">Number Bond 1 - 20</div>
+                    <div class="cat-desc">Bond 1 - 20</div>
                 </div>
                 <div class="cat-card" onclick="pilihKategori('CT', this)">
                     <div class="cat-title">👑 CT</div>
-                    <div class="cat-desc">Khusus Ratusan</div>
+                    <div class="cat-desc">Ratusan</div>
                 </div>
             </div>
 
             <div class="lobby-section-title">2. Daftar Nama Pemain (Maksimal 10 anak):</div>
             <textarea id="player-input-box" placeholder="Ketik nama anak, pisahkan dengan baris baru (Enter)...
 Contoh:
-Runi
-Cantik
-Sekali"></textarea>
-            <div class="input-hint">💡 Tips: Ketik satu nama di setiap baris ya!</div>
+Budi
+Ani
+Siti"></textarea>
+            <div class="input-hint">💡 Ketik satu nama di setiap baris ya!</div>
             
             <div>
                 <button class="btn" onclick="mulaiPermainanDariLobby()">Mulai Bermain! 🌟</button>
             </div>
-            <div id="lobby-error" class="wrong" style="font-size: 15px; margin-top: 12px;"></div>
+            <div id="lobby-error" class="wrong" style="font-size: 14px; margin-top: 10px; font-weight: 700;"></div>
         </div>
 
         <!-- Halaman Bermain -->
@@ -631,7 +652,7 @@ Sekali"></textarea>
         </div>
 
         <!-- Halaman Hasil Akhir -->
-        <div id="result-screen" class="hidden modal">
+        <div id="result-screen" class="hidden">
             <div class="mascot">🏆🎉</div>
             <h1>Hore! Permainan Selesai!</h1>
             <div id="winner-text">Pemenangnya adalah...</div>
@@ -663,7 +684,7 @@ Sekali"></textarea>
         const nextBtn = document.getElementById('next-btn');
         const welcomeOverlay = document.getElementById('welcome-overlay');
 
-        // --- SISTEM PEMBUAT SUARA (Audio Synthesizer Built-in) ---
+        // --- SISTEM AUDIO BUILD-IN ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(type) {
@@ -681,25 +702,25 @@ Sekali"></textarea>
                 osc.type = 'triangle';
                 osc.frequency.setValueAtTime(440, now); 
                 osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); 
-                gainNode.gain.setValueAtTime(0.3, now);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-                osc.start(now);
-                osc.stop(now + 0.4);
-            } else if (type === 'wrong') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(150, now);
-                osc.frequency.setValueAtTime(100, now + 0.15);
-                gainNode.gain.setValueAtTime(0.3, now);
+                gainNode.gain.setValueAtTime(0.2, now);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
                 osc.start(now);
                 osc.stop(now + 0.35);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(140, now);
+                osc.frequency.setValueAtTime(90, now + 0.15);
+                gainNode.gain.setValueAtTime(0.2, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
             }
         }
 
         function triggerConfetti() {
             confetti({
-                particleCount: 130,
-                spread: 80,
+                particleCount: 120,
+                spread: 70,
                 origin: { y: 0.6 }
             });
         }
@@ -708,7 +729,7 @@ Sekali"></textarea>
             document.body.classList.add('flash-red');
             setTimeout(() => {
                 document.body.classList.remove('flash-red');
-            }, 400);
+            }, 350);
         }
 
         function tutupWelcome() {
@@ -722,7 +743,6 @@ Sekali"></textarea>
             document.querySelectorAll('.cat-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
 
-            // Ubah Tema Body & Maskot Lobby
             document.body.className = `theme-${kode}`;
             let mascotEl = document.getElementById('lobby-mascot');
             if (kode === 'LE1') mascotEl.innerText = '🍎🧸';

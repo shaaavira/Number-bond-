@@ -280,11 +280,11 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 36px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            transition: background 0.5s ease, border-color 0.5s ease, transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: background 0.6s ease, border-color 0.6s ease, transform 0.3s ease;
         }
         .circle:hover {
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
         .branch-lines {
@@ -320,7 +320,7 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 34px;
-            color: #2f3542;
+            color: #2d3436;
             outline: none;
             border-radius: 50%;
         }
@@ -654,13 +654,13 @@ Uswa"></textarea>
 
         let audioCtx = null;
 
-        // Palet warna modern, cerah, namun kalem (soft pink, soft purple, soft yellow, mint, soft blue)
-        const modernSoftPalettes = [
-            { top: 'linear-gradient(135deg, #ffc2d1 0%, #ff9ebb 100%)', borderTop: '#ffe6ed', bottom: 'linear-gradient(135deg, #b5ead7 0%, #9ff1df 100%)', borderBottom: '#e2fcf7' }, // Soft Pink & Mint
-            { top: 'linear-gradient(135deg, #e2d9f3 0%, #c7b9ff 100%)', borderTop: '#f3eeff', bottom: 'linear-gradient(135deg, #ffdac1 0%, #ffb7b2 100%)', borderBottom: '#ffebe3' }, // Soft Purple & Soft Peach
-            { top: 'linear-gradient(135deg, #fff3b0 0%, #ffe066 100%)', borderTop: '#fffbe8', bottom: 'linear-gradient(135deg, #c4faf8 0%, #8ae9ec 100%)', borderBottom: '#e6ffff' }, // Soft Yellow & Soft Sky Blue
-            { top: 'linear-gradient(135deg, #ffb3ba 0%, #ff8b94 100%)', borderTop: '#ffe5e8', bottom: 'linear-gradient(135deg, #bae1ff 0%, #99d2ff 100%)', borderBottom: '#e8f4ff' }, // Soft Coral Pink & Soft Blue
-            { top: 'linear-gradient(135deg, #d4a5a5 0%, #b87d7d 100%)', borderTop: '#f4e6e6', bottom: 'linear-gradient(135deg, #fdfd96 0%, #f7f779 100%)', borderBottom: '#ffffea' }  // Soft Rose & Soft Butter Yellow
+        // Palet warna modern, cerah, aesthetic, dan cantik untuk anak-anak
+        const gorgeousPalettes = [
+            { top: 'linear-gradient(135deg, #ff9a8b 0%, #ff6a88 100%)', borderTop: '#ffccd5', bottom: 'linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%)', borderBottom: '#dbeafe' }, // Sunset Rose & Ocean Blue
+            { top: 'linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%)', borderTop: '#fdf2f8', bottom: 'linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%)', borderBottom: '#eff6ff' }, // Cotton Candy Pink & Sky Blue
+            { top: 'linear-gradient(135deg, #fde047 0%, #eab308 100%)', borderTop: '#fef9c3', bottom: 'linear-gradient(135deg, #34d399 0%, #059669 100%)', borderBottom: '#ecfdf5' }, // Sunny Yellow & Emerald Mint
+            { top: 'linear-gradient(135deg, #c084fc 0%, #9333ea 100%)', borderTop: '#f3e8ff', bottom: 'linear-gradient(135deg, #38bdf8 0%, #0284c7 100%)', borderBottom: '#e0f2fe' }, // Neon Lilac & Bright Cyan
+            { top: 'linear-gradient(135deg, #fb7185 0%, #e11d48 100%)', borderTop: '#ffe4e6', bottom: 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)', borderBottom: '#fef3c7' }  // Vibrant Coral & Warm Amber
         ];
 
         function initAudio() {
@@ -672,7 +672,7 @@ Uswa"></textarea>
             }
         }
 
-        // Efek Suara Tepuk Tangan & Musik Ceria Sukses
+        // Efek Suara Tepuk Tangan & Nada Sukses Gembira
         function playClappingAndCheer() {
             try {
                 initAudio();
@@ -746,7 +746,7 @@ Uswa"></textarea>
 
         function triggerConfetti() {
             try {
-                confetti({ particleCount: 160, spread: 100, origin: { y: 0.6 } });
+                confetti({ particleCount: 180, spread: 110, origin: { y: 0.6 } });
             } catch(e) {}
         }
 
@@ -877,15 +877,15 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Memilih palet warna modern, cerah tapi kalem secara acak
-            const softPalette = modernSoftPalettes[Math.floor(Math.random() * modernSoftPalettes.length)];
+            // Memilih palet warna modern, cerah, dan cantik secara acak untuk setiap soal
+            const gorgeousPalette = gorgeousPalettes[Math.floor(Math.random() * gorgeousPalettes.length)];
 
-            topValEl.style.background = softPalette.top;
-            topValEl.style.borderColor = softPalette.borderTop;
-            leftValEl.style.background = softPalette.bottom;
-            leftValEl.style.borderColor = softPalette.borderBottom;
-            rightValEl.style.background = softPalette.bottom;
-            rightValEl.style.borderColor = softPalette.borderBottom;
+            topValEl.style.background = gorgeousPalette.top;
+            topValEl.style.borderColor = gorgeousPalette.borderTop;
+            leftValEl.style.background = gorgeousPalette.bottom;
+            leftValEl.style.borderColor = gorgeousPalette.borderBottom;
+            rightValEl.style.background = gorgeousPalette.bottom;
+            rightValEl.style.borderColor = gorgeousPalette.borderBottom;
 
             topValEl.innerHTML = '';
             leftValEl.innerHTML = '';

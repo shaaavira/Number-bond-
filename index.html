@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Minecraft!</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/canvas-confetti.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -20,6 +20,7 @@
             --btn-main: #00FF7F;
             --btn-shadow: #052e16;
             --accent-color: #4ade80;
+            --card-box-bg: #102a1e;
         }
 
         /* TEMA WARNA MODERN & CERIA ANAK-ANAK */
@@ -30,6 +31,7 @@
             --btn-main: #1CB5E0;
             --btn-shadow: #041f26;
             --accent-color: #83F4FF;
+            --card-box-bg: #08212a;
         }
         body.theme-LE2 { 
             --bg-gradient: linear-gradient(135deg, #A67B5B 0%, #D79955 100%); 
@@ -38,6 +40,7 @@
             --btn-main: #D79955;
             --btn-shadow: #1c120a;
             --accent-color: #F4E04D;
+            --card-box-bg: #23170e;
         }
         body.theme-LE3 { 
             --bg-gradient: linear-gradient(135deg, #FF4E50 0%, #F9D423 100%); 
@@ -46,6 +49,7 @@
             --btn-main: #FF3366;
             --btn-shadow: #21080a;
             --accent-color: #ff94a8;
+            --card-box-bg: #280c0e;
         }
         body.theme-CT  { 
             --bg-gradient: linear-gradient(135deg, #FF8008 0%, #FFC837 100%); 
@@ -54,6 +58,7 @@
             --btn-main: #FF7300;
             --btn-shadow: #211205;
             --accent-color: #FFC837;
+            --card-box-bg: #29180a;
         }
 
         body {
@@ -319,17 +324,18 @@
         .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--btn-shadow); }
         .btn-start-game:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-shadow); }
 
+        /* TABEL SKOR (DIBEDAKAN WARNANYA DARI TABEL DASAR) */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
             gap: 8px;
-            background: rgba(0,0,0,0.25);
+            background: var(--card-box-bg);
             padding: 6px 14px;
             border-radius: 8px;
             margin: 3px 0;
             overflow-x: auto;
-            border: 2px solid var(--border-main); 
+            border: 2px solid var(--accent-color); 
             width: 100%;
             max-width: 900px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
@@ -370,9 +376,10 @@
             display: inline-block;
         }
 
+        /* TABEL GAMBAR (DIBEDAKAN WARNANYA DARI TABEL DASAR) */
         .visual-illustration-box {
-            background: rgba(0,0,0,0.25);
-            border: 3px solid var(--border-main);
+            background: #182836;
+            border: 3px solid #38bdf8;
             border-radius: 8px;
             padding: 8px 16px;
             margin: 6px auto;
@@ -382,8 +389,7 @@
             gap: 14px;
             min-height: 58px;
             max-width: 820px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
-            overflow-x: auto;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 4px 10px rgba(56, 189, 248, 0.15);
         }
 
         .emoji-side {
@@ -395,10 +401,10 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            background: var(--container-bg);
+            background: #0f172a;
             padding: 5px 10px;
             border-radius: 6px;
-            border: 2px dashed var(--border-main);
+            border: 2px dashed #38bdf8;
             max-width: 360px;
             gap: 2px;
         }
@@ -516,24 +522,25 @@
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
+        /* TABEL MATH CALCULATION FORMULA (DIBEDAKAN WARNANYA DI SEMUA LEVEL) */
         .formula-box {
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Press Start 2P', monospace;
             font-size: 12px;
-            color: #f1f5f9;
-            background: var(--container-bg);
+            color: #ffffff;
+            background: #271638;
             padding: 8px 12px;
             border-radius: 6px;
             margin-bottom: 6px;
-            border: 2px dashed var(--border-main);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            border: 2px dashed #c084fc;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 4px 10px rgba(192, 132, 252, 0.15);
             width: 100%;
         }
         
         .formula-box span {
-            color: var(--accent-color);
+            color: #e879f9;
             margin: 0 5px;
         }
 
@@ -544,15 +551,15 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 13px;
             color: #ffffff;
-            background: rgba(0,0,0,0.3);
-            border: 2px solid var(--border-main);
+            background: rgba(0,0,0,0.4);
+            border: 2px solid #c084fc;
             border-radius: 4px;
             outline: none;
             transition: all 0.15s ease;
         }
         .form-input:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+            border-color: #f0abfc;
+            box-shadow: 0 0 0 3px rgba(240, 171, 252, 0.3);
         }
 
         .btn {
@@ -894,16 +901,15 @@ Creeper"></textarea>
             { left: '⭐', right: '✨' }  
         ];
 
-        // Palet warna ceria untuk lingkaran kiri & kanan (yang selalu sama warnanya)
         const pairColors = [
-            "#3b82f6", // Biru Cerah
-            "#ef4444", // Merah Terang
-            "#10b981", // Hijau Emerald
-            "#f59e0b", // Kuning Amber
-            "#8b5cf6", // Ungu Violet
-            "#ec4899", // Pink Cantik
-            "#06b6d4", // Cyan Ceria
-            "#f97316"  // Oranye Terang
+            "#3b82f6", 
+            "#ef4444", 
+            "#10b981", 
+            "#f59e0b", 
+            "#8b5cf6", 
+            "#ec4899", 
+            "#06b6d4", 
+            "#f97316"  
         ];
 
         let audioCtx = null;
@@ -1083,25 +1089,20 @@ Creeper"></textarea>
             formVal2.value = ''; 
             formVal3.value = '';
 
-            // ATUR NILAI BERDASARKAN KATEGORI BARU
             if (kategoriPilihan === 'LE1') {
-                // Number bond 1-5
-                nilaiTotal = Math.floor(Math.random() * 4) + 2; // 2 sampai 5
+                nilaiTotal = Math.floor(Math.random() * 4) + 2; 
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 1)) + 1;
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
             } else if (kategoriPilihan === 'LE2') {
-                // Number bond 1-10
-                nilaiTotal = Math.floor(Math.random() * 8) + 3; // 3 sampai 10
+                nilaiTotal = Math.floor(Math.random() * 8) + 3; 
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 1)) + 1;
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
             } else if (kategoriPilihan === 'LE3') {
-                // Number bond 1-20
-                nilaiTotal = Math.floor(Math.random() * 15) + 6; // 6 sampai 20
+                nilaiTotal = Math.floor(Math.random() * 15) + 6; 
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 2)) + 1;
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
             } else if (kategoriPilihan === 'CT') {
-                // Number bond ratusan
-                nilaiTotal = Math.floor(Math.random() * 7 + 2) * 100; // 200 - 800
+                nilaiTotal = Math.floor(Math.random() * 7 + 2) * 100; 
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal/10 - 2) + 1) * 10; 
                 if (nilaiTotal - nilaiBagianA < 20) { nilaiBagianA = nilaiTotal - 120; }
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
@@ -1135,7 +1136,6 @@ Creeper"></textarea>
             leftValEl.innerHTML = '';
             rightValEl.innerHTML = '';
 
-            // UBAH WARNA LINGKARAN KIRI DAN KANAN AGAR SAMA TETAPI BERUBAH TIAP SOAL
             let randomColor = pairColors[Math.floor(Math.random() * pairColors.length)];
             leftValEl.style.backgroundColor = randomColor;
             rightValEl.style.backgroundColor = randomColor;
@@ -1253,7 +1253,7 @@ Creeper"></textarea>
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih salah, ayo cek ulang angkanya! 🤔</span>";
-                recheckBtn.classList.remove('hidden');
+                recheckBtn.classList.add('hidden');
             }
         }
 

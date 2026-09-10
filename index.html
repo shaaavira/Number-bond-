@@ -102,7 +102,7 @@
             font-weight: 700;
         }
 
-        /* Lobby / Menu yang Dirapikan agar Padat & Penuh */
+        /* Lobby / Menu yang Padat & Rapi */
         #lobby-screen {
             display: flex;
             flex-direction: column;
@@ -269,6 +269,12 @@
             flex-direction: column;
             align-items: center;
             position: relative;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Efek Animasi Putar & Membesar saat Benar */
+        .bond-celebrate {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .circle {
@@ -282,14 +288,7 @@
             font-weight: 900;
             font-size: 36px;
             box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-            transition: all 0.3s ease;
-        }
-
-        .top-circle {
-            background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
-            color: white;
-            margin-bottom: 10px;
-            border: 4px solid #ff9ff3;
+            transition: background 0.5s ease, border-color 0.5s ease;
         }
 
         .branch-lines {
@@ -314,12 +313,6 @@
             display: flex;
             justify-content: space-between;
             width: 195px; 
-        }
-
-        .part-circle {
-            background: linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%);
-            color: white;
-            border: 4px solid #74b9ff;
         }
 
         .circle input {
@@ -507,7 +500,7 @@
     </div>
 
     <div class="game-container">
-        <!-- LOBBY (Dirapikan tanpa space kosong berlebih) -->
+        <!-- LOBBY -->
         <div id="lobby-screen">
             <div>
                 <div class="mascot">🧸🎈</div>
@@ -566,12 +559,12 @@ Uswa"></textarea>
 
             <div class="game-main-layout">
                 <div class="left-side-game">
-                    <div class="bond-container">
-                        <div id="top-val" class="circle top-circle"></div>
+                    <div class="bond-container" id="bond-container-el">
+                        <div id="top-val" class="circle"></div>
                         <div class="branch-lines"></div>
                         <div class="bottom-circles">
-                            <div id="left-val" class="circle part-circle"></div>
-                            <div id="right-val" class="circle part-circle"></div>
+                            <div id="left-val" class="circle"></div>
+                            <div id="right-val" class="circle"></div>
                         </div>
                     </div>
                 </div>
@@ -593,7 +586,7 @@ Uswa"></textarea>
                     </div>
 
                     <div id="picker-section" class="hidden">
-                        <div class="picker-title">Siapa paling cepat benar? 👇</div>
+                        <div class="picker-title" id="picker-title-text">Siapa paling cepat benar? 👇</div>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
@@ -623,6 +616,7 @@ Uswa"></textarea>
         let nilaiTotal = 5;
         let nilaiBagianA = 2;
         let nilaiBagianB = 3;
+        let isModeBetulkan = false; // Status apakah sedang sesi betulkan jawaban setelah salah
 
         const topValEl = document.getElementById('top-val');
         const leftValEl = document.getElementById('left-val');
@@ -633,6 +627,8 @@ Uswa"></textarea>
         const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
+        const bondContainerEl = document.getElementById('bond-container-el');
+        const pickerTitleText = document.getElementById('picker-title-text');
         
         const lobbyScreen = document.getElementById('lobby-screen');
         const gameScreen = document.getElementById('game-screen');
@@ -646,6 +642,15 @@ Uswa"></textarea>
         const welcomeBtn = document.getElementById('welcome-btn');
 
         let audioCtx = null;
+
+        // Palet warna warni untuk lingkaran Number Bond agar berubah setiap soal
+        const colorPalettes = [
+            { top: 'linear-gradient(135deg, #ff6b81 0%, #ff4757 100%)', borderTop: '#ff9ff3', bottom: 'linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%)', borderBottom: '#74b9ff' },
+            { top: 'linear-gradient(135deg, #ffa502 0%, #ff7f50 100%)', borderTop: '#ffeaa7', bottom: 'linear-gradient(135deg, #2ed573 0%, #26af5f 100%)', borderBottom: '#7efff5' },
+            { top: 'linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%)', borderTop: '#d2b4de', bottom: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)', borderBottom: '#85c1e9' },
+            { top: 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)', borderTop: '#f5b7b1', bottom: 'linear-gradient(135deg, #f39c12 0%, #d68910 100%)', borderBottom: '#f8c471' },
+            { top: 'linear-gradient(135deg, #00cec9 0%, #0984e3 100%)', borderTop: '#81ecec', bottom: 'linear-gradient(135deg, #fd79a8 0%, #e84393 100%)', borderBottom: '#fab1a0' }
+        ];
 
         function initAudio() {
             if (!audioCtx) {
@@ -765,7 +770,7 @@ Uswa"></textarea>
                 let btn = document.createElement('button');
                 btn.className = 'btn-name';
                 btn.innerText = p.nama;
-                btn.onclick = () => tambahSkorAnak(index);
+                btn.onclick = () => aksiPilihAnak(index);
                 btnContainer.appendChild(btn);
             });
         }
@@ -781,6 +786,8 @@ Uswa"></textarea>
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             nextBtn.classList.add('hidden');
+            isModeBetulkan = false;
+            bondContainerEl.classList.remove('bond-celebrate');
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
@@ -815,9 +822,15 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            topValEl.className = "circle top-circle";
-            leftValEl.className = "circle part-circle";
-            rightValEl.className = "circle part-circle";
+            // Pilih palet warna acak agar berubah setiap soal
+            const randomPalette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+
+            topValEl.style.background = randomPalette.top;
+            topValEl.style.borderColor = randomPalette.borderTop;
+            leftValEl.style.background = randomPalette.bottom;
+            leftValEl.style.borderColor = randomPalette.borderBottom;
+            rightValEl.style.background = randomPalette.bottom;
+            rightValEl.style.borderColor = randomPalette.borderBottom;
 
             topValEl.innerHTML = '';
             leftValEl.innerHTML = '';
@@ -826,21 +839,18 @@ Uswa"></textarea>
             const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
 
             if (posisiKosong === 2) {
-                topValEl.classList.add('top-circle');
                 topValEl.innerHTML = inputElement;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiTotal;
             } else if (posisiKosong === 1) {
                 topValEl.innerText = nilaiTotal;
-                leftValEl.classList.add('part-circle');
                 leftValEl.innerHTML = inputElement;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiBagianA;
             } else {
                 topValEl.innerText = nilaiTotal;
                 leftValEl.innerText = nilaiBagianA;
-                rightValEl.classList.add('part-circle');
                 rightValEl.innerHTML = inputElement;
                 jawabanBenar = nilaiBagianB;
             }
@@ -868,28 +878,64 @@ Uswa"></textarea>
                 return;
             }
 
-            activeInput.disabled = true;
-            submitBtn.style.display = 'none';
-
             if (jawabanUser === jawabanBenar) {
+                // Jawaban Benar
                 playSound('correct');
                 triggerConfetti();
-                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Siapa cepat? 👇</span>";
+                activeInput.disabled = true;
+                submitBtn.style.display = 'none';
+                bondContainerEl.classList.add('bond-celebrate');
+                
+                isModeBetulkan = false;
+                pickerTitleText.innerText = "Siapa paling cepat benar? 👇";
+                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih anak yang menjawab: 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
+                // Jawaban Salah
                 playSound('wrong');
                 triggerFlashRed();
-                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat! Jawabannya: ${jawabanBenar} 💪</span>`;
-                nextBtn.classList.remove('hidden');
+
+                if (!isModeBetulkan) {
+                    // Pertama kali salah: Beri kesempatan anak yang menjawab untuk memperbaikinya (betulkan jawaban)
+                    isModeBetulkan = true;
+                    feedbackEl.innerHTML = "<span class='wrong'>Kurang tepat! Mau beri kesempatan betulkan jawaban? Pilih siapa yang ingin memperbaiki: 👇</span>";
+                    pickerTitleText.innerText = "Betulkan jawaban (Poin +5): 👇";
+                    pickerSection.classList.remove('hidden');
+                } else {
+                    // Jika sudah sesi betulkan tapi masih salah / langsung klik periksa
+                    feedbackEl.innerHTML = `<span class='wrong'>Belum tepat. Jawabannya adalah: ${jawabanBenar} 💪</span>`;
+                    activeInput.disabled = true;
+                    submitBtn.style.display = 'none';
+                    nextBtn.classList.remove('hidden');
+                }
             }
         }
 
-        function tambahSkorAnak(index) {
-            daftarPemain[index].skor += 10;
-            updatePapanSkor();
+        function aksiPilihAnak(index) {
             pickerSection.classList.add('hidden');
-            feedbackEl.innerHTML = "<span class='correct'>Poin +10 untuk " + daftarPemain[index].nama.toUpperCase() + "! 🎈</span>";
-            nextBtn.classList.remove('hidden');
+            const activeInput = document.getElementById('user-input');
+
+            if (!isModeBetulkan) {
+                // Skenario Normal Benar (Poin +10)
+                daftarPemain[index].skor += 10;
+                updatePapanSkor();
+                feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
+                nextBtn.classList.remove('hidden');
+            } else {
+                // Skenario Betulkan Jawaban setelah Salah (Poin +5 sebagai apresiasi usaha)
+                daftarPemain[index].skor += 5;
+                updatePapanSkor();
+                
+                // Isi otomatis jawaban benar ke input agar anak melihat bentuk benarnya
+                if (activeInput) {
+                    activeInput.value = jawabanBenar;
+                    activeInput.disabled = true;
+                }
+                submitBtn.style.display = 'none';
+
+                feedbackEl.innerHTML = `<span class='correct'>Hebat ${daftarPemain[index].nama.toUpperCase()} berhasil betulkan jawaban! Poin +5 👏</span>`;
+                nextBtn.classList.remove('hidden');
+            }
         }
 
         function lanjutkanSoal() {

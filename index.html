@@ -63,6 +63,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            overflow-y: auto;
         }
 
         .btn-back {
@@ -110,25 +111,68 @@
             font-weight: 700;
         }
 
-        /* Lobby */
+        /* LOBBY BARU YANG LEBIH CERIA & GAMER-STYLE */
         #lobby-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
             flex: 1;
-            gap: 10px;
+            gap: 12px;
+            padding: 6px 0;
+            overflow-y: auto;
+        }
+
+        .lobby-hero-card {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 4px dashed #ffb74d;
+            border-radius: 22px;
+            padding: 10px 20px;
+            width: 100%;
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.12);
+            animation: floatBanner 4s ease-in-out infinite;
+        }
+        @keyframes floatBanner {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .lobby-hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #e65100;
+            margin: 0;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        .lobby-hero-sub {
+            font-size: 13px;
+            font-weight: 800;
+            color: #af601a;
+            margin-top: 2px;
+        }
+
+        .lobby-section-box {
+            background: #f8fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 12px 16px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
 
         .lobby-section-title {
             font-family: 'Outfit', sans-serif;
             font-size: 14px;
-            font-weight: 800;
-            color: #2d3436;
-            margin-bottom: 3px;
-            text-align: left;
-            width: 100%;
+            font-weight: 900;
+            color: #334155;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .category-grid {
@@ -140,54 +184,85 @@
 
         .cat-card {
             background: #ffffff;
-            border: 3px solid #f1f5f9;
+            border: 3px solid #e2e8f0;
             border-radius: 16px;
-            padding: 10px;
+            padding: 12px 10px;
             cursor: pointer;
-            text-align: left;
-            transition: all 0.2s ease;
+            text-align: center;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 0 #cbd5e1;
+            position: relative;
         }
 
-        .cat-card:hover { border-color: #cbd5e1; transform: translateY(-2px); }
+        .cat-card:hover { transform: translateY(-3px); box-shadow: 0 7px 0 #cbd5e1; border-color: #94a3b8; }
+        .cat-card:active { transform: translateY(1px); box-shadow: 0 2px 0 #cbd5e1; }
+        
         .cat-card.selected {
-            background: #fff0f3;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe3e6 100%);
             border-color: #ff4757;
-            box-shadow: 0 6px 15px rgba(255, 71, 87, 0.15);
+            box-shadow: 0 6px 0 #ff6b81, 0 10px 20px rgba(255, 71, 87, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .cat-emoji {
+            font-size: 26px;
+            margin-bottom: 4px;
+            display: block;
         }
 
         .cat-title {
             font-family: 'Outfit', sans-serif;
             font-size: 16px;
             font-weight: 900;
-            color: #2d3436;
+            color: #1e293b;
         }
         .cat-card.selected .cat-title { color: #ff4757; }
-        .cat-desc { font-size: 12px; color: #636e72; font-weight: 700; margin-top: 2px;}
+        .cat-desc { font-size: 11px; color: #64748b; font-weight: 800; margin-top: 3px;}
 
         #lobby-screen textarea {
             width: 100%;
-            height: 75px;
-            padding: 10px;
-            border: 3px solid #e2e8f0;
+            height: 68px;
+            padding: 10px 14px;
+            border: 3px solid #cbd5e1;
             border-radius: 14px;
             font-family: 'Quicksand', sans-serif;
             font-size: 14px;
             font-weight: 700;
             resize: none;
             outline: none;
-            color: #2d3436;
-            background: #f8fafc;
+            color: #1e293b;
+            background: #ffffff;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
         }
-        #lobby-screen textarea:focus { border-color: #ff4757; background: #fff; }
+        #lobby-screen textarea:focus { border-color: #ff4757; background: #fff; box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.15); }
 
         .input-hint {
-            font-size: 12px;
-            color: #94a3b8;
-            margin: 2px 0 4px 0;
-            text-align: left;
-            width: 100%;
-            font-weight: 700;
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 4px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
+
+        .btn-start-game {
+            background: linear-gradient(135deg, #2ed573 0%, #26af5f 100%);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            border-radius: 18px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #1b8a47, 0 10px 20px rgba(46, 213, 115, 0.3);
+            transition: all 0.15s ease;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #1b8a47, 0 12px 25px rgba(46, 213, 115, 0.4); }
+        .btn-start-game:active { transform: translateY(3px); box-shadow: 0 3px 0 #1b8a47; }
 
         /* PAPAN SKOR LUCU & MENARIK */
         .leaderboard {
@@ -580,47 +655,48 @@
     <div class="game-container">
         <!-- LOBBY -->
         <div id="lobby-screen">
-            <div>
-                <div class="title-header-wrapper">
-                    <h1>Petualangan Number Bond</h1>
-                    <span class="mascot-inline">🧸🎈</span>
-                </div>
-                <div class="subtitle">Yuk pilih kategori seru & tulis namamu! ✨</div>
+            <div class="lobby-hero-card">
+                <div class="lobby-hero-title">🎮 Petualangan Number Bond 🌟</div>
+                <div class="lobby-hero-sub">Pilih level petualanganmu dan masukkan nama jagoan cilik! ✨</div>
             </div>
             
-            <div style="width: 100%;">
-                <div class="lobby-section-title">1. Pilih Kategori Level:</div>
+            <div class="lobby-section-box">
+                <div class="lobby-section-title">🗺️ Pilih Kategori Level Petualangan:</div>
                 <div class="category-grid">
                     <div class="cat-card selected" onclick="pilihKategori('LE1', this)">
-                        <div class="cat-title">🍎 LE 1</div>
+                        <span class="cat-emoji">🍎</span>
+                        <div class="cat-title">LE 1</div>
                         <div class="cat-desc">Bond 1 - 5</div>
                     </div>
                     <div class="cat-card" onclick="pilihKategori('LE2', this)">
-                        <div class="cat-title">⭐ LE 2</div>
+                        <span class="cat-emoji">⭐</span>
+                        <div class="cat-title">LE 2</div>
                         <div class="cat-desc">Bond 1 - 10</div>
                     </div>
                     <div class="cat-card" onclick="pilihKategori('LE3', this)">
-                        <div class="cat-title">🚀 LE 3</div>
+                        <span class="cat-emoji">🚀</span>
+                        <div class="cat-title">LE 3</div>
                         <div class="cat-desc">Bond 1 - 20</div>
                     </div>
                     <div class="cat-card" onclick="pilihKategori('CT', this)">
-                        <div class="cat-title">👑 CT</div>
+                        <span class="cat-emoji">👑</span>
+                        <div class="cat-title">CT</div>
                         <div class="cat-desc">Ratusan</div>
                     </div>
                 </div>
             </div>
 
-            <div style="width: 100%;">
-                <div class="lobby-section-title">2. Daftar Nama Pemain:</div>
+            <div class="lobby-section-box">
+                <div class="lobby-section-title">✏️ Ketik Nama Pemain / Jagoan Cilik:</div>
                 <textarea id="player-input-box" placeholder="Contoh:
 Firgi
 Ara
 Uswa"></textarea>
-                <div class="input-hint">💡 Ketik satu nama di setiap baris ya!</div>
+                <div class="input-hint">💡 Ketik satu nama di setiap baris ya (Maksimal 10 anak)!</div>
             </div>
             
             <div>
-                <button class="btn" onclick="mulaiPermainanDariLobby()">Mulai Bermain! 🌟</button>
+                <button class="btn-start-game" onclick="mulaiPermainanDariLobby()">Mulai Petualangan! 🚀✨</button>
             </div>
             <div id="lobby-error" class="wrong" style="font-size: 12px; font-weight: 800; min-height: 16px;"></div>
         </div>
@@ -862,12 +938,14 @@ Uswa"></textarea>
 
         function pilihKategori(kode, element) {
             kategoriPilihan = kode;
+            playClickSound();
             document.querySelectorAll('.cat-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
             document.body.className = `theme-${kode}`;
         }
 
         function mulaiPermainanDariLobby() {
+            playClickSound();
             let textValue = document.getElementById('player-input-box').value.trim();
             if (!textValue) {
                 lobbyError.innerText = "Masukkan minimal 1 nama anak ya! 🤔";
@@ -901,6 +979,7 @@ Uswa"></textarea>
         }
 
         function kembaliKeLobby() {
+            playClickSound();
             resultScreen.classList.add('hidden');
             gameScreen.classList.add('hidden');
             lobbyScreen.classList.remove('hidden');
@@ -1053,6 +1132,7 @@ Uswa"></textarea>
         }
 
         function cekJawaban() {
+            playClickSound();
             const activeInput = document.getElementById('user-input');
             if (!activeInput) return;
             const jawabanUser = parseInt(activeInput.value);
@@ -1093,6 +1173,7 @@ Uswa"></textarea>
         }
 
         function mulaiBetulkanJawaban() {
+            playClickSound();
             retryBtn.classList.add('hidden');
             const activeInput = document.getElementById('user-input');
             
@@ -1107,6 +1188,7 @@ Uswa"></textarea>
         }
 
         function periksaUlangJawaban() {
+            playClickSound();
             const activeInput = document.getElementById('user-input');
             if (!activeInput) return;
             const jawabanBaru = parseInt(activeInput.value);
@@ -1129,11 +1211,13 @@ Uswa"></textarea>
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
+                recheckBtn.classList.1 = 'hidden';
                 recheckBtn.classList.remove('hidden');
             }
         }
 
         function cekFormulaJawaban() {
+            playClickSound();
             let v1 = parseInt(formVal1.value);
             let v2 = parseInt(formVal2.value);
             let v3 = parseInt(formVal3.value);
@@ -1170,6 +1254,7 @@ Uswa"></textarea>
         }
 
         function aksiPilihAnak(index) {
+            playClickSound();
             pickerSection.classList.add('hidden');
             feedbackEl.innerHTML = '';
 
@@ -1188,6 +1273,7 @@ Uswa"></textarea>
         }
 
         function lanjutkanSoal() {
+            playClickSound();
             soalKe++;
             if (soalKe > totalSoal) {
                 gameScreen.classList.add('hidden');

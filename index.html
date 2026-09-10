@@ -280,8 +280,11 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 36px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-            transition: background 0.5s ease, border-color 0.5s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: background 0.5s ease, border-color 0.5s ease, transform 0.3s ease;
+        }
+        .circle:hover {
+            transform: scale(1.05);
         }
 
         .branch-lines {
@@ -294,10 +297,10 @@
             content: '';
             position: absolute;
             top: 0;
-            width: 5px; 
+            width: 6px; 
             height: 24px; 
             border-radius: 3px;
-            background-color: #a4b0be;
+            background-color: #cbd5e1;
         }
         .branch-lines::before { left: 22px; transform: rotate(30deg); }
         .branch-lines::after { right: 22px; transform: rotate(-30deg); }
@@ -338,7 +341,7 @@
             padding: 8px 12px;
             border-radius: 14px;
             margin-bottom: 10px;
-            border: 3px dashed #a4b0be;
+            border: 3px dashed #cbd5e1;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
         
@@ -651,13 +654,13 @@ Uswa"></textarea>
 
         let audioCtx = null;
 
-        // Pilihan palet warna Number Bond yang soft, kalem, dan estetik (nyaman di mata anak)
-        const softColorPalettes = [
-            { top: 'linear-gradient(135deg, #ffb8b8 0%, #ff8787 100%)', borderTop: '#ffd8d8', bottom: 'linear-gradient(135deg, #a5d8ff 0%, #74c0fc 100%)', borderBottom: '#d0ebff' },
-            { top: 'linear-gradient(135deg, #ffec99 0%, #ffd43b 100%)', borderTop: '#fff9db', bottom: 'linear-gradient(135deg, #b2f2bb 0%, #8ce99a 100%)', borderBottom: '#e6fcf5' },
-            { top: 'linear-gradient(135deg, #e599f7 0%, #cc5de8 100%)', borderTop: '#f3d9fa', bottom: 'linear-gradient(135deg, #99e9f2 0%, #38d9a9 100%)', borderBottom: '#e3fafc' },
-            { top: 'linear-gradient(135deg, #ffc078 0%, #ffa94d 100%)', borderTop: '#ffe8cc', bottom: 'linear-gradient(135deg, #74c0fc 0%, #4dabf7 100%)', borderBottom: '#e7f5ff' },
-            { top: 'linear-gradient(135deg, #f06595 0%, #e64980 100%)', borderTop: '#fcc2d7', bottom: 'linear-gradient(135deg, #63e6be 0%, #20c997 100%)', borderBottom: '#c3fae8' }
+        // Palet warna modern, cerah, namun kalem (soft pink, soft purple, soft yellow, mint, soft blue)
+        const modernSoftPalettes = [
+            { top: 'linear-gradient(135deg, #ffc2d1 0%, #ff9ebb 100%)', borderTop: '#ffe6ed', bottom: 'linear-gradient(135deg, #b5ead7 0%, #9ff1df 100%)', borderBottom: '#e2fcf7' }, // Soft Pink & Mint
+            { top: 'linear-gradient(135deg, #e2d9f3 0%, #c7b9ff 100%)', borderTop: '#f3eeff', bottom: 'linear-gradient(135deg, #ffdac1 0%, #ffb7b2 100%)', borderBottom: '#ffebe3' }, // Soft Purple & Soft Peach
+            { top: 'linear-gradient(135deg, #fff3b0 0%, #ffe066 100%)', borderTop: '#fffbe8', bottom: 'linear-gradient(135deg, #c4faf8 0%, #8ae9ec 100%)', borderBottom: '#e6ffff' }, // Soft Yellow & Soft Sky Blue
+            { top: 'linear-gradient(135deg, #ffb3ba 0%, #ff8b94 100%)', borderTop: '#ffe5e8', bottom: 'linear-gradient(135deg, #bae1ff 0%, #99d2ff 100%)', borderBottom: '#e8f4ff' }, // Soft Coral Pink & Soft Blue
+            { top: 'linear-gradient(135deg, #d4a5a5 0%, #b87d7d 100%)', borderTop: '#f4e6e6', bottom: 'linear-gradient(135deg, #fdfd96 0%, #f7f779 100%)', borderBottom: '#ffffea' }  // Soft Rose & Soft Butter Yellow
         ];
 
         function initAudio() {
@@ -669,6 +672,7 @@ Uswa"></textarea>
             }
         }
 
+        // Efek Suara Tepuk Tangan & Musik Ceria Sukses
         function playClappingAndCheer() {
             try {
                 initAudio();
@@ -690,7 +694,7 @@ Uswa"></textarea>
                 osc.start(now);
                 osc.stop(now + 0.7);
 
-                for (let i = 0; i < 12; i++) {
+                for (let i = 0; i < 14; i++) {
                     let startTime = now + i * 0.05;
                     let bufferSize = audioCtx.sampleRate * 0.04;
                     let buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
@@ -742,7 +746,7 @@ Uswa"></textarea>
 
         function triggerConfetti() {
             try {
-                confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+                confetti({ particleCount: 160, spread: 100, origin: { y: 0.6 } });
             } catch(e) {}
         }
 
@@ -873,8 +877,8 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Memilih warna soft kalem setiap soal baru
-            const softPalette = softColorPalettes[Math.floor(Math.random() * softColorPalettes.length)];
+            // Memilih palet warna modern, cerah tapi kalem secara acak
+            const softPalette = modernSoftPalettes[Math.floor(Math.random() * modernSoftPalettes.length)];
 
             topValEl.style.background = softPalette.top;
             topValEl.style.borderColor = softPalette.borderTop;
@@ -933,7 +937,7 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
-                // Jawaban Benar Langsung (Efek confetti + suara tepuk tangan)
+                // Efek jawaban benar: Konfeti meriah & Suara tepuk tangan gembira
                 playClappingAndCheer();
                 triggerConfetti();
                 
@@ -947,7 +951,7 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih siswa yang menjawab: 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
-                // Jawaban Salah: Munculkan tombol Betulkan Jawaban
+                // Jawaban Salah
                 playSound('wrong');
                 triggerFlashRed();
 
@@ -964,7 +968,6 @@ Uswa"></textarea>
             retryBtn.classList.add('hidden');
             const activeInput = document.getElementById('user-input');
             
-            // Buka input agar bisa diketik ulang jawaban yang benar
             if (activeInput) {
                 activeInput.value = '';
                 activeInput.disabled = false;
@@ -981,7 +984,7 @@ Uswa"></textarea>
             const jawabanBaru = parseInt(activeInput.value);
 
             if (jawabanBaru === jawabanBenar) {
-                // Berhasil betulkan jawaban -> Efek confetti + suara tepuk tangan, lalu pilih siswa untuk diberi poin
+                // Efek jawaban benar saat periksa ulang: Konfeti meriah & Suara tepuk tangan gembira
                 playClappingAndCheer();
                 triggerConfetti();
 
@@ -1002,13 +1005,11 @@ Uswa"></textarea>
             pickerSection.classList.add('hidden');
 
             if (!isSalahSesi) {
-                // Pemberian poin benar langsung (10 poin)
                 daftarPemain[index].skor += 10;
                 updatePapanSkor();
                 feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
                 nextBtn.classList.remove('hidden');
             } else {
-                // Pemberian poin setelah sukses betulkan jawaban (5 poin)
                 daftarPemain[index].skor += 5;
                 updatePapanSkor();
                 

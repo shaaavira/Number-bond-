@@ -481,9 +481,9 @@
             <div class="lobby-section-title">2. Daftar Nama Pemain (Maksimal 10 anak):</div>
             <textarea id="player-input-box" placeholder="Ketik nama anak, pisahkan dengan baris baru (Enter)...
 Contoh:
-Dawai
-Nahda
-Ali"></textarea>
+Budi
+Ani
+Siti"></textarea>
             <div class="input-hint">💡 Tips: Ketik satu nama di setiap baris ya!</div>
             
             <div>
@@ -811,7 +811,7 @@ Ali"></textarea>
                     let namaPemenang = pemenang.map(p => p.nama).join(" & ");
                     winnerText.innerHTML = `Hasil Seri! 🤝<br>Hebat semua: ${namaPemenang} (${maksSkor} Poin)`;
                 } else {
-                    winnerText.innerHTML = `🎉 Yey! Selamat <b>${pemenang[0].nama}</b>!<br>Juara Tercepat dengan ${maksSkor} Poin! 🌟🏆`;
+                    winnerText.innerHTML = `🎉 Yey! Selamat Kepada <b>${pemenang[0].nama}</b>!<br>Juara Tercepat dengan ${maksSkor} Poin! 🌟🏆`;
                 }
             } else {
                 buatSoalBaru();

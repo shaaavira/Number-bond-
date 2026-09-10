@@ -295,55 +295,70 @@
             padding: 14px;
         }
 
+        /* CONTAINER NUMBER BOND DENGAN POSISI ABSOLUT YANG PRESISI */
         .bond-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             position: relative;
+            width: 240px;
+            height: 180px;
+            margin: 0 auto;
         }
 
         .circle {
-            width: 85px;
-            height: 85px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 34px;
+            font-size: 32px;
             color: #ffffff;
             border: none;
             box-shadow: none;
-            transition: background 0.5s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* PERBAIKAN: Garis Penghubung Panjang Sempurna Bentuk /\ */
-        .branch-lines {
-            width: 200px;  
-            height: 70px;  
-            position: relative;
-            margin: -10px 0;
-            z-index: 1;
-        }
-        .branch-lines::before, .branch-lines::after {
-            content: '';
             position: absolute;
-            top: 0;
-            width: 6px; 
-            height: 76px; 
-            border-radius: 3px;
-            background-color: #94a3b8;
+            z-index: 2;
+            transition: background 0.5s ease;
         }
-        .branch-lines::before { left: 32px; transform: rotate(33deg); transform-origin: top center; }
-        .branch-lines::after { right: 32px; transform: rotate(-33deg); transform-origin: top center; }
 
-        .bottom-circles {
-            display: flex;
-            justify-content: space-between;
-            width: 200px; 
+        /* Posisi Lingkaran Atas dan Bawah */
+        #top-val {
+            top: 0;
+            left: 80px;
+        }
+
+        #left-val {
+            bottom: 0;
+            left: 0;
+        }
+
+        #right-val {
+            bottom: 0;
+            right: 0;
+        }
+
+        /* Garis V Terbalik (/\) yang Menghubungkan Langsung Kiri-Atas & Kanan-Atas */
+        .branch-line-left, .branch-line-right {
+            position: absolute;
+            background-color: #94a3b8;
+            height: 6px;
+            border-radius: 3px;
+            z-index: 1;
+            transform-origin: center;
+        }
+
+        .branch-line-left {
+            width: 110px;
+            top: 55px;
+            left: 36px;
+            transform: rotate(41deg);
+        }
+
+        .branch-line-right {
+            width: 110px;
+            top: 55px;
+            right: 36px;
+            transform: rotate(-41deg);
         }
 
         .circle input {
@@ -354,7 +369,7 @@
             text-align: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 32px;
+            font-size: 30px;
             color: #ffffff;
             outline: none;
             border-radius: 50%;
@@ -611,12 +626,11 @@ Uswa"></textarea>
             <div class="game-main-layout">
                 <div class="left-side-game">
                     <div class="bond-container" id="bond-container-el">
+                        <div class="branch-line-left"></div>
+                        <div class="branch-line-right"></div>
                         <div id="top-val" class="circle"></div>
-                        <div class="branch-lines"></div>
-                        <div class="bottom-circles">
-                            <div id="left-val" class="circle"></div>
-                            <div id="right-val" class="circle"></div>
-                        </div>
+                        <div id="left-val" class="circle"></div>
+                        <div id="right-val" class="circle"></div>
                     </div>
                 </div>
 

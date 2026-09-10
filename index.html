@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/canvas-confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -50,13 +50,13 @@
         .game-container {
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px);
-            padding: 20px 28px;
+            padding: 18px 24px;
             border-radius: 32px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 960px;
             height: 96vh;
-            max-height: 680px;
+            max-height: 700px;
             text-align: center;
             position: relative;
             display: flex;
@@ -67,8 +67,8 @@
 
         .btn-back {
             position: absolute;
-            top: 16px;
-            left: 24px;
+            top: 14px;
+            left: 20px;
             background: #f1f5f9;
             border: none;
             padding: 8px 14px;
@@ -89,16 +89,16 @@
         h1 {
             font-family: 'Outfit', sans-serif;
             color: #ff4757;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 15px;
+            font-size: 14px;
             color: #636e72;
-            margin: 4px 0 12px 0;
+            margin: 2px 0 8px 0;
             font-weight: 700;
         }
 
@@ -188,9 +188,9 @@
             justify-content: center;
             gap: 10px;
             background: #f8fafc;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 16px;
-            margin: 4px 0 6px 0;
+            margin: 2px 0 4px 0;
             overflow-x: auto;
             border: 3px solid #e2e8f0;
             width: 100%;
@@ -200,9 +200,9 @@
         .player-score {
             text-align: center;
             background: white;
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 12px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             color: #475569;
             border: 3px solid #e2e8f0;
@@ -213,7 +213,7 @@
         .player-score span {
             display: block;
             font-family: 'Outfit', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: #ff4757;
         }
@@ -229,6 +229,35 @@
             border-radius: 14px;
             border: 2px solid #2ed573;
             display: inline-block;
+        }
+
+        /* ILUSTRASI VISUAL CERIA ANAK DI ATAS NUMBER BOND */
+        .visual-illustration-box {
+            background: #f0fdf4;
+            border: 2px dashed #86efac;
+            border-radius: 16px;
+            padding: 6px 14px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 46px;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .story-text {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: #166534;
+        }
+
+        .emoji-cluster {
+            font-size: 20px;
+            letter-spacing: 2px;
         }
 
         /* LAYOUT UTAMA */
@@ -248,7 +277,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 20px;
+            padding: 10px;
         }
 
         .right-side-game {
@@ -270,45 +299,45 @@
             position: relative;
         }
 
-        /* Desain Flat Datar/2D dengan Warna Gemas Soft */
+        /* Warna Flat Datar 2D dengan Warna Lebih Cerah & Ramah Anak */
         .circle {
-            width: 90px;
-            height: 90px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 36px;
-            color: #ffffff; /* Angka warna putih agar sangat kontras dan jelas */
+            font-size: 34px;
+            color: #ffffff;
             border: none;
-            box-shadow: none; /* Tanpa efek 3D / tanpa bayangan menonjol */
+            box-shadow: none;
             transition: background 0.5s ease;
         }
 
         .branch-lines {
-            width: 140px;  
+            width: 130px;  
             height: 10px;  
             position: relative;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .branch-lines::before, .branch-lines::after {
             content: '';
             position: absolute;
             top: 0;
             width: 6px; 
-            height: 24px; 
+            height: 22px; 
             border-radius: 3px;
-            background-color: #cbd5e1;
+            background-color: #94a3b8;
         }
-        .branch-lines::before { left: 22px; transform: rotate(30deg); }
-        .branch-lines::after { right: 22px; transform: rotate(-30deg); }
+        .branch-lines::before { left: 18px; transform: rotate(30deg); }
+        .branch-lines::after { right: 18px; transform: rotate(-30deg); }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 195px; 
+            width: 185px; 
         }
 
         .circle input {
@@ -319,8 +348,8 @@
             text-align: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 34px;
-            color: #ffffff; /* Angka input anak juga putih bersih */
+            font-size: 32px;
+            color: #ffffff;
             outline: none;
             border-radius: 50%;
         }
@@ -334,13 +363,13 @@
             align-items: center;
             justify-content: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 900;
             color: #2f3542;
             background: #ffffff;
             padding: 8px 12px;
             border-radius: 14px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             border: 3px dashed #cbd5e1;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
@@ -348,16 +377,16 @@
         .formula-box span {
             color: #ff6b81;
             font-weight: 900;
-            font-size: 24px;
+            font-size: 22px;
             margin: 0 6px;
         }
 
         .form-input {
-            width: 55px;
-            height: 40px;
+            width: 50px;
+            height: 38px;
             text-align: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 900;
             color: #2f3542;
             background: #f8fafc;
@@ -374,10 +403,10 @@
             background-color: #2ed573;
             color: white;
             border: none;
-            padding: 10px 28px;
+            padding: 9px 24px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 17px;
+            font-size: 16px;
             border-radius: 14px;
             cursor: pointer;
             box-shadow: 0 4px 0 #26af5f;
@@ -425,7 +454,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 6px;
-            max-height: 60px;
+            max-height: 55px;
             overflow-y: auto;
         }
 
@@ -446,9 +475,9 @@
         #feedback {
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 15px;
+            font-size: 14px;
             margin-top: 4px;
-            min-height: 22px;
+            min-height: 20px;
         }
 
         .correct { color: #00b894; }
@@ -456,7 +485,7 @@
         .hidden { display: none !important; }
 
         .mascot {
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 2px;
             animation: floatMascot 3s ease-in-out infinite;
         }
@@ -565,6 +594,14 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
+            <!-- ILUSTRASI GAMBAR LUCU DI ATAS NUMBER BOND UNTUK LEVEL LE1, LE2, LE3 -->
+            <div id="visual-illustration-wrapper" class="hidden">
+                <div class="visual-illustration-box">
+                    <span id="story-instruction-text" class="story-text">Cerita:</span>
+                    <div id="illustration-emojis" class="emoji-cluster">🍎🍎 + 🍏🍏</div>
+                </div>
+            </div>
+
             <div class="game-main-layout">
                 <div class="left-side-game">
                     <div class="bond-container" id="bond-container-el">
@@ -651,16 +688,31 @@ Uswa"></textarea>
         const nextBtn = document.getElementById('next-btn');
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
+        const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
+        const storyInstructionText = document.getElementById('story-instruction-text');
+        const illustrationEmojis = document.getElementById('illustration-emojis');
 
         let audioCtx = null;
 
-        // Kombinasi warna solid/flat gemas soft (pastel ceria nan aesthetic)
-        const gemasSoftPalettes = [
-            { top: '#ffb5a7', bottom1: '#b5ead7', bottom2: '#c7ceea' }, // Soft Peach, Soft Mint, Soft Lavender
-            { top: '#ff9aa2', bottom1: '#ffdac1', bottom2: '#e2f0cb' }, // Soft Pink, Soft Cream, Soft Lime
-            { top: '#b5ead7', bottom1: '#ffb7b2', bottom2: '#ffdac1' }, // Mint & Pink Pastel
-            { top: '#c7ceea', bottom1: '#ff9aa2', bottom2: '#b5ead7' }, // Lavender & Soft Pink
-            { top: '#f8b195', bottom1: '#f67280', bottom2: '#c06c84' }  // Warm Soft Sunset
+        // Palet warna cerah, kontras, dan gemas untuk anak-anak
+        const brightGemasPalettes = [
+            { top: '#ff6b81', bottom1: '#2ed573', bottom2: '#1e90ff' }, // Hot Pink, Green, Blue
+            { top: '#ff4757', bottom1: '#ffa502', bottom2: '#2ed573' }, // Red, Orange, Green
+            { top: '#9b59b6', bottom1: '#3498db', bottom2: '#e67e22' }, // Purple, Blue, Orange
+            { top: '#e84393', bottom1: '#00cec9', bottom2: '#6c5ce7' }, // Magenta, Turquoise, Indigo
+            { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }  // Pink, Mint, Deep Blue
+        ];
+
+        // Daftar ikon gambar ramah anak untuk ilustrasi
+        const illustrationItemPool = [
+            { icon: '🍎', name: 'Apel Merah' },
+            { icon: '🍏', name: 'Apel Hijau' },
+            { icon: '⭐', name: 'Bintang' },
+            { icon: '🎈', name: 'Balon' },
+            { icon: '🍬', name: 'Permen' },
+            { icon: '🐱', name: 'Kucing' },
+            { icon: '🚗', name: 'Mobil' },
+            { icon: '🌸', name: 'Bunga' }
         ];
 
         function initAudio() {
@@ -672,7 +724,6 @@ Uswa"></textarea>
             }
         }
 
-        // Efek Suara Tepuk Tangan & Melodi Gembira saat Jawaban Benar
         function playClappingAndCheer() {
             try {
                 initAudio();
@@ -877,8 +928,28 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Memilih palet warna flat gemas soft secara acak
-            const palette = gemasSoftPalettes[Math.floor(Math.random() * gemasSoftPalettes.length)];
+            // Tampilkan ilustrasi visual gambar cerah jika kategori LE1, LE2, LE3
+            if (kategoriPilihan === 'CT') {
+                visualIllustrationWrapper.classList.add('hidden');
+            } else {
+                visualIllustrationWrapper.classList.remove('hidden');
+                let randomItem = illustrationItemPool[Math.floor(Math.random() * illustrationItemPool.length)];
+                
+                let strA = randomItem.icon.repeat(Math.min(nilaiBagianA, 8));
+                let strB = randomItem.icon.repeat(Math.min(nilaiBagianB, 8));
+                let strTotal = randomItem.icon.repeat(Math.min(nilaiTotal, 8));
+
+                if (posisiKosong === 2) {
+                    storyInstructionText.innerText = `Ada ${nilaiBagianA} dan ${nilaiBagianB} ${randomItem.name}, totalnya ada berapa?`;
+                    illustrationEmojis.innerHTML = `${strA} &nbsp;+&nbsp; ${strB}`;
+                } else {
+                    storyInstructionText.innerText = `Total ada ${nilaiTotal} ${randomItem.name}, dikurangi ${posisiKosong === 1 ? nilaiBagianB : nilaiBagianA}:`;
+                    illustrationEmojis.innerHTML = `${strTotal} &nbsp;-&nbsp; ${posisiKosong === 1 ? strB : strA}`;
+                }
+            }
+
+            // Memilih palet warna cerah dan gemas secara acak
+            const palette = brightGemasPalettes[Math.floor(Math.random() * brightGemasPalettes.length)];
 
             topValEl.style.background = palette.top;
             leftValEl.style.background = palette.bottom1;
@@ -956,7 +1027,7 @@ Uswa"></textarea>
                 submitBtn.style.display = 'none';
                 isSalahSesi = true;
 
-                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di bawah untuk membetulkan jawaban. 💪</span>`;
+                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di atas untuk membetulkan jawaban. 💪</span>`;
                 retryBtn.classList.remove('hidden');
             }
         }

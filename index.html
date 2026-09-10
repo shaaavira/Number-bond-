@@ -308,38 +308,18 @@
             border: 4px solid #74b9ff;
         }
 
-        /* Kotak Rumus Bantuan (Teks Besar) */
-        .formula-box {
-            font-family: 'Outfit', sans-serif;
-            font-size: 24px;
-            font-weight: 900;
-            color: #2f3542;
-            background: #ffffff;
-            padding: 8px 18px;
-            border-radius: 14px;
-            margin-bottom: 12px;
-            border: 3px dashed #a4b0be;
-            letter-spacing: 2px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-        .formula-box span {
-            color: #ff4757;
-            font-weight: 900;
-            font-size: 26px;
-        }
-
-        /* Kotak Input Aktif (Teka-teki) */
-        .input-box-wrapper {
-            background: #fff200 !important;
-            border: 4px dashed #ffa502 !important;
+        /* Modifikasi Lingkaran Kosong agar tidak ada kotak/placeholder */
+        .circle-empty {
+            background: #ffffff !important;
+            border: 4px solid #cbd5e1 !important;
             color: #2f3542 !important;
-            box-shadow: 0 0 0 3px #ffeaa7, 0 6px 15px rgba(0,0,0,0.15) !important;
-            animation: pulseBox 1.5s infinite ease-in-out;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.05) !important;
+            animation: pulseBox 2s infinite ease-in-out;
         }
 
         @keyframes pulseBox {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
+            0%, 100% { transform: scale(1); border-color: #cbd5e1; }
+            50% { transform: scale(1.03); border-color: #94a3b8; }
         }
 
         .circle input {
@@ -359,6 +339,52 @@
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
+
+        /* Kotak Rumus Bantuan (Bisa Diisi Teacher) */
+        .formula-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #2f3542;
+            background: #ffffff;
+            padding: 10px 14px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            border: 3px dashed #a4b0be;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .formula-box span {
+            color: #ff4757;
+            font-weight: 900;
+            font-size: 26px;
+            margin: 0 6px;
+        }
+
+        .form-input {
+            width: 60px;
+            height: 45px;
+            text-align: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: #2f3542;
+            background: #f8fafc;
+            border: 3px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: #2ed573;
+            background: #fff;
+        }
+        .form-input:disabled {
+            background: #e2e8f0;
+            color: #64748b;
+        }
 
         .btn {
             background-color: #2ed573;
@@ -551,10 +577,15 @@ Uswa"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 800; color: #636e72; margin-bottom: 6px;">Bantuan Hitung:</div>
-                    <!-- Kotak Rumus Bantuan (□ + □ = □) -->
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 800; color: #636e72; margin-bottom: 6px;">Papan Tulis Teacher:</div>
+                    
+                    <!-- Kotak Rumus Interaktif untuk Teacher -->
                     <div id="formula-display" class="formula-box">
-                        <span>□</span> + <span>□</span> = <span>□</span>
+                        <input type="number" id="form-val1" class="form-input" autocomplete="off">
+                        <span id="form-operator">+</span>
+                        <input type="number" id="form-val2" class="form-input" autocomplete="off">
+                        <span>=</span>
+                        <input type="number" id="form-val3" class="form-input" autocomplete="off">
                     </div>
 
                     <div class="input-section">
@@ -597,7 +628,10 @@ Uswa"></textarea>
         const topValEl = document.getElementById('top-val');
         const leftValEl = document.getElementById('left-val');
         const rightValEl = document.getElementById('right-val');
-        const formulaDisplay = document.getElementById('formula-display');
+        const formVal1 = document.getElementById('form-val1');
+        const formVal2 = document.getElementById('form-val2');
+        const formVal3 = document.getElementById('form-val3');
+        const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
         
@@ -725,16 +759,6 @@ Uswa"></textarea>
             });
         }
 
-        function updateRumusMatematikaAwal() {
-            if (posisiKosong === 2) {
-                formulaDisplay.innerHTML = `<span>${nilaiBagianA}</span> + <span>${nilaiBagianB}</span> = <span>□</span>`;
-            } else if (posisiKosong === 1) {
-                formulaDisplay.innerHTML = `<span>${nilaiTotal}</span> - <span>${nilaiBagianB}</span> = <span>□</span>`;
-            } else {
-                formulaDisplay.innerHTML = `<span>${nilaiTotal}</span> - <span>${nilaiBagianA}</span> = <span>□</span>`;
-            }
-        }
-
         function buatSoalBaru() {
             feedbackEl.innerHTML = '';
             pickerSection.classList.add('hidden');
@@ -742,6 +766,11 @@ Uswa"></textarea>
             nextBtn.classList.add('hidden');
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
+
+            // Reset Papan Tulis Teacher
+            formVal1.value = ''; formVal1.disabled = false;
+            formVal2.value = ''; formVal2.disabled = false;
+            formVal3.value = ''; formVal3.disabled = false;
 
             if (kategoriPilihan === 'LE1') {
                 nilaiTotal = Math.floor(Math.random() * 4) + 2; 
@@ -764,6 +793,13 @@ Uswa"></textarea>
 
             posisiKosong = Math.floor(Math.random() * 3);
 
+            // Set operator di papan tulis teacher
+            if (posisiKosong === 2) {
+                formOperator.innerText = '+'; // Top kosong -> Penjumlahan part + part
+            } else {
+                formOperator.innerText = '-'; // Part kosong -> Pengurangan total - part
+            }
+
             topValEl.className = "circle top-circle";
             leftValEl.className = "circle part-circle";
             rightValEl.className = "circle part-circle";
@@ -772,56 +808,56 @@ Uswa"></textarea>
             leftValEl.innerHTML = '';
             rightValEl.innerHTML = '';
 
+            const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
+
             if (posisiKosong === 2) {
-                topValEl.classList.add('input-box-wrapper');
-                topValEl.innerHTML = '<input type="number" id="user-input" placeholder="□" autocomplete="off" inputmode="numeric">';
+                topValEl.classList.add('circle-empty');
+                topValEl.innerHTML = inputElement;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiTotal;
             } else if (posisiKosong === 1) {
                 topValEl.innerText = nilaiTotal;
-                leftValEl.classList.add('input-box-wrapper');
-                leftValEl.innerHTML = '<input type="number" id="user-input" placeholder="□" autocomplete="off" inputmode="numeric">';
+                leftValEl.classList.add('circle-empty');
+                leftValEl.innerHTML = inputElement;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiBagianA;
             } else {
                 topValEl.innerText = nilaiTotal;
                 leftValEl.innerText = nilaiBagianA;
-                rightValEl.classList.add('input-box-wrapper');
-                rightValEl.innerHTML = '<input type="number" id="user-input" placeholder="□" autocomplete="off" inputmode="numeric">';
+                rightValEl.classList.add('circle-empty');
+                rightValEl.innerHTML = inputElement;
                 jawabanBenar = nilaiBagianB;
             }
 
-            updateRumusMatematikaAwal();
-
-            const activeInput = document.querySelector('.input-box-wrapper input');
+            const activeInput = document.getElementById('user-input');
             activeInput.focus();
             
-            activeInput.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") { cekJawaban(); }
+            // Allow Enter key to trigger check
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(inp => {
+                inp.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") { cekJawaban(); }
+                });
             });
         }
 
         function cekJawaban() {
-            const activeInput = document.querySelector('.input-box-wrapper input');
+            const activeInput = document.getElementById('user-input');
             if (!activeInput) return;
             const jawabanUser = parseInt(activeInput.value);
 
             if (isNaN(jawabanUser)) {
-                feedbackEl.innerHTML = "<span class='wrong'>Masukkan angka dulu ya! 🤔</span>";
+                feedbackEl.innerHTML = "<span class='wrong'>Masukkan angka di Number Bond dulu ya! 🤔</span>";
                 return;
             }
 
+            // Kunci input Number Bond dan Papan Tulis
             activeInput.disabled = true;
+            formVal1.disabled = true;
+            formVal2.disabled = true;
+            formVal3.disabled = true;
             submitBtn.style.display = 'none';
-
-            if (posisiKosong === 2) {
-                formulaDisplay.innerHTML = `<span>${nilaiBagianA}</span> + <span>${nilaiBagianB}</span> = <span style="color:${jawabanUser === jawabanBenar ? '#2ed573':'#ff4757'}">${jawabanUser}</span>`;
-            } else if (posisiKosong === 1) {
-                formulaDisplay.innerHTML = `<span>${nilaiTotal}</span> - <span>${nilaiBagianB}</span> = <span style="color:${jawabanUser === jawabanBenar ? '#2ed573':'#ff4757'}">${jawabanUser}</span>`;
-            } else {
-                formulaDisplay.innerHTML = `<span>${nilaiTotal}</span> - <span>${nilaiBagianA}</span> = <span style="color:${jawabanUser === jawabanBenar ? '#2ed573':'#ff4757'}">${jawabanUser}</span>`;
-            }
 
             if (jawabanUser === jawabanBenar) {
                 playSound('correct');

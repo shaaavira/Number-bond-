@@ -17,11 +17,11 @@
             --bg-gradient: linear-gradient(135deg, #1b4d3e 0%, #0d2818 100%);
         }
 
-        /* TEMA DINAMIS SEIMBANG (HIJAU, BIRU, COKLAT, ABU-ABU) */
-        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); } /* Biru Malam */
-        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #1b4d3e 0%, #0d2818 100%); } /* Hijau Lumut */
-        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #78350f 0%, #451a03 100%); } /* Coklat Kayu */
-        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #374151 0%, #111827 100%); } /* Abu-abu Batu */
+        /* TEMA DINAMIS: DEFAULT & LE1 HIJAU, LE2 BIRU, LE3 COKLAT, CT ABU-ABU BATU NETHER */
+        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #1b4d3e 0%, #0d2818 100%); } /* Hijau Lumut Minecraft */
+        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); } /* Biru Laut/Intan */
+        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #78350f 0%, #451a03 100%); } /* Coklat Kayu/Tanah */
+        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #374151 0%, #111827 100%); } /* Abu-abu Netherite/Batu */
 
         body {
             background: var(--bg-gradient);
@@ -49,17 +49,17 @@
         }
 
         .game-container {
-            background: #1e293b; /* Abu-abu biru gelap seimbang khas UI game modern */
+            background: #1e293b; 
             color: #f8fafc;
             backdrop-filter: blur(16px);
-            padding: 14px 22px;
-            border-radius: 14px;
+            padding: 16px 24px;
+            border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255,255,255,0.15);
-            border: 4px solid #64748b; /* Bingkai abu-abu batu kuarsa */
+            border: 4px solid #64748b; 
             width: 100%;
-            max-width: 1000px;
+            max-width: 1080px;
             height: 98vh;
-            max-height: 780px;
+            max-height: 820px;
             text-align: center;
             position: relative;
             display: flex;
@@ -73,7 +73,7 @@
             position: absolute;
             top: 14px;
             left: 18px;
-            background: #475569; /* Abu-abu baja */
+            background: #475569; 
             border: 2px solid #94a3b8;
             padding: 6px 14px;
             font-family: 'Press Start 2P', monospace;
@@ -101,7 +101,7 @@
 
         h1 {
             font-family: 'Press Start 2P', monospace;
-            color: #38bdf8; /* Biru neon cerah */
+            color: #38bdf8; 
             font-size: 17px;
             margin: 0;
             text-shadow: 2px 2px #0f172a;
@@ -114,33 +114,32 @@
             font-weight: 700;
         }
 
-        /* LOBBY 2x2 GRID SUPAYA TIDAK TERLALU KE BAWAH */
+        /* LOBBY PENUH SATU LAYAR (FULL SCREEN FIT) */
         #lobby-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             width: 100%;
             flex: 1;
-            gap: 8px;
-            padding: 2px 0;
-            overflow-y: auto;
+            gap: 10px;
+            padding: 4px 0;
         }
 
         .lobby-hero-card {
             background: #334155;
             border: 3px solid #64748b;
-            border-radius: 8px;
-            padding: 8px 16px;
+            border-radius: 10px;
+            padding: 10px 20px;
             width: 100%;
-            max-width: 650px;
+            max-width: 900px;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         }
 
         .lobby-hero-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 11px;
-            color: #facc15; /* Kuning emas */
+            font-size: 12px;
+            color: #facc15; 
             margin: 0;
             text-shadow: 1px 1px #000;
         }
@@ -149,92 +148,102 @@
             font-size: 11px;
             font-weight: 700;
             color: #e2e8f0;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         .lobby-row-container {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             width: 100%;
-            max-width: 650px;
+            max-width: 900px;
             justify-content: center;
+            flex: 1;
         }
 
         .lobby-section-box {
             background: #0f172a;
             border: 2px solid #475569;
-            border-radius: 8px;
-            padding: 8px 14px;
+            border-radius: 10px;
+            padding: 12px 16px;
             text-align: left;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .lobby-section-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
+            font-size: 10px;
             color: #38bdf8;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* 2 x 2 GRID KATEGORI */
+        /* 2 x 2 GRID KATEGORI LEBIH BESAR & PENUH */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 10px;
             width: 100%;
+            flex: 1;
+            align-content: center;
         }
 
         .cat-card {
             background: #1e293b;
             border: 3px solid #64748b;
-            border-radius: 6px;
-            padding: 8px 6px;
+            border-radius: 8px;
+            padding: 12px 8px;
             cursor: pointer;
             text-align: center;
             transition: all 0.15s ease;
-            box-shadow: 0 3px 0 #0f172a;
+            box-shadow: 0 4px 0 #0f172a;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .cat-card:hover { transform: translateY(-2px); border-color: #38bdf8; }
         .cat-card:active { transform: translateY(1px); box-shadow: 0 1px 0 #0f172a; }
         
         .cat-card.selected {
-            background: #0369a1;
-            border-color: #7dd3fc;
-            box-shadow: 0 3px 0 #0c4a6e, 0 6px 12px rgba(3, 105, 161, 0.4);
+            background: #047857;
+            border-color: #34d399;
+            box-shadow: 0 4px 0 #065f46, 0 6px 16px rgba(4, 120, 87, 0.4);
             transform: translateY(-2px);
         }
 
         .cat-emoji {
-            font-size: 18px;
-            margin-bottom: 2px;
+            font-size: 26px;
+            margin-bottom: 4px;
             display: block;
         }
 
         .cat-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
+            font-size: 11px;
             color: #f1f5f9;
         }
         .cat-card.selected .cat-title { color: #ffffff; }
-        .cat-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 2px;}
+        .cat-desc { font-size: 11px; color: #cbd5e1; font-weight: 700; margin-top: 3px;}
 
-        /* KOTAK INPUT NAMA COMPACT */
+        /* KOTAK INPUT NAMA LEBIH LUAS */
         #lobby-screen textarea {
             width: 100%; 
-            height: 82px; 
-            padding: 8px 10px;
+            flex: 1;
+            min-height: 140px; 
+            padding: 10px 12px;
             border: 2px solid #64748b;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Outfit', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            line-height: 1.3;
+            line-height: 1.4;
             resize: none;
             outline: none;
             color: #f1f5f9;
@@ -252,7 +261,7 @@
         .input-hint {
             font-size: 10px;
             color: #94a3b8;
-            margin-top: 3px;
+            margin-top: 4px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -261,19 +270,20 @@
         }
 
         .btn-start-game {
-            background: #15803d; /* Hijau emerald seimbang */
+            background: #15803d; 
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 12px 28px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
-            border-radius: 6px;
+            font-size: 11px;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #166534, 0 6px 14px rgba(21, 128, 61, 0.4);
+            box-shadow: 0 5px 0 #166534, 0 8px 16px rgba(21, 128, 61, 0.4);
             transition: all 0.15s ease;
-            margin-top: 2px;
+            margin-top: 4px;
+            width: 100%;
         }
-        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #166534; }
+        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #166534; }
         .btn-start-game:active { transform: translateY(2px); box-shadow: 0 1px 0 #166534; }
 
         /* LEADERBOARD PIXEL */
@@ -287,7 +297,7 @@
             border-radius: 8px;
             margin: 3px 0;
             overflow-x: auto;
-            border: 2px solid #d97706; /* Emas */
+            border: 2px solid #d97706; 
             width: 100%;
             max-width: 900px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
@@ -398,7 +408,7 @@
             overflow-y: auto;
         }
 
-        /* NUMBER BOND BULAT SEMPURNA DENGAN KIRI-KANAN SAMA WARNA, ATAS BEDA */
+        /* NUMBER BOND BULAT SEMPURNA */
         .bond-container {
             display: flex;
             flex-direction: column;
@@ -441,7 +451,7 @@
             width: 5px; 
             height: 56px; 
             border-radius: 2px;
-            background-color: #92400e; /* Batang kayu coklat hangat */
+            background-color: #92400e; 
             border: 1px solid #1f2937;
         }
         .branch-lines::before { left: 18px; transform: rotate(30deg); transform-origin: top center; }
@@ -512,7 +522,7 @@
         }
 
         .btn {
-            background-color: #0369a1; /* Biru seimbang */
+            background-color: #0369a1; 
             color: white;
             border: none;
             padding: 8px 18px;
@@ -527,21 +537,21 @@
         .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #0c4a6e; }
 
         .btn-next {
-            background-color: #d97706; /* Kuning emas/oranye terang */
+            background-color: #d97706; 
             box-shadow: 0 4px 0 #b45309;
         }
         .btn-next:hover { box-shadow: 0 5px 0 #b45309; }
         .btn-next:active { box-shadow: 0 1px 0 #b45309; }
 
         .btn-retry {
-            background-color: #dc2626; /* Merah menyala */
+            background-color: #dc2626; 
             box-shadow: 0 4px 0 #991b1b;
         }
         .btn-retry:hover { box-shadow: 0 5px 0 #991b1b; }
         .btn-retry:active { box-shadow: 0 1px 0 #991b1b; }
 
         .btn-recheck {
-            background-color: #7c3aed; /* Ungu mewah */
+            background-color: #7c3aed; 
             box-shadow: 0 4px 0 #5b21b6;
         }
         .btn-recheck:hover { box-shadow: 0 5px 0 #5b21b6; }
@@ -581,7 +591,7 @@
         }
 
         .btn-name {
-            background-color: #047857; /* Hijau zamrud pekat */
+            background-color: #047857; 
             color: white;
             border: none;
             padding: 5px 10px;
@@ -669,25 +679,25 @@
             </div>
             
             <div class="lobby-row-container">
-                <div class="lobby-section-box" style="flex: 1.1;">
+                <div class="lobby-section-box" style="flex: 1.2;">
                     <div class="lobby-section-title">🗺️ Kategori Level:</div>
                     <div class="category-grid">
-                        <div class="cat-card selected" onclick="pilihKategori('LE1', this)">
+                        <div id="card-LE1" class="cat-card selected" onclick="pilihKategori('LE1', this)">
                             <span class="cat-emoji">🌱</span>
                             <div class="cat-title">LE 1</div>
                             <div class="cat-desc">1 - 5</div>
                         </div>
-                        <div class="cat-card" onclick="pilihKategori('LE2', this)">
+                        <div id="card-LE2" class="cat-card" onclick="pilihKategori('LE2', this)">
                             <span class="cat-emoji">🔥</span>
                             <div class="cat-title">LE 2</div>
                             <div class="cat-desc">1 - 10</div>
                         </div>
-                        <div class="cat-card" onclick="pilihKategori('LE3', this)">
+                        <div id="card-LE3" class="cat-card" onclick="pilihKategori('LE3', this)">
                             <span class="cat-emoji">💎</span>
                             <div class="cat-title">LE 3</div>
                             <div class="cat-desc">1 - 20</div>
                         </div>
-                        <div class="cat-card" onclick="pilihKategori('CT', this)">
+                        <div id="card-CT" class="cat-card" onclick="pilihKategori('CT', this)">
                             <span class="cat-emoji">👑</span>
                             <div class="cat-title">CT</div>
                             <div class="cat-desc">Ratusan</div>
@@ -695,7 +705,7 @@
                     </div>
                 </div>
 
-                <div class="lobby-section-box" style="flex: 0.9; display: flex; flex-direction: column; justify-content: space-between;">
+                <div class="lobby-section-box" style="flex: 0.8;">
                     <div>
                         <div class="lobby-section-title">✏️ Nama Player:</div>
                         <textarea id="player-input-box" placeholder="Steve
@@ -703,7 +713,7 @@ Alex
 Creeper"></textarea>
                         <div class="input-hint">💡 Satu nama per baris (Maks 10)</div>
                     </div>
-                    <div style="text-align: center; margin-top: 4px;">
+                    <div style="text-align: center; margin-top: 8px;">
                         <button class="btn-start-game" onclick="mulaiPermainanDariLobby()">Mulai Petualangan! 🎮</button>
                     </div>
                 </div>
@@ -836,13 +846,12 @@ Creeper"></textarea>
         audioBenar.volume = 0.3; 
         audioBenar.load();
 
-        /* PALET PASANGAN WARNA SEIMBANG: Kiri & Kanan SAMA, Atas BEDA & KONTRAS */
         const circlePalettes = [
-            { top: '#d97706', bottom: '#0284c7' }, /* Atas Kuning Emas, Kiri-Kanan Biru Langit */
-            { top: '#dc2626', bottom: '#059669' }, /* Atas Merah Terang, Kiri-Kanan Hijau Emerald */
-            { top: '#7c3aed', bottom: '#ea580c' }, /* Atas Ungu, Kiri-Kanan Oranye */
-            { top: '#0284c7', bottom: '#4f46e5' }, /* Atas Biru, Kiri-Kanan Indigo */
-            { top: '#db2777', bottom: '#0d9488' }  /* Atas Pink Magenta, Kiri-Kanan Toska */
+            { top: '#d97706', bottom: '#0284c7' }, 
+            { top: '#dc2626', bottom: '#059669' }, 
+            { top: '#7c3aed', bottom: '#ea580c' }, 
+            { top: '#0284c7', bottom: '#4f46e5' }, 
+            { top: '#db2777', bottom: '#0d9488' }  
         ];
 
         const additionPairs = [
@@ -1097,7 +1106,6 @@ Creeper"></textarea>
 
             const palette = circlePalettes[Math.floor(Math.random() * circlePalettes.length)];
 
-            /* Lingkaran Atas berbeda warna, Lingkaran Kiri & Kanan SAMA */
             topValEl.style.background = palette.top;
             leftValEl.style.background = palette.bottom;   
             rightValEl.style.background = palette.bottom;  

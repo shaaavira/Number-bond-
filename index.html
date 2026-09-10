@@ -189,41 +189,48 @@
             font-weight: 700;
         }
 
-        /* Leaderboard */
+        /* PAPAN SKOR LUCU & MENARIK (Learderboard baru) */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
-            gap: 10px;
-            background: #f8fafc;
-            padding: 6px 14px;
-            border-radius: 14px;
-            margin: 2px 0 4px 0;
+            gap: 12px;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 8px 18px;
+            border-radius: 20px;
+            margin: 4px 0;
             overflow-x: auto;
-            border: 3px solid #e2e8f0;
+            border: 4px dashed #ffb74d;
             width: 100%;
             max-width: 980px;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.8), 0 4px 10px rgba(255, 183, 77, 0.2);
         }
 
         .player-score {
             text-align: center;
-            background: white;
-            padding: 4px 12px;
-            border-radius: 10px;
+            background: #ffffff;
+            padding: 6px 14px;
+            border-radius: 14px;
             font-size: 12px;
             font-weight: 800;
-            color: #475569;
-            border: 3px solid #e2e8f0;
+            color: #5d4037;
+            border: 3px solid #ffe0b2;
             white-space: nowrap;
             flex-shrink: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        .player-score:hover {
+            transform: translateY(-2px);
         }
         .player-score span {
             display: block;
             font-family: 'Outfit', sans-serif;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 900;
-            color: #ff4757;
+            color: #ff7043;
+            text-shadow: 1px 1px 0px #ffe0b2;
         }
 
         .level-info {
@@ -443,13 +450,13 @@
             background-color: #ffa502;
             box-shadow: 0 3px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
 
         .btn-retry {
             background-color: #ff7675;
             box-shadow: 0 3px 0 #d63031;
         }
-        .btn-retry:active { box-shadow: 0 1px 0 #d63031; }
+        .btn-retry:active { box-shadow: 0 2px 0 #d63031; }
 
         .btn-recheck {
             background-color: #74b9ff;
@@ -620,7 +627,10 @@ Uswa"></textarea>
                     <span class="mascot-inline" id="game-mascot">🍎🧸</span>
                 </div>
                 <div class="subtitle" id="game-category-badge">Kategori: LE 1</div>
+                
+                <!-- PAPAN SKOR LUCU -->
                 <div class="leaderboard" id="leaderboard-container"></div>
+                
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
@@ -897,7 +907,7 @@ Uswa"></textarea>
             daftarPemain.forEach((p, index) => {
                 let skorDiv = document.createElement('div');
                 skorDiv.className = 'player-score';
-                skorDiv.innerHTML = `${p.nama} <span id="score-val-${index}">0</span>`;
+                skorDiv.innerHTML = `⭐ ${p.nama} <span id="score-val-${index}">0</span>`;
                 lbContainer.appendChild(skorDiv);
 
                 let btn = document.createElement('button');
@@ -1111,7 +1121,7 @@ Uswa"></textarea>
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
-                recheckBtn.classList.remove('hidden');
+                recheckBtn.classList.add('hidden');
             }
         }
 

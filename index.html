@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/canvas-confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -239,8 +239,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 15px;
-            border-radius: 24px;
+            padding: 20px;
         }
 
         .right-side-game {
@@ -277,7 +276,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Atas berbeda sendiri (Warna Merah/Pink) */
+        /* Atas Berbeda Sendiri (Merah/Pink) */
         .top-circle {
             background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
             color: white;
@@ -309,7 +308,7 @@
             width: 195px; 
         }
 
-        /* Kaki Kiri & Kanan DISAMAKAN warnanya (Biru) */
+        /* SEMUA KAKI (Kiri & Kanan) DISAMAKAN WARNANYA (Biru) */
         .part-circle {
             background: linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%);
             color: white;
@@ -330,19 +329,25 @@
             50% { transform: scale(1.03); border-color: #94a3b8; }
         }
 
-        /* Efek Garis Putus-putus Melingkari 2 Lingkaran Number Bond yang Diketahui setelah Periksa */
-        .highlight-known-1 .top-circle,
-        .highlight-known-2 .top-circle,
-        .highlight-known-3 .left-val-el, /* Nanti diatur lewat class */
-        .circle.highlight-dashed {
-            border: 4px dashed #ff4757 !important;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.4) !important;
-            animation: pulseDashed 1.2s infinite ease-in-out;
+        /* Garis Putus-putus Penyelubung / Pembungkus 2 Lingkaran yang Harus Dihitung */
+        .group-highlight {
+            position: absolute;
+            border: 4px dashed #ff4757;
+            background: rgba(255, 71, 87, 0.05);
+            border-radius: 40px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+        }
+        .group-highlight.show {
+            opacity: 1;
+            animation: pulseGroup 1.5s infinite ease-in-out;
         }
 
-        @keyframes pulseDashed {
+        @keyframes pulseGroup {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
+            50% { transform: scale(1.03); }
         }
 
         .circle input {
@@ -424,7 +429,7 @@
             background-color: #ffa502;
             box-shadow: 0 4px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
 
         /* Pilihan Cepat Nama Anak */
         #picker-section {
@@ -584,9 +589,12 @@ Uswa"></textarea>
 
             <!-- LAYOUT MENYAMPING -->
             <div class="game-main-layout">
-                <!-- Kiri: Pohon Number Bond -->
+                <!-- Kiri: Pohon Number Bond dengan Garis Penyelubung (Highlight Group) -->
                 <div class="left-side-game">
-                    <div class="bond-container">
+                    <div class="bond-container" id="bond-container-box">
+                        <!-- Garis putus-putus pembungkus yang menyatukan 2 lingkaran soal -->
+                        <div id="group-highlight-box" class="group-highlight"></div>
+
                         <div id="top-val" class="circle top-circle"></div>
                         <div class="branch-lines"></div>
                         <div class="bottom-circles">
@@ -654,6 +662,7 @@ Uswa"></textarea>
         const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
+        const groupHighlightBox = document.getElementById('group-highlight-box');
         
         const lobbyScreen = document.getElementById('lobby-screen');
         const gameScreen = document.getElementById('game-screen');
@@ -784,11 +793,7 @@ Uswa"></textarea>
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             nextBtn.classList.add('hidden');
-            
-            // Bersihkan efek garis putus-putus pada soal baru
-            topValEl.classList.remove('highlight-dashed');
-            leftValEl.classList.remove('highlight-dashed');
-            rightValEl.classList.remove('highlight-dashed');
+            groupHighlightBox.classList.remove('show'); // Hilangkan kotak pembungkus pada soal baru
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
@@ -834,21 +839,21 @@ Uswa"></textarea>
             const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
 
             if (posisiKosong === 2) {
-                // Yang dicari atas (top), jadi yang diketahui adalah 2 kaki (left & right)
+                // Atas kosong, yang diketahui adalah 2 kaki (kiri & kanan) -> Kotak pembungkus mencakup 2 kaki di bawah
                 topValEl.classList.add('circle-empty');
                 topValEl.innerHTML = inputElement;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiTotal;
             } else if (posisiKosong === 1) {
-                // Yang dicari kaki kiri (left), jadi yang diketahui adalah top & right
+                // Kaki kiri kosong, yang diketahui adalah atas & kaki kanan -> Kotak pembungkus mencakup atas & kanan
                 topValEl.innerText = nilaiTotal;
                 leftValEl.classList.add('circle-empty');
                 leftValEl.innerHTML = inputElement;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiBagianA;
             } else {
-                // Yang dicari kaki kanan (right), jadi yang diketahui adalah top & left
+                // Kaki kanan kosong, yang diketahui adalah atas & kaki kiri -> Kotak pembungkus mencakup atas & kiri
                 topValEl.innerText = nilaiTotal;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.classList.add('circle-empty');
@@ -867,6 +872,31 @@ Uswa"></textarea>
             });
         }
 
+        function posisikanKotakPembungkus() {
+            // Mengatur posisi dan ukuran kotak pembungkus (garis putus-putus) sesuai lingkaran yang diketahui
+            let box = groupHighlightBox;
+            if (posisiKosong === 2) {
+                // Bungkus 2 kaki bawah (left & right)
+                box.style.top = "115px";
+                box.style.left = "-10px";
+                box.style.width = "215px";
+                box.style.height = "105px";
+            } else if (posisiKosong === 1) {
+                // Bungkus atas (top) dan kanan (right)
+                box.style.top = "0px";
+                box.style.left = "80px";
+                box.style.width = "120px";
+                box.style.height = "180px";
+            } else {
+                // Bungkus atas (top) dan kiri (left)
+                box.style.top = "0px";
+                box.style.left = "-5px";
+                box.style.width = "120px";
+                box.style.height = "180px";
+            }
+            box.classList.add('show');
+        }
+
         function cekJawaban() {
             const activeInput = document.getElementById('user-input');
             if (!activeInput) return;
@@ -880,17 +910,8 @@ Uswa"></textarea>
             activeInput.disabled = true;
             submitBtn.style.display = 'none';
 
-            // Berikan garis putus-putus HANYA pada 2 lingkaran Number Bond yang sudah diketahui (soal)
-            if (posisiKosong === 2) {
-                leftValEl.classList.add('highlight-dashed');
-                rightValEl.classList.add('highlight-dashed');
-            } else if (posisiKosong === 1) {
-                topValEl.classList.add('highlight-dashed');
-                rightValEl.classList.add('highlight-dashed');
-            } else {
-                topValEl.classList.add('highlight-dashed');
-                leftValEl.classList.add('highlight-dashed');
-            }
+            // Munculkan garis pembungkus menyatukan 2 lingkaran soal yang diketahui
+            posisikanKotakPembungkus();
 
             if (jawabanUser === jawabanBenar) {
                 playSound('correct');

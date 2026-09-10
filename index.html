@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/canvas-confetti.browser.min.js"></script>
+    <!-- Diperbarui ke CDN jsDelivr yang lebih stabil untuk Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -231,7 +232,7 @@
             display: inline-block;
         }
 
-        /* KOTAK ILUSTRASI GAMBAR DIPERBESAR */
+        /* KOTAK ILUSTRASI GAMBAR */
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
@@ -297,7 +298,7 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.03);
         }
 
-        /* NUMBER BOND DIPERBESAR */
+        /* NUMBER BOND */
         .bond-container {
             display: flex;
             flex-direction: column;
@@ -365,7 +366,7 @@
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
-        /* PAPAN TULIS TEACHER DIPERBESAR */
+        /* PAPAN TULIS TEACHER */
         .formula-box {
             display: flex;
             align-items: center;
@@ -727,17 +728,20 @@ Uswa"></textarea>
         ];
 
         function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            } catch(e) {}
         }
 
         function playClappingAndCheer() {
             try {
                 initAudio();
+                if (!audioCtx) return;
                 let now = audioCtx.currentTime;
 
                 const osc = audioCtx.createOscillator();
@@ -789,6 +793,7 @@ Uswa"></textarea>
         function playSound(type) {
             try {
                 initAudio();
+                if (!audioCtx) return;
                 const osc = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
                 osc.connect(gainNode);
@@ -808,7 +813,13 @@ Uswa"></textarea>
 
         function triggerConfetti() {
             try {
-                confetti({ particleCount: 180, spread: 110, origin: { y: 0.6 } });
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 150,
+                        spread: 90,
+                        origin: { y: 0.6 }
+                    });
+                }
             } catch(e) {}
         }
 

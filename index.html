@@ -231,35 +231,30 @@
             display: inline-block;
         }
 
-        /* KOTAK GAMBAR BESAR TANPA KETERANGAN (HANYA VISUAL IKON) */
+        /* KOTAK GAMBAR BESAR TANPA TANDA TAMBAH/KURANG */
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
             border-radius: 18px;
-            padding: 8px 16px;
+            padding: 6px 16px;
             margin-bottom: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            min-height: 55px;
-            max-width: 520px;
+            gap: 12px;
+            min-height: 52px;
+            max-width: 560px;
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            overflow-x: auto;
         }
 
         .emoji-group {
-            font-size: 28px; /* Ukuran gambar dibuat besar agar mudah dilihat anak-anak */
-            letter-spacing: 4px;
+            font-size: 26px; /* Gambar besar agar mudah dilihat anak-anak */
+            letter-spacing: 3px;
             line-height: 1;
-        }
-
-        .operator-icon {
-            font-family: 'Outfit', sans-serif;
-            font-size: 26px;
-            font-weight: 900;
-            color: #f59e0b;
+            white-space: nowrap;
         }
 
         /* LAYOUT UTAMA */
@@ -595,12 +590,10 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK GAMBAR BESAR TANPA KETERANGAN TEKS -->
+            <!-- KOTAK GAMBAR BESAR TANPA TANDA TAMBAH/KURANG (Ganti gambar tiap soal & Cross untuk pengurangan) -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
-                    <div id="left-visual-group" class="emoji-group">🔴🔴</div>
-                    <div id="middle-operator" class="operator-icon">+</div>
-                    <div id="right-visual-group" class="emoji-group">🟢🟢🟢</div>
+                    <div id="visual-group" class="emoji-group"></div>
                 </div>
             </div>
 
@@ -691,13 +684,10 @@ Uswa"></textarea>
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
-        const leftVisualGroup = document.getElementById('left-visual-group');
-        const rightVisualGroup = document.getElementById('right-visual-group');
-        const middleOperator = document.getElementById('middle-operator');
+        const visualGroup = document.getElementById('visual-group');
 
         let audioCtx = null;
 
-        // Palet warna cerah, kontras, dan gemas untuk anak-anak
         const brightGemasPalettes = [
             { top: '#ff6b81', bottom1: '#2ed573', bottom2: '#1e90ff' },
             { top: '#ff4757', bottom1: '#ffa502', bottom2: '#2ed573' },
@@ -706,11 +696,14 @@ Uswa"></textarea>
             { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }
         ];
 
-        // Pasangan objek dua warna (misal: Balon Merah & Hijau, Bola Merah & Hijau)
-        const objectPairs = [
-            { itemA: '🎈', itemB: '🟢' }, // Balon merah & hijau (menggunakan balon merah dan balon hijau emoji atau bulatan warna) -> pakai bola/balon
-            { itemA: '🔴', itemB: '🟢' }, // Bola Merah & Bola Hijau
-            { itemA: '🍎', itemB: '🍏' }  // Apel Merah & Apel Hijau
+        // Variasi pasangan objek beda warna untuk penjumlahan, dan objek tunggal untuk pengurangan (dengan coret/cross)
+        const assetPairs = [
+            { a: '🔴', b: '🟢', single: '🔴' }, // Bola Merah & Hijau
+            { a: '🍎', b: '🍏', single: '🍎' }, // Apel Merah & Hijau
+            { a: '⭐', b: '🌟', single: '⭐' }, // Bintang Kuning & Emas
+            { a: '🎈', b: '🟢', single: '🎈' }, // Balon & Hijau
+            { a: '🍬', b: '⭐', single: '🍬' }, // Permen & Bintang
+            { a: '🐱', b: '🐶', single: '🐱' }  // Kucing & Anjing
         ];
 
         function initAudio() {
@@ -926,27 +919,27 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Tampilkan gambar visual besar tanpa teks keterangan untuk LE1, LE2, LE3
+            // Tampilkan gambar visual berganti tiap soal tanpa tanda tambah/kurang
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
-                let chosenPair = objectPairs[Math.floor(Math.random() * objectPairs.length)];
-                
-                let limitCount = 8; // Batas maksimal gambar ditampilkan agar muat di layar
-                let countA = Math.min(nilaiBagianA, limitCount);
-                let countB = Math.min(nilaiBagianB, limitCount);
-                let countTotal = Math.min(nilaiTotal, limitCount);
+                let chosenPair = assetPairs[Math.floor(Math.random() * assetPairs.length)];
+                let limitCount = 8; // Batas maksimal gambar agar pas
 
                 if (posisiKosong === 2) {
-                    leftVisualGroup.innerHTML = chosenPair.itemA.repeat(countA);
-                    middleOperator.innerText = '+';
-                    rightVisualGroup.innerHTML = chosenPair.itemB.repeat(countB);
+                    // Penjumlahan: Bedakan warna (tanpa tanda tambah)
+                    let countA = Math.min(nilaiBagianA, limitCount);
+                    let countB = Math.min(nilaiBagianB, limitCount);
+                    visualGroup.innerHTML = chosenPair.a.repeat(countA) + "&nbsp;&nbsp;" + chosenPair.b.repeat(countB);
                 } else {
-                    let subCount = posisiKosong === 1 ? countB : countA;
-                    leftVisualGroup.innerHTML = chosenPair.itemA.repeat(countTotal);
-                    middleOperator.innerText = '-';
-                    rightVisualGroup.innerHTML = chosenPair.itemB.repeat(subCount);
+                    // Pengurangan: Total objek digambar, lalu beberapa diberi tanda silang (❌)
+                    let countTotal = Math.min(nilaiTotal, limitCount);
+                    let countCross = Math.min(posisiKosong === 1 ? nilaiBagianB : nilaiBagianA, countTotal);
+                    let countNormal = countTotal - countCross;
+
+                    let htmlStr = chosenPair.single.repeat(countNormal) + ("❌".repeat(countCross));
+                    visualGroup.innerHTML = htmlStr;
                 }
             }
 

@@ -323,9 +323,10 @@
             transition: background 0.5s ease;
         }
 
+        /* Kaki diperpanjang dari 30px menjadi 50px dan penyesuaian rotasi */
         .branch-lines {
             width: 160px;  
-            height: 14px;  
+            height: 18px;  
             position: relative;
             margin-bottom: 6px;
         }
@@ -334,17 +335,17 @@
             position: absolute;
             top: 0;
             width: 6px; 
-            height: 30px; 
+            height: 50px; 
             border-radius: 3px;
             background-color: #94a3b8;
         }
-        .branch-lines::before { left: 22px; transform: rotate(30deg); }
-        .branch-lines::after { right: 22px; transform: rotate(-30deg); }
+        .branch-lines::before { left: 24px; transform: rotate(20deg); }
+        .branch-lines::after { right: 24px; transform: rotate(-20deg); }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 230px; 
+            width: 250px; 
         }
 
         .circle input {
@@ -603,11 +604,11 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK ILUSTRASI GAMBAR -->
+            <!-- KOTAK ILUSTRASI GAMBAR (Group Right & Left Dibalik Posisinya) -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
-                    <div id="visual-group-left" class="emoji-side"></div>
                     <div id="visual-group-right" class="emoji-side"></div>
+                    <div id="visual-group-left" class="emoji-side"></div>
                 </div>
             </div>
 
@@ -701,8 +702,9 @@ Uswa"></textarea>
         const visualGroupLeft = document.getElementById('visual-group-left');
         const visualGroupRight = document.getElementById('visual-group-right');
 
-        // MEMUAT AUDIO DI AWAL (PRELOAD) UNTUK MENGHILANGKAN DELAY
+        // MEMUAT AUDIO DI AWAL DENGAN VOLUME DIKECILKAN SEDIKIT
         const audioBenar = new Audio('Hore.mp3');
+        audioBenar.volume = 0.6; // Menurunkan volume sedikit agar tidak terlalu keras
         audioBenar.load();
 
         const circlePalettes = [
@@ -722,10 +724,10 @@ Uswa"></textarea>
         ];
 
         const subtractionPairs = [
-            { left: '🥀', right: '🌹' }, 
-            { left: '🫗', right: '🥛' }, 
-            { left: '🍖', right: '🍗' }, 
-            { left: '🫝', right: '🍎' }  
+            { left: '🌹', right: '🥀' }, 
+            { left: '🥛', right: '🫗' }, 
+            { left: '🍗', right: '🍖' }, 
+            { left: '🍎', right: '🫝' }  
         ];
 
         let audioCtx = null;
@@ -766,7 +768,7 @@ Uswa"></textarea>
         // FUNGSI MEMUTAR SUARA Hore.mp3 MULAI DARI DETIK KE-1
         function playClappingAndCheer() {
             try {
-                audioBenar.currentTime = 1.0; // Mulai dari detik ke-1
+                audioBenar.currentTime = 1.0; 
                 audioBenar.play().catch(e => {
                     console.log("Audio diblokir browser atau file tidak ditemukan.");
                 });
@@ -814,8 +816,8 @@ Uswa"></textarea>
         welcomeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             initAudio();
-            playClickSound(); // Menggunakan suara klik, bukan audio Hore
-            triggerConfetti();
+            playClickSound(); 
+            // Konfeti di awal game telah dihapus sesuai permintaan
             welcomeOverlay.classList.add('hidden');
         });
 

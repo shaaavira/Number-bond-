@@ -707,7 +707,7 @@ Uswa"></textarea>
         const visualGroupRight = document.getElementById('visual-group-right');
 
         const audioBenar = new Audio('Hore.mp3');
-        audioBenar.volume = 0.2; // Volume Hore diset 20%
+        audioBenar.volume = 0.3; // Volume Hore diset 30%
         audioBenar.load();
 
         const circlePalettes = [
@@ -769,7 +769,7 @@ Uswa"></textarea>
 
         function playClappingAndCheer() {
             try {
-                audioBenar.currentTime = 0; 
+                audioBenar.currentTime = 1.0; // Langsung mulai dari detik ke-1 tanpa delay
                 audioBenar.play().catch(e => {
                     console.log("Audio diblokir browser atau file tidak ditemukan.");
                 });
@@ -790,7 +790,7 @@ Uswa"></textarea>
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(140, now);
                     osc.frequency.setValueAtTime(90, now + 0.15);
-                    gainNode.gain.setValueAtTime(1.0, now); // Volume suara salah diset 100% (maksimal)
+                    gainNode.gain.setValueAtTime(1.0, now); // Volume suara salah 100%
                     gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                     osc.start(now); osc.stop(now + 0.3);
                 }

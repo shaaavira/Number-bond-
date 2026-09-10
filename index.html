@@ -20,13 +20,14 @@
         body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%); }
         body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
         body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+        /* CT diubah menjadi kuning soft cerah yang nyaman di mata */
         body.theme-CT  { --bg-gradient: linear-gradient(135deg, #fef08a 0%, #fde047 50%, #facc15 100%); }
 
         body {
             background: var(--bg-gradient);
             font-family: 'Quicksand', sans-serif;
             margin: 0;
-            padding: 5px;
+            padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,38 +51,37 @@
         .game-container {
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px);
-            padding: 12px 20px;
-            border-radius: 28px;
+            padding: 20px 30px;
+            border-radius: 32px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 1050px;
             height: 98vh;
-            max-height: 740px;
+            max-height: 780px;
             text-align: center;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            overflow: hidden;
         }
 
         .btn-back {
             position: absolute;
-            top: 10px;
-            left: 14px;
+            top: 16px;
+            left: 20px;
             background: #f1f5f9;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 14px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 13px;
+            font-size: 15px;
             color: #475569;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             box-shadow: 0 3px 0 #cbd5e1;
             z-index: 100;
         }
@@ -90,16 +90,16 @@
         h1 {
             font-family: 'Outfit', sans-serif;
             color: #ff4757;
-            font-size: 24px;
+            font-size: 30px;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 12px;
+            font-size: 14px;
             color: #636e72;
-            margin: 2px 0;
+            margin: 2px 0 8px 0;
             font-weight: 700;
         }
 
@@ -111,15 +111,15 @@
             justify-content: center;
             width: 100%;
             flex: 1;
-            gap: 8px;
+            gap: 12px;
         }
 
         .lobby-section-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 800;
             color: #2d3436;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             text-align: left;
             width: 100%;
         }
@@ -127,15 +127,15 @@
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 12px;
             width: 100%;
         }
 
         .cat-card {
             background: #ffffff;
             border: 3px solid #f1f5f9;
-            border-radius: 14px;
-            padding: 8px 6px;
+            border-radius: 18px;
+            padding: 12px 10px;
             cursor: pointer;
             text-align: left;
             transition: all 0.2s ease;
@@ -150,21 +150,21 @@
 
         .cat-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 900;
             color: #2d3436;
         }
         .cat-card.selected .cat-title { color: #ff4757; }
-        .cat-desc { font-size: 11px; color: #636e72; font-weight: 700; margin-top: 1px;}
+        .cat-desc { font-size: 13px; color: #636e72; font-weight: 700; margin-top: 2px;}
 
         #lobby-screen textarea {
             width: 100%;
-            height: 70px;
-            padding: 8px;
+            height: 90px;
+            padding: 12px;
             border: 3px solid #e2e8f0;
-            border-radius: 12px;
+            border-radius: 16px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 700;
             resize: none;
             outline: none;
@@ -174,91 +174,60 @@
         #lobby-screen textarea:focus { border-color: #ff4757; background: #fff; }
 
         .input-hint {
-            font-size: 11px;
+            font-size: 13px;
             color: #94a3b8;
-            margin: 2px 0;
+            margin: 2px 0 6px 0;
             text-align: left;
             width: 100%;
             font-weight: 700;
         }
 
-        /* --- PAPAN SKOR LUCU & CERIA --- */
+        /* Leaderboard */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            padding: 6px 12px;
-            border-radius: 14px;
-            margin: 2px 0;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 8px 16px;
+            border-radius: 16px;
+            margin: 4px 0 8px 0;
             overflow-x: auto;
-            border: 3px dashed #f59e0b;
+            border: 3px solid #e2e8f0;
             width: 100%;
             max-width: 980px;
-            box-shadow: inset 0 2px 6px rgba(245, 158, 11, 0.1);
         }
 
         .player-score {
             text-align: center;
-            background: #ffffff;
-            padding: 4px 10px;
+            background: white;
+            padding: 6px 14px;
             border-radius: 12px;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 800;
-            color: #64748b;
-            border: 3px solid #fde047;
+            color: #475569;
+            border: 3px solid #e2e8f0;
             white-space: nowrap;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(252, 211, 77, 0.25);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
-            transition: transform 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.04);
         }
-
-        .player-score:hover {
-            transform: scale(1.05);
-        }
-
-        .player-score-header {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 12px;
-            font-weight: 900;
-            color: #334155;
-        }
-
         .player-score span {
-            display: inline-block;
+            display: block;
             font-family: 'Outfit', sans-serif;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 900;
             color: #ff4757;
-            background: #fff1f2;
-            padding: 0 6px;
-            border-radius: 6px;
-            border: 2px solid #fecdd3;
-            animation: pulseScore 2s infinite ease-in-out;
-        }
-
-        @keyframes pulseScore {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
         }
 
         .level-info {
             font-family: 'Outfit', sans-serif;
             color: #2ed573;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 800;
-            margin-bottom: 2px;
+            margin-bottom: 6px;
             background: #eafaf1;
-            padding: 2px 10px;
-            border-radius: 10px;
+            padding: 4px 14px;
+            border-radius: 14px;
             border: 2px solid #2ed573;
             display: inline-block;
         }
@@ -267,48 +236,50 @@
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
-            border-radius: 14px;
-            padding: 4px 12px;
-            margin-bottom: 2px;
+            border-radius: 20px;
+            padding: 10px 18px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            min-height: 55px;
+            gap: 14px;
+            min-height: 85px;
             max-width: 950px;
             margin-left: auto;
             margin-right: auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
             flex-wrap: wrap; 
         }
 
         .emoji-side {
-            font-size: 28px;
-            letter-spacing: 2px;
-            line-height: 1.1;
+            font-size: 38px;
+            letter-spacing: 3px;
+            line-height: 1.25;
             white-space: nowrap;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.9);
-            padding: 3px 8px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 12px;
             border: 2px dashed #fcd34d;
         }
 
+        /* Khusus mode LE1: Ukuran dibuat lebih besar lagi (50px) karena jumlahnya sedikit (1-5) */
         .emoji-side.le1-mode {
-            font-size: 34px !important;
-            letter-spacing: 2px !important;
-            padding: 3px 10px;
+            font-size: 50px !important;
+            letter-spacing: 4px !important;
+            padding: 6px 16px;
         }
 
+        /* Khusus mode LE3: Ukuran 38px dibungkus rapi fleksibel agar muat sampai 20 */
         .emoji-side.le3-mode {
-            font-size: 26px !important;
+            font-size: 38px !important;
             letter-spacing: 2px !important;
             flex-wrap: wrap !important;
-            max-width: 380px;
+            max-width: 440px;
             justify-content: center;
             gap: 2px;
-            padding: 3px 6px;
+            padding: 6px 10px;
             white-space: normal !important;
         }
 
@@ -318,8 +289,8 @@
             width: 100%;
             justify-content: space-between;
             align-items: center;
-            gap: 14px;
-            margin: 2px 0;
+            gap: 24px;
+            margin: 6px 0;
             flex: 1;
         }
 
@@ -330,7 +301,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 2px;
+            padding: 10px;
         }
 
         .right-side-game {
@@ -341,45 +312,45 @@
             justify-content: center;
             background: #f8fafc;
             border: 3px solid #e2e8f0;
-            border-radius: 18px;
-            padding: 10px 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.03);
         }
 
-        /* NUMBER BOND - DIPERBESAR KEMBALI */
+        /* NUMBER BOND */
         .bond-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             transform: scale(1.15);
-            margin: 8px 0;
+            margin: 15px 0;
         }
 
         .circle {
-            width: 95px;
-            height: 95px;
+            width: 105px;
+            height: 105px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 36px;
+            font-size: 40px;
             color: #ffffff;
             border: none;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             transition: background 0.5s ease;
             position: relative;
             z-index: 2;
         }
 
         .branch-lines {
-            width: 120px;  
-            height: 32px;  
+            width: 140px;  
+            height: 40px;  
             position: relative;
-            margin-top: -10px;
-            margin-bottom: -10px;
+            margin-top: -15px;
+            margin-bottom: -15px;
             z-index: 1;
         }
         .branch-lines::before, .branch-lines::after {
@@ -387,17 +358,17 @@
             position: absolute;
             bottom: 0;
             width: 4px; 
-            height: 55px; 
+            height: 70px; 
             border-radius: 2px;
             background-color: #334155;
         }
-        .branch-lines::before { left: 18px; transform: rotate(30deg); transform-origin: top center; }
-        .branch-lines::after { right: 18px; transform: rotate(-30deg); transform-origin: top center; }
+        .branch-lines::before { left: 23px; transform: rotate(32deg); transform-origin: top center; }
+        .branch-lines::after { right: 23px; transform: rotate(-32deg); transform-origin: top center; }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 190px; 
+            width: 240px; 
         }
 
         .circle input {
@@ -408,7 +379,7 @@
             text-align: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 34px;
+            font-size: 38px;
             color: #ffffff;
             outline: none;
             border-radius: 50%;
@@ -418,42 +389,42 @@
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
-        /* PAPAN TULIS TEACHER - DIPERBESAR KEMBALI */
+        /* PAPAN TULIS TEACHER */
         .formula-box {
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 900;
             color: #2f3542;
             background: #ffffff;
-            padding: 8px 12px;
-            border-radius: 12px;
-            margin-bottom: 6px;
+            padding: 14px 20px;
+            border-radius: 16px;
+            margin-bottom: 14px;
             border: 3px dashed #cbd5e1;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             width: 100%;
         }
         
         .formula-box span {
             color: #ff6b81;
             font-weight: 900;
-            font-size: 24px;
-            margin: 0 6px;
+            font-size: 26px;
+            margin: 0 8px;
         }
 
         .form-input {
-            width: 62px;
-            height: 48px;
+            width: 65px;
+            height: 50px;
             text-align: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
             color: #2f3542;
             background: #f8fafc;
             border: 3px solid #cbd5e1;
-            border-radius: 10px;
+            border-radius: 12px;
             outline: none;
         }
         .form-input:focus {
@@ -465,58 +436,58 @@
             background-color: #2ed573;
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 11px 26px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 14px;
-            border-radius: 10px;
+            font-size: 17px;
+            border-radius: 14px;
             cursor: pointer;
-            box-shadow: 0 3px 0 #26af5f;
+            box-shadow: 0 4px 0 #26af5f;
             transition: all 0.1s ease;
         }
-        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #26af5f; }
+        .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #26af5f; }
 
         .btn-next {
             background-color: #ffa502;
-            box-shadow: 0 3px 0 #e67e22;
+            box-shadow: 0 4px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
 
         .btn-retry {
             background-color: #ff7675;
-            box-shadow: 0 3px 0 #d63031;
+            box-shadow: 0 4px 0 #d63031;
         }
-        .btn-retry:active { box-shadow: 0 1px 0 #d63031; }
+        .btn-retry:active { box-shadow: 0 2px 0 #d63031; }
 
         .btn-recheck {
             background-color: #74b9ff;
-            box-shadow: 0 3px 0 #0984e3;
+            box-shadow: 0 4px 0 #0984e3;
         }
-        .btn-recheck:active { box-shadow: 0 1px 0 #0984e3; }
+        .btn-recheck:active { box-shadow: 0 2px 0 #0984e3; }
 
         #picker-section {
             background: #fff9e6;
-            padding: 6px;
-            border-radius: 10px;
-            margin-top: 6px;
+            padding: 10px;
+            border-radius: 14px;
+            margin-top: 14px;
             border: 2px dashed #ffa502;
             width: 100%;
         }
 
         .picker-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 800;
             color: #d35400;
-            margin-bottom: 3px;
+            margin-bottom: 6px;
         }
 
         .name-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 4px;
-            max-height: 55px;
+            gap: 6px;
+            max-height: 70px;
             overflow-y: auto;
         }
 
@@ -524,11 +495,11 @@
             background-color: #6c5ce7;
             color: white;
             border: none;
-            padding: 4px 8px;
+            padding: 6px 12px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 12px;
-            border-radius: 6px;
+            font-size: 14px;
+            border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 2px 0 #4834d4;
         }
@@ -537,9 +508,9 @@
         #feedback {
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 13px;
-            margin-top: 2px;
-            min-height: 18px;
+            font-size: 15px;
+            margin-top: 8px;
+            min-height: 24px;
         }
 
         .correct { color: #00b894; }
@@ -547,24 +518,24 @@
         .hidden { display: none !important; }
 
         .mascot {
-            font-size: 22px;
+            font-size: 28px;
             margin-bottom: 2px;
             animation: floatMascot 3s ease-in-out infinite;
         }
         @keyframes floatMascot {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            50% { transform: translateY(-4px); }
         }
 
         #winner-text {
             font-family: 'Outfit', sans-serif;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 800;
             color: #2d3436;
-            margin: 6px 0;
+            margin: 10px 0;
             background: #fff9e6;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 16px;
             border: 3px dashed #ffa502;
             line-height: 1.4;
         }
@@ -578,13 +549,13 @@
         }
 
         .welcome-card {
-            background: white; padding: 22px; border-radius: 22px; text-align: center; max-width: 350px; width: 90%;
+            background: white; padding: 26px; border-radius: 26px; text-align: center; max-width: 380px; width: 90%;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             z-index: 100000;
             position: relative;
         }
-        .welcome-title { font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 900; color: #ff4757; margin-bottom: 3px; }
-        .welcome-desc { font-size: 12px; color: #636e72; margin-bottom: 12px; font-weight: 700; }
+        .welcome-title { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 900; color: #ff4757; margin-bottom: 6px; }
+        .welcome-desc { font-size: 14px; color: #636e72; margin-bottom: 16px; font-weight: 700; }
     </style>
 </head>
 <body class="theme-LE1">
@@ -641,7 +612,7 @@ Uswa"></textarea>
             <div>
                 <button class="btn" onclick="mulaiPermainanDariLobby()">Mulai Bermain! 🌟</button>
             </div>
-            <div id="lobby-error" class="wrong" style="font-size: 11px; font-weight: 800; min-height: 14px;"></div>
+            <div id="lobby-error" class="wrong" style="font-size: 13px; font-weight: 800; min-height: 18px;"></div>
         </div>
 
         <!-- GAME SCREEN -->
@@ -677,7 +648,7 @@ Uswa"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 800; color: #636e72; margin-bottom: 3px;">Papan Tulis Teacher:</div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 800; color: #636e72; margin-bottom: 6px;">Papan Tulis Teacher:</div>
                     
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
@@ -694,21 +665,21 @@ Uswa"></textarea>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
-                    <div id="formula-check-section" class="hidden" style="margin-top: 4px;">
+                    <div id="formula-check-section" class="hidden" style="margin-top: 8px;">
                         <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Jawaban Papan Tulis 🔍</button>
                     </div>
 
                     <div id="picker-section" class="hidden">
                         <div id="feedback"></div>
-                        <div class="picker-title" id="picker-title-text" style="margin-top: 2px;">Siapa yang mau diberi skor? 👇</div>
+                        <div class="picker-title" id="picker-title-text" style="margin-top: 6px;">Siapa yang mau diberi skor? 👇</div>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
-                    <div id="feedback-outside" style="min-height: 18px; margin-top: 3px; font-size: 12px; font-weight: 800;"></div>
+                    <div id="feedback-outside" style="min-height: 24px; margin-top: 6px;"></div>
                 </div>
             </div>
 
-            <div style="height: 1px;"></div>
+            <div style="height: 2px;"></div>
         </div>
 
         <!-- RESULT -->
@@ -926,10 +897,7 @@ Uswa"></textarea>
             daftarPemain.forEach((p, index) => {
                 let skorDiv = document.createElement('div');
                 skorDiv.className = 'player-score';
-                skorDiv.innerHTML = `
-                    <div class="player-score-header">⭐ ${p.nama}</div>
-                    <span id="score-val-${index}">0</span>
-                `;
+                skorDiv.innerHTML = `${p.nama} <span id="score-val-${index}">0</span>`;
                 lbContainer.appendChild(skorDiv);
 
                 let btn = document.createElement('button');
@@ -994,6 +962,7 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
+            // Atur ilustrasi gambar (CT disembunyikan, LE1 ukuran 50px, LE3 ukuran 38px)
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {

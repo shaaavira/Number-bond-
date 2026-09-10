@@ -17,11 +17,11 @@
             --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
 
-        /* TEMA PIXEL / MINECRAFT */
-        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #15803d 0%, #166534 50%, #14532d 100%); } /* Nuansa Rumput/Hutan */
-        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #b91c1c 0%, #991b1b 50%, #7f1d1d 100%); } /* Nuansa Nether */
-        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%); } /* Nuansa Lautan/Diamond */
-        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #b45309 0%, #78350f 100%); } /* Nuansa Tambang Emas */
+        /* KEMBALI KE COLOR PALETTE ORIGINAL KODE AWAL */
+        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%); }
+        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
 
         body {
             background: var(--bg-gradient);
@@ -216,7 +216,7 @@
         .cat-card.selected .cat-title { color: #34d399; }
         .cat-desc { font-size: 11px; color: #94a3b8; font-weight: 700; margin-top: 2px;}
 
-        /* KOTAK INPUT NAMA: LEBIH LEBAR KE BAWAH (TINGGI) TAPI PENDEK KE SAMPING (LEBAR KECIL) */
+        /* KOTAK INPUT NAMA */
         #lobby-screen textarea {
             width: 280px; 
             height: 115px; 
@@ -390,7 +390,7 @@
             overflow-y: auto;
         }
 
-        /* NUMBER BOND */
+        /* NUMBER BOND KEMBALI BULAT SEMPURNA */
         .bond-container {
             display: flex;
             flex-direction: column;
@@ -403,7 +403,7 @@
         .circle {
             width: 95px;
             height: 95px;
-            border-radius: 12px; /* Kotak ala Minecraft */
+            border-radius: 50%; /* Kembali BULAT */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -456,7 +456,7 @@
             font-size: 22px;
             color: #ffffff;
             outline: none;
-            border-radius: 12px;
+            border-radius: 50%;
         }
 
         input::-webkit-outer-spin-button,
@@ -657,30 +657,30 @@
         <div id="lobby-screen">
             <div class="lobby-hero-card">
                 <div class="lobby-hero-title">⛏️ Minecraft Math Adventure 💎</div>
-                <div class="lobby-hero-sub">Pilih bioma level petualanganmu dan masukkan nama para player! ✨</div>
+                <div class="lobby-hero-sub">Pilih level kategori petualanganmu dan masukkan nama para player! ✨</div>
             </div>
             
             <div class="lobby-section-box">
-                <div class="lobby-section-title">🗺️ Pilih Bioma / Kategori Level:</div>
+                <div class="lobby-section-title">🗺️ Pilih Kategori Level:</div>
                 <div class="category-grid">
                     <div class="cat-card selected" onclick="pilihKategori('LE1', this)">
-                        <span class="cat-emoji">🌳</span>
-                        <div class="cat-title">Bioma 1</div>
+                        <span class="cat-emoji">🌱</span>
+                        <div class="cat-title">LE 1</div>
                         <div class="cat-desc">Bond 1 - 5</div>
                     </div>
                     <div class="cat-card" onclick="pilihKategori('LE2', this)">
                         <span class="cat-emoji">🔥</span>
-                        <div class="cat-title">Nether</div>
+                        <div class="cat-title">LE 2</div>
                         <div class="cat-desc">Bond 1 - 10</div>
                     </div>
                     <div class="cat-card" onclick="pilihKategori('LE3', this)">
                         <span class="cat-emoji">💎</span>
-                        <div class="cat-title">Diamond</div>
+                        <div class="cat-title">LE 3</div>
                         <div class="cat-desc">Bond 1 - 20</div>
                     </div>
                     <div class="cat-card" onclick="pilihKategori('CT', this)">
                         <span class="cat-emoji">👑</span>
-                        <div class="cat-title">The End</div>
+                        <div class="cat-title">CT</div>
                         <div class="cat-desc">Ratusan</div>
                     </div>
                 </div>
@@ -709,7 +709,7 @@ Creeper"></textarea>
                     <h1 id="game-title-header">Crafting Number Bond</h1>
                     <span class="mascot-inline" id="game-mascot">🧱⛏️</span>
                 </div>
-                <div class="subtitle" id="game-category-badge">Bioma: Forest (1 - 5)</div>
+                <div class="subtitle" id="game-category-badge">Kategori: LE 1 (1 - 5)</div>
                 
                 <!-- PAPAN SKOR -->
                 <div class="leaderboard" id="leaderboard-container"></div>
@@ -756,7 +756,7 @@ Creeper"></textarea>
 
                     <div id="formula-check-section" class="hidden" style="margin-top: 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;">
                         <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Crafting Table 🔍</button>
-                        <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Bioma ➔</button>
+                        <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Level ➔</button>
                     </div>
 
                     <div id="picker-section" class="hidden">
@@ -824,16 +824,14 @@ Creeper"></textarea>
         audioBenar.volume = 0.3; 
         audioBenar.load();
 
-        // Blok Minecraft warna-warni khas game
         const circlePalettes = [
-            { top: '#15803d', bottom: '#b45309' }, // Rumput & Kayu
-            { top: '#b91c1c', bottom: '#475569' }, // Netherrack & Batu Bara
-            { top: '#1d4ed8', bottom: '#10b981' }, // Berlian & Zamrud
-            { top: '#7c3aed', bottom: '#db2777' }, // Amethyst & Redstone
-            { top: '#ea580c', bottom: '#0284c7' }  // Lava & Air
+            { top: '#3b82f6', bottom: '#1d4ed8' }, 
+            { top: '#10b981', bottom: '#047857' }, 
+            { top: '#8b5cf6', bottom: '#6d28d9' }, 
+            { top: '#f59e0b', bottom: '#d97706' }, 
+            { top: '#ec4899', bottom: '#be185d' }  
         ];
 
-        // Item / block Minecraft
         const additionPairs = [
             { left: '🪵', right: '🧱' }, 
             { left: '🍎', right: '🥕' }, 
@@ -871,7 +869,7 @@ Creeper"></textarea>
                 gainNode.connect(audioCtx.destination);
                 let now = audioCtx.currentTime;
                 
-                osc.type = 'square'; // Suara chip 8-bit ala Minecraft
+                osc.type = 'square';
                 osc.frequency.setValueAtTime(440, now);
                 osc.frequency.exponentialRampToValueAtTime(220, now + 0.1);
                 
@@ -960,13 +958,13 @@ Creeper"></textarea>
 
             setupPapanSkorDanTombol();
 
-            let namaKatBadge = "Bioma Forest (1 - 5)";
+            let namaKatBadge = "LE 1 (1 - 5)";
             let gameMascotEmoji = "🧱⛏️";
-            if (kategoriPilihan === 'LE2') { namaKatBadge = "Bioma Nether (1 - 10)"; gameMascotEmoji = "🔥🧟"; }
-            if (kategoriPilihan === 'LE3') { namaKatBadge = "Bioma Diamond (1 - 20)"; gameMascotEmoji = "💎🗡️"; }
-            if (kategoriPilihan === 'CT') { namaKatBadge = "Bioma The End (Ratusan)"; gameMascotEmoji = "👑🐉"; }
+            if (kategoriPilihan === 'LE2') { namaKatBadge = "LE 2 (1 - 10)"; gameMascotEmoji = "🔥🧟"; }
+            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (1 - 20)"; gameMascotEmoji = "💎🗡️"; }
+            if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Ratusan)"; gameMascotEmoji = "👑🐉"; }
             
-            document.getElementById('game-category-badge').innerText = `Bioma: ${namaKatBadge}`;
+            document.getElementById('game-category-badge').innerText = `Kategori: ${namaKatBadge}`;
             gameMascotEl.innerText = gameMascotEmoji;
 
             lobbyScreen.classList.add('hidden');
@@ -1136,7 +1134,7 @@ Creeper"></textarea>
             const jawabanUser = parseInt(activeInput.value);
 
             if (isNaN(jawabanUser)) {
-                feedbackOutside.innerHTML = "<span class='wrong'>Isi blok angka Number Bond dulu ya! ⛏️</span>";
+                feedbackOutside.innerHTML = "<span class='wrong'>Isi lingkaran Number Bond dulu ya! ⛏️</span>";
                 return;
             }
 
@@ -1153,7 +1151,7 @@ Creeper"></textarea>
                 pickerTitleText.innerText = "Siapa paling cepat benar? (+10 XP): 👇";
                 
                 feedbackOutside.innerHTML = ""; 
-                feedbackEl.innerHTML = "<span class='correct'>Crafting Berhasil! ✨</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Hebat! Benar! ✨</span>";
                 pickerSection.classList.remove('hidden'); 
                 
                 formulaCheckSection.classList.remove('hidden');
@@ -1165,7 +1163,7 @@ Creeper"></textarea>
                 submitBtn.style.display = 'none';
                 isSalahSesi = true;
 
-                feedbackOutside.innerHTML = `<span class='wrong'>Gagal nge-craft! Klik tombol di bawah untuk perbaiki. 💪</span>`;
+                feedbackOutside.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di bawah untuk perbaiki. 💪</span>`;
                 retryBtn.classList.remove('hidden');
             }
         }
@@ -1201,7 +1199,7 @@ Creeper"></textarea>
                 pickerTitleText.innerText = "Pilih player yang membetulkan jawaban (+5 XP): 👇";
                 
                 feedbackOutside.innerHTML = "";
-                feedbackEl.innerHTML = "<span class='correct'>Mantap! Blok sudah benar. 👏</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Mantap! Lingkaran sudah benar. 👏</span>";
                 pickerSection.classList.remove('hidden');
                 
                 formulaCheckSection.classList.remove('hidden');
@@ -1246,7 +1244,7 @@ Creeper"></textarea>
             } else {
                 playSound('wrong');
                 triggerFlashRed();
-                feedbackOutside.innerHTML = "<span class='wrong'>Formula crafting belum tepat, yuk cek lagi! 🧐</span>";
+                feedbackOutside.innerHTML = "<span class='wrong'>Formula belum tepat, yuk cek lagi! 🧐</span>";
             }
         }
 

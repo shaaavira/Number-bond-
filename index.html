@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Number Bond Ratusan!</title>
+    <!-- Memuat Font Lucu dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            border: 5px solid #ff7675;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: #d63031;
+            font-size: 28px;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 0px #ffeaa7;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #636e72;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #ffeaa7;
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #d35400;
+            font-size: 16px;
+        }
+
+        /* Number Bond Visual (Pohon Angka) */
+        .bond-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Fredoka One', cursive;
+            font-size: 26px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Lingkaran Atas (Total/Hasil) */
+        .top-circle {
+            background: #ff7675;
+            color: white;
+            border: 4px dashed #fab1a0;
+            margin-bottom: 20px;
+        }
+
+        .branch-lines {
+            width: 200px;
+            height: 30px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .branch-lines::before, .branch-lines::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 35px;
+            background-color: #b2bec3;
+        }
+
+        .branch-lines::before {
+            left: 30px;
+            transform: rotate(-35deg);
+        }
+
+        .branch-lines::after {
+            right: 30px;
+            transform: rotate(35deg);
+        }
+
+        .bottom-circles {
+            display: flex;
+            justify-content: space-between;
+            width: 280px;
+        }
+
+        /* Lingkaran Bawah (Bagian-bagian) */
+        .part-circle {
+            background: #74b9ff;
+            color: white;
+            border: 4px dashed #81ecec;
+        }
+
+        .part-circle.input-box-wrapper {
+            background: #dfe6e9;
+            border: 4px solid #b2bec3;
+        }
+
+        .part-circle input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-family: 'Fredoka One', cursive;
+            font-size: 24px;
+            color: #2d3436;
+            outline: none;
+            border-radius: 50%;
+        }
+
+        /* Kontrol Input & Tombol */
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #00b894;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #00a884;
+            transition: all 0.1s ease;
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #00a884;
+        }
+
+        /* Feedback Pesan */
+        #feedback {
+            font-family: 'Fredoka One', cursive;
+            font-size: 20px;
+            margin-top: 15px;
+            min-height: 30px;
+        }
+
+        .correct { color: #00b894; }
+        .wrong { color: #d63031; }
+
+        /* Tampilan Selesai / Game Over */
+        .hidden {
+            display: none !important;
+        }
+
+        .modal {
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .mascot {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <!-- Halaman Bermain -->
+        <div id="game-screen">
+            <div class="mascot">🚀🦊</div>
+            <h1>Number Bond Ratusan</h1>
+            <div class="subtitle">Tentukan angka yang hilang pada pohon angka! (Kelas 5)</div>
+
+            <div class="stats-bar">
+                <span id="score-text">Skor: 0</span>
+                <span id="level-text">Soal: 1 / 10</span>
+            </div>
+
+            <!-- Pohon Number Bond -->
+            <div class="bond-container">
+                <!-- Total Atas -->
+                <div id="top-val" class="circle top-circle">500</div>
+                
+                <div class="branch-lines"></div>
+
+                <!-- Bagian Bawah -->
+                <div class="bottom-circles">
+                    <div id="left-val" class="circle part-circle">200</div>
+                    <div id="right-val" class="circle part-circle input-box-wrapper">
+                        <input type="number" id="user-input" placeholder="?" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
+            </div>
+
+            <div id="feedback"></div>
+        </div>
+
+        <!-- Halaman Hasil Akhir -->
+        <div id="result-screen" class="hidden modal">
+            <div class="mascot">🏆🎉</div>
+            <h1>Hebat Sekali!</h1>
+            <p class="subtitle">Kamu telah menyelesaikan petualangan Number Bond!</p>
+            <h2 id="final-score" style="font-family: 'Fredoka One'; color: #00b894; font-size: 36px; margin: 20px 0;">Skor Akhir: 100</h2>
+            <button class="btn" onclick="mulaiGame()">Main Lagi 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        let skor = 0;
+        let soalKe = 1;
+        let totalSoal = 10;
+        let jawabanBenar = 0;
+        let posisiKosong = 0; // 0 = kanan, 1 = kiri, 2 = atas
+
+        const topValEl = document.getElementById('top-val');
+        const leftValEl = document.getElementById('left-val');
+        const rightValEl = document.getElementById('right-val');
+        const userInput = document.getElementById('user-input');
+        const feedbackEl = document.getElementById('feedback');
+        const scoreText = document.getElementById('score-text');
+        const levelText = document.getElementById('level-text');
+        
+        const gameScreen = document.getElementById('game-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const finalScore = document.getElementById('final-score');
+
+        function mulaiGame() {
+            skor = 0;
+            soalKe = 1;
+            gameScreen.classList.remove('hidden');
+            resultScreen.classList.add('hidden');
+            buatSoalBaru();
+        }
+
+        function buatSoalBaru() {
+            userInput.value = '';
+            feedbackEl.innerHTML = '';
+            userInput.disabled = false;
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            
+            scoreText.innerText = `Skor: ${skor}`;
+            levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
+
+            // Buat angka ratusan acak (kelipatan 10 atau 25 agar pas untuk kelas 5, misal 100 - 900)
+            // Bagian A dan B dipilih acak
+            let bagianA = Math.floor(Math.random() * 7 + 1) * 50 + 100; // antara 150 - 500
+            let bagianB = Math.floor(Math.random() * 7 + 1) * 50 + 50;   // antara 100 - 400
+            let total = bagianA + bagianB;
+
+            // Tentukan bagian mana yang ditutup (?) -> 0: Kanan, 1: Kiri, 2: Atas
+            posisiKosong = Math.floor(Math.random() * 3);
+
+            // Reset HTML element wrappers
+            leftValEl.className = "circle part-circle";
+            rightValEl.className = "circle part-circle";
+            topValEl.className = "circle top-circle";
+
+            if (posisiKosong === 2) {
+                // Atas kosong (Penjumlahan Ratusan)
+                topValEl.className = "circle top-circle input-box-wrapper";
+                topValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off">';
+                
+                leftValEl.innerText = bagianA;
+                rightValEl.innerText = bagianB;
+                jawabanBenar = total;
+            } else if (posisiKosong === 1) {
+                // Kiri kosong (Pengurangan Ratusan)
+                leftValEl.className = "circle part-circle input-box-wrapper";
+                leftValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off">';
+                
+                topValEl.innerText = total;
+                rightValEl.innerText = bagianB;
+                jawabanBenar = bagianA;
+            } else {
+                // Kanan kosong (Pengurangan Ratusan)
+                rightValEl.className = "circle part-circle input-box-wrapper";
+                rightValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off">';
+                
+                topValEl.innerText = total;
+                leftValEl.innerText = bagianA;
+                jawabanBenar = bagianB;
+            }
+
+            // Re-assign variabel input karena elemennya baru dibuat ulang
+            const activeInput = document.querySelector('.input-box-wrapper input');
+            activeInput.focus();
+            
+            // Tambahkan event listener untuk tombol Enter
+            activeInput.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    cekJawaban();
+                }
+            });
+        }
+
+        function cekJawaban() {
+            const activeInput = document.querySelector('.input-box-wrapper input');
+            const jawabanUser = parseInt(activeInput.value);
+
+            if (isNaN(jawabanUser)) {
+                feedbackEl.innerHTML = "<span class='wrong'>Masukkan angka dulu ya! 🤔</span>";
+                return;
+            }
+
+            activeInput.disabled = true;
+            document.getElementById('submit-btn').style.display = 'none';
+
+            if (jawabanUser === jawabanBenar) {
+                skor += 10;
+                feedbackEl.innerHTML = "<span class='correct'>Benar! Luar Biasa! 🎉</span>";
+            } else {
+                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat. Jawabannya: ${jawabanBenar} 💡</span>`;
+            }
+
+            setTimeout(() => {
+                soalKe++;
+                if (soalKe > totalSoal) {
+                    gameScreen.classList.add('hidden');
+                    resultScreen.classList.remove('hidden');
+                    finalScore.innerText = `Skor Akhir: ${skor}`;
+                } else {
+                    buatSoalBaru();
+                }
+            }, 1800); // Jeda 1.8 detik sebelum soal berikutnya
+        }
+
+        // Jalankan game saat pertama kali dibuka
+        mulaiGame();
+    </script>
+</body>
+</html>

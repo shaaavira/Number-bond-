@@ -50,7 +50,7 @@
         .game-container {
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px);
-            padding: 16px 24px;
+            padding: 20px 28px;
             border-radius: 32px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -67,8 +67,8 @@
 
         .btn-back {
             position: absolute;
-            top: 14px;
-            left: 20px;
+            top: 16px;
+            left: 24px;
             background: #f1f5f9;
             border: none;
             padding: 8px 14px;
@@ -89,26 +89,36 @@
         h1 {
             font-family: 'Outfit', sans-serif;
             color: #ff4757;
-            font-size: 26px;
+            font-size: 30px;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 14px;
+            font-size: 15px;
             color: #636e72;
-            margin: 2px 0 4px 0;
+            margin: 4px 0 12px 0;
             font-weight: 700;
         }
 
-        /* Lobby */
+        /* Lobby / Menu yang Dirapikan agar Padat & Penuh */
+        #lobby-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            flex: 1;
+            gap: 12px;
+        }
+
         .lobby-section-title {
             font-family: 'Outfit', sans-serif;
             font-size: 15px;
             font-weight: 800;
             color: #2d3436;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             text-align: left;
             width: 100%;
         }
@@ -116,16 +126,15 @@
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
             width: 100%;
         }
 
         .cat-card {
             background: #ffffff;
             border: 3px solid #f1f5f9;
-            border-radius: 16px;
-            padding: 10px;
+            border-radius: 18px;
+            padding: 12px 10px;
             cursor: pointer;
             text-align: left;
             transition: all 0.2s ease;
@@ -140,16 +149,16 @@
 
         .cat-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 900;
             color: #2d3436;
         }
         .cat-card.selected .cat-title { color: #ff4757; }
-        .cat-desc { font-size: 12px; color: #636e72; font-weight: 700; }
+        .cat-desc { font-size: 13px; color: #636e72; font-weight: 700; margin-top: 2px;}
 
         #lobby-screen textarea {
             width: 100%;
-            height: 80px;
+            height: 90px;
             padding: 12px;
             border: 3px solid #e2e8f0;
             border-radius: 16px;
@@ -166,7 +175,7 @@
         .input-hint {
             font-size: 13px;
             color: #94a3b8;
-            margin: 4px 0 10px 0;
+            margin: 2px 0 6px 0;
             text-align: left;
             width: 100%;
             font-weight: 700;
@@ -313,26 +322,6 @@
             border: 4px solid #74b9ff;
         }
 
-        /* Garis Putus-putus Penyelubung / Pembungkus Lonjong Miring agar Fit */
-        .group-highlight {
-            position: absolute;
-            border: 4px dashed #ff4757;
-            background: rgba(255, 71, 87, 0.05);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
-        }
-        .group-highlight.show {
-            opacity: 1;
-            animation: pulseGroup 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulseGroup {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-
         .circle input {
             width: 100%;
             height: 100%;
@@ -342,7 +331,7 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 34px;
-            color: #ffffff; /* Warna teks input disamakan putih agar serasi dengan lingkaran */
+            color: #ffffff;
             outline: none;
             border-radius: 50%;
         }
@@ -396,7 +385,7 @@
             background-color: #2ed573;
             color: white;
             border: none;
-            padding: 9px 26px;
+            padding: 10px 28px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 17px;
@@ -518,43 +507,49 @@
     </div>
 
     <div class="game-container">
-        <!-- LOBBY -->
-        <div id="lobby-screen" style="width: 100%;">
-            <div class="mascot">🧸🎈</div>
-            <h1>Petualangan Number Bond</h1>
-            <div class="subtitle">Yuk pilih kategori seru & tulis namamu! ✨</div>
+        <!-- LOBBY (Dirapikan tanpa space kosong berlebih) -->
+        <div id="lobby-screen">
+            <div>
+                <div class="mascot">🧸🎈</div>
+                <h1>Petualangan Number Bond</h1>
+                <div class="subtitle">Yuk pilih kategori seru & tulis namamu! ✨</div>
+            </div>
             
-            <div class="lobby-section-title">1. Pilih Kategori Level:</div>
-            <div class="category-grid">
-                <div class="cat-card selected" onclick="pilihKategori('LE1', this)">
-                    <div class="cat-title">🍎 LE 1</div>
-                    <div class="cat-desc">Bond 1 - 5</div>
-                </div>
-                <div class="cat-card" onclick="pilihKategori('LE2', this)">
-                    <div class="cat-title">⭐ LE 2</div>
-                    <div class="cat-desc">Bond 1 - 10</div>
-                </div>
-                <div class="cat-card" onclick="pilihKategori('LE3', this)">
-                    <div class="cat-title">🚀 LE 3</div>
-                    <div class="cat-desc">Bond 1 - 20</div>
-                </div>
-                <div class="cat-card" onclick="pilihKategori('CT', this)">
-                    <div class="cat-title">👑 CT</div>
-                    <div class="cat-desc">Ratusan</div>
+            <div style="width: 100%;">
+                <div class="lobby-section-title">1. Pilih Kategori Level:</div>
+                <div class="category-grid">
+                    <div class="cat-card selected" onclick="pilihKategori('LE1', this)">
+                        <div class="cat-title">🍎 LE 1</div>
+                        <div class="cat-desc">Bond 1 - 5</div>
+                    </div>
+                    <div class="cat-card" onclick="pilihKategori('LE2', this)">
+                        <div class="cat-title">⭐ LE 2</div>
+                        <div class="cat-desc">Bond 1 - 10</div>
+                    </div>
+                    <div class="cat-card" onclick="pilihKategori('LE3', this)">
+                        <div class="cat-title">🚀 LE 3</div>
+                        <div class="cat-desc">Bond 1 - 20</div>
+                    </div>
+                    <div class="cat-card" onclick="pilihKategori('CT', this)">
+                        <div class="cat-title">👑 CT</div>
+                        <div class="cat-desc">Ratusan</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="lobby-section-title">2. Daftar Nama Pemain:</div>
-            <textarea id="player-input-box" placeholder="Contoh:
+            <div style="width: 100%;">
+                <div class="lobby-section-title">2. Daftar Nama Pemain:</div>
+                <textarea id="player-input-box" placeholder="Contoh:
 Firgi
 Ara
 Uswa"></textarea>
-            <div class="input-hint">💡 Ketik satu nama di setiap baris ya!</div>
+                <div class="input-hint">💡 Ketik satu nama di setiap baris ya!</div>
+            </div>
             
             <div>
                 <button class="btn" onclick="mulaiPermainanDariLobby()">Mulai Bermain! 🌟</button>
             </div>
-            <div id="lobby-error" class="wrong" style="font-size: 13px; margin-top: 4px; font-weight: 800;"></div>
+            <div id="lobby-error" class="wrong" style="font-size: 13px; font-weight: 800; min-height: 18px;"></div>
         </div>
 
         <!-- GAME SCREEN -->
@@ -571,8 +566,7 @@ Uswa"></textarea>
 
             <div class="game-main-layout">
                 <div class="left-side-game">
-                    <div class="bond-container" id="bond-container-box">
-                        <div id="group-highlight-box" class="group-highlight"></div>
+                    <div class="bond-container">
                         <div id="top-val" class="circle top-circle"></div>
                         <div class="branch-lines"></div>
                         <div class="bottom-circles">
@@ -639,7 +633,6 @@ Uswa"></textarea>
         const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
-        const groupHighlightBox = document.getElementById('group-highlight-box');
         
         const lobbyScreen = document.getElementById('lobby-screen');
         const gameScreen = document.getElementById('game-screen');
@@ -788,7 +781,6 @@ Uswa"></textarea>
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             nextBtn.classList.add('hidden');
-            groupHighlightBox.classList.remove('show');
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
@@ -823,7 +815,6 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Kembalikan semua ke warna aslinya (Top: Merah/Pink, Kaki: Biru)
             topValEl.className = "circle top-circle";
             leftValEl.className = "circle part-circle";
             rightValEl.className = "circle part-circle";
@@ -835,21 +826,18 @@ Uswa"></textarea>
             const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
 
             if (posisiKosong === 2) {
-                // Top yang dicari: lingkaran atas dikosongkan tapi warnanya tetap top-circle (merah/pink)
                 topValEl.classList.add('top-circle');
                 topValEl.innerHTML = inputElement;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiTotal;
             } else if (posisiKosong === 1) {
-                // Kaki kiri yang dicari: lingkaran kiri dikosongkan tapi warnanya tetap part-circle (biru)
                 topValEl.innerText = nilaiTotal;
                 leftValEl.classList.add('part-circle');
                 leftValEl.innerHTML = inputElement;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiBagianA;
             } else {
-                // Kaki kanan yang dicari: lingkaran kanan dikosongkan tapi warnanya tetap part-circle (biru)
                 topValEl.innerText = nilaiTotal;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.classList.add('part-circle');
@@ -870,36 +858,6 @@ Uswa"></textarea>
             });
         }
 
-        function posisikanKotakPembungkus() {
-            let box = groupHighlightBox;
-            if (posisiKosong === 2) {
-                // Membungkus dua kaki bawah (lonjong horizontal)
-                box.style.top = "115px";
-                box.style.left = "-8px";
-                box.style.width = "210px";
-                box.style.height = "100px";
-                box.style.borderRadius = "50px";
-                box.style.transform = "rotate(0deg)";
-            } else if (posisiKosong === 1) {
-                // Membungkus atas dan kanan (lonjong miring ke kanan)
-                box.style.top = "18px";
-                box.style.left = "42px";
-                box.style.width = "125px";
-                box.style.height = "165px";
-                box.style.borderRadius = "60px";
-                box.style.transform = "rotate(32deg)";
-            } else {
-                // Membungkus atas dan kiri (lonjong miring ke kiri)
-                box.style.top = "18px";
-                box.style.left = "27px";
-                box.style.width = "125px";
-                box.style.height = "165px";
-                box.style.borderRadius = "60px";
-                box.style.transform = "rotate(-32deg)";
-            }
-            box.classList.add('show');
-        }
-
         function cekJawaban() {
             const activeInput = document.getElementById('user-input');
             if (!activeInput) return;
@@ -912,8 +870,6 @@ Uswa"></textarea>
 
             activeInput.disabled = true;
             submitBtn.style.display = 'none';
-
-            posisikanKotakPembungkus();
 
             if (jawabanUser === jawabanBenar) {
                 playSound('correct');

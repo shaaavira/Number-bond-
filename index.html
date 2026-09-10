@@ -702,7 +702,8 @@ Uswa"></textarea>
         const visualGroupLeft = document.getElementById('visual-group-left');
         const visualGroupRight = document.getElementById('visual-group-right');
 
-        let audioCtx = null;
+        // MEMBUAT OBJEK AUDIO DARI FILE LOKAL Hore.mp3
+        const audioBenar = new Audio('Hore.mp3');
 
         const circlePalettes = [
             { top: '#ff6b81', bottom: '#2ed573' }, 
@@ -727,6 +728,7 @@ Uswa"></textarea>
             { left: '🍩', right: '🍪' }  
         ];
 
+        let audioCtx = null;
         function initAudio() {
             try {
                 if (!audioCtx) {
@@ -738,55 +740,13 @@ Uswa"></textarea>
             } catch(e) {}
         }
 
+        // FUNGSI MEMUTAR SUARA Hore.mp3
         function playClappingAndCheer() {
             try {
-                initAudio();
-                if (!audioCtx) return;
-                let now = audioCtx.currentTime;
-
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, now); 
-                osc.frequency.setValueAtTime(659.25, now + 0.1); 
-                osc.frequency.setValueAtTime(783.99, now + 0.2); 
-                osc.frequency.setValueAtTime(1046.50, now + 0.3); 
-                
-                gain.gain.setValueAtTime(0.2, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
-                
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start(now);
-                osc.stop(now + 0.7);
-
-                for (let i = 0; i < 14; i++) {
-                    let startTime = now + i * 0.05;
-                    let bufferSize = audioCtx.sampleRate * 0.04;
-                    let buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                    let output = buffer.getChannelData(0);
-                    for (let j = 0; j < bufferSize; j++) {
-                        output[j] = Math.random() * 2 - 1;
-                    }
-
-                    let noise = audioCtx.createBufferSource();
-                    noise.buffer = buffer;
-
-                    let filter = audioCtx.createBiquadFilter();
-                    filter.type = 'bandpass';
-                    filter.frequency.value = 1000 + Math.random() * 800;
-
-                    let noiseGain = audioCtx.createGain();
-                    noiseGain.gain.setValueAtTime(0.15, startTime);
-                    noiseGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.04);
-
-                    noise.connect(filter);
-                    filter.connect(noiseGain);
-                    noiseGain.connect(audioCtx.destination);
-
-                    noise.start(startTime);
-                    noise.stop(startTime + 0.04);
-                }
+                audioBenar.currentTime = 0; // Reset ke awal biar bisa diputar berulang
+                audioBenar.play().catch(e => {
+                    console.log("Audio diblokir browser atau file tidak ditemukan.");
+                });
             } catch(e) {}
         }
 

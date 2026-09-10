@@ -323,19 +323,21 @@
             transition: background 0.5s ease;
         }
 
-        /* Kaki diperpanjang dari 30px menjadi 50px dan penyesuaian rotasi */
+        /* Kaki digeser naik sedikit (margin-bottom negatif agar merapat ke lingkaran atas) */
         .branch-lines {
             width: 160px;  
-            height: 18px;  
+            height: 14px;  
             position: relative;
-            margin-bottom: 6px;
+            margin-top: -6px;
+            margin-bottom: -6px;
+            z-index: 2;
         }
         .branch-lines::before, .branch-lines::after {
             content: '';
             position: absolute;
             top: 0;
             width: 6px; 
-            height: 50px; 
+            height: 46px; 
             border-radius: 3px;
             background-color: #94a3b8;
         }
@@ -604,7 +606,7 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK ILUSTRASI GAMBAR (Group Right & Left Dibalik Posisinya) -->
+            <!-- KOTAK ILUSTRASI GAMBAR -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
                     <div id="visual-group-right" class="emoji-side"></div>
@@ -702,9 +704,8 @@ Uswa"></textarea>
         const visualGroupLeft = document.getElementById('visual-group-left');
         const visualGroupRight = document.getElementById('visual-group-right');
 
-        // MEMUAT AUDIO DI AWAL DENGAN VOLUME DIKECILKAN SEDIKIT
         const audioBenar = new Audio('Hore.mp3');
-        audioBenar.volume = 0.6; // Menurunkan volume sedikit agar tidak terlalu keras
+        audioBenar.volume = 0.6;
         audioBenar.load();
 
         const circlePalettes = [
@@ -742,7 +743,6 @@ Uswa"></textarea>
             } catch(e) {}
         }
 
-        // FUNGSI SUARA KLIK UNTUK TOMBOL "MULAI MASUK"
         function playClickSound() {
             try {
                 initAudio();
@@ -765,7 +765,6 @@ Uswa"></textarea>
             } catch(e) {}
         }
 
-        // FUNGSI MEMUTAR SUARA Hore.mp3 MULAI DARI DETIK KE-1
         function playClappingAndCheer() {
             try {
                 audioBenar.currentTime = 1.0; 
@@ -817,7 +816,6 @@ Uswa"></textarea>
             e.preventDefault();
             initAudio();
             playClickSound(); 
-            // Konfeti di awal game telah dihapus sesuai permintaan
             welcomeOverlay.classList.add('hidden');
         });
 

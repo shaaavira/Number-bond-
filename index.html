@@ -231,7 +231,7 @@
             display: inline-block;
         }
 
-        /* KOTAK GAMBAR BESAR (UKURAN DIPERBESAR SUPAYA JELAS & TIDAK BOSAN) */
+        /* KOTAK GAMBAR BESAR (UKURAN SANGAT JELAS UNTUK ANAK-ANAK) */
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
@@ -241,9 +241,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 12px;
             min-height: 60px;
-            max-width: 600px;
+            max-width: 620px;
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -251,7 +251,7 @@
         }
 
         .emoji-group {
-            font-size: 34px; /* Ukuran gambar dibuat besar khusus untuk anak-anak */
+            font-size: 34px; /* Ukuran gambar dibuat besar */
             letter-spacing: 4px;
             line-height: 1;
             white-space: nowrap;
@@ -590,7 +590,7 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK GAMBAR BESAR SESUAI PERMINTAAN (PENJUMLAHAN & PENGURANGAN BERVARIASI) -->
+            <!-- KOTAK GAMBAR BESAR TANPA TANDA SILANG (PENJUMLAHAN & PENGURANGAN DENGAN PERBEDAAN BENTUK OBJEK) -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
                     <div id="visual-group" class="emoji-group"></div>
@@ -696,19 +696,19 @@ Uswa"></textarea>
             { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }
         ];
 
-        // Daftar pasangan gambar khusus untuk Penjumlahan (dua warna berbeda)
+        // Daftar pasangan untuk Penjumlahan (beda warna/bentuk)
         const additionPairs = [
-            { a: '🍎', b: '🍏' }, // Apel Merah & Apel Hijau
-            { a: '🐓', b: '🐔' }, // Ayam Jantan & Ayam Betina
-            { a: '🍪', b: '🧁' }, // Kue & Kukis (atau kue berbeda)
-            { a: '🥛', b: '🧃' }  // Susu & Jus
+            { a: '🍎', b: '🍏' }, // Apel merah & hijau
+            { a: '🐓', b: '🐔' }, // Ayam jantan & betina
+            { a: '🍪', b: '🧁' }, // Kue & kukis
+            { a: '🥛', b: '🧃' }  // Susu & jus
         ];
 
-        // Daftar pasangan gambar untuk Pengurangan (Utuh/Penuh/Digantung vs Pecah/Kosong/Dilipat dengan tanda ❌)
+        // Daftar pasangan untuk Pengurangan (tanpa silang, murni beda bentuk seperti utuh/pecah, penuh/kosong, digantung/dilipat)
         const subtractionPairs = [
-            { normal: '🥚', broken: '🍳' }, // Telur utuh & telur pecah/digoreng
-            { normal: '🥛', empty: '🈳' },  // Gelas penuh & gelas kosong (atau ikon serupa)
-            { normal: '👕', folded: '📦' }  // Baju digantung & baju dilipat
+            { normal: '🥚', alt: '🍳' }, // Telur utuh & telur pecah/goreng
+            { normal: '🥛', alt: '🍵' }, // Gelas penuh & cangkir/gelas kosong
+            { normal: '👕', alt: '👚' }  // Baju digantung & baju dilipat/kaos
         ];
 
         function initAudio() {
@@ -924,28 +924,29 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Ilustrasi gambar tiap soal berganti agar anak tidak bosan dan berukuran besar
+            // Ilustrasi gambar tiap soal berganti agar bervariasi, besar, dan tanpa tanda silang
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
-                let limitCount = 8; // Batas maksimal gambar agar pas
+                let limitCount = 8; // Batas maksimal gambar agar pas di layar
 
                 if (posisiKosong === 2) {
-                    // PENJUMLAHAN: Gunakan pasangan gambar beda warna (misal: apel merah & hijau, ayam jantan & betina, dll)
+                    // Penjumlahan: Menggunakan dua jenis objek/warna berbeda (misal apel merah & hijau, dll)
                     let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
                     let countA = Math.min(nilaiBagianA, limitCount);
                     let countB = Math.min(nilaiBagianB, limitCount);
                     visualGroup.innerHTML = chosenAdd.a.repeat(countA) + "&nbsp;&nbsp;" + chosenAdd.b.repeat(countB);
                 } else {
-                    // PENGURANGAN: Gunakan pasangan objek (misal: telur utuh & pecah, gelas penuh & kosong, baju) dengan tanda silang (❌)
+                    // Pengurangan: Murni membedakan bentuk objek tanpa tanda silang (misal: telur utuh dan pecah, gelas penuh & kosong, dll)
                     let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
-                    let countTotal = Math.min(nilaiTotal, limitCount);
-                    let countCross = Math.min(posisiKosong === 1 ? nilaiBagianB : nilaiBagianA, countTotal);
-                    let countNormal = countTotal - countCross;
+                    let partA = posisiKosong === 1 ? nilaiBagianA : nilaiBagianB; // Bagian yang tersisa/normal
+                    let partB = posisiKosong === 1 ? nilaiBagianB : nilaiBagianA; // Bagian yang dikurangi/berbeda
+                    
+                    let countA = Math.min(partA, limitCount);
+                    let countB = Math.min(partB, limitCount);
 
-                    let htmlStr = chosenSub.normal.repeat(countNormal) + ("❌".repeat(countCross));
-                    visualGroup.innerHTML = htmlStr;
+                    visualGroup.innerHTML = chosenSub.normal.repeat(countA) + "&nbsp;&nbsp;" + chosenSub.alt.repeat(countB);
                 }
             }
 

@@ -20,7 +20,8 @@
         body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%); }
         body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
         body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #f7f1e3 0%, #f3cc84 50%, #eccc68 100%); }
+        /* CT diubah menjadi kuning soft cerah yang nyaman di mata */
+        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #fef08a 0%, #fde047 50%, #facc15 100%); }
 
         body {
             background: var(--bg-gradient);
@@ -247,7 +248,7 @@
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 6px 16px rgba(0,0,0,0.04);
-            flex-wrap: wrap; /* Supaya otomatis menyesuaikan jika turun baris */
+            flex-wrap: wrap; 
         }
 
         .emoji-side {
@@ -263,7 +264,14 @@
             border: 2px dashed #fcd34d;
         }
 
-        /* Khusus mode LE3: Ukuran pas 38px tapi dibungkus rapi fleksibel agar muat sampai 20 */
+        /* Khusus mode LE1: Ukuran dibuat lebih besar lagi (50px) karena jumlahnya sedikit (1-5) */
+        .emoji-side.le1-mode {
+            font-size: 50px !important;
+            letter-spacing: 4px !important;
+            padding: 6px 16px;
+        }
+
+        /* Khusus mode LE3: Ukuran 38px dibungkus rapi fleksibel agar muat sampai 20 */
         .emoji-side.le3-mode {
             font-size: 38px !important;
             letter-spacing: 2px !important;
@@ -309,7 +317,7 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.03);
         }
 
-        /* NUMBER BOND SESUAI GAMBAR REFERENSI */
+        /* NUMBER BOND */
         .bond-container {
             display: flex;
             flex-direction: column;
@@ -785,9 +793,7 @@ Uswa"></textarea>
         function playClappingAndCheer() {
             try {
                 audioBenar.currentTime = 1.0; 
-                audioBenar.play().catch(e => {
-                    console.log("Audio diblokir browser atau file tidak ditemukan.");
-                });
+                audioBenar.play().catch(e => {});
             } catch(e) {}
         }
 
@@ -956,18 +962,21 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Atur ilustrasi gambar (CT disembunyikan, LE3 menggunakan mode le3-mode ukuran 38px)
+            // Atur ilustrasi gambar (CT disembunyikan, LE1 ukuran 50px, LE3 ukuran 38px)
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
                 
-                if (kategoriPilihan === 'LE3') {
+                visualGroupLeft.classList.remove('le1-mode', 'le3-mode');
+                visualGroupRight.classList.remove('le1-mode', 'le3-mode');
+
+                if (kategoriPilihan === 'LE1') {
+                    visualGroupLeft.classList.add('le1-mode');
+                    visualGroupRight.classList.add('le1-mode');
+                } else if (kategoriPilihan === 'LE3') {
                     visualGroupLeft.classList.add('le3-mode');
                     visualGroupRight.classList.add('le3-mode');
-                } else {
-                    visualGroupLeft.classList.remove('le3-mode');
-                    visualGroupRight.classList.remove('le3-mode');
                 }
 
                 if (posisiKosong === 2) {

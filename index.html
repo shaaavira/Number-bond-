@@ -56,7 +56,7 @@
             width: 100%;
             max-width: 960px;
             height: 96vh;
-            max-height: 660px;
+            max-height: 680px;
             text-align: center;
             position: relative;
             display: flex;
@@ -71,10 +71,10 @@
             left: 20px;
             background: #f1f5f9;
             border: none;
-            padding: 6px 12px;
+            padding: 8px 14px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 14px;
+            font-size: 15px;
             color: #475569;
             border-radius: 12px;
             cursor: pointer;
@@ -82,22 +82,23 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 3px 0 #cbd5e1;
+            z-index: 50; /* Memastikan tombol selalu di atas dan bisa diklik */
         }
         .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #cbd5e1; }
 
         h1 {
             font-family: 'Outfit', sans-serif;
             color: #ff4757;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 15px;
+            font-size: 14px;
             color: #636e72;
-            margin: 2px 0 6px 0;
+            margin: 2px 0 4px 0;
             font-weight: 700;
         }
 
@@ -171,38 +172,39 @@
             font-weight: 700;
         }
 
-        /* Leaderboard Horizontal di Atas Game */
+        /* Leaderboard Diperbesar */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
-            gap: 6px;
+            gap: 10px;
             background: #f8fafc;
-            padding: 6px 10px;
-            border-radius: 14px;
-            margin-bottom: 6px;
+            padding: 10px 14px;
+            border-radius: 16px;
+            margin: 4px 0 6px 0;
             overflow-x: auto;
-            border: 2px solid #e2e8f0;
+            border: 3px solid #e2e8f0;
             width: 100%;
-            max-width: 900px;
+            max-width: 920px;
         }
 
         .player-score {
             text-align: center;
             background: white;
-            padding: 2px 8px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #636e72;
-            border: 2px solid #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #475569;
+            border: 3px solid #e2e8f0;
             white-space: nowrap;
             flex-shrink: 0;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.04);
         }
         .player-score span {
             display: block;
             font-family: 'Outfit', sans-serif;
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 900;
             color: #ff4757;
         }
@@ -210,12 +212,12 @@
         .level-info {
             font-family: 'Outfit', sans-serif;
             color: #2ed573;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             background: #eafaf1;
-            padding: 2px 14px;
-            border-radius: 16px;
+            padding: 2px 12px;
+            border-radius: 14px;
             border: 2px solid #2ed573;
             display: inline-block;
         }
@@ -227,7 +229,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 20px;
-            margin: 4px 0;
+            margin: 2px 0;
         }
 
         .left-side-game {
@@ -247,7 +249,7 @@
             background: #f8fafc;
             border: 3px solid #e2e8f0;
             border-radius: 20px;
-            padding: 16px;
+            padding: 14px;
         }
 
         /* Pohon Number Bond Besar */
@@ -259,47 +261,47 @@
         }
 
         .circle {
-            width: 95px;
-            height: 95px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 38px;
+            font-size: 36px;
             box-shadow: 0 6px 16px rgba(0,0,0,0.12);
         }
 
         .top-circle {
             background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
             color: white;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border: 4px solid #ff9ff3;
         }
 
         .branch-lines {
-            width: 150px;  
-            height: 12px;  
+            width: 140px;  
+            height: 10px;  
             position: relative;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .branch-lines::before, .branch-lines::after {
             content: '';
             position: absolute;
             top: 0;
             width: 5px; 
-            height: 26px; 
+            height: 24px; 
             border-radius: 3px;
             background-color: #ffa502;
         }
-        .branch-lines::before { left: 24px; transform: rotate(30deg); }
-        .branch-lines::after { right: 24px; transform: rotate(-30deg); }
+        .branch-lines::before { left: 22px; transform: rotate(30deg); }
+        .branch-lines::after { right: 22px; transform: rotate(-30deg); }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 210px; 
+            width: 195px; 
         }
 
         .part-circle {
@@ -330,7 +332,7 @@
             text-align: center;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 36px;
+            font-size: 34px;
             color: #2f3542;
             outline: none;
             border-radius: 50%;
@@ -346,13 +348,13 @@
             align-items: center;
             justify-content: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 900;
             color: #2f3542;
             background: #ffffff;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border: 3px dashed #a4b0be;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
@@ -360,16 +362,16 @@
         .formula-box span {
             color: #ff4757;
             font-weight: 900;
-            font-size: 26px;
+            font-size: 24px;
             margin: 0 6px;
         }
 
         .form-input {
-            width: 60px;
-            height: 45px;
+            width: 55px;
+            height: 40px;
             text-align: center;
             font-family: 'Outfit', sans-serif;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
             color: #2f3542;
             background: #f8fafc;
@@ -390,36 +392,36 @@
             background-color: #2ed573;
             color: white;
             border: none;
-            padding: 10px 30px;
+            padding: 9px 26px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 18px;
-            border-radius: 16px;
+            font-size: 17px;
+            border-radius: 14px;
             cursor: pointer;
-            box-shadow: 0 5px 0 #26af5f;
+            box-shadow: 0 4px 0 #26af5f;
             transition: all 0.1s ease;
         }
-        .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #26af5f; }
+        .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #26af5f; }
 
         .btn-next {
             background-color: #ffa502;
-            box-shadow: 0 5px 0 #e67e22;
+            box-shadow: 0 4px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
 
         /* Pilihan Cepat Nama Anak */
         #picker-section {
             background: #fff9e6;
-            padding: 8px;
-            border-radius: 14px;
-            margin-top: 8px;
+            padding: 6px;
+            border-radius: 12px;
+            margin-top: 6px;
             border: 2px dashed #ffa502;
             width: 100%;
         }
 
         .picker-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             color: #d35400;
             margin-bottom: 4px;
@@ -430,7 +432,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 6px;
-            max-height: 65px;
+            max-height: 60px;
             overflow-y: auto;
         }
 
@@ -438,22 +440,22 @@
             background-color: #3742fa;
             color: white;
             border: none;
-            padding: 5px 12px;
+            padding: 5px 10px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 14px;
-            border-radius: 10px;
+            font-size: 13px;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 3px 0 #2f3542;
+            box-shadow: 0 2px 0 #2f3542;
         }
-        .btn-name:active { transform: translateY(2px); box-shadow: 0 1px 0 #2f3542; }
+        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #2f3542; }
 
         #feedback {
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 17px;
-            margin-top: 6px;
-            min-height: 24px;
+            font-size: 16px;
+            margin-top: 4px;
+            min-height: 22px;
         }
 
         .correct { color: #2ed573; }
@@ -461,7 +463,7 @@
         .hidden { display: none !important; }
 
         .mascot {
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 2px;
             animation: floatMascot 3s ease-in-out infinite;
         }
@@ -472,7 +474,7 @@
 
         #winner-text {
             font-family: 'Outfit', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #2d3436;
             margin: 10px 0;
@@ -551,14 +553,14 @@ Uswa"></textarea>
         </div>
 
         <!-- GAME SCREEN -->
-        <div id="game-screen" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%;">
+        <div id="game-screen" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; position: relative;">
             <button class="btn-back" onclick="kembaliKeLobby()">⬅️ Menu</button>
             
             <div style="width: 100%;">
                 <div class="mascot" id="game-mascot">🎨🎪</div>
                 <h1 id="game-title-header">Rumah Angka Ceria</h1>
                 <div class="subtitle" id="game-category-badge">Kategori: LE 1</div>
-                <!-- Papan Skor Horizontal -->
+                <!-- Papan Skor Horizontal Diperbesar -->
                 <div class="leaderboard" id="leaderboard-container"></div>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
@@ -577,7 +579,7 @@ Uswa"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 800; color: #636e72; margin-bottom: 6px;">Papan Tulis Teacher:</div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: #636e72; margin-bottom: 4px;">Papan Tulis Teacher:</div>
                     
                     <!-- Kotak Rumus Interaktif untuk Teacher -->
                     <div id="formula-display" class="formula-box">
@@ -602,7 +604,7 @@ Uswa"></textarea>
                 </div>
             </div>
 
-            <div style="height: 5px;"></div>
+            <div style="height: 2px;"></div>
         </div>
 
         <!-- RESULT -->

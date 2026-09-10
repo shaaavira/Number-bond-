@@ -740,10 +740,10 @@ Uswa"></textarea>
             } catch(e) {}
         }
 
-        // FUNGSI MEMUTAR SUARA Hore.mp3 SECARA INSTAN TANPA DELAY
+        // FUNGSI MEMUTAR SUARA Hore.mp3 MULAI DARI DETIK KE-1
         function playClappingAndCheer() {
             try {
-                audioBenar.currentTime = 0; 
+                audioBenar.currentTime = 1.0; // Mulai dari detik ke-1
                 audioBenar.play().catch(e => {
                     console.log("Audio diblokir browser atau file tidak ditemukan.");
                 });
@@ -987,7 +987,6 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
-                // Suara dan Confetti dipanggil bersamaan secara instan
                 playClappingAndCheer();
                 triggerConfetti();
                 

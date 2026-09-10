@@ -450,7 +450,7 @@
             background: #fff9e6;
             padding: 10px;
             border-radius: 14px;
-            margin-top: 10px;
+            margin-top: 14px; /* Diberi jarak lebih jauh agar tidak mepet dengan kotak */
             border: 2px dashed #ffa502;
             width: 100%;
         }
@@ -632,11 +632,11 @@ Uswa"></textarea>
                     <div style="font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 800; color: #636e72; margin-bottom: 6px;">Papan Tulis Teacher:</div>
                     
                     <div id="formula-display" class="formula-box">
-                        <input type="number" id="form-val1" class="form-input" autocomplete="off">
+                        <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
                         <span id="form-operator">+</span>
-                        <input type="number" id="form-val2" class="form-input" autocomplete="off">
+                        <input type="number" id="form-val2" class="form-input" autocomplete="off" placeholder="?">
                         <span>=</span>
-                        <input type="number" id="form-val3" class="form-input" autocomplete="off">
+                        <input type="number" id="form-val3" class="form-input" autocomplete="off" placeholder="?">
                     </div>
 
                     <div class="input-section">
@@ -646,13 +646,18 @@ Uswa"></textarea>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
+                    <!-- Tombol Cek Jawaban Tambahan untuk Papan Tulis Formula -->
+                    <div id="formula-check-section" class="hidden" style="margin-top: 8px;">
+                        <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Jawaban Papan Tulis 🔍</button>
+                    </div>
+
                     <div id="picker-section" class="hidden">
                         <div id="feedback"></div>
                         <div class="picker-title" id="picker-title-text" style="margin-top: 6px;">Siapa yang mau diberi skor? 👇</div>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
-                    <div id="feedback-outside" style="min-height: 24px;"></div>
+                    <div id="feedback-outside" style="min-height: 24px; margin-top: 6px;"></div>
                 </div>
             </div>
 
@@ -675,9 +680,6 @@ Uswa"></textarea>
         let totalSoal = 10;
         let jawabanBenar = 0;
         let posisiKosong = 0; 
-        let nilaiTotal = 5;
-        let nilaiBagianA = 2;
-        let nilaiBagianB = 3;
         let isSalahSesi = false;
 
         const topValEl = document.getElementById('top-val');
@@ -696,6 +698,7 @@ Uswa"></textarea>
         const gameScreen = document.getElementById('game-screen');
         const resultScreen = document.getElementById('result-screen');
         const pickerSection = document.getElementById('picker-section');
+        const formulaCheckSection = document.getElementById('formula-check-section');
         const winnerText = document.getElementById('winner-text');
         const lobbyError = document.getElementById('lobby-error');
         const submitBtn = document.getElementById('submit-btn');
@@ -709,7 +712,7 @@ Uswa"></textarea>
         const visualGroupRight = document.getElementById('visual-group-right');
 
         const audioBenar = new Audio('Hore.mp3');
-        audioBenar.volume = 0.3; // Volume Hore diset 30%
+        audioBenar.volume = 0.3; 
         audioBenar.load();
 
         const circlePalettes = [
@@ -771,7 +774,7 @@ Uswa"></textarea>
 
         function playClappingAndCheer() {
             try {
-                audioBenar.currentTime = 1.0; // Langsung mulai dari detik ke-1 tanpa delay
+                audioBenar.currentTime = 1.0; 
                 audioBenar.play().catch(e => {
                     console.log("Audio diblokir browser atau file tidak ditemukan.");
                 });
@@ -792,7 +795,7 @@ Uswa"></textarea>
                     osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(140, now);
                     osc.frequency.setValueAtTime(90, now + 0.15);
-                    gainNode.gain.setValueAtTime(1.0, now); // Volume suara salah 100%
+                    gainNode.gain.setValueAtTime(1.0, now); 
                     gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                     osc.start(now); osc.stop(now + 0.3);
                 }
@@ -895,10 +898,15 @@ Uswa"></textarea>
             });
         }
 
+        let nilaiTotal = 5;
+        let nilaiBagianA = 2;
+        let nilaiBagianB = 3;
+
         function buatSoalBaru() {
             feedbackEl.innerHTML = '';
             feedbackOutside.innerHTML = '';
             pickerSection.classList.add('hidden');
+            formulaCheckSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             retryBtn.classList.add('hidden');
             recheckBtn.classList.add('hidden');
@@ -1027,6 +1035,9 @@ Uswa"></textarea>
                 pickerTitleText.innerText = "Siapa paling cepat benar? (Poin +10): 👇";
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! ✨</span>";
                 pickerSection.classList.remove('hidden'); 
+                
+                // Munculkan opsi cek jawaban untuk papan tulis formula
+                formulaCheckSection.classList.remove('hidden');
             } else {
                 playSound('wrong');
                 triggerFlashRed();
@@ -1069,10 +1080,52 @@ Uswa"></textarea>
                 pickerTitleText.innerText = "Pilih siswa yang membetulkan jawaban (Poin +5): 👇";
                 feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. 👏</span>";
                 pickerSection.classList.remove('hidden');
+                
+                // Munculkan opsi cek jawaban untuk papan tulis formula
+                formulaCheckSection.classList.remove('hidden');
             } else {
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
+            }
+        }
+
+        // Fungsi Cek Jawaban Papan Tulis Formula
+        function cekFormulaJawaban() {
+            let v1 = parseInt(formVal1.value);
+            let v2 = parseInt(formVal2.value);
+            let v3 = parseInt(formVal3.value);
+
+            if (isNaN(v1) || isNaN(v2) || isNaN(v3)) {
+                feedbackOutside.innerHTML = "<span class='wrong'>Lengkapi semua kotak di Papan Tulis Teacher ya! 📝</span>";
+                return;
+            }
+
+            let isFormulaCorrect = false;
+            if (posisiKosong === 2) {
+                // Penjumlahan: a + b = total (atau bentuk setara)
+                if ((v1 + v2 === v3) && (v1 === nilaiBagianA && v2 === nilaiBagianB && v3 === nilaiTotal)) {
+                    isFormulaCorrect = true;
+                } else if (v1 + v2 === v3) {
+                    isFormulaCorrect = true; // Benar secara matematika meskipun kombinasinya variasi lain
+                }
+            } else {
+                // Pengurangan: total - a = b
+                if ((v1 - v2 === v3) && (v1 === nilaiTotal)) {
+                    isFormulaCorrect = true;
+                } else if (v1 - v2 === v3) {
+                    isFormulaCorrect = true;
+                }
+            }
+
+            if (isFormulaCorrect) {
+                playClappingAndCheer();
+                triggerConfetti();
+                feedbackOutside.innerHTML = "<span class='correct'>Papan Tulis Teacher benar dan hebat! 🌟🎉</span>";
+            } else {
+                playSound('wrong');
+                triggerFlashRed();
+                feedbackOutside.innerHTML = "<span class='wrong'>Hitungan di papan tulis masih belum tepat, yuk cek lagi! 🧐</span>";
             }
         }
 

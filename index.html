@@ -241,7 +241,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
             min-height: 60px;
             max-width: 620px;
             margin-left: auto;
@@ -255,6 +255,12 @@
             letter-spacing: 4px;
             line-height: 1;
             white-space: nowrap;
+        }
+
+        .visual-divider {
+            font-size: 24px;
+            font-weight: 900;
+            color: #d35400;
         }
 
         /* LAYOUT UTAMA */
@@ -590,10 +596,10 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK GAMBAR BESAR -->
+            <!-- KOTAK GAMBAR BESAR (MENYESUAIKAN KAKI NUMBER BOND) -->
             <div id="visual-illustration-wrapper" class="hidden">
-                <div class="visual-illustration-box">
-                    <div id="visual-group" class="emoji-group"></div>
+                <div class="visual-illustration-box" id="visual-illustration-box">
+                    <!-- Ditampilkan sesuai posisi yang ditanya (kiri atau kanan) -->
                 </div>
             </div>
 
@@ -684,7 +690,7 @@ Uswa"></textarea>
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
-        const visualGroup = document.getElementById('visual-group');
+        const visualIllustrationBox = document.getElementById('visual-illustration-box');
 
         let audioCtx = null;
 
@@ -696,7 +702,7 @@ Uswa"></textarea>
             { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }
         ];
 
-        // Daftar pasangan untuk Penjumlahan (sejenis tapi dibedakan warna/jenis spesifik)
+        // Daftar pasangan Penjumlahan (sejenis tapi dibedakan warna/jenis spesifik)
         const additionPairs = [
             { a: '👕', b: '👚' }, // Baju merah & baju biru
             { a: '🥛', b: '🍵' }, // Gelas susu & gelas teh
@@ -705,11 +711,11 @@ Uswa"></textarea>
             { a: '🍪', b: '🧁' }  // Kue kukis & cupcake
         ];
 
-        // Daftar pasangan untuk Pengurangan (utuh vs dimakan/pecah/digigit)
+        // Daftar pasangan Pengurangan (utuh vs dimakan/pecah/digigit)
         const subtractionPairs = [
-            { normal: '🍎', alt: '🍏' }, // Apel utuh & apel dimakan (bisa pakai variasi apel/buah)
+            { normal: '🍎', alt: '🍏' }, // Apel utuh & apel dimakan
             { normal: '🥚', alt: '🍳' }, // Telur utuh & telur pecah
-            { normal: '🥛', alt: '🧃' }, // Gelas utuh/penuh & gelas kosong/minum
+            { normal: '🥛', alt: '🧃' }, // Gelas utuh & gelas kosong
             { normal: '🍪', alt: '🍩' }  // Kukis utuh & kukis digigit
         ];
 
@@ -926,29 +932,46 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Ilustrasi gambar sesuai permintaan spesifik (Penjumlahan vs Pengurangan) dengan ukuran besar dan tanpa cross
+            // Aturan gambar mengikuti kaki number bond:
+            // - Jika posisiKosong === 2 (Atas/Total): Tampilkan kedua kaki secara lengkap (Kiri & Kanan) untuk dijumlahkan.
+            // - Jika posisiKosong === 1 (Kaki Kiri): Tampilkan hanya gambar bagian KAKI KIRI saja yang dihitung.
+            // - Jika posisiKosong === 0 (Kaki Kanan): Tampilkan hanya gambar bagian KAKI KANAN saja yang dihitung.
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
-                let limitCount = 8; // Batas maksimal gambar agar rapi di layar
+                let limitCount = 8; // Batas maksimal gambar agar pas
 
                 if (posisiKosong === 2) {
-                    // Penjumlahan: baju merah & baju biru, gelas susu & gelas teh, apel merah & apel hijau, ayam jantan & ayam betina, kue kukis & cupcake
+                    // Penjumlahan lengkap (menampilkan kiri dan kanan dipisah tanda + atau spasi jelas)
                     let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
                     let countA = Math.min(nilaiBagianA, limitCount);
                     let countB = Math.min(nilaiBagianB, limitCount);
-                    visualGroup.innerHTML = chosenAdd.a.repeat(countA) + "&nbsp;&nbsp;" + chosenAdd.b.repeat(countB);
+                    visualIllustrationBox.innerHTML = `
+                        <div class="emoji-group">${chosenAdd.a.repeat(countA)}</div>
+                        <div class="visual-divider">+</div>
+                        <div class="emoji-group">${chosenAdd.b.repeat(countB)}</div>
+                    `;
+                } else if (posisiKosong === 1) {
+                    // Yang ditanya kaki KIRI (index 0 / bagian A)
+                    let countA = Math.min(nilaiBagianA, limitCount);
+                    if (formOperator.innerText === '+') {
+                        let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
+                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenAdd.a.repeat(countA)}</div>`;
+                    } else {
+                        let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
+                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenSub.normal.repeat(countA)}</div>`;
+                    }
                 } else {
-                    // Pengurangan: apel utuh & apel dimakan, telur utuh & telur pecah, gelas utuh & gelas pecah, kukis utuh & kukis digigit
-                    let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
-                    let partA = posisiKosong === 1 ? nilaiBagianA : nilaiBagianB; // Bagian utuh/normal
-                    let partB = posisiKosong === 1 ? nilaiBagianB : nilaiBagianA; // Bagian yang dimakan/pecah/digigit
-                    
-                    let countA = Math.min(partA, limitCount);
-                    let countB = Math.min(partB, limitCount);
-
-                    visualGroup.innerHTML = chosenSub.normal.repeat(countA) + "&nbsp;&nbsp;" + chosenSub.alt.repeat(countB);
+                    // Yang ditanya kaki KANAN (index 0 / bagian B) -> Gambar yang dihitung juga yang di kanan!
+                    let countB = Math.min(nilaiBagianB, limitCount);
+                    if (formOperator.innerText === '+') {
+                        let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
+                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenAdd.b.repeat(countB)}</div>`;
+                    } else {
+                        let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
+                        visualIllustrationBox.innerHTML = `<div class="emoji-group">${chosenSub.alt.repeat(countB)}</div>`;
+                    }
                 }
             }
 

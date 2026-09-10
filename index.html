@@ -239,7 +239,7 @@
             display: inline-block;
         }
 
-        /* KOTAK ILUSTRASI GAMBAR (Diberikan jarak atas & bawah yang seimbang dan pas) */
+        /* KOTAK ILUSTRASI GAMBAR */
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
@@ -453,7 +453,7 @@
             background-color: #74b9ff;
             box-shadow: 0 3px 0 #0984e3;
         }
-        .btn-recheck:active { box-shadow: 0 2px 0 #0984e3; }
+        .btn-recheck:active { box-shadow: 0 1px 0 #0984e3; }
 
         #picker-section {
             background: #fff9e6;
@@ -546,7 +546,7 @@
             position: relative;
         }
         .welcome-title { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; color: #ff4757; margin-bottom: 6px; }
-.welcome-desc { font-size: 13px; color: #636e72; margin-bottom: 14px; font-weight: 700; }
+        .welcome-desc { font-size: 13px; color: #636e72; margin-bottom: 14px; font-weight: 700; }
     </style>
 </head>
 <body class="theme-LE1">
@@ -918,7 +918,7 @@ Uswa"></textarea>
 
         function buatSoalBaru() {
             feedbackEl.innerHTML = '';
-            feedbackOutside.innerHTML = ''; // Pesan error dibersihkan saat soal baru
+            feedbackOutside.innerHTML = '';
             pickerSection.classList.add('hidden');
             formulaCheckSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
@@ -965,9 +965,13 @@ Uswa"></textarea>
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
                 
-                if (kategoriPilihan === 'LE1' || kategoriPilihan === 'LE2') {
-                    visualGroupLeft.style.fontSize = '30px';
-                    visualGroupRight.style.fontSize = '30px';
+                // Ukuran emoji dibuat lebih besar khusus untuk LE 1 (36px) dan LE 2 (32px)
+                if (kategoriPilihan === 'LE1') {
+                    visualGroupLeft.style.fontSize = '36px';
+                    visualGroupRight.style.fontSize = '36px';
+                } else if (kategoriPilihan === 'LE2') {
+                    visualGroupLeft.style.fontSize = '32px';
+                    visualGroupRight.style.fontSize = '32px';
                 } else {
                     visualGroupLeft.style.fontSize = '26px';
                     visualGroupRight.style.fontSize = '26px';
@@ -1051,7 +1055,6 @@ Uswa"></textarea>
                 isSalahSesi = false;
                 pickerTitleText.innerText = "Siapa paling cepat benar? (Poin +10): 👇";
                 
-                // Pesan error sebelumnya dibersihkan saat jawaban sudah benar
                 feedbackOutside.innerHTML = ""; 
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! ✨</span>";
                 pickerSection.classList.remove('hidden'); 
@@ -1098,7 +1101,6 @@ Uswa"></textarea>
 
                 pickerTitleText.innerText = "Pilih siswa yang membetulkan jawaban (Poin +5): 👇";
                 
-                // Pesan error sebelumnya dibersihkan saat perbaikan jawaban sudah benar
                 feedbackOutside.innerHTML = "";
                 feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. 👏</span>";
                 pickerSection.classList.remove('hidden');

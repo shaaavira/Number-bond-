@@ -50,7 +50,7 @@
         .game-container {
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px);
-            padding: 18px 24px;
+            padding: 16px 24px;
             border-radius: 32px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -89,16 +89,16 @@
         h1 {
             font-family: 'Outfit', sans-serif;
             color: #ff4757;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: #636e72;
-            margin: 2px 0 8px 0;
+            margin: 2px 0 6px 0;
             font-weight: 700;
         }
 
@@ -188,7 +188,7 @@
             justify-content: center;
             gap: 10px;
             background: #f8fafc;
-            padding: 8px 12px;
+            padding: 6px 12px;
             border-radius: 16px;
             margin: 2px 0 4px 0;
             overflow-x: auto;
@@ -231,33 +231,35 @@
             display: inline-block;
         }
 
-        /* ILUSTRASI VISUAL CERIA ANAK DI ATAS NUMBER BOND */
+        /* KOTAK GAMBAR BESAR TANPA KETERANGAN (HANYA VISUAL IKON) */
         .visual-illustration-box {
-            background: #f0fdf4;
-            border: 2px dashed #86efac;
-            border-radius: 16px;
-            padding: 6px 14px;
-            margin-bottom: 6px;
+            background: #fffbeb;
+            border: 3px solid #fde047;
+            border-radius: 18px;
+            padding: 8px 16px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            min-height: 46px;
-            max-width: 450px;
+            gap: 14px;
+            min-height: 55px;
+            max-width: 520px;
             margin-left: auto;
             margin-right: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
-        .story-text {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 14px;
-            font-weight: 800;
-            color: #166534;
+        .emoji-group {
+            font-size: 28px; /* Ukuran gambar dibuat besar agar mudah dilihat anak-anak */
+            letter-spacing: 4px;
+            line-height: 1;
         }
 
-        .emoji-cluster {
-            font-size: 20px;
-            letter-spacing: 2px;
+        .operator-icon {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: #f59e0b;
         }
 
         /* LAYOUT UTAMA */
@@ -277,7 +279,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 10px;
+            padding: 8px;
         }
 
         .right-side-game {
@@ -299,7 +301,6 @@
             position: relative;
         }
 
-        /* Warna Flat Datar 2D dengan Warna Lebih Cerah & Ramah Anak */
         .circle {
             width: 85px;
             height: 85px;
@@ -594,11 +595,12 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- ILUSTRASI GAMBAR LUCU DI ATAS NUMBER BOND UNTUK LEVEL LE1, LE2, LE3 -->
+            <!-- KOTAK GAMBAR BESAR TANPA KETERANGAN TEKS -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
-                    <span id="story-instruction-text" class="story-text">Cerita:</span>
-                    <div id="illustration-emojis" class="emoji-cluster">🍎🍎 + 🍏🍏</div>
+                    <div id="left-visual-group" class="emoji-group">🔴🔴</div>
+                    <div id="middle-operator" class="operator-icon">+</div>
+                    <div id="right-visual-group" class="emoji-group">🟢🟢🟢</div>
                 </div>
             </div>
 
@@ -689,30 +691,26 @@ Uswa"></textarea>
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
-        const storyInstructionText = document.getElementById('story-instruction-text');
-        const illustrationEmojis = document.getElementById('illustration-emojis');
+        const leftVisualGroup = document.getElementById('left-visual-group');
+        const rightVisualGroup = document.getElementById('right-visual-group');
+        const middleOperator = document.getElementById('middle-operator');
 
         let audioCtx = null;
 
         // Palet warna cerah, kontras, dan gemas untuk anak-anak
         const brightGemasPalettes = [
-            { top: '#ff6b81', bottom1: '#2ed573', bottom2: '#1e90ff' }, // Hot Pink, Green, Blue
-            { top: '#ff4757', bottom1: '#ffa502', bottom2: '#2ed573' }, // Red, Orange, Green
-            { top: '#9b59b6', bottom1: '#3498db', bottom2: '#e67e22' }, // Purple, Blue, Orange
-            { top: '#e84393', bottom1: '#00cec9', bottom2: '#6c5ce7' }, // Magenta, Turquoise, Indigo
-            { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }  // Pink, Mint, Deep Blue
+            { top: '#ff6b81', bottom1: '#2ed573', bottom2: '#1e90ff' },
+            { top: '#ff4757', bottom1: '#ffa502', bottom2: '#2ed573' },
+            { top: '#9b59b6', bottom1: '#3498db', bottom2: '#e67e22' },
+            { top: '#e84393', bottom1: '#00cec9', bottom2: '#6c5ce7' },
+            { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }
         ];
 
-        // Daftar ikon gambar ramah anak untuk ilustrasi
-        const illustrationItemPool = [
-            { icon: '🍎', name: 'Apel Merah' },
-            { icon: '🍏', name: 'Apel Hijau' },
-            { icon: '⭐', name: 'Bintang' },
-            { icon: '🎈', name: 'Balon' },
-            { icon: '🍬', name: 'Permen' },
-            { icon: '🐱', name: 'Kucing' },
-            { icon: '🚗', name: 'Mobil' },
-            { icon: '🌸', name: 'Bunga' }
+        // Pasangan objek dua warna (misal: Balon Merah & Hijau, Bola Merah & Hijau)
+        const objectPairs = [
+            { itemA: '🎈', itemB: '🟢' }, // Balon merah & hijau (menggunakan balon merah dan balon hijau emoji atau bulatan warna) -> pakai bola/balon
+            { itemA: '🔴', itemB: '🟢' }, // Bola Merah & Bola Hijau
+            { itemA: '🍎', itemB: '🍏' }  // Apel Merah & Apel Hijau
         ];
 
         function initAudio() {
@@ -928,27 +926,30 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Tampilkan ilustrasi visual gambar cerah jika kategori LE1, LE2, LE3
+            // Tampilkan gambar visual besar tanpa teks keterangan untuk LE1, LE2, LE3
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
-                let randomItem = illustrationItemPool[Math.floor(Math.random() * illustrationItemPool.length)];
+                let chosenPair = objectPairs[Math.floor(Math.random() * objectPairs.length)];
                 
-                let strA = randomItem.icon.repeat(Math.min(nilaiBagianA, 8));
-                let strB = randomItem.icon.repeat(Math.min(nilaiBagianB, 8));
-                let strTotal = randomItem.icon.repeat(Math.min(nilaiTotal, 8));
+                let limitCount = 8; // Batas maksimal gambar ditampilkan agar muat di layar
+                let countA = Math.min(nilaiBagianA, limitCount);
+                let countB = Math.min(nilaiBagianB, limitCount);
+                let countTotal = Math.min(nilaiTotal, limitCount);
 
                 if (posisiKosong === 2) {
-                    storyInstructionText.innerText = `Ada ${nilaiBagianA} dan ${nilaiBagianB} ${randomItem.name}, totalnya ada berapa?`;
-                    illustrationEmojis.innerHTML = `${strA} &nbsp;+&nbsp; ${strB}`;
+                    leftVisualGroup.innerHTML = chosenPair.itemA.repeat(countA);
+                    middleOperator.innerText = '+';
+                    rightVisualGroup.innerHTML = chosenPair.itemB.repeat(countB);
                 } else {
-                    storyInstructionText.innerText = `Total ada ${nilaiTotal} ${randomItem.name}, dikurangi ${posisiKosong === 1 ? nilaiBagianB : nilaiBagianA}:`;
-                    illustrationEmojis.innerHTML = `${strTotal} &nbsp;-&nbsp; ${posisiKosong === 1 ? strB : strA}`;
+                    let subCount = posisiKosong === 1 ? countB : countA;
+                    leftVisualGroup.innerHTML = chosenPair.itemA.repeat(countTotal);
+                    middleOperator.innerText = '-';
+                    rightVisualGroup.innerHTML = chosenPair.itemB.repeat(subCount);
                 }
             }
 
-            // Memilih palet warna cerah dan gemas secara acak
             const palette = brightGemasPalettes[Math.floor(Math.random() * brightGemasPalettes.length)];
 
             topValEl.style.background = palette.top;
@@ -1005,7 +1006,6 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
-                // Efek jawaban benar: Konfeti meriah & Suara tepuk tangan gembira
                 playClappingAndCheer();
                 triggerConfetti();
                 
@@ -1019,7 +1019,6 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih siswa yang menjawab: 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
-                // Jawaban Salah
                 playSound('wrong');
                 triggerFlashRed();
 
@@ -1027,7 +1026,7 @@ Uswa"></textarea>
                 submitBtn.style.display = 'none';
                 isSalahSesi = true;
 
-                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di atas untuk membetulkan jawaban. 💪</span>`;
+                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di bawah untuk membetulkan jawaban. 💪</span>`;
                 retryBtn.classList.remove('hidden');
             }
         }
@@ -1052,7 +1051,6 @@ Uswa"></textarea>
             const jawabanBaru = parseInt(activeInput.value);
 
             if (jawabanBaru === jawabanBenar) {
-                // Efek jawaban benar saat periksa ulang: Konfeti meriah & Suara tepuk tangan gembira
                 playClappingAndCheer();
                 triggerConfetti();
 

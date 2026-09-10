@@ -47,7 +47,7 @@
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             text-align: center;
             border: 5px solid #ff7675;
             position: relative;
@@ -57,7 +57,7 @@
         h1 {
             font-family: 'Fredoka One', cursive;
             color: #d63031;
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 5px;
             text-shadow: 2px 2px 0px #ffeaa7;
         }
@@ -69,31 +69,57 @@
             font-weight: 700;
         }
 
-        /* Papan Skor 3 Anak */
+        /* Lobby Form Styling */
+        #lobby-screen textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 3px solid #74b9ff;
+            border-radius: 15px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            resize: none;
+            outline: none;
+            margin-bottom: 15px;
+            color: #2d3436;
+        }
+
+        .input-hint {
+            font-size: 12px;
+            color: #636e72;
+            margin-bottom: 15px;
+        }
+
+        /* Papan Skor Dinamis */
         .leaderboard {
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
             background: #ffeaa7;
             padding: 10px;
             border-radius: 15px;
-            margin-bottom: 20px;
-            font-weight: 700;
-            color: #d35400;
-            font-size: 14px;
+            margin-bottom: 15px;
+            max-height: 110px;
+            overflow-y: auto;
         }
 
         .player-score {
             text-align: center;
             background: white;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 13px;
+            font-weight: 700;
+            color: #2d3436;
         }
 
         .player-score span {
             display: block;
             font-family: 'Fredoka One', cursive;
-            font-size: 16px;
+            font-size: 15px;
             color: #e17055;
         }
 
@@ -109,19 +135,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
         }
 
         .circle {
-            width: 90px;
-            height: 90px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Fredoka One', cursive;
-            font-size: 26px;
+            font-size: 24px;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
@@ -134,8 +160,8 @@
 
         /* Garis Bentuk Atap Rumah (/\) */
         .branch-lines {
-            width: 200px;  
-            height: 35px;  
+            width: 180px;  
+            height: 30px;  
             position: relative;
             margin-bottom: 15px;
         }
@@ -145,25 +171,25 @@
             position: absolute;
             top: 0;
             width: 4px; 
-            height: 42px; 
+            height: 38px; 
             background-color: #a0a0a0; 
             border-radius: 2px;
         }
 
         .branch-lines::before {
-            left: 35px;
+            left: 30px;
             transform: rotate(35deg);
         }
 
         .branch-lines::after {
-            right: 35px;
+            right: 30px;
             transform: rotate(-35deg);
         }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 260px; 
+            width: 240px; 
         }
 
         .part-circle {
@@ -185,7 +211,7 @@
             background: transparent;
             text-align: center;
             font-family: 'Fredoka One', cursive;
-            font-size: 24px;
+            font-size: 22px;
             color: #2d3436;
             outline: none;
             border-radius: 50%;
@@ -226,7 +252,7 @@
         /* Bagian Pilih Siapa yang Cepat */
         #picker-section {
             background: #f1f2f6;
-            padding: 15px;
+            padding: 12px;
             border-radius: 15px;
             margin-top: 10px;
             border: 2px dashed #ced6e0;
@@ -234,46 +260,43 @@
 
         .picker-title {
             font-family: 'Fredoka One', cursive;
-            font-size: 16px;
+            font-size: 15px;
             color: #2f3640;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .name-buttons {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 6px;
+            max-height: 100px;
+            overflow-y: auto;
         }
 
         .btn-name {
             background-color: #0984e3;
             color: white;
             border: none;
-            padding: 10px 18px;
+            padding: 8px 14px;
             font-family: 'Fredoka One', cursive;
-            font-size: 15px;
-            border-radius: 12px;
+            font-size: 13px;
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #074985;
+            box-shadow: 0 3px 0 #074985;
             transition: all 0.1s ease;
         }
 
         .btn-name:active {
-            transform: translateY(3px);
+            transform: translateY(2px);
             box-shadow: 0 1px 0 #074985;
         }
-
-        .btn-name:nth-child(2) { background-color: #e84393; box-shadow: 0 4px 0 #a21253; }
-        .btn-name:nth-child(2):active { box-shadow: 0 1px 0 #a21253; }
-
-        .btn-name:nth-child(3) { background-color: #fdcb6e; color: #2d3436; box-shadow: 0 4px 0 #e1b12c; }
-        .btn-name:nth-child(3):active { box-shadow: 0 1px 0 #e1b12c; }
 
         /* Feedback Pesan */
         #feedback {
             font-family: 'Fredoka One', cursive;
-            font-size: 18px;
-            margin-top: 10px;
+            font-size: 17px;
+            margin-top: 8px;
             min-height: 25px;
         }
 
@@ -302,7 +325,7 @@
 
         #winner-text {
             font-family: 'Fredoka One', cursive;
-            font-size: 22px;
+            font-size: 20px;
             color: #d63031;
             margin: 15px 0;
             background: #ffeaa7;
@@ -314,17 +337,33 @@
 <body>
 
     <div class="game-container">
+        <!-- Halaman Pendaftaran Pemain (Lobby) -->
+        <div id="lobby-screen">
+            <div class="mascot">📝✨</div>
+            <h1>Daftar Pemain</h1>
+            <div class="subtitle">Masukkan nama anak-anak yang akan bermain (Maksimal 10 anak)</div>
+            
+            <textarea id="player-input-box" placeholder="Ketik nama anak, pisahkan dengan enter (baris baru)...
+Contoh:
+Dawai
+Alif
+Nahda"></textarea>
+            <div class="input-hint">*Ketik maksimal 10 nama, masing-masing 1 baris.</div>
+            <div>
+                <button class="btn" onclick="mulaiPermainanDariLobby()">Mulai Game! 🚀</button>
+            </div>
+            <div id="lobby-error" class="wrong" style="font-size: 14px; margin-top: 10px;"></div>
+        </div>
+
         <!-- Halaman Bermain -->
-        <div id="game-screen">
+        <div id="game-screen" class="hidden">
             <div class="mascot">🚀⚡</div>
             <h1>Cepat-Cepetan Number Bond</h1>
             <div class="subtitle">Siapa yang paling cepat menjawab?</div>
 
-            <!-- Papan Skor 3 Anak -->
-            <div class="leaderboard">
-                <div class="player-score">Dawai <span id="score-dawai">0</span></div>
-                <div class="player-score">Alif <span id="score-alif">0</span></div>
-                <div class="player-score">Nahda <span id="score-nahda">0</span></div>
+            <!-- Papan Skor Dinamis -->
+            <div class="leaderboard" id="leaderboard-container">
+                <!-- Diisi otomatis oleh JavaScript -->
             </div>
 
             <div class="level-info" id="level-text">Soal: 1 / 10</div>
@@ -346,10 +385,8 @@
             <!-- Pilihan Nama Anak Muncul Jika Benar -->
             <div id="picker-section" class="hidden">
                 <div class="picker-title">Siapa yang duluan menjawab benar? ⏱️</div>
-                <div class="name-buttons">
-                    <button class="btn-name" onclick="tambahSkorAnak('dawai')">Dawai 👦</button>
-                    <button class="btn-name" onclick="tambahSkorAnak('alif')">Alif 👦</button>
-                    <button class="btn-name" onclick="tambahSkorAnak('nahda')">Nahda 👧</button>
+                <div class="name-buttons" id="name-buttons-container">
+                    <!-- Tombol nama anak diisi otomatis -->
                 </div>
             </div>
 
@@ -361,15 +398,12 @@
             <div class="mascot">🏆👑</div>
             <h1>Permainan Selesai!</h1>
             <div id="winner-text">Pemenangnya adalah...</div>
-            <button class="btn" onclick="mulaiGame()">Main Lagi 🔄</button>
+            <button class="btn" onclick="kembaliKeLobby()">Ganti Pemain / Main Lagi 🔄</button>
         </div>
     </div>
 
     <script>
-        let skorDawai = 0;
-        let skorAlif = 0;
-        let skorNahda = 0;
-        
+        let daftarPemain = []; // Array objek: { nama: "...", skor: 0 }
         let soalKe = 1;
         let totalSoal = 10;
         let jawabanBenar = 0;
@@ -381,10 +415,12 @@
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
         
+        const lobbyScreen = document.getElementById('lobby-screen');
         const gameScreen = document.getElementById('game-screen');
         const resultScreen = document.getElementById('result-screen');
         const pickerSection = document.getElementById('picker-section');
         const winnerText = document.getElementById('winner-text');
+        const lobbyError = document.getElementById('lobby-error');
 
         // --- SISTEM PEMBUAT SUARA (Audio Synthesizer Built-in) ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -401,16 +437,14 @@
             let now = audioCtx.currentTime;
 
             if (type === 'correct') {
-                // Suara melodi ceria naik (Ding-ding!)
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(440, now); // A4
-                osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+                osc.frequency.setValueAtTime(440, now); 
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); 
                 gainNode.gain.setValueAtTime(0.3, now);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
                 osc.start(now);
                 osc.stop(now + 0.4);
             } else if (type === 'wrong') {
-                // Suara buzz rendah (Bzzz!)
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(150, now);
                 osc.frequency.setValueAtTime(100, now + 0.15);
@@ -421,7 +455,6 @@
             }
         }
 
-        // --- EFEK CONFETTI MERIAH ---
         function triggerConfetti() {
             confetti({
                 particleCount: 120,
@@ -430,7 +463,6 @@
             });
         }
 
-        // --- EFEK KILAT MERAH ---
         function triggerFlashRed() {
             document.body.classList.add('flash-red');
             setTimeout(() => {
@@ -438,24 +470,75 @@
             }, 400);
         }
 
-        function mulaiGame() {
-            skorDawai = 0;
-            skorAlif = 0;
-            skorNahda = 0;
-            soalKe = 1;
+        function mulaiPermainanDariLobby() {
+            let textValue = document.getElementById('player-input-box').value.trim();
+            if (!textValue) {
+                lobbyError.innerText = "Masukkan minimal 1 nama anak ya! 🤔";
+                return;
+            }
+
+            // Pecah berdasarkan baris baru
+            let barisNama = textValue.split('\n')
+                .map(n => n.trim())
+                .filter(n => n.length > 0);
+
+            if (barisNama.length === 0) {
+                lobbyError.innerText = "Nama tidak boleh kosong!";
+                return;
+            }
+
+            if (barisNama.length > 10) {
+                lobbyError.innerText = "Maksimal hanya 10 anak ya! Kurangi jumlahnya.";
+                return;
+            }
+
+            lobbyError.innerText = "";
             
-            updatePapanSkor();
+            // Inisialisasi daftar pemain dengan skor 0
+            daftarPemain = barisNama.map(nama => ({ nama: nama, skor: 0 }));
+            soalKe = 1;
+
+            setupPapanSkorDanTombol();
+
+            lobbyScreen.classList.add('hidden');
             gameScreen.classList.remove('hidden');
             resultScreen.classList.add('hidden');
-            pickerSection.classList.add('hidden');
-            
+
             buatSoalBaru();
         }
 
+        function kembaliKeLobby() {
+            resultScreen.classList.add('hidden');
+            lobbyScreen.classList.remove('hidden');
+        }
+
+        function setupPapanSkorDanTombol() {
+            let lbContainer = document.getElementById('leaderboard-container');
+            let btnContainer = document.getElementById('name-buttons-container');
+            
+            lbContainer.innerHTML = '';
+            btnContainer.innerHTML = '';
+
+            daftarPemain.forEach((p, index) => {
+                // Buat papan skor
+                let skorDiv = document.createElement('div');
+                skorDiv.className = 'player-score';
+                skorDiv.innerHTML = `${p.nama} <span id="score-val-${index}">0</span>`;
+                lbContainer.appendChild(skorDiv);
+
+                // Buat tombol anak di bagian konfirmasi benar
+                let btn = document.createElement('button');
+                btn.className = 'btn-name';
+                btn.innerText = p.nama;
+                btn.onclick = () => tambahSkorAnak(index);
+                btnContainer.appendChild(btn);
+            });
+        }
+
         function updatePapanSkor() {
-            document.getElementById('score-dawai').innerText = skorDawai;
-            document.getElementById('score-alif').innerText = skorAlif;
-            document.getElementById('score-nahda').innerText = skorNahda;
+            daftarPemain.forEach((p, index) => {
+                document.getElementById(`score-val-${index}`).innerText = p.skor;
+            });
         }
 
         function buatSoalBaru() {
@@ -531,21 +614,18 @@
             } else {
                 playSound('wrong');
                 triggerFlashRed();
-                feedbackEl.innerHTML = `<span class='wrong'>Wah kurang tepat! Jawabannya: ${jawabanBenar} 💡</span>`;
+                feedbackEl.innerHTML = "<span class='wrong'>Wah kurang tepat! Jawabannya: " + jawabanBenar + " 💡</span>";
                 setTimeout(() => {
                     lanjutkanSoal();
                 }, 2200);
             }
         }
 
-        function tambahSkorAnak(nama) {
-            if (nama === 'dawai') skorDawai += 10;
-            if (nama === 'alif') skorAlif += 10;
-            if (nama === 'nahda') skorNahda += 10;
-            
+        function tambahSkorAnak(index) {
+            daftarPemain[index].skor += 10;
             updatePapanSkor();
             pickerSection.classList.add('hidden');
-            feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${nama.toUpperCase()}! 🌟</span>`;
+            feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
 
             setTimeout(() => {
                 lanjutkanSoal();
@@ -557,27 +637,24 @@
             if (soalKe > totalSoal) {
                 gameScreen.classList.add('hidden');
                 resultScreen.classList.remove('hidden');
-                triggerConfetti(); // Rayakan akhir game
+                triggerConfetti(); 
                 
-                let maksSkor = Math.max(skorDawai, skorAlif, skorNahda);
-                let pemenang = [];
-                if (skorDawai === maksSkor) pemenang.push("Dawai");
-                if (skorAlif === maksSkor) pemenang.push("Alif");
-                if (skorNahda === maksSkor) pemenang.push("Nahda");
+                // Cari skor tertinggi
+                let maksSkor = Math.max(...daftarPemain.map(p => p.skor));
+                let pemenang = daftarPemain.filter(p => p.skor === maksSkor);
 
                 if (maksSkor === 0) {
                     winnerText.innerHTML = `Belum ada poin yang terkumpul! Ayo coba lagi.`;
                 } else if (pemenang.length > 1) {
-                    winnerText.innerHTML = `Hasil Seri! 🤝<br>Antara: ${pemenang.join(" & ")} (${maksSkor} Poin)`;
+                    let namaPemenang = pemenang.map(p => p.nama).join(" & ");
+                    winnerText.innerHTML = `Hasil Seri! 🤝<br>Antara: ${namaPemenang} (${maksSkor} Poin)`;
                 } else {
-                    winnerText.innerHTML = `🎉 Selamat Kepada <b>${pemenang[0]}</b>!<br>Pemenang Tercepat dengan ${maksSkor} Poin! 🏆`;
+                    winnerText.innerHTML = `🎉 Selamat Kepada <b>${pemenang[0].nama}</b>!<br>Pemenang Tercepat dengan ${maksSkor} Poin! 🏆`;
                 }
             } else {
                 buatSoalBaru();
             }
         }
-
-        mulaiGame();
     </script>
 </body>
 </html>

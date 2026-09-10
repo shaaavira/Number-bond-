@@ -325,7 +325,7 @@
             z-index: 2;
         }
 
-        /* Garis penghubung persis seperti referensi (menghubungkan tepat dari bawah lingkaran atas ke atas lingkaran bawah) */
+        /* Garis penghubung persis seperti referensi */
         .branch-lines {
             width: 140px;  
             height: 40px;  
@@ -608,7 +608,7 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK ILUSTRASI GAMBAR (Kiri & Kanan sudah disesuaikan posisinya) -->
+            <!-- KOTAK ILUSTRASI GAMBAR -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
                     <div id="visual-group-left" class="emoji-side"></div>
@@ -1067,8 +1067,8 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. Pilih siswa yang diberi poin: 👇</span>";
                 pickerSection.classList.remove('hidden');
             } else {
-                playSound('wrong');
-                triggerFlashRed();
+                playSound('wrong');       // Efek suara salah saat pemeriksaan ulang keliru
+                triggerFlashRed();        // Layar berkedip merah
                 feedbackEl.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
             }
         }

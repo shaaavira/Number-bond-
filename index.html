@@ -20,7 +20,7 @@
         body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%); }
         body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
         body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #f6e58d 0%, #f7d794 50%, #ffeaa7 100%); }
+        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #f7f1e3 0%, #f3cc84 50%, #eccc68 100%); }
 
         body {
             background: var(--bg-gradient);
@@ -236,14 +236,14 @@
             background: #fffbeb;
             border: 3px solid #fde047;
             border-radius: 20px;
-            padding: 12px 24px;
+            padding: 10px 20px;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 16px;
             min-height: 70px;
-            max-width: 780px;
+            max-width: 860px;
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 6px 16px rgba(0,0,0,0.04);
@@ -261,6 +261,17 @@
             padding: 6px 16px;
             border-radius: 12px;
             border: 2px dashed #fcd34d;
+        }
+
+        /* Kelas khusus untuk memperkecil emoji di LE3 agar muat banyak */
+        .emoji-side.small-mode {
+            font-size: 20px !important;
+            letter-spacing: 2px !important;
+            flex-wrap: wrap;
+            max-width: 360px;
+            justify-content: center;
+            gap: 2px;
+            padding: 4px 10px;
         }
 
         /* LAYOUT UTAMA */
@@ -325,7 +336,6 @@
             z-index: 2;
         }
 
-        /* Garis penghubung persis seperti referensi */
         .branch-lines {
             width: 140px;  
             height: 40px;  
@@ -450,7 +460,7 @@
             background: #fff9e6;
             padding: 10px;
             border-radius: 14px;
-            margin-top: 14px; /* Diberi jarak lebih jauh agar tidak mepet dengan kotak */
+            margin-top: 14px;
             border: 2px dashed #ffa502;
             width: 100%;
         }
@@ -646,7 +656,6 @@ Uswa"></textarea>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
-                    <!-- Tombol Cek Jawaban Tambahan untuk Papan Tulis Formula -->
                     <div id="formula-check-section" class="hidden" style="margin-top: 8px;">
                         <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Jawaban Papan Tulis 🔍</button>
                     </div>
@@ -946,24 +955,28 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
+            // Atur ilustrasi gambar (CT disembunyikan, LE3 menggunakan mode kecil agar muat hingga 20)
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
-                let limitCount = 8;
+                
+                if (kategoriPilihan === 'LE3') {
+                    visualGroupLeft.classList.add('small-mode');
+                    visualGroupRight.classList.add('small-mode');
+                } else {
+                    visualGroupLeft.classList.remove('small-mode');
+                    visualGroupRight.classList.remove('small-mode');
+                }
 
                 if (posisiKosong === 2) {
                     let chosenPair = additionPairs[Math.floor(Math.random() * additionPairs.length)];
-                    let countLeft = Math.min(nilaiBagianA, limitCount);
-                    let countRight = Math.min(nilaiBagianB, limitCount);
-                    visualGroupLeft.innerHTML = chosenPair.left.repeat(countLeft);
-                    visualGroupRight.innerHTML = chosenPair.right.repeat(countRight);
+                    visualGroupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
+                    visualGroupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
                 } else {
                     let chosenPair = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
-                    let countLeft = Math.min(nilaiBagianA, limitCount);
-                    let countRight = Math.min(nilaiBagianB, limitCount);
-                    visualGroupLeft.innerHTML = chosenPair.left.repeat(countLeft);
-                    visualGroupRight.innerHTML = chosenPair.right.repeat(countRight);
+                    visualGroupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
+                    visualGroupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
                 }
             }
 
@@ -1036,7 +1049,6 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! ✨</span>";
                 pickerSection.classList.remove('hidden'); 
                 
-                // Munculkan opsi cek jawaban untuk papan tulis formula
                 formulaCheckSection.classList.remove('hidden');
             } else {
                 playSound('wrong');
@@ -1047,7 +1059,7 @@ Uswa"></textarea>
                 isSalahSesi = true;
 
                 feedbackOutside.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di atas untuk membetulkan jawaban. 💪</span>`;
-                retryBtn.classList.remove('hidden');
+                retryBtn.classList.add('hidden');
             }
         }
 
@@ -1081,7 +1093,6 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. 👏</span>";
                 pickerSection.classList.remove('hidden');
                 
-                // Munculkan opsi cek jawaban untuk papan tulis formula
                 formulaCheckSection.classList.remove('hidden');
             } else {
                 playSound('wrong');       
@@ -1090,7 +1101,6 @@ Uswa"></textarea>
             }
         }
 
-        // Fungsi Cek Jawaban Papan Tulis Formula
         function cekFormulaJawaban() {
             let v1 = parseInt(formVal1.value);
             let v2 = parseInt(formVal2.value);
@@ -1103,14 +1113,12 @@ Uswa"></textarea>
 
             let isFormulaCorrect = false;
             if (posisiKosong === 2) {
-                // Penjumlahan: a + b = total (atau bentuk setara)
                 if ((v1 + v2 === v3) && (v1 === nilaiBagianA && v2 === nilaiBagianB && v3 === nilaiTotal)) {
                     isFormulaCorrect = true;
                 } else if (v1 + v2 === v3) {
-                    isFormulaCorrect = true; // Benar secara matematika meskipun kombinasinya variasi lain
+                    isFormulaCorrect = true;
                 }
             } else {
-                // Pengurangan: total - a = b
                 if ((v1 - v2 === v3) && (v1 === nilaiTotal)) {
                     isFormulaCorrect = true;
                 } else if (v1 - v2 === v3) {

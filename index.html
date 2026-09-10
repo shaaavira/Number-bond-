@@ -89,39 +89,44 @@
             background: #ff7675;
             color: white;
             border: 4px dashed #fab1a0;
-            margin-bottom: 20px;
+            margin-bottom: 50px; /* Beri jarak lebih besar untuk garis */
         }
 
+        /* --- BAGIAN PERBAIKAN GARIS (Branch Lines) --- */
         .branch-lines {
-            width: 200px;
-            height: 30px;
-            position: relative;
-            margin-bottom: 10px;
+            width: 150px;  /* Lebar dasar tempat garis berada */
+            height: 40px;  /* Tinggi vertikal garis */
+            position: absolute;
+            top: 75px; /* Mengatur posisi vertikal di bawah lingkaran atas */
         }
 
         .branch-lines::before, .branch-lines::after {
             content: '';
             position: absolute;
             top: 0;
-            width: 2px;
-            height: 35px;
-            background-color: #b2bec3;
+            width: 4px; /* Ketebalan garis */
+            height: 45px; /* Panjang garis */
+            background-color: #a0a0a0; /* Warna garis */
+            border-radius: 2px;
         }
 
+        /* Garis Kiri: Miring ke kiri (\) */
         .branch-lines::before {
-            left: 30px;
-            transform: rotate(-35deg);
+            left: 0;
+            transform: rotate(-25deg);
         }
 
+        /* Garis Kanan: Miring ke kanan (/) */
         .branch-lines::after {
-            right: 30px;
-            transform: rotate(35deg);
+            right: 0;
+            transform: rotate(25deg);
         }
+        /* --- SELESAI PERBAIKAN GARIS --- */
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 280px;
+            width: 260px; /* Lebar sejajar garis bawah */
         }
 
         /* Lingkaran Bawah (Bagian-bagian) */
@@ -147,6 +152,16 @@
             color: #2d3436;
             outline: none;
             border-radius: 50%;
+        }
+
+        /* Menghilangkan spinner default input type=number */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
         }
 
         /* Kontrol Input & Tombol */
@@ -211,7 +226,7 @@
         <div id="game-screen">
             <div class="mascot">🚀🦊</div>
             <h1>Number Bond Ratusan</h1>
-            <div class="subtitle">Tentukan angka yang hilang pada pohon angka! (Kelas 5)</div>
+            <div class="subtitle">Tentukan angka yang hilang pada pohon angka!</div>
 
             <div class="stats-bar">
                 <span id="score-text">Skor: 0</span>
@@ -223,13 +238,14 @@
                 <!-- Total Atas -->
                 <div id="top-val" class="circle top-circle">500</div>
                 
+                <!-- Garis Penghubung (Bentuk \ / ) -->
                 <div class="branch-lines"></div>
 
                 <!-- Bagian Bawah -->
                 <div class="bottom-circles">
                     <div id="left-val" class="circle part-circle">200</div>
                     <div id="right-val" class="circle part-circle input-box-wrapper">
-                        <input type="number" id="user-input" placeholder="?" autocomplete="off">
+                        <input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">
                     </div>
                 </div>
             </div>
@@ -261,7 +277,6 @@
         const topValEl = document.getElementById('top-val');
         const leftValEl = document.getElementById('left-val');
         const rightValEl = document.getElementById('right-val');
-        const userInput = document.getElementById('user-input');
         const feedbackEl = document.getElementById('feedback');
         const scoreText = document.getElementById('score-text');
         const levelText = document.getElementById('level-text');
@@ -279,59 +294,61 @@
         }
 
         function buatSoalBaru() {
-            userInput.value = '';
             feedbackEl.innerHTML = '';
-            userInput.disabled = false;
             document.getElementById('submit-btn').style.display = 'inline-block';
             
             scoreText.innerText = `Skor: ${skor}`;
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
-            // Buat angka ratusan acak (kelipatan 10 atau 25 agar pas untuk kelas 5, misal 100 - 900)
-            // Bagian A dan B dipilih acak
-            let bagianA = Math.floor(Math.random() * 7 + 1) * 50 + 100; // antara 150 - 500
-            let bagianB = Math.floor(Math.random() * 7 + 1) * 50 + 50;   // antara 100 - 400
-            let total = bagianA + bagianB;
+            // Generate angka: total ratusan acak (misal 200 - 900)
+            let total = Math.floor(Math.random() * 7 + 2) * 100;
+            // Generate bagian pertama (kurang dari total, kelipatan 10)
+            let bagianA = Math.floor(Math.random() * (total/10 - 2) + 1) * 10; 
+            // Pastikan ada sisa yang masuk akal untuk kelas 5 (minimal 20)
+            if (total - bagianA < 20) { bagianA = total - 120; }
+
+            let bagianB = total - bagianA;
 
             // Tentukan bagian mana yang ditutup (?) -> 0: Kanan, 1: Kiri, 2: Atas
             posisiKosong = Math.floor(Math.random() * 3);
 
-            // Reset HTML element wrappers
-            leftValEl.className = "circle part-circle";
-            rightValEl.className = "circle part-circle";
-            topValEl.className = "circle top-circle";
+            // Reset tampilan wrapper agar bersih dari input box sebelumnya
+            leftValEl.classList.remove('input-box-wrapper');
+            rightValEl.classList.remove('input-box-wrapper');
+            topValEl.classList.remove('input-box-wrapper');
+
+            leftValEl.innerHTML = '';
+            rightValEl.innerHTML = '';
+            topValEl.innerHTML = '';
 
             if (posisiKosong === 2) {
-                // Atas kosong (Penjumlahan Ratusan)
-                topValEl.className = "circle top-circle input-box-wrapper";
-                topValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off">';
-                
+                // Atas kosong (Tanya Total)
+                topValEl.classList.add('input-box-wrapper');
+                topValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 leftValEl.innerText = bagianA;
                 rightValEl.innerText = bagianB;
                 jawabanBenar = total;
             } else if (posisiKosong === 1) {
-                // Kiri kosong (Pengurangan Ratusan)
-                leftValEl.className = "circle part-circle input-box-wrapper";
-                leftValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off">';
-                
+                // Kiri kosong (Tanya Bagian)
+                leftValEl.classList.add('input-box-wrapper');
+                leftValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 topValEl.innerText = total;
                 rightValEl.innerText = bagianB;
                 jawabanBenar = bagianA;
             } else {
-                // Kanan kosong (Pengurangan Ratusan)
-                rightValEl.className = "circle part-circle input-box-wrapper";
-                rightValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off">';
-                
+                // Kanan kosong (Tanya Bagian)
+                rightValEl.classList.add('input-box-wrapper');
+                rightValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 topValEl.innerText = total;
                 leftValEl.innerText = bagianA;
                 jawabanBenar = bagianB;
             }
 
-            // Re-assign variabel input karena elemennya baru dibuat ulang
+            // Fokuskan ke input box baru
             const activeInput = document.querySelector('.input-box-wrapper input');
             activeInput.focus();
             
-            // Tambahkan event listener untuk tombol Enter
+            // Enter key listener
             activeInput.addEventListener("keypress", function(event) {
                 if (event.key === "Enter") {
                     cekJawaban();
@@ -341,6 +358,7 @@
 
         function cekJawaban() {
             const activeInput = document.querySelector('.input-box-wrapper input');
+            if (!activeInput) return;
             const jawabanUser = parseInt(activeInput.value);
 
             if (isNaN(jawabanUser)) {
@@ -367,10 +385,10 @@
                 } else {
                     buatSoalBaru();
                 }
-            }, 1800); // Jeda 1.8 detik sebelum soal berikutnya
+            }, 2000); // Jeda 2 detik
         }
 
-        // Jalankan game saat pertama kali dibuka
+        // Jalankan game
         mulaiGame();
     </script>
 </body>

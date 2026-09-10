@@ -313,24 +313,11 @@
             border: 4px solid #74b9ff;
         }
 
-        .circle-empty {
-            background: #ffffff !important;
-            border: 4px solid #cbd5e1 !important;
-            color: #2f3542 !important;
-            box-shadow: inset 0 4px 8px rgba(0,0,0,0.05) !important;
-            animation: pulseBox 2s infinite ease-in-out;
-        }
-
-        @keyframes pulseBox {
-            0%, 100% { transform: scale(1); border-color: #cbd5e1; }
-            50% { transform: scale(1.03); border-color: #94a3b8; }
-        }
-
+        /* Garis Putus-putus Penyelubung / Pembungkus Lonjong Miring agar Fit */
         .group-highlight {
             position: absolute;
             border: 4px dashed #ff4757;
             background: rgba(255, 71, 87, 0.05);
-            border-radius: 40px;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -355,7 +342,7 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 34px;
-            color: #2f3542;
+            color: #ffffff; /* Warna teks input disamakan putih agar serasi dengan lingkaran */
             outline: none;
             border-radius: 50%;
         }
@@ -424,7 +411,7 @@
             background-color: #ffa502;
             box-shadow: 0 4px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
 
         #picker-section {
             background: #fff9e6;
@@ -716,7 +703,6 @@ Uswa"></textarea>
             setTimeout(() => { document.body.classList.remove('flash-red'); }, 350);
         }
 
-        // Event listener secara aman untuk tombol masuk
         welcomeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             initAudio();
@@ -837,6 +823,7 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
+            // Kembalikan semua ke warna aslinya (Top: Merah/Pink, Kaki: Biru)
             topValEl.className = "circle top-circle";
             leftValEl.className = "circle part-circle";
             rightValEl.className = "circle part-circle";
@@ -848,21 +835,24 @@ Uswa"></textarea>
             const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
 
             if (posisiKosong === 2) {
-                topValEl.classList.add('circle-empty');
+                // Top yang dicari: lingkaran atas dikosongkan tapi warnanya tetap top-circle (merah/pink)
+                topValEl.classList.add('top-circle');
                 topValEl.innerHTML = inputElement;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiTotal;
             } else if (posisiKosong === 1) {
+                // Kaki kiri yang dicari: lingkaran kiri dikosongkan tapi warnanya tetap part-circle (biru)
                 topValEl.innerText = nilaiTotal;
-                leftValEl.classList.add('circle-empty');
+                leftValEl.classList.add('part-circle');
                 leftValEl.innerHTML = inputElement;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiBagianA;
             } else {
+                // Kaki kanan yang dicari: lingkaran kanan dikosongkan tapi warnanya tetap part-circle (biru)
                 topValEl.innerText = nilaiTotal;
                 leftValEl.innerText = nilaiBagianA;
-                rightValEl.classList.add('circle-empty');
+                rightValEl.classList.add('part-circle');
                 rightValEl.innerHTML = inputElement;
                 jawabanBenar = nilaiBagianB;
             }
@@ -883,20 +873,29 @@ Uswa"></textarea>
         function posisikanKotakPembungkus() {
             let box = groupHighlightBox;
             if (posisiKosong === 2) {
+                // Membungkus dua kaki bawah (lonjong horizontal)
                 box.style.top = "115px";
-                box.style.left = "-10px";
-                box.style.width = "215px";
-                box.style.height = "105px";
+                box.style.left = "-8px";
+                box.style.width = "210px";
+                box.style.height = "100px";
+                box.style.borderRadius = "50px";
+                box.style.transform = "rotate(0deg)";
             } else if (posisiKosong === 1) {
-                box.style.top = "0px";
-                box.style.left = "80px";
-                box.style.width = "120px";
-                box.style.height = "180px";
+                // Membungkus atas dan kanan (lonjong miring ke kanan)
+                box.style.top = "18px";
+                box.style.left = "42px";
+                box.style.width = "125px";
+                box.style.height = "165px";
+                box.style.borderRadius = "60px";
+                box.style.transform = "rotate(32deg)";
             } else {
-                box.style.top = "0px";
-                box.style.left = "-5px";
-                box.style.width = "120px";
-                box.style.height = "180px";
+                // Membungkus atas dan kiri (lonjong miring ke kiri)
+                box.style.top = "18px";
+                box.style.left = "27px";
+                box.style.width = "125px";
+                box.style.height = "165px";
+                box.style.borderRadius = "60px";
+                box.style.transform = "rotate(-32deg)";
             }
             box.classList.add('show');
         }

@@ -82,7 +82,7 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 3px 0 #cbd5e1;
-            z-index: 50; /* Memastikan tombol selalu di atas dan bisa diklik */
+            z-index: 100; /* Pastikan selalu di atas elemen lain */
         }
         .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #cbd5e1; }
 
@@ -238,6 +238,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
+            padding: 15px;
+            border-radius: 24px;
+            transition: all 0.4s ease;
+        }
+
+        /* Kotak Bingkai Melingkar/Menandai Number Bond setelah Periksa */
+        .left-side-game.highlight-bond {
+            border: 4px dashed #ff4757;
+            background: rgba(255, 71, 87, 0.04);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.2);
+            animation: pulseHighlight 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseHighlight {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .right-side-game {
@@ -310,7 +327,7 @@
             border: 4px solid #74b9ff;
         }
 
-        /* Modifikasi Lingkaran Kosong agar tidak ada kotak/placeholder */
+        /* Lingkaran Kosong tanpa kotak */
         .circle-empty {
             background: #ffffff !important;
             border: 4px solid #cbd5e1 !important;
@@ -342,7 +359,7 @@
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
-        /* Kotak Rumus Bantuan (Bisa Diisi Teacher) */
+        /* Kotak Rumus Bantuan (Bisa Diisi Teacher Selamanya) */
         .formula-box {
             display: flex;
             align-items: center;
@@ -383,10 +400,6 @@
             border-color: #2ed573;
             background: #fff;
         }
-        .form-input:disabled {
-            background: #e2e8f0;
-            color: #64748b;
-        }
 
         .btn {
             background-color: #2ed573;
@@ -407,7 +420,7 @@
             background-color: #ffa502;
             box-shadow: 0 4px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
 
         /* Pilihan Cepat Nama Anak */
         #picker-section {
@@ -565,9 +578,10 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- LAYOUT MENYAMPING (Kiri: Pohon Bond, Kanan: Kotak Rumus & Tombol) -->
+            <!-- LAYOUT MENYAMPING -->
             <div class="game-main-layout">
-                <div class="left-side-game">
+                <!-- Kiri: Pohon Number Bond dengan Bingkai Melingkar -->
+                <div class="left-side-game" id="bond-wrapper-box">
                     <div class="bond-container">
                         <div id="top-val" class="circle top-circle"></div>
                         <div class="branch-lines"></div>
@@ -578,10 +592,10 @@ Uswa"></textarea>
                     </div>
                 </div>
 
+                <!-- Kanan: Papan Tulis Teacher yang selalu bisa diketik -->
                 <div class="right-side-game">
                     <div style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: #636e72; margin-bottom: 4px;">Papan Tulis Teacher:</div>
                     
-                    <!-- Kotak Rumus Interaktif untuk Teacher -->
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off">
                         <span id="form-operator">+</span>
@@ -636,6 +650,7 @@ Uswa"></textarea>
         const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
+        const bondWrapperBox = document.getElementById('bond-wrapper-box');
         
         const lobbyScreen = document.getElementById('lobby-screen');
         const gameScreen = document.getElementById('game-screen');
@@ -766,13 +781,14 @@ Uswa"></textarea>
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             nextBtn.classList.add('hidden');
+            bondWrapperBox.classList.remove('highlight-bond'); // Hilangkan garis melingkar saat soal baru
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
-            // Reset Papan Tulis Teacher
-            formVal1.value = ''; formVal1.disabled = false;
-            formVal2.value = ''; formVal2.disabled = false;
-            formVal3.value = ''; formVal3.disabled = false;
+            // Reset Papan Tulis Teacher (Bisa diisi kapan saja)
+            formVal1.value = ''; 
+            formVal2.value = ''; 
+            formVal3.value = '';
 
             if (kategoriPilihan === 'LE1') {
                 nilaiTotal = Math.floor(Math.random() * 4) + 2; 
@@ -795,11 +811,10 @@ Uswa"></textarea>
 
             posisiKosong = Math.floor(Math.random() * 3);
 
-            // Set operator di papan tulis teacher
             if (posisiKosong === 2) {
-                formOperator.innerText = '+'; // Top kosong -> Penjumlahan part + part
+                formOperator.innerText = '+'; 
             } else {
-                formOperator.innerText = '-'; // Part kosong -> Pengurangan total - part
+                formOperator.innerText = '-'; 
             }
 
             topValEl.className = "circle top-circle";
@@ -835,7 +850,6 @@ Uswa"></textarea>
             const activeInput = document.getElementById('user-input');
             activeInput.focus();
             
-            // Allow Enter key to trigger check
             const inputs = document.querySelectorAll('input[type="number"]');
             inputs.forEach(inp => {
                 inp.addEventListener("keypress", function(event) {
@@ -854,12 +868,12 @@ Uswa"></textarea>
                 return;
             }
 
-            // Kunci input Number Bond dan Papan Tulis
+            // Kunci input Number Bond saja, papan tulis teacher tetap bebas diisi
             activeInput.disabled = true;
-            formVal1.disabled = true;
-            formVal2.disabled = true;
-            formVal3.disabled = true;
             submitBtn.style.display = 'none';
+
+            // Munculkan garis melingkar/bingkai pada Number Bond
+            bondWrapperBox.classList.add('highlight-bond');
 
             if (jawabanUser === jawabanBenar) {
                 playSound('correct');

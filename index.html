@@ -82,7 +82,7 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 3px 0 #cbd5e1;
-            z-index: 100; /* Pastikan selalu di atas elemen lain */
+            z-index: 100;
         }
         .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #cbd5e1; }
 
@@ -172,7 +172,7 @@
             font-weight: 700;
         }
 
-        /* Leaderboard Diperbesar */
+        /* Leaderboard */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
@@ -222,7 +222,7 @@
             display: inline-block;
         }
 
-        /* LAYOUT UTAMA: MENYAMPING (Flexbox Row) */
+        /* LAYOUT UTAMA */
         .game-main-layout {
             display: flex;
             width: 100%;
@@ -241,20 +241,6 @@
             position: relative;
             padding: 15px;
             border-radius: 24px;
-            transition: all 0.4s ease;
-        }
-
-        /* Kotak Bingkai Melingkar/Menandai Number Bond setelah Periksa */
-        .left-side-game.highlight-bond {
-            border: 4px dashed #ff4757;
-            background: rgba(255, 71, 87, 0.04);
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.2);
-            animation: pulseHighlight 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulseHighlight {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
         }
 
         .right-side-game {
@@ -288,8 +274,10 @@
             font-weight: 900;
             font-size: 36px;
             box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            transition: all 0.3s ease;
         }
 
+        /* Atas berbeda sendiri (Warna Merah/Pink) */
         .top-circle {
             background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
             color: white;
@@ -310,7 +298,7 @@
             width: 5px; 
             height: 24px; 
             border-radius: 3px;
-            background-color: #ffa502;
+            background-color: #1e90ff;
         }
         .branch-lines::before { left: 22px; transform: rotate(30deg); }
         .branch-lines::after { right: 22px; transform: rotate(-30deg); }
@@ -321,6 +309,7 @@
             width: 195px; 
         }
 
+        /* Kaki Kiri & Kanan DISAMAKAN warnanya (Biru) */
         .part-circle {
             background: linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%);
             color: white;
@@ -341,6 +330,21 @@
             50% { transform: scale(1.03); border-color: #94a3b8; }
         }
 
+        /* Efek Garis Putus-putus Melingkari 2 Lingkaran Number Bond yang Diketahui setelah Periksa */
+        .highlight-known-1 .top-circle,
+        .highlight-known-2 .top-circle,
+        .highlight-known-3 .left-val-el, /* Nanti diatur lewat class */
+        .circle.highlight-dashed {
+            border: 4px dashed #ff4757 !important;
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.4) !important;
+            animation: pulseDashed 1.2s infinite ease-in-out;
+        }
+
+        @keyframes pulseDashed {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
         .circle input {
             width: 100%;
             height: 100%;
@@ -359,7 +363,7 @@
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
-        /* Kotak Rumus Bantuan (Bisa Diisi Teacher Selamanya) */
+        /* Kotak Rumus Bantuan */
         .formula-box {
             display: flex;
             align-items: center;
@@ -580,8 +584,8 @@ Uswa"></textarea>
 
             <!-- LAYOUT MENYAMPING -->
             <div class="game-main-layout">
-                <!-- Kiri: Pohon Number Bond dengan Bingkai Melingkar -->
-                <div class="left-side-game" id="bond-wrapper-box">
+                <!-- Kiri: Pohon Number Bond -->
+                <div class="left-side-game">
                     <div class="bond-container">
                         <div id="top-val" class="circle top-circle"></div>
                         <div class="branch-lines"></div>
@@ -592,7 +596,7 @@ Uswa"></textarea>
                     </div>
                 </div>
 
-                <!-- Kanan: Papan Tulis Teacher yang selalu bisa diketik -->
+                <!-- Kanan: Papan Tulis Teacher -->
                 <div class="right-side-game">
                     <div style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: #636e72; margin-bottom: 4px;">Papan Tulis Teacher:</div>
                     
@@ -650,7 +654,6 @@ Uswa"></textarea>
         const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
         const levelText = document.getElementById('level-text');
-        const bondWrapperBox = document.getElementById('bond-wrapper-box');
         
         const lobbyScreen = document.getElementById('lobby-screen');
         const gameScreen = document.getElementById('game-screen');
@@ -781,11 +784,14 @@ Uswa"></textarea>
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             nextBtn.classList.add('hidden');
-            bondWrapperBox.classList.remove('highlight-bond'); // Hilangkan garis melingkar saat soal baru
+            
+            // Bersihkan efek garis putus-putus pada soal baru
+            topValEl.classList.remove('highlight-dashed');
+            leftValEl.classList.remove('highlight-dashed');
+            rightValEl.classList.remove('highlight-dashed');
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
-            // Reset Papan Tulis Teacher (Bisa diisi kapan saja)
             formVal1.value = ''; 
             formVal2.value = ''; 
             formVal3.value = '';
@@ -828,18 +834,21 @@ Uswa"></textarea>
             const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
 
             if (posisiKosong === 2) {
+                // Yang dicari atas (top), jadi yang diketahui adalah 2 kaki (left & right)
                 topValEl.classList.add('circle-empty');
                 topValEl.innerHTML = inputElement;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiTotal;
             } else if (posisiKosong === 1) {
+                // Yang dicari kaki kiri (left), jadi yang diketahui adalah top & right
                 topValEl.innerText = nilaiTotal;
                 leftValEl.classList.add('circle-empty');
                 leftValEl.innerHTML = inputElement;
                 rightValEl.innerText = nilaiBagianB;
                 jawabanBenar = nilaiBagianA;
             } else {
+                // Yang dicari kaki kanan (right), jadi yang diketahui adalah top & left
                 topValEl.innerText = nilaiTotal;
                 leftValEl.innerText = nilaiBagianA;
                 rightValEl.classList.add('circle-empty');
@@ -868,12 +877,20 @@ Uswa"></textarea>
                 return;
             }
 
-            // Kunci input Number Bond saja, papan tulis teacher tetap bebas diisi
             activeInput.disabled = true;
             submitBtn.style.display = 'none';
 
-            // Munculkan garis melingkar/bingkai pada Number Bond
-            bondWrapperBox.classList.add('highlight-bond');
+            // Berikan garis putus-putus HANYA pada 2 lingkaran Number Bond yang sudah diketahui (soal)
+            if (posisiKosong === 2) {
+                leftValEl.classList.add('highlight-dashed');
+                rightValEl.classList.add('highlight-dashed');
+            } else if (posisiKosong === 1) {
+                topValEl.classList.add('highlight-dashed');
+                rightValEl.classList.add('highlight-dashed');
+            } else {
+                topValEl.classList.add('highlight-dashed');
+                leftValEl.classList.add('highlight-dashed');
+            }
 
             if (jawabanUser === jawabanBenar) {
                 playSound('correct');

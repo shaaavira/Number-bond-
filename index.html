@@ -189,7 +189,7 @@
             font-weight: 700;
         }
 
-        /* PAPAN SKOR LUCU & MENARIK (Learderboard baru) */
+        /* PAPAN SKOR LUCU & MENARIK */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
@@ -463,6 +463,14 @@
             box-shadow: 0 3px 0 #0984e3;
         }
         .btn-recheck:active { box-shadow: 0 1px 0 #0984e3; }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+        }
 
         #picker-section {
             background: #fff9e6;
@@ -1121,7 +1129,7 @@ Uswa"></textarea>
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
-                recheckBtn.classList.add('hidden');
+                recheckBtn.classList.remove('hidden');
             }
         }
 

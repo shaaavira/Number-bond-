@@ -6,6 +6,8 @@
     <title>Petualangan Number Bond Ratusan!</title>
     <!-- Memuat Font Lucu dari Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Memuat Pustaka Confetti untuk Efek Kembang Api -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -21,6 +23,22 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+
+        /* Efek Kilat Merah saat Salah */
+        body.flash-red {
+            background: linear-gradient(135deg, #ff7675 0%, #fab1a0 100%) !important;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            20% { transform: translate(-10px, 0); }
+            40% { transform: translate(10px, 0); }
+            60% { transform: translate(-10px, 0); }
+            80% { transform: translate(10px, 0); }
+            100% { transform: translate(0, 0); }
         }
 
         .game-container {
@@ -368,6 +386,58 @@
         const pickerSection = document.getElementById('picker-section');
         const winnerText = document.getElementById('winner-text');
 
+        // --- SISTEM PEMBUAT SUARA (Audio Synthesizer Built-in) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            let now = audioCtx.currentTime;
+
+            if (type === 'correct') {
+                // Suara melodi ceria naik (Ding-ding!)
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, now); // A4
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+                gainNode.gain.setValueAtTime(0.3, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } else if (type === 'wrong') {
+                // Suara buzz rendah (Bzzz!)
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.setValueAtTime(100, now + 0.15);
+                gainNode.gain.setValueAtTime(0.3, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            }
+        }
+
+        // --- EFEK CONFETTI MERIAH ---
+        function triggerConfetti() {
+            confetti({
+                particleCount: 120,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // --- EFEK KILAT MERAH ---
+        function triggerFlashRed() {
+            document.body.classList.add('flash-red');
+            setTimeout(() => {
+                document.body.classList.remove('flash-red');
+            }, 400);
+        }
+
         function mulaiGame() {
             skorDawai = 0;
             skorAlif = 0;
@@ -454,13 +524,17 @@
             document.getElementById('submit-btn').style.display = 'none';
 
             if (jawabanUser === jawabanBenar) {
+                playSound('correct');
+                triggerConfetti();
                 feedbackEl.innerHTML = "<span class='correct'>Benar! Siapa yang paling cepat? 👇</span>";
-                pickerSection.classList.remove('hidden'); // Munculkan pilihan nama anak
+                pickerSection.classList.remove('hidden'); 
             } else {
-                feedbackEl.innerHTML = `<span class='wrong'>Wah salah. Jawabannya: ${jawabanBenar} 💡</span>`;
+                playSound('wrong');
+                triggerFlashRed();
+                feedbackEl.innerHTML = `<span class='wrong'>Wah kurang tepat! Jawabannya: ${jawabanBenar} 💡</span>`;
                 setTimeout(() => {
                     lanjutkanSoal();
-                }, 2000);
+                }, 2200);
             }
         }
 
@@ -483,8 +557,8 @@
             if (soalKe > totalSoal) {
                 gameScreen.classList.add('hidden');
                 resultScreen.classList.remove('hidden');
+                triggerConfetti(); // Rayakan akhir game
                 
-                // Tentukan Pemenang
                 let maksSkor = Math.max(skorDawai, skorAlif, skorNahda);
                 let pemenang = [];
                 if (skorDawai === maksSkor) pemenang.push("Dawai");

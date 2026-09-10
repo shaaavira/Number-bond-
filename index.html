@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/canvas-confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -386,7 +386,13 @@
             background-color: #ffa502;
             box-shadow: 0 4px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
+
+        .btn-retry {
+            background-color: #e67e22;
+            box-shadow: 0 4px 0 #d35400;
+        }
+        .btn-retry:active { box-shadow: 0 2px 0 #d35400; }
 
         #picker-section {
             background: #fff9e6;
@@ -431,7 +437,7 @@
         #feedback {
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 16px;
+            font-size: 15px;
             margin-top: 4px;
             min-height: 22px;
         }
@@ -575,11 +581,12 @@ Uswa"></textarea>
 
                     <div class="input-section">
                         <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
+                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Betulkan Jawaban ✍️</button>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
                     <div id="picker-section" class="hidden">
-                        <div class="picker-title" id="picker-title-text">Siapa paling cepat benar? 👇</div>
+                        <div class="picker-title" id="picker-title-text">Siapa yang mau diberi skor? 👇</div>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
@@ -609,7 +616,7 @@ Uswa"></textarea>
         let nilaiTotal = 5;
         let nilaiBagianA = 2;
         let nilaiBagianB = 3;
-        let isModeBetulkan = false;
+        let isSalahSesi = false; // Menandakan apakah soal ini habis dijawab salah
 
         const topValEl = document.getElementById('top-val');
         const leftValEl = document.getElementById('left-val');
@@ -629,13 +636,13 @@ Uswa"></textarea>
         const winnerText = document.getElementById('winner-text');
         const lobbyError = document.getElementById('lobby-error');
         const submitBtn = document.getElementById('submit-btn');
+        const retryBtn = document.getElementById('retry-btn');
         const nextBtn = document.getElementById('next-btn');
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
 
         let audioCtx = null;
 
-        // Palet warna warni untuk lingkaran Number Bond agar berubah setiap soal
         const colorPalettes = [
             { top: 'linear-gradient(135deg, #ff6b81 0%, #ff4757 100%)', borderTop: '#ff9ff3', bottom: 'linear-gradient(135deg, #70a1ff 0%, #1e90ff 100%)', borderBottom: '#74b9ff' },
             { top: 'linear-gradient(135deg, #ffa502 0%, #ff7f50 100%)', borderTop: '#ffeaa7', bottom: 'linear-gradient(135deg, #2ed573 0%, #26af5f 100%)', borderBottom: '#7efff5' },
@@ -653,20 +660,18 @@ Uswa"></textarea>
             }
         }
 
-        // Suara Tepuk Tangan & Nada Sukses menggunakan Web Audio API
         function playClappingAndCheer() {
             try {
                 initAudio();
                 let now = audioCtx.currentTime;
 
-                // Suara nada kemenangan ceria (Tring-tring melengking)
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, now); // C5
-                osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
-                osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
-                osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+                osc.frequency.setValueAtTime(523.25, now); 
+                osc.frequency.setValueAtTime(659.25, now + 0.1); 
+                osc.frequency.setValueAtTime(783.99, now + 0.2); 
+                osc.frequency.setValueAtTime(1046.50, now + 0.3); 
                 
                 gain.gain.setValueAtTime(0.2, now);
                 gain.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
@@ -676,7 +681,6 @@ Uswa"></textarea>
                 osc.start(now);
                 osc.stop(now + 0.7);
 
-                // Simulasi Suara Tepuk Tangan (White Noise burst beruntun)
                 for (let i = 0; i < 12; i++) {
                     let startTime = now + i * 0.05;
                     let bufferSize = audioCtx.sampleRate * 0.04;
@@ -691,7 +695,7 @@ Uswa"></textarea>
 
                     let filter = audioCtx.createBiquadFilter();
                     filter.type = 'bandpass';
-                    filter.frequency.value = 1000 + Math.random() * 800; // Frekuensi tepukan tangan
+                    filter.frequency.value = 1000 + Math.random() * 800;
 
                     let noiseGain = audioCtx.createGain();
                     noiseGain.gain.setValueAtTime(0.15, startTime);
@@ -704,9 +708,7 @@ Uswa"></textarea>
                     noise.start(startTime);
                     noise.stop(startTime + 0.04);
                 }
-            } catch(e) {
-                console.log("Audio simulation error", e);
-            }
+            } catch(e) {}
         }
 
         function playSound(type) {
@@ -824,8 +826,9 @@ Uswa"></textarea>
             feedbackEl.innerHTML = '';
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
+            retryBtn.classList.add('hidden');
             nextBtn.classList.add('hidden');
-            isModeBetulkan = false;
+            isSalahSesi = false;
             
             levelText.innerText = `Soal: ${soalKe} / ${totalSoal}`;
 
@@ -860,7 +863,6 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Ganti warna acak di setiap soal
             const randomPalette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
 
             topValEl.style.background = randomPalette.top;
@@ -917,57 +919,62 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
-                // Jawaban Benar: Mainkan suara tepuk tangan & lempar confetti
+                // Benar langsung
                 playClappingAndCheer();
                 triggerConfetti();
                 
                 activeInput.disabled = true;
                 submitBtn.style.display = 'none';
+                retryBtn.classList.add('hidden');
                 
-                isModeBetulkan = false;
-                pickerTitleText.innerText = "Siapa paling cepat benar? 👇";
-                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih anak yang menjawab: 👇</span>";
+                isSalahSesi = false;
+                pickerTitleText.innerText = "Siapa paling cepat benar? (Poin +10): 👇";
+                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih siswa yang menjawab: 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
-                // Jawaban Salah: Berikan opsi betulkan jawaban terlebih dahulu
+                // Salah: Tampilkan tombol "Betulkan Jawaban" terlebih dahulu
                 playSound('wrong');
                 triggerFlashRed();
 
-                if (!isModeBetulkan) {
-                    isModeBetulkan = true;
-                    feedbackEl.innerHTML = "<span class='wrong'>Kurang tepat! Silakan betulkan jawaban bersama siswa: 👇</span>";
-                    pickerTitleText.innerText = "Pilih siswa yang membuktikannya (Poin +5): 👇";
-                    pickerSection.classList.remove('hidden');
-                } else {
-                    feedbackEl.innerHTML = `<span class='wrong'>Belum tepat. Jawabannya adalah: ${jawabanBenar} 💪</span>`;
-                    activeInput.disabled = true;
-                    submitBtn.style.display = 'none';
-                    nextBtn.classList.remove('hidden');
-                }
+                activeInput.disabled = true;
+                submitBtn.style.display = 'none';
+                isSalahSesi = true;
+
+                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di bawah untuk membetulkan jawaban. 💪</span>`;
+                retryBtn.classList.remove('hidden');
             }
+        }
+
+        function mulaiBetulkanJawaban() {
+            retryBtn.classList.add('hidden');
+            const activeInput = document.getElementById('user-input');
+            
+            // Masukkan jawaban benar secara otomatis dan aktifkan kembali jika ingin dibetulkan bersama
+            if (activeInput) {
+                activeInput.value = jawabanBenar;
+                activeInput.disabled = false;
+                activeInput.focus();
+            }
+
+            feedbackEl.innerHTML = "<span class='correct'>Mari periksa kembali! Siapa siswa yang membetulkan? (Poin +5): 👇</span>";
+            pickerTitleText.innerText = "Pilih siswa yang membetulkan jawaban (Poin +5): 👇";
+            pickerSection.classList.remove('hidden');
         }
 
         function aksiPilihAnak(index) {
             pickerSection.classList.add('hidden');
-            const activeInput = document.getElementById('user-input');
 
-            if (!isModeBetulkan) {
-                // Skenario Normal Benar (Poin +10)
+            if (!isSalahSesi) {
+                // Pemberian poin benar (10 poin)
                 daftarPemain[index].skor += 10;
                 updatePapanSkor();
                 feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
                 nextBtn.classList.remove('hidden');
             } else {
-                // Skenario Betulkan Jawaban setelah Salah (Poin +5)
+                // Pemberian poin setelah betulkan jawaban (5 poin)
                 daftarPemain[index].skor += 5;
                 updatePapanSkor();
                 
-                if (activeInput) {
-                    activeInput.value = jawabanBenar;
-                    activeInput.disabled = true;
-                }
-                submitBtn.style.display = 'none';
-
                 feedbackEl.innerHTML = `<span class='correct'>Kerja bagus ${daftarPemain[index].nama.toUpperCase()} sudah membetulkan jawaban! Poin +5 👏</span>`;
                 nextBtn.classList.remove('hidden');
             }

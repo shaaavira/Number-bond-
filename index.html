@@ -297,7 +297,7 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.03);
         }
 
-        /* NUMBER BOND */
+        /* NUMBER BOND SESUAI GAMBAR REFERENSI */
         .bond-container {
             display: flex;
             flex-direction: column;
@@ -321,33 +321,35 @@
             border: none;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             transition: background 0.5s ease;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Kaki digeser naik sedikit (margin-bottom negatif agar merapat ke lingkaran atas) */
+        /* Garis penghubung persis seperti referensi (menghubungkan tepat dari bawah lingkaran atas ke atas lingkaran bawah) */
         .branch-lines {
-            width: 160px;  
-            height: 14px;  
+            width: 140px;  
+            height: 40px;  
             position: relative;
-            margin-top: -6px;
-            margin-bottom: -6px;
-            z-index: 2;
+            margin-top: -15px;
+            margin-bottom: -15px;
+            z-index: 1;
         }
         .branch-lines::before, .branch-lines::after {
             content: '';
             position: absolute;
             top: 0;
-            width: 6px; 
-            height: 46px; 
-            border-radius: 3px;
-            background-color: #94a3b8;
+            width: 4px; 
+            height: 42px; 
+            border-radius: 2px;
+            background-color: #334155;
         }
-        .branch-lines::before { left: 24px; transform: rotate(20deg); }
-        .branch-lines::after { right: 24px; transform: rotate(-20deg); }
+        .branch-lines::before { left: 16px; transform: rotate(32deg); transform-origin: top center; }
+        .branch-lines::after { right: 16px; transform: rotate(-32deg); transform-origin: top center; }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 250px; 
+            width: 240px; 
         }
 
         .circle input {
@@ -606,11 +608,11 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK ILUSTRASI GAMBAR -->
+            <!-- KOTAK ILUSTRASI GAMBAR (Kiri & Kanan sudah disesuaikan posisinya) -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
-                    <div id="visual-group-right" class="emoji-side"></div>
                     <div id="visual-group-left" class="emoji-side"></div>
+                    <div id="visual-group-right" class="emoji-side"></div>
                 </div>
             </div>
 

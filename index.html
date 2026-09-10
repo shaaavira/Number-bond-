@@ -89,15 +89,15 @@
             background: #ff7675;
             color: white;
             border: 4px dashed #fab1a0;
-            margin-bottom: 50px; /* Beri jarak lebih besar untuk garis */
+            margin-bottom: 25px; /* Jarak pas dengan garis atap */
         }
 
-        /* --- BAGIAN PERBAIKAN GARIS (Branch Lines) --- */
+        /* --- GARIS BENTUK ATAP RUMAH (/\) --- */
         .branch-lines {
-            width: 150px;  /* Lebar dasar tempat garis berada */
-            height: 40px;  /* Tinggi vertikal garis */
-            position: absolute;
-            top: 75px; /* Mengatur posisi vertikal di bawah lingkaran atas */
+            width: 200px;  
+            height: 35px;  
+            position: relative;
+            margin-bottom: 15px;
         }
 
         .branch-lines::before, .branch-lines::after {
@@ -105,28 +105,28 @@
             position: absolute;
             top: 0;
             width: 4px; /* Ketebalan garis */
-            height: 45px; /* Panjang garis */
+            height: 42px; /* Panjang garis */
             background-color: #a0a0a0; /* Warna garis */
             border-radius: 2px;
         }
 
-        /* Garis Kiri: Miring ke kiri (\) */
+        /* Garis Kiri: Miring ke kanan atas / bawah (membentuk sisi kiri 'A') */
         .branch-lines::before {
-            left: 0;
-            transform: rotate(-25deg);
+            left: 35px;
+            transform: rotate(35deg);
         }
 
-        /* Garis Kanan: Miring ke kanan (/) */
+        /* Garis Kanan: Miring ke kiri atas / bawah (membentuk sisi kanan 'A') */
         .branch-lines::after {
-            right: 0;
-            transform: rotate(25deg);
+            right: 35px;
+            transform: rotate(-35deg);
         }
         /* --- SELESAI PERBAIKAN GARIS --- */
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 260px; /* Lebar sejajar garis bawah */
+            width: 260px; /* Lebar sejajar posisi bawah garis */
         }
 
         /* Lingkaran Bawah (Bagian-bagian) */
@@ -238,7 +238,7 @@
                 <!-- Total Atas -->
                 <div id="top-val" class="circle top-circle">500</div>
                 
-                <!-- Garis Penghubung (Bentuk \ / ) -->
+                <!-- Garis Penghubung (Bentuk /\ ) -->
                 <div class="branch-lines"></div>
 
                 <!-- Bagian Bawah -->
@@ -302,17 +302,13 @@
 
             // Generate angka: total ratusan acak (misal 200 - 900)
             let total = Math.floor(Math.random() * 7 + 2) * 100;
-            // Generate bagian pertama (kurang dari total, kelipatan 10)
             let bagianA = Math.floor(Math.random() * (total/10 - 2) + 1) * 10; 
-            // Pastikan ada sisa yang masuk akal untuk kelas 5 (minimal 20)
             if (total - bagianA < 20) { bagianA = total - 120; }
 
             let bagianB = total - bagianA;
 
-            // Tentukan bagian mana yang ditutup (?) -> 0: Kanan, 1: Kiri, 2: Atas
             posisiKosong = Math.floor(Math.random() * 3);
 
-            // Reset tampilan wrapper agar bersih dari input box sebelumnya
             leftValEl.classList.remove('input-box-wrapper');
             rightValEl.classList.remove('input-box-wrapper');
             topValEl.classList.remove('input-box-wrapper');
@@ -322,21 +318,18 @@
             topValEl.innerHTML = '';
 
             if (posisiKosong === 2) {
-                // Atas kosong (Tanya Total)
                 topValEl.classList.add('input-box-wrapper');
                 topValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 leftValEl.innerText = bagianA;
                 rightValEl.innerText = bagianB;
                 jawabanBenar = total;
             } else if (posisiKosong === 1) {
-                // Kiri kosong (Tanya Bagian)
                 leftValEl.classList.add('input-box-wrapper');
                 leftValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 topValEl.innerText = total;
                 rightValEl.innerText = bagianB;
                 jawabanBenar = bagianA;
             } else {
-                // Kanan kosong (Tanya Bagian)
                 rightValEl.classList.add('input-box-wrapper');
                 rightValEl.innerHTML = '<input type="number" id="user-input" placeholder="?" autocomplete="off" inputmode="numeric">';
                 topValEl.innerText = total;
@@ -344,11 +337,9 @@
                 jawabanBenar = bagianB;
             }
 
-            // Fokuskan ke input box baru
             const activeInput = document.querySelector('.input-box-wrapper input');
             activeInput.focus();
             
-            // Enter key listener
             activeInput.addEventListener("keypress", function(event) {
                 if (event.key === "Enter") {
                     cekJawaban();
@@ -385,10 +376,9 @@
                 } else {
                     buatSoalBaru();
                 }
-            }, 2000); // Jeda 2 detik
+            }, 2000);
         }
 
-        // Jalankan game
         mulaiGame();
     </script>
 </body>

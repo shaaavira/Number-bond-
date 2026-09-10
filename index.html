@@ -229,7 +229,7 @@
             background: var(--container-bg);
             border: 3px solid var(--border-main);
             border-radius: 8px;
-            padding: 12px 8px;
+            padding: 10px 8px;
             cursor: pointer;
             text-align: center;
             transition: all 0.15s ease;
@@ -252,18 +252,18 @@
         }
 
         .cat-emoji {
-            font-size: 26px;
-            margin-bottom: 4px;
+            font-size: 22px;
+            margin-bottom: 2px;
             display: block;
         }
 
         .cat-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 11px;
+            font-size: 10px;
             color: #f1f5f9;
         }
         .cat-card.selected .cat-title { color: #000; font-weight: 900; }
-        .cat-desc { font-size: 11px; color: #cbd5e1; font-weight: 700; margin-top: 3px;}
+        .cat-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 2px;}
         .cat-card.selected .cat-desc { color: #1e293b; }
 
         #lobby-screen textarea {
@@ -465,6 +465,12 @@
             z-index: 2;
         }
 
+        /* LINGKARAN ATAS (BERBEDA DARI KIRI/KANAN) */
+        #top-val {
+            background-color: var(--accent-color) !important;
+            color: #0f172a !important;
+        }
+
         .branch-lines {
             width: 120px;  
             height: 30px;  
@@ -501,7 +507,7 @@
             font-family: 'Press Start 2P', monospace;
             font-weight: 900;
             font-size: 22px;
-            color: #ffffff;
+            color: inherit;
             outline: none;
             border-radius: 50%;
         }
@@ -715,22 +721,22 @@
                         <div id="card-LE1" class="cat-card selected" onclick="pilihKategori('LE1', this)">
                             <span class="cat-emoji">💧</span>
                             <div class="cat-title">LE 1</div>
-                            <div class="cat-desc">Biru Muda</div>
+                            <div class="cat-desc">Number bond 1-5</div>
                         </div>
                         <div id="card-LE2" class="cat-card" onclick="pilihKategori('LE2', this)">
                             <span class="cat-emoji">🪵</span>
                             <div class="cat-title">LE 2</div>
-                            <div class="cat-desc">Coklat</div>
+                            <div class="cat-desc">Number bond 1-10</div>
                         </div>
                         <div id="card-LE3" class="cat-card" onclick="pilihKategori('LE3', this)">
                             <span class="cat-emoji">🍎</span>
                             <div class="cat-title">LE 3</div>
-                            <div class="cat-desc">Merah</div>
+                            <div class="cat-desc">Number bond 1-20</div>
                         </div>
                         <div id="card-CT" class="cat-card" onclick="pilihKategori('CT', this)">
                             <span class="cat-emoji">🍊</span>
                             <div class="cat-title">CT</div>
-                            <div class="cat-desc">Oranye</div>
+                            <div class="cat-desc">Number bond ratusan</div>
                         </div>
                     </div>
                 </div>
@@ -780,8 +786,8 @@ Creeper"></textarea>
                         <div id="top-val" class="circle"></div>
                         <div class="branch-lines"></div>
                         <div class="bottom-circles">
-                            <div id="left-val" class="circle"></div>
-                            <div id="right-val" class="circle"></div>
+                            <div id="left-val" class="circle bottom-circle-item"></div>
+                            <div id="right-val" class="circle bottom-circle-item"></div>
                         </div>
                     </div>
                 </div>
@@ -799,7 +805,7 @@ Creeper"></textarea>
 
                     <div class="input-section">
                         <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
-                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Fix Jawaban ✍️</button>
+                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Fix Jawabannya ✍️</button>
                         <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
                     </div>
 
@@ -886,6 +892,18 @@ Creeper"></textarea>
             { left: '🥩', right: '🦴' }, 
             { left: '💎', right: '⛏️' }, 
             { left: '⭐', right: '✨' }  
+        ];
+
+        // Palet warna ceria untuk lingkaran kiri & kanan (yang selalu sama warnanya)
+        const pairColors = [
+            "#3b82f6", // Biru Cerah
+            "#ef4444", // Merah Terang
+            "#10b981", // Hijau Emerald
+            "#f59e0b", // Kuning Amber
+            "#8b5cf6", // Ungu Violet
+            "#ec4899", // Pink Cantik
+            "#06b6d4", // Cyan Ceria
+            "#f97316"  // Oranye Terang
         ];
 
         let audioCtx = null;
@@ -995,11 +1013,11 @@ Creeper"></textarea>
 
             setupPapanSkorDanTombol();
 
-            let namaKatBadge = "LE 1 (Biru Muda)";
+            let namaKatBadge = "LE 1 (Number bond 1-5)";
             let gameMascotEmoji = "💧⭐";
-            if (kategoriPilihan === 'LE2') { namaKatBadge = "LE 2 (Coklat)"; gameMascotEmoji = "🪵🧱"; }
-            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Merah)"; gameMascotEmoji = "🍎🗡️"; }
-            if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Oranye)"; gameMascotEmoji = "🍊🪙"; }
+            if (kategoriPilihan === 'LE2') { namaKatBadge = "LE 2 (Number bond 1-10)"; gameMascotEmoji = "🪵🧱"; }
+            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Number bond 1-20)"; gameMascotEmoji = "🍎🗡️"; }
+            if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Number bond ratusan)"; gameMascotEmoji = "🍊🪙"; }
             
             document.getElementById('game-category-badge').innerText = `Kategori: ${namaKatBadge}`;
             gameMascotEl.innerText = gameMascotEmoji;
@@ -1065,20 +1083,25 @@ Creeper"></textarea>
             formVal2.value = ''; 
             formVal3.value = '';
 
+            // ATUR NILAI BERDASARKAN KATEGORI BARU
             if (kategoriPilihan === 'LE1') {
-                nilaiTotal = Math.floor(Math.random() * 4) + 2; 
+                // Number bond 1-5
+                nilaiTotal = Math.floor(Math.random() * 4) + 2; // 2 sampai 5
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 1)) + 1;
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
             } else if (kategoriPilihan === 'LE2') {
-                nilaiTotal = Math.floor(Math.random() * 8) + 3; 
+                // Number bond 1-10
+                nilaiTotal = Math.floor(Math.random() * 8) + 3; // 3 sampai 10
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 1)) + 1;
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
             } else if (kategoriPilihan === 'LE3') {
-                nilaiTotal = Math.floor(Math.random() * 15) + 6; 
+                // Number bond 1-20
+                nilaiTotal = Math.floor(Math.random() * 15) + 6; // 6 sampai 20
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal - 2)) + 1;
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
             } else if (kategoriPilihan === 'CT') {
-                nilaiTotal = Math.floor(Math.random() * 7 + 2) * 100;
+                // Number bond ratusan
+                nilaiTotal = Math.floor(Math.random() * 7 + 2) * 100; // 200 - 800
                 nilaiBagianA = Math.floor(Math.random() * (nilaiTotal/10 - 2) + 1) * 10; 
                 if (nilaiTotal - nilaiBagianA < 20) { nilaiBagianA = nilaiTotal - 120; }
                 nilaiBagianB = nilaiTotal - nilaiBagianA;
@@ -1111,6 +1134,11 @@ Creeper"></textarea>
             topValEl.innerHTML = '';
             leftValEl.innerHTML = '';
             rightValEl.innerHTML = '';
+
+            // UBAH WARNA LINGKARAN KIRI DAN KANAN AGAR SAMA TETAPI BERUBAH TIAP SOAL
+            let randomColor = pairColors[Math.floor(Math.random() * pairColors.length)];
+            leftValEl.style.backgroundColor = randomColor;
+            rightValEl.style.backgroundColor = randomColor;
 
             const inputElement = '<input type="number" id="user-input" placeholder="" autocomplete="off" inputmode="numeric">';
 
@@ -1154,7 +1182,7 @@ Creeper"></textarea>
             const jawabanUser = parseInt(activeInput.value);
 
             if (isNaN(jawabanUser)) {
-                feedbackOutside.innerHTML = "<span class='wrong'>Isi lingkaran Number Bond dulu ya! ✨</span>";
+                feedbackOutside.innerHTML = "<span class='wrong'>Isi lingkaran number bond dulu ya! ✨</span>";
                 return;
             }
 
@@ -1171,7 +1199,7 @@ Creeper"></textarea>
                 pickerTitleText.innerText = "Siapa player yang mendapat XP? (+10 XP): 👇";
                 
                 feedbackOutside.innerHTML = ""; 
-                feedbackEl.innerHTML = "<span class='correct'>Crafting Sempurna! Benar! ✨</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Berhasil melengkapi number bond! ✨</span>";
                 pickerSection.classList.remove('hidden'); 
                 formulaCheckSection.classList.remove('hidden');
             } else {
@@ -1182,7 +1210,7 @@ Creeper"></textarea>
                 submitBtn.style.display = 'none';
                 isSalahSesi = true;
 
-                feedbackOutside.innerHTML = `<span class='wrong'>Belum pas! Klik tombol di bawah untuk perbaiki materialnya. 💪</span>`;
+                feedbackOutside.innerHTML = `<span class='wrong'>Belum pas! Klik tombol di bawah untuk memperbaikinya. 💪</span>`;
                 retryBtn.classList.remove('hidden');
             }
         }
@@ -1199,7 +1227,7 @@ Creeper"></textarea>
             }
 
             feedbackOutside.innerHTML = "<span class='wrong'>Diskusikan bersama tim, lalu klik Periksa Lagi! ✍️</span>";
-            recheckBtn.classList.remove('hidden'); // TOMBOL PERIKSA LAGI MUNCUL DI SINI!
+            recheckBtn.classList.remove('hidden'); 
         }
 
         function periksaUlangJawaban() {
@@ -1218,7 +1246,7 @@ Creeper"></textarea>
                 pickerTitleText.innerText = "Pilih player yang membetulkan jawaban (+5 XP): 👇";
                 
                 feedbackOutside.innerHTML = "";
-                feedbackEl.innerHTML = "<span class='correct'>Mantap! Lingkaran berhasil diperbaiki. 👏</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Berhasil melengkapi number bond! 👏</span>";
                 pickerSection.classList.remove('hidden');
                 formulaCheckSection.classList.remove('hidden');
             } else {

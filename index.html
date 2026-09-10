@@ -14,14 +14,14 @@
         }
 
         :root {
-            --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --bg-gradient: linear-gradient(135deg, #1b4d3e 0%, #0d2818 100%);
         }
 
-        /* KEMBALI KE COLOR PALETTE ORIGINAL KODE AWAL */
-        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
-        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%); }
-        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
-        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        /* TEMA WARNA ALAM MINECRAFT (RUMPUT, HUTAN, EMERALD, TANAH COKLAT) */
+        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%); }
+        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #386641 0%, #283618 100%); }
+        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #606c38 0%, #283618 100%); }
+        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #8c6d46 0%, #583101 100%); }
 
         body {
             background: var(--bg-gradient);
@@ -49,13 +49,13 @@
         }
 
         .game-container {
-            background: #1e293b;
+            background: #1e3f20; /* Hijau lumut khas Minecraft */
             color: #f8fafc;
             backdrop-filter: blur(16px);
             padding: 16px 26px;
             border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 2px 0 rgba(255,255,255,0.1);
-            border: 4px solid #475569;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 2px 0 rgba(255,255,255,0.15);
+            border: 4px solid #556b2f; /* Bingkai tanah/rumput hijau tua */
             width: 100%;
             max-width: 1100px;
             height: 98vh;
@@ -73,23 +73,23 @@
             position: absolute;
             top: 16px;
             left: 20px;
-            background: #334155;
-            border: 2px solid #64748b;
+            background: #3e2723; /* Coklat kayu */
+            border: 2px solid #8d6e63;
             padding: 6px 14px;
             font-family: 'Press Start 2P', monospace;
             font-size: 9px;
-            color: #cbd5e1;
+            color: #ffecb3;
             border-radius: 4px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 4px 0 #0f172a;
+            box-shadow: 0 4px 0 #271c19;
             z-index: 100;
             transition: all 0.15s ease;
         }
-        .btn-back:hover { background: #475569; transform: translateY(-1px); }
-        .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #0f172a; }
+        .btn-back:hover { background: #4e342e; transform: translateY(-1px); }
+        .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #271c19; }
 
         .title-header-wrapper {
             display: flex;
@@ -101,7 +101,7 @@
 
         h1 {
             font-family: 'Press Start 2P', monospace;
-            color: #4ade80;
+            color: #76ff03; /* Hijau neon terang ala XP Minecraft */
             font-size: 18px;
             margin: 0;
             text-shadow: 2px 2px #000;
@@ -109,7 +109,7 @@
 
         .subtitle {
             font-size: 12px;
-            color: #94a3b8;
+            color: #dcedc8;
             margin: 4px 0 6px 0;
             font-weight: 700;
         }
@@ -128,19 +128,19 @@
         }
 
         .lobby-hero-card {
-            background: rgba(15, 23, 42, 0.8);
-            border: 3px solid #38bdf8;
+            background: #2b5329;
+            border: 3px solid #81c784;
             border-radius: 8px;
             padding: 10px 18px;
             width: 100%;
             max-width: 950px;
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .lobby-hero-title {
             font-family: 'Press Start 2P', monospace;
             font-size: 13px;
-            color: #38bdf8;
+            color: #a5d6a7;
             margin: 0;
             text-shadow: 1px 1px #000;
         }
@@ -148,25 +148,25 @@
         .lobby-hero-sub {
             font-size: 12px;
             font-weight: 700;
-            color: #94a3b8;
+            color: #c8e6c9;
             margin-top: 4px;
         }
 
         .lobby-section-box {
-            background: #0f172a;
-            border: 2px solid #334155;
+            background: #142815;
+            border: 2px solid #33691e;
             border-radius: 8px;
             padding: 10px 18px;
             width: 100%;
             max-width: 950px;
             text-align: left;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .lobby-section-title {
             font-family: 'Press Start 2P', monospace;
             font-size: 10px;
-            color: #fbbf24;
+            color: #ffd54f; /* Kuning emas khas koin/gold ingot */
             margin-bottom: 8px;
             display: flex;
             align-items: center;
@@ -181,24 +181,24 @@
         }
 
         .cat-card {
-            background: #1e293b;
-            border: 3px solid #475569;
+            background: #1b381d;
+            border: 3px solid #558b2f;
             border-radius: 6px;
             padding: 10px 8px;
             cursor: pointer;
             text-align: center;
             transition: all 0.15s ease;
-            box-shadow: 0 4px 0 #0f172a;
+            box-shadow: 0 4px 0 #0d1a0e;
             position: relative;
         }
 
-        .cat-card:hover { transform: translateY(-3px); border-color: #38bdf8; }
-        .cat-card:active { transform: translateY(1px); box-shadow: 0 1px 0 #0f172a; }
+        .cat-card:hover { transform: translateY(-3px); border-color: #8bc34a; }
+        .cat-card:active { transform: translateY(1px); box-shadow: 0 1px 0 #0d1a0e; }
         
         .cat-card.selected {
-            background: #065f46;
-            border-color: #34d399;
-            box-shadow: 0 4px 0 #064e3b, 0 8px 16px rgba(52, 211, 153, 0.2);
+            background: #2e7d32;
+            border-color: #aed581;
+            box-shadow: 0 4px 0 #1b5e20, 0 8px 16px rgba(46, 125, 50, 0.4);
             transform: translateY(-3px);
         }
 
@@ -211,17 +211,17 @@
         .cat-title {
             font-family: 'Press Start 2P', monospace;
             font-size: 10px;
-            color: #f8fafc;
+            color: #f1f8e9;
         }
-        .cat-card.selected .cat-title { color: #34d399; }
-        .cat-desc { font-size: 11px; color: #94a3b8; font-weight: 700; margin-top: 2px;}
+        .cat-card.selected .cat-title { color: #e8f5e9; }
+        .cat-desc { font-size: 11px; color: #c8e6c9; font-weight: 700; margin-top: 2px;}
 
         /* KOTAK INPUT NAMA */
         #lobby-screen textarea {
             width: 280px; 
             height: 115px; 
             padding: 10px 14px;
-            border: 3px solid #475569;
+            border: 3px solid #558b2f;
             border-radius: 6px;
             font-family: 'Outfit', sans-serif;
             font-size: 14px;
@@ -229,21 +229,21 @@
             line-height: 1.35;
             resize: none;
             outline: none;
-            color: #f8fafc;
-            background: #0f172a;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            color: #f1f8e9;
+            background: #112212;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
             transition: all 0.2s ease;
             display: block;
             margin: 0 auto; 
         }
         #lobby-screen textarea:focus { 
-            border-color: #38bdf8; 
-            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2), inset 0 2px 4px rgba(0,0,0,0.5); 
+            border-color: #8bc34a; 
+            box-shadow: 0 0 0 4px rgba(139, 195, 74, 0.25), inset 0 2px 4px rgba(0,0,0,0.6); 
         }
 
         .input-hint {
             font-size: 11px;
-            color: #94a3b8;
+            color: #c8e6c9;
             margin-top: 4px;
             font-weight: 700;
             display: flex;
@@ -253,7 +253,7 @@
         }
 
         .btn-start-game {
-            background: #16a34a;
+            background: #2e7d32;
             color: white;
             border: none;
             padding: 12px 28px;
@@ -261,12 +261,12 @@
             font-size: 11px;
             border-radius: 6px;
             cursor: pointer;
-            box-shadow: 0 5px 0 #14532d, 0 8px 18px rgba(22, 163, 74, 0.3);
+            box-shadow: 0 5px 0 #1b5e20, 0 8px 18px rgba(46, 125, 50, 0.4);
             transition: all 0.15s ease;
             margin-top: 4px;
         }
-        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #14532d; }
-        .btn-start-game:active { transform: translateY(3px); box-shadow: 0 2px 0 #14532d; }
+        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #1b5e20; }
+        .btn-start-game:active { transform: translateY(3px); box-shadow: 0 2px 0 #1b5e20; }
 
         /* LEADERBOARD PIXEL */
         .leaderboard {
@@ -274,29 +274,29 @@
             flex-wrap: nowrap;
             justify-content: center;
             gap: 10px;
-            background: #0f172a;
+            background: #142815;
             padding: 8px 16px;
             border-radius: 8px;
             margin: 4px 0;
             overflow-x: auto;
-            border: 2px solid #fbbf24;
+            border: 2px solid #ffd54f;
             width: 100%;
             max-width: 950px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
         }
 
         .player-score {
             text-align: center;
-            background: #1e293b;
+            background: #1b381d;
             padding: 6px 14px;
             border-radius: 6px;
             font-size: 11px;
             font-weight: 700;
-            color: #fbbf24;
-            border: 2px solid #475569;
+            color: #ffd54f;
+            border: 2px solid #558b2f;
             white-space: nowrap;
             flex-shrink: 0;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
             transition: transform 0.2s ease;
         }
         .player-score:hover { transform: translateY(-2px); }
@@ -304,26 +304,26 @@
             display: block;
             font-family: 'Press Start 2P', monospace;
             font-size: 12px;
-            color: #34d399;
+            color: #76ff03;
             margin-top: 3px;
         }
 
         .level-info {
             font-family: 'Press Start 2P', monospace;
-            color: #38bdf8;
+            color: #81c784;
             font-size: 10px;
             margin: 4px 0;
-            background: #0f172a;
+            background: #142815;
             padding: 6px 14px;
             border-radius: 6px;
-            border: 2px solid #38bdf8;
+            border: 2px solid #81c784;
             display: inline-block;
         }
 
         /* KOTAK ILUSTRASI GAMBAR */
         .visual-illustration-box {
-            background: #0f172a;
-            border: 3px solid #475569;
+            background: #142815;
+            border: 3px solid #558b2f;
             border-radius: 8px;
             padding: 10px 18px;
             margin: 8px auto;
@@ -346,10 +346,10 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            background: #1e293b;
+            background: #1b381d;
             padding: 6px 12px;
             border-radius: 6px;
-            border: 2px dashed #64748b;
+            border: 2px dashed #689f38;
             max-width: 380px;
             gap: 2px;
         }
@@ -381,8 +381,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #0f172a;
-            border: 2px solid #475569;
+            background: #142815;
+            border: 2px solid #558b2f;
             border-radius: 8px;
             padding: 14px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -390,7 +390,7 @@
             overflow-y: auto;
         }
 
-        /* NUMBER BOND KEMBALI BULAT SEMPURNA */
+        /* NUMBER BOND BULAT SEMPURNA DENGAN KIRI-KANAN SAMA WARNA, ATAS BEDA */
         .bond-container {
             display: flex;
             flex-direction: column;
@@ -403,16 +403,16 @@
         .circle {
             width: 95px;
             height: 95px;
-            border-radius: 50%; /* Kembali BULAT */
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Press Start 2P', monospace;
             font-weight: 900;
-            font-size: 24px;
+            font-size: 26px;
             color: #ffffff;
-            border: 4px solid #0f172a;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.3);
+            border: 4px solid #111b12; /* Batas gelap agar lingkaran sangat tegas terlihat */
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 3px 0 rgba(255,255,255,0.4);
             transition: background 0.5s ease;
             position: relative;
             z-index: 2;
@@ -433,8 +433,8 @@
             width: 6px; 
             height: 62px; 
             border-radius: 2px;
-            background-color: #64748b;
-            border: 1px solid #0f172a;
+            background-color: #8d6e63; /* Batang kayu coklat Minecraft */
+            border: 1px solid #271c19;
         }
         .branch-lines::before { left: 20px; transform: rotate(32deg); transform-origin: top center; }
         .branch-lines::after { right: 20px; transform: rotate(-32deg); transform-origin: top center; }
@@ -453,7 +453,7 @@
             text-align: center;
             font-family: 'Press Start 2P', monospace;
             font-weight: 900;
-            font-size: 22px;
+            font-size: 24px;
             color: #ffffff;
             outline: none;
             border-radius: 50%;
@@ -470,18 +470,18 @@
             justify-content: center;
             font-family: 'Press Start 2P', monospace;
             font-size: 13px;
-            color: #f8fafc;
-            background: #1e293b;
+            color: #f1f8e9;
+            background: #1b381d;
             padding: 10px 14px;
             border-radius: 6px;
             margin-bottom: 8px;
-            border: 2px dashed #64748b;
+            border: 2px dashed #81c784;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
             width: 100%;
         }
         
         .formula-box span {
-            color: #38bdf8;
+            color: #ffd54f;
             margin: 0 6px;
         }
 
@@ -491,20 +491,20 @@
             text-align: center;
             font-family: 'Press Start 2P', monospace;
             font-size: 14px;
-            color: #f8fafc;
-            background: #0f172a;
-            border: 2px solid #64748b;
+            color: #ffffff;
+            background: #112212;
+            border: 2px solid #558b2f;
             border-radius: 4px;
             outline: none;
             transition: all 0.15s ease;
         }
         .form-input:focus {
-            border-color: #34d399;
-            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+            border-color: #76ff03;
+            box-shadow: 0 0 0 3px rgba(118, 255, 3, 0.25);
         }
 
         .btn {
-            background-color: #059669;
+            background-color: #2e7d32;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -512,32 +512,32 @@
             font-size: 10px;
             border-radius: 6px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #047857;
+            box-shadow: 0 4px 0 #1b5e20;
             transition: all 0.15s ease;
         }
-        .btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #047857; }
-        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #047857; }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #1b5e20; }
+        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #1b5e20; }
 
         .btn-next {
-            background-color: #d97706;
-            box-shadow: 0 4px 0 #b45309;
+            background-color: #e65100; /* Oranye bata api Nether */
+            box-shadow: 0 4px 0 #bf360c;
         }
-        .btn-next:hover { box-shadow: 0 5px 0 #b45309; }
-        .btn-next:active { box-shadow: 0 1px 0 #b45309; }
+        .btn-next:hover { box-shadow: 0 5px 0 #bf360c; }
+        .btn-next:active { box-shadow: 0 1px 0 #bf360c; }
 
         .btn-retry {
-            background-color: #dc2626;
-            box-shadow: 0 4px 0 #991b1b;
+            background-color: #c62828;
+            box-shadow: 0 4px 0 #8e0000;
         }
-        .btn-retry:hover { box-shadow: 0 5px 0 #991b1b; }
-        .btn-retry:active { box-shadow: 0 1px 0 #991b1b; }
+        .btn-retry:hover { box-shadow: 0 5px 0 #8e0000; }
+        .btn-retry:active { box-shadow: 0 1px 0 #8e0000; }
 
         .btn-recheck {
-            background-color: #0284c7;
-            box-shadow: 0 4px 0 #0369a1;
+            background-color: #0277bd;
+            box-shadow: 0 4px 0 #01579b;
         }
-        .btn-recheck:hover { box-shadow: 0 5px 0 #0369a1; }
-        .btn-recheck:active { box-shadow: 0 1px 0 #0369a1; }
+        .btn-recheck:hover { box-shadow: 0 5px 0 #01579b; }
+        .btn-recheck:active { box-shadow: 0 1px 0 #01579b; }
 
         .input-section {
             display: flex;
@@ -548,18 +548,18 @@
         }
 
         #picker-section {
-            background: #1e293b;
+            background: #1b381d;
             padding: 10px;
             border-radius: 6px;
             margin-top: 8px;
-            border: 2px dashed #fbbf24;
+            border: 2px dashed #ffd54f;
             width: 100%;
         }
 
         .picker-title {
             font-family: 'Press Start 2P', monospace;
             font-size: 9px;
-            color: #fbbf24;
+            color: #ffd54f;
             margin-bottom: 6px;
         }
 
@@ -573,7 +573,7 @@
         }
 
         .btn-name {
-            background-color: #7c3aed;
+            background-color: #512da8; /* Warna ungu portal nether yang kontras cerah */
             color: white;
             border: none;
             padding: 6px 12px;
@@ -581,11 +581,11 @@
             font-size: 9px;
             border-radius: 4px;
             cursor: pointer;
-            box-shadow: 0 3px 0 #5b21b6;
+            box-shadow: 0 3px 0 #311b92;
             transition: all 0.1s ease;
         }
         .btn-name:hover { transform: translateY(-1px); }
-        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #5b21b6; }
+        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #311b92; }
 
         #feedback {
             font-family: 'Press Start 2P', monospace;
@@ -594,8 +594,8 @@
             min-height: 20px;
         }
 
-        .correct { color: #34d399; }
-        .wrong { color: #f87171; }
+        .correct { color: #76ff03; }
+        .wrong { color: #ff5252; }
         .hidden { display: none !important; }
 
         .mascot-inline {
@@ -613,41 +613,41 @@
             font-family: 'Outfit', sans-serif;
             font-size: 16px;
             font-weight: 800;
-            color: #f8fafc;
+            color: #f1f8e9;
             margin: 8px 0;
-            background: #0f172a;
+            background: #142815;
             padding: 16px;
             border-radius: 8px;
-            border: 3px dashed #fbbf24;
+            border: 3px dashed #ffd54f;
             line-height: 1.4;
         }
 
         #welcome-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(13, 40, 24, 0.88);
             display: flex; justify-content: center; align-items: center;
             z-index: 99999; backdrop-filter: blur(8px);
         }
 
         .welcome-card {
-            background: #1e293b; padding: 28px; border-radius: 12px; text-align: center; max-width: 420px; width: 90%;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            border: 4px solid #475569;
+            background: #1e3f20; padding: 28px; border-radius: 12px; text-align: center; max-width: 420px; width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 4px solid #556b2f;
             z-index: 100000;
             position: relative;
         }
-        .welcome-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #4ade80; margin-bottom: 10px; line-height: 1.4; text-shadow: 1px 1px #000; }
-        .welcome-desc { font-size: 12px; color: #94a3b8; margin-bottom: 16px; font-weight: 700; line-height: 1.4; }
+        .welcome-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #76ff03; margin-bottom: 10px; line-height: 1.4; text-shadow: 1px 1px #000; }
+        .welcome-desc { font-size: 12px; color: #c8e6c9; margin-bottom: 16px; font-weight: 700; line-height: 1.4; }
     </style>
 </head>
 <body class="theme-LE1">
 
     <div id="welcome-overlay">
         <div class="welcome-card">
-            <div style="font-size: 34px; margin-bottom: 6px;">⛏️💎</div>
+            <div style="font-size: 34px; margin-bottom: 6px;">⛏️🌲</div>
             <div class="welcome-title">CRAFTING NUMBER BOND!</div>
-            <div class="welcome-desc">Selamat datang di game petualangan matematika gaya Minecraft! Siap berhitung bersama Steve & Alex? 🚀✨</div>
+            <div class="welcome-desc">Selamat datang di petualangan matematika hutan hijau Minecraft! Siap berhitung bersama Steve & Alex? 🚀✨</div>
             <button class="btn" id="welcome-btn" type="button">Start Game 🎮</button>
         </div>
     </div>
@@ -656,7 +656,7 @@
         <!-- LOBBY -->
         <div id="lobby-screen">
             <div class="lobby-hero-card">
-                <div class="lobby-hero-title">⛏️ Minecraft Math Adventure 💎</div>
+                <div class="lobby-hero-title">⛏️ Minecraft Math Adventure 🌲</div>
                 <div class="lobby-hero-sub">Pilih level kategori petualanganmu dan masukkan nama para player! ✨</div>
             </div>
             
@@ -738,7 +738,7 @@ Creeper"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Press Start 2P', monospace; font-size: 9px; color: #94a3b8; margin-bottom: 6px;">Crafting Table Formula:</div>
+                    <div style="font-family: 'Press Start 2P', monospace; font-size: 9px; color: #c8e6c9; margin-bottom: 6px;">Crafting Table Formula:</div>
                     
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
@@ -824,12 +824,13 @@ Creeper"></textarea>
         audioBenar.volume = 0.3; 
         audioBenar.load();
 
+        /* PALET PASANGAN WARNA: Lingkaran Kiri & Kanan SAMA, Lingkaran Atas BEDA & KONTRAS */
         const circlePalettes = [
-            { top: '#3b82f6', bottom: '#1d4ed8' }, 
-            { top: '#10b981', bottom: '#047857' }, 
-            { top: '#8b5cf6', bottom: '#6d28d9' }, 
-            { top: '#f59e0b', bottom: '#d97706' }, 
-            { top: '#ec4899', bottom: '#be185d' }  
+            { top: '#b45309', bottom: '#1d4ed8' }, /* Atas Coklat Kayu, Kiri-Kanan Biru Terang */
+            { top: '#c2410c', bottom: '#047857' }, /* Atas Oranye Bata, Kiri-Kanan Hijau Emerald */
+            { top: '#6d28d9', bottom: '#b91c1c' }, /* Atas Ungu Tua, Kiri-Kanan Merah Menyala */
+            { top: '#0284c7', bottom: '#d97706' }, /* Atas Biru Langit, Kiri-Kanan Kuning Emas */
+            { top: '#be185d', bottom: '#0f766e' }  /* Atas Pink Magenta, Kiri-Kanan Toska Gelap */
         ];
 
         const additionPairs = [
@@ -1084,6 +1085,7 @@ Creeper"></textarea>
 
             const palette = circlePalettes[Math.floor(Math.random() * circlePalettes.length)];
 
+            /* Lingkaran Atas berbeda warna, Lingkaran Kiri & Kanan SAMA */
             topValEl.style.background = palette.top;
             leftValEl.style.background = palette.bottom;   
             rightValEl.style.background = palette.bottom;  

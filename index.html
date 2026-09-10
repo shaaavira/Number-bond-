@@ -14,13 +14,14 @@
         }
 
         :root {
-            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%);
+            --bg-gradient: linear-gradient(135deg, #fbcfe8 0%, #fed7aa 50%, #fef08a 100%);
         }
 
-        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%); }
-        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
-        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #f6e58d 0%, #f7d794 50%, #ffeaa7 100%); }
+        /* PALET WARNA MODERN & SELARAS KHUSUS ANAK-ANAK */
+        body.theme-LE1 { --bg-gradient: linear-gradient(135deg, #fbcfe8 0%, #fed7aa 50%, #fef08a 100%); } /* Pink - Peach - Kuning Cerah */
+        body.theme-LE2 { --bg-gradient: linear-gradient(135deg, #bae6fd 0%, #ddd6fe 50%, #fbcfe8 100%); } /* Biru Langit - Ungu Soft - Pink */
+        body.theme-LE3 { --bg-gradient: linear-gradient(135deg, #bbf7d0 0%, #99f6e4 50%, #bae6fd 100%); } /* Hijau Mint - Tosca - Biru Soft */
+        body.theme-CT  { --bg-gradient: linear-gradient(135deg, #fef08a 0%, #fed7aa 50%, #fbcfe8 100%); } /* Kuning Mewah - Peach - Pink */
 
         body {
             background: var(--bg-gradient);
@@ -33,11 +34,11 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            transition: background 0.6s ease;
+            transition: background 0.8s ease;
         }
 
         body.flash-red {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 100%) !important;
+            background: linear-gradient(135deg, #fca5a5 0%, #fecaca 100%) !important;
             animation: shake 0.35s cubic-bezier(.36,.07,.19,.97) both;
         }
 
@@ -48,15 +49,16 @@
         }
 
         .game-container {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(20px);
-            padding: 14px 24px;
-            border-radius: 32px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(16px);
+            padding: 16px 26px;
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0,0,0,0.04);
+            border: 4px solid rgba(255, 255, 255, 0.8);
             width: 100%;
-            max-width: 1050px;
+            max-width: 1100px;
             height: 98vh;
-            max-height: 780px;
+            max-height: 800px;
             text-align: center;
             position: relative;
             display: flex;
@@ -68,23 +70,25 @@
 
         .btn-back {
             position: absolute;
-            top: 14px;
+            top: 16px;
             left: 20px;
             background: #f1f5f9;
-            border: none;
-            padding: 6px 12px;
+            border: 2px solid #e2e8f0;
+            padding: 6px 14px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 14px;
+            font-size: 13px;
             color: #475569;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 3px 0 #cbd5e1;
+            box-shadow: 0 4px 0 #cbd5e1;
             z-index: 100;
+            transition: all 0.15s ease;
         }
+        .btn-back:hover { background: #e2e8f0; transform: translateY(-1px); }
         .btn-back:active { transform: translateY(2px); box-shadow: 0 1px 0 #cbd5e1; }
 
         .title-header-wrapper {
@@ -97,7 +101,7 @@
 
         h1 {
             font-family: 'Outfit', sans-serif;
-            color: #ff4757;
+            color: #db2777;
             font-size: 26px;
             font-weight: 900;
             margin: 0;
@@ -106,12 +110,12 @@
 
         .subtitle {
             font-size: 13px;
-            color: #636e72;
-            margin: 2px 0 4px 0;
+            color: #64748b;
+            margin: 2px 0 6px 0;
             font-weight: 700;
         }
 
-        /* LOBBY BARU YANG LEBIH CERIA & GAMER-STYLE */
+        /* LOBBY */
         #lobby-screen {
             display: flex;
             flex-direction: column;
@@ -120,48 +124,49 @@
             width: 100%;
             flex: 1;
             gap: 12px;
-            padding: 6px 0;
+            padding: 4px 0;
             overflow-y: auto;
         }
 
         .lobby-hero-card {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            border: 4px dashed #ffb74d;
-            border-radius: 22px;
-            padding: 10px 20px;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fff1f2 100%);
+            border: 3px dashed #f43f5e;
+            border-radius: 24px;
+            padding: 12px 20px;
             width: 100%;
-            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.12);
+            max-width: 950px;
+            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.08);
             animation: floatBanner 4s ease-in-out infinite;
         }
         @keyframes floatBanner {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            50% { transform: translateY(-4px); }
         }
 
         .lobby-hero-title {
             font-family: 'Outfit', sans-serif;
             font-size: 24px;
             font-weight: 900;
-            color: #e65100;
+            color: #e11d48;
             margin: 0;
-            text-shadow: 2px 2px 0px #fff;
         }
 
         .lobby-hero-sub {
             font-size: 13px;
             font-weight: 800;
-            color: #af601a;
+            color: #fb7185;
             margin-top: 2px;
         }
 
         .lobby-section-box {
             background: #f8fafc;
-            border: 3px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 22px;
+            padding: 14px 20px;
             width: 100%;
+            max-width: 950px;
             text-align: left;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
         .lobby-section-title {
@@ -178,29 +183,29 @@
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 12px;
             width: 100%;
         }
 
         .cat-card {
             background: #ffffff;
             border: 3px solid #e2e8f0;
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 12px 10px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 0 #cbd5e1;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 5px 0 #cbd5e1;
             position: relative;
         }
 
-        .cat-card:hover { transform: translateY(-3px); box-shadow: 0 7px 0 #cbd5e1; border-color: #94a3b8; }
+        .cat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #cbd5e1; border-color: #94a3b8; }
         .cat-card:active { transform: translateY(1px); box-shadow: 0 2px 0 #cbd5e1; }
         
         .cat-card.selected {
-            background: linear-gradient(135deg, #fff0f3 0%, #ffe3e6 100%);
-            border-color: #ff4757;
-            box-shadow: 0 6px 0 #ff6b81, 0 10px 20px rgba(255, 71, 87, 0.25);
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border-color: #f43f5e;
+            box-shadow: 0 6px 0 #fda4af, 0 10px 20px rgba(244, 63, 94, 0.2);
             transform: translateY(-4px);
         }
 
@@ -216,30 +221,36 @@
             font-weight: 900;
             color: #1e293b;
         }
-        .cat-card.selected .cat-title { color: #ff4757; }
-        .cat-desc { font-size: 11px; color: #64748b; font-weight: 800; margin-top: 3px;}
+        .cat-card.selected .cat-title { color: #f43f5e; }
+        .cat-desc { font-size: 11px; color: #64748b; font-weight: 800; margin-top: 2px;}
 
+        /* INPUT NAMA LEBIH LEBAR DAN LUAS */
         #lobby-screen textarea {
             width: 100%;
-            height: 68px;
-            padding: 10px 14px;
+            height: 95px;
+            padding: 12px 16px;
             border: 3px solid #cbd5e1;
-            border-radius: 14px;
+            border-radius: 16px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             resize: none;
             outline: none;
             color: #1e293b;
             background: #ffffff;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
         }
-        #lobby-screen textarea:focus { border-color: #ff4757; background: #fff; box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.15); }
+        #lobby-screen textarea:focus { 
+            border-color: #f43f5e; 
+            background: #fff; 
+            box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.15), inset 0 2px 4px rgba(0,0,0,0.03); 
+        }
 
         .input-hint {
-            font-size: 11px;
+            font-size: 12px;
             color: #64748b;
-            margin-top: 4px;
+            margin-top: 6px;
             font-weight: 800;
             display: flex;
             align-items: center;
@@ -247,38 +258,38 @@
         }
 
         .btn-start-game {
-            background: linear-gradient(135deg, #2ed573 0%, #26af5f 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
             border: none;
-            padding: 12px 32px;
+            padding: 12px 36px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 18px;
-            border-radius: 18px;
+            border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 6px 0 #1b8a47, 0 10px 20px rgba(46, 213, 115, 0.3);
+            box-shadow: 0 6px 0 #047857, 0 10px 20px rgba(16, 185, 129, 0.3);
             transition: all 0.15s ease;
             letter-spacing: 0.5px;
             margin-top: 2px;
         }
-        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #1b8a47, 0 12px 25px rgba(46, 213, 115, 0.4); }
-        .btn-start-game:active { transform: translateY(3px); box-shadow: 0 3px 0 #1b8a47; }
+        .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #047857, 0 12px 25px rgba(16, 185, 129, 0.4); }
+        .btn-start-game:active { transform: translateY(3px); box-shadow: 0 3px 0 #047857; }
 
-        /* PAPAN SKOR LUCU & MENARIK */
+        /* LEADERBOARD MODERN */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            padding: 8px 18px;
+            gap: 10px;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            padding: 8px 16px;
             border-radius: 20px;
             margin: 4px 0;
             overflow-x: auto;
-            border: 4px dashed #ffb74d;
+            border: 3px dashed #f59e0b;
             width: 100%;
-            max-width: 980px;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.8), 0 4px 10px rgba(255, 183, 77, 0.2);
+            max-width: 950px;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 10px rgba(245, 158, 11, 0.15);
         }
 
         .player-score {
@@ -288,53 +299,49 @@
             border-radius: 14px;
             font-size: 12px;
             font-weight: 800;
-            color: #5d4037;
-            border: 3px solid #ffe0b2;
+            color: #78350f;
+            border: 2px solid #fde68a;
             white-space: nowrap;
             flex-shrink: 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.03);
             transition: transform 0.2s ease;
         }
-        .player-score:hover {
-            transform: translateY(-2px);
-        }
+        .player-score:hover { transform: translateY(-2px); }
         .player-score span {
             display: block;
             font-family: 'Outfit', sans-serif;
             font-size: 18px;
             font-weight: 900;
-            color: #ff7043;
-            text-shadow: 1px 1px 0px #ffe0b2;
+            color: #d97706;
         }
 
         .level-info {
             font-family: 'Outfit', sans-serif;
-            color: #2ed573;
+            color: #059669;
             font-size: 13px;
             font-weight: 800;
             margin: 2px 0;
-            background: #eafaf1;
-            padding: 3px 12px;
-            border-radius: 12px;
-            border: 2px solid #2ed573;
+            background: #ecfdf5;
+            padding: 4px 14px;
+            border-radius: 14px;
+            border: 2px solid #10b981;
             display: inline-block;
         }
 
         /* KOTAK ILUSTRASI GAMBAR */
         .visual-illustration-box {
-            background: #fffbeb;
-            border: 3px solid #fde047;
-            border-radius: 18px;
+            background: #fdf8f6;
+            border: 3px solid #fed7aa;
+            border-radius: 20px;
             padding: 10px 18px;
-            margin: 12px auto;
+            margin: 10px auto;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 16px;
             min-height: 65px;
             max-width: 860px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             overflow-x: auto;
         }
 
@@ -347,10 +354,10 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 6px 12px;
-            border-radius: 10px;
-            border: 2px dashed #fcd34d;
+            border-radius: 12px;
+            border: 2px dashed #ffedd5;
             max-width: 380px;
             gap: 2px;
         }
@@ -383,8 +390,8 @@
             align-items: center;
             justify-content: center;
             background: #f8fafc;
-            border: 3px solid #e2e8f0;
-            border-radius: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 22px;
             padding: 14px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             max-height: 480px;
@@ -413,7 +420,7 @@
             font-size: 36px;
             color: #ffffff;
             border: none;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
             transition: background 0.5s ease;
             position: relative;
             z-index: 2;
@@ -434,7 +441,7 @@
             width: 4px; 
             height: 62px; 
             border-radius: 2px;
-            background-color: #334155;
+            background-color: #475569;
         }
         .branch-lines::before { left: 20px; transform: rotate(32deg); transform-origin: top center; }
         .branch-lines::after { right: 20px; transform: rotate(-32deg); transform-origin: top center; }
@@ -471,21 +478,21 @@
             font-family: 'Outfit', sans-serif;
             font-size: 18px;
             font-weight: 900;
-            color: #2f3542;
+            color: #334155;
             background: #ffffff;
-            padding: 8px 12px;
-            border-radius: 12px;
+            padding: 10px 14px;
+            border-radius: 16px;
             margin-bottom: 8px;
             border: 2px dashed #cbd5e1;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
             width: 100%;
         }
         
         .formula-box span {
-            color: #ff6b81;
+            color: #f43f5e;
             font-weight: 900;
             font-size: 20px;
-            margin: 0 5px;
+            margin: 0 6px;
         }
 
         .form-input {
@@ -495,49 +502,55 @@
             font-family: 'Outfit', sans-serif;
             font-size: 20px;
             font-weight: 900;
-            color: #2f3542;
+            color: #334155;
             background: #f8fafc;
             border: 2px solid #cbd5e1;
-            border-radius: 8px;
+            border-radius: 10px;
             outline: none;
+            transition: all 0.15s ease;
         }
         .form-input:focus {
-            border-color: #2ed573;
+            border-color: #10b981;
             background: #fff;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
         }
 
         .btn {
-            background-color: #2ed573;
+            background-color: #10b981;
             color: white;
             border: none;
-            padding: 9px 20px;
+            padding: 10px 22px;
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 15px;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            box-shadow: 0 3px 0 #26af5f;
-            transition: all 0.1s ease;
+            box-shadow: 0 4px 0 #059669;
+            transition: all 0.15s ease;
         }
-        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #26af5f; }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 #059669; }
+        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #059669; }
 
         .btn-next {
-            background-color: #ffa502;
-            box-shadow: 0 3px 0 #e67e22;
+            background-color: #f59e0b;
+            box-shadow: 0 4px 0 #d97706;
         }
-        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
+        .btn-next:hover { box-shadow: 0 5px 0 #d97706; }
+        .btn-next:active { box-shadow: 0 1px 0 #d97706; }
 
         .btn-retry {
-            background-color: #ff7675;
-            box-shadow: 0 3px 0 #d63031;
+            background-color: #f43f5e;
+            box-shadow: 0 4px 0 #e11d48;
         }
-        .btn-retry:active { box-shadow: 0 2px 0 #d63031; }
+        .btn-retry:hover { box-shadow: 0 5px 0 #e11d48; }
+        .btn-retry:active { box-shadow: 0 1px 0 #e11d48; }
 
         .btn-recheck {
-            background-color: #74b9ff;
-            box-shadow: 0 3px 0 #0984e3;
+            background-color: #0284c7;
+            box-shadow: 0 4px 0 #0369a1;
         }
-        .btn-recheck:active { box-shadow: 0 1px 0 #0984e3; }
+        .btn-recheck:hover { box-shadow: 0 5px 0 #0369a1; }
+        .btn-recheck:active { box-shadow: 0 1px 0 #0369a1; }
 
         .input-section {
             display: flex;
@@ -548,11 +561,11 @@
         }
 
         #picker-section {
-            background: #fff9e6;
-            padding: 8px;
-            border-radius: 12px;
+            background: #fffbeb;
+            padding: 10px;
+            border-radius: 16px;
             margin-top: 8px;
-            border: 2px dashed #ffa502;
+            border: 2px dashed #f59e0b;
             width: 100%;
         }
 
@@ -560,7 +573,7 @@
             font-family: 'Outfit', sans-serif;
             font-size: 13px;
             font-weight: 800;
-            color: #d35400;
+            color: #d97706;
             margin-bottom: 4px;
         }
 
@@ -569,23 +582,25 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 6px;
-            max-height: 55px;
+            max-height: 58px;
             overflow-y: auto;
         }
 
         .btn-name {
-            background-color: #6c5ce7;
+            background-color: #8b5cf6;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 12px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
             font-size: 13px;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 2px 0 #4834d4;
+            box-shadow: 0 3px 0 #7c3aed;
+            transition: all 0.1s ease;
         }
-        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #4834d4; }
+        .btn-name:hover { transform: translateY(-1px); }
+        .btn-name:active { transform: translateY(2px); box-shadow: 0 0 0 #7c3aed; }
 
         #feedback {
             font-family: 'Outfit', sans-serif;
@@ -595,8 +610,8 @@
             min-height: 20px;
         }
 
-        .correct { color: #00b894; }
-        .wrong { color: #d63031; }
+        .correct { color: #059669; }
+        .wrong { color: #e11d48; }
         .hidden { display: none !important; }
 
         .mascot-inline {
@@ -607,45 +622,46 @@
         }
         @keyframes floatMascot {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            50% { transform: translateY(-4px); }
         }
 
         #winner-text {
             font-family: 'Outfit', sans-serif;
             font-size: 16px;
             font-weight: 800;
-            color: #2d3436;
+            color: #1e293b;
             margin: 8px 0;
-            background: #fff9e6;
-            padding: 14px;
-            border-radius: 14px;
-            border: 3px dashed #ffa502;
+            background: #fffbeb;
+            padding: 16px;
+            border-radius: 18px;
+            border: 3px dashed #f59e0b;
             line-height: 1.4;
         }
 
         #welcome-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.5);
             display: flex; justify-content: center; align-items: center;
             z-index: 99999; backdrop-filter: blur(8px);
         }
 
         .welcome-card {
-            background: white; padding: 24px; border-radius: 24px; text-align: center; max-width: 380px; width: 90%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: white; padding: 28px; border-radius: 28px; text-align: center; max-width: 400px; width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border: 4px solid #f1f5f9;
             z-index: 100000;
             position: relative;
         }
-        .welcome-title { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; color: #ff4757; margin-bottom: 6px; }
-        .welcome-desc { font-size: 13px; color: #636e72; margin-bottom: 14px; font-weight: 700; }
+        .welcome-title { font-family: 'Outfit', sans-serif; font-size: 21px; font-weight: 900; color: #f43f5e; margin-bottom: 6px; }
+        .welcome-desc { font-size: 13px; color: #64748b; margin-bottom: 16px; font-weight: 700; line-height: 1.4; }
     </style>
 </head>
 <body class="theme-LE1">
 
     <div id="welcome-overlay">
         <div class="welcome-card">
-            <div style="font-size: 32px; margin-bottom: 4px;">👩‍🏫✨</div>
+            <div style="font-size: 34px; margin-bottom: 6px;">👩‍🏫✨</div>
             <div class="welcome-title">Selamat datang di game buatan Miss Runi</div>
             <div class="welcome-desc">Yuk kita belajar berhitung matematika dengan seru dan gembira! 🍎🌟</div>
             <button class="btn" id="welcome-btn" type="button">Mulai Masuk 🚀</button>
@@ -712,7 +728,7 @@ Uswa"></textarea>
                 </div>
                 <div class="subtitle" id="game-category-badge">Kategori: LE 1</div>
                 
-                <!-- PAPAN SKOR LUCU -->
+                <!-- PAPAN SKOR -->
                 <div class="leaderboard" id="leaderboard-container"></div>
                 
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
@@ -739,7 +755,7 @@ Uswa"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: #636e72; margin-bottom: 4px;">Papan Tulis Teacher:</div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: #64748b; margin-bottom: 4px;">Papan Tulis Teacher:</div>
                     
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
@@ -775,10 +791,10 @@ Uswa"></textarea>
 
         <!-- RESULT -->
         <div id="result-screen" class="hidden" style="width: 100%;">
-            <div style="font-size: 32px; margin-bottom: 4px;">🏆🎉</div>
+            <div style="font-size: 34px; margin-bottom: 4px;">🏆🎉</div>
             <h1>Hore! Permainan Selesai!</h1>
             <div id="winner-text">Pemenangnya adalah...</div>
-            <button class="btn" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
+            <button class="btn btn-next" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
         </div>
     </div>
 
@@ -826,11 +842,11 @@ Uswa"></textarea>
         audioBenar.load();
 
         const circlePalettes = [
-            { top: '#ff6b81', bottom: '#2ed573' }, 
-            { top: '#ff4757', bottom: '#1e90ff' }, 
-            { top: '#9b59b6', bottom: '#e67e22' }, 
-            { top: '#e84393', bottom: '#00cec9' }, 
-            { top: '#fd79a8', bottom: '#0984e3' }  
+            { top: '#f43f5e', bottom: '#10b981' }, 
+            { top: '#8b5cf6', bottom: '#0284c7' }, 
+            { top: '#d97706', bottom: '#059669' }, 
+            { top: '#db2777', bottom: '#2563eb' }, 
+            { top: '#ea580c', bottom: '#0d9488' }  
         ];
 
         const additionPairs = [
@@ -885,9 +901,7 @@ Uswa"></textarea>
         function playClappingAndCheer() {
             try {
                 audioBenar.currentTime = 1.0; 
-                audioBenar.play().catch(e => {
-                    console.log("Audio diblokir browser atau file tidak ditemukan.");
-                });
+                audioBenar.play().catch(e => {});
             } catch(e) {}
         }
 
@@ -929,7 +943,6 @@ Uswa"></textarea>
             setTimeout(() => { document.body.classList.remove('flash-red'); }, 350);
         }
 
-        // PERBAIKAN: Tombol Masuk sekarang dijamin responsif
         welcomeBtn.onclick = function() {
             initAudio();
             playClickSound(); 

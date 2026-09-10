@@ -231,7 +231,7 @@
             display: inline-block;
         }
 
-        /* KOTAK GAMBAR BESAR */
+        /* KOTAK ILUSTRASI GAMBAR */
         .visual-illustration-box {
             background: #fffbeb;
             border: 3px solid #fde047;
@@ -240,9 +240,9 @@
             margin-bottom: 4px;
             display: flex;
             align-items: center;
-            justify-content: space-around; /* Supaya kiri dan kanan terpisah rapi */
-            gap: 20px;
-            min-height: 60px;
+            justify-content: center;
+            gap: 16px;
+            min-height: 55px;
             max-width: 620px;
             margin-left: auto;
             margin-right: auto;
@@ -251,24 +251,16 @@
         }
 
         .emoji-side {
-            font-size: 32px;
-            letter-spacing: 3px;
+            font-size: 30px;
+            letter-spacing: 2px;
             line-height: 1;
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 4px;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 4px 12px;
             border-radius: 10px;
             border: 2px dashed #fcd34d;
-        }
-
-        .vs-label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 14px;
-            font-weight: 900;
-            color: #d97706;
         }
 
         /* LAYOUT UTAMA */
@@ -604,11 +596,10 @@ Uswa"></textarea>
                 <div class="level-info" id="level-text">Soal: 1 / 10</div>
             </div>
 
-            <!-- KOTAK GAMBAR BESAR (TERPISAH KIRI & KANAN) -->
+            <!-- KOTAK ILUSTRASI GAMBAR YANG SINKRON DENGAN KAKI KIRI & KANAN -->
             <div id="visual-illustration-wrapper" class="hidden">
                 <div class="visual-illustration-box">
                     <div id="visual-group-left" class="emoji-side"></div>
-                    <div class="vs-label">Kiri & Kanan</div>
                     <div id="visual-group-right" class="emoji-side"></div>
                 </div>
             </div>
@@ -713,19 +704,20 @@ Uswa"></textarea>
             { top: '#fd79a8', bottom1: '#00b894', bottom2: '#0984e3' }
         ];
 
+        // Pasangan gambar untuk Kiri & Kanan yang akurat sesuai nilai kakinya
         const additionPairs = [
-            { a: '👕', b: '👚' }, 
-            { a: '🥛', b: '🍵' }, 
-            { a: '🍎', b: '🍏' }, 
-            { a: '🐓', b: '🐔' }, 
-            { a: '🍪', b: '🧁' }  
+            { left: '👕', right: '👚' }, 
+            { left: '🥛', right: '🍵' }, 
+            { left: '🍎', right: '🍏' }, 
+            { left: '🐓', right: '🐔' }, 
+            { left: '🍪', right: '🧁' }  
         ];
 
         const subtractionPairs = [
-            { normal: '🍎', alt: '🍏' }, 
-            { normal: '🥚', alt: '🍳' }, 
-            { normal: '🥛', alt: '🧃' }, 
-            { normal: '🍪', alt: '🍩' }  
+            { left: '🍏', right: '🍎' }, 
+            { left: '🍳', right: '🥚' }, 
+            { left: '🧃', right: '🥛' }, 
+            { left: '🍩', right: '🍪' }  
         ];
 
         function initAudio() {
@@ -941,35 +933,26 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // MAPPING ILUSTRASI KIRI & KANAN SESUAI KAKI NUMBER BOND
+            // SINKRONISASI GAMBAR DENGAN KAKI KIRI & KANAN NUMBER BOND
             if (kategoriPilihan === 'CT') {
                 visualIllustrationWrapper.classList.add('hidden');
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
                 let limitCount = 8;
 
+                // Kaki kiri bernilai nilaiBagianA, kaki kanan bernilai nilaiBagianB
                 if (posisiKosong === 2) {
-                    let chosenAdd = additionPairs[Math.floor(Math.random() * additionPairs.length)];
-                    let countA = Math.min(nilaiBagianA, limitCount);
-                    let countB = Math.min(nilaiBagianB, limitCount);
-                    visualGroupLeft.innerHTML = chosenAdd.a.repeat(countA);
-                    visualGroupRight.innerHTML = chosenAdd.b.repeat(countB);
+                    let chosenPair = additionPairs[Math.floor(Math.random() * additionPairs.length)];
+                    let countLeft = Math.min(nilaiBagianA, limitCount);
+                    let countRight = Math.min(nilaiBagianB, limitCount);
+                    visualGroupLeft.innerHTML = chosenPair.left.repeat(countLeft);
+                    visualGroupRight.innerHTML = chosenPair.right.repeat(countRight);
                 } else {
-                    let chosenSub = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
-                    let partA = posisiKosong === 1 ? nilaiBagianA : nilaiBagianB; 
-                    let partB = posisiKosong === 1 ? nilaiBagianB : nilaiBagianA; 
-                    
-                    let countA = Math.min(partA, limitCount);
-                    let countB = Math.min(partB, limitCount);
-
-                    // Sisi kiri merepresentasikan kaki kiri, sisi kanan merepresentasikan kaki kanan
-                    if (posisiKosong === 1) {
-                        visualGroupLeft.innerHTML = chosenSub.alt.repeat(countA);
-                        visualGroupRight.innerHTML = chosenSub.normal.repeat(countB);
-                    } else {
-                        visualGroupLeft.innerHTML = chosenSub.normal.repeat(countA);
-                        visualGroupRight.innerHTML = chosenSub.alt.repeat(countB);
-                    }
+                    let chosenPair = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
+                    let countLeft = Math.min(nilaiBagianA, limitCount);
+                    let countRight = Math.min(nilaiBagianB, limitCount);
+                    visualGroupLeft.innerHTML = chosenPair.left.repeat(countLeft);
+                    visualGroupRight.innerHTML = chosenPair.right.repeat(countRight);
                 }
             }
 

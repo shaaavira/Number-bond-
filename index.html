@@ -647,11 +647,12 @@ Uswa"></textarea>
                     </div>
 
                     <div id="picker-section" class="hidden">
-                        <div class="picker-title" id="picker-title-text">Siapa yang mau diberi skor? 👇</div>
+                        <div id="feedback"></div>
+                        <div class="picker-title" id="picker-title-text" style="margin-top: 6px;">Siapa yang mau diberi skor? 👇</div>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
-                    <div id="feedback"></div>
+                    <div id="feedback-outside" style="min-height: 24px;"></div>
                 </div>
             </div>
 
@@ -687,6 +688,7 @@ Uswa"></textarea>
         const formVal3 = document.getElementById('form-val3');
         const formOperator = document.getElementById('form-operator');
         const feedbackEl = document.getElementById('feedback');
+        const feedbackOutside = document.getElementById('feedback-outside');
         const levelText = document.getElementById('level-text');
         const pickerTitleText = document.getElementById('picker-title-text');
         
@@ -895,6 +897,7 @@ Uswa"></textarea>
 
         function buatSoalBaru() {
             feedbackEl.innerHTML = '';
+            feedbackOutside.innerHTML = '';
             pickerSection.classList.add('hidden');
             submitBtn.style.display = 'inline-block';
             retryBtn.classList.add('hidden');
@@ -1007,7 +1010,7 @@ Uswa"></textarea>
             const jawabanUser = parseInt(activeInput.value);
 
             if (isNaN(jawabanUser)) {
-                feedbackEl.innerHTML = "<span class='wrong'>Masukkan angka di Number Bond dulu ya! 🤔</span>";
+                feedbackOutside.innerHTML = "<span class='wrong'>Masukkan angka di Number Bond dulu ya! 🤔</span>";
                 return;
             }
 
@@ -1022,7 +1025,7 @@ Uswa"></textarea>
                 
                 isSalahSesi = false;
                 pickerTitleText.innerText = "Siapa paling cepat benar? (Poin +10): 👇";
-                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih siswa yang menjawab: 👇</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! ✨</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
                 playSound('wrong');
@@ -1032,7 +1035,7 @@ Uswa"></textarea>
                 submitBtn.style.display = 'none';
                 isSalahSesi = true;
 
-                feedbackEl.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di atas untuk membetulkan jawaban. 💪</span>`;
+                feedbackOutside.innerHTML = `<span class='wrong'>Kurang tepat! Klik tombol di atas untuk membetulkan jawaban. 💪</span>`;
                 retryBtn.classList.remove('hidden');
             }
         }
@@ -1047,7 +1050,7 @@ Uswa"></textarea>
                 activeInput.focus();
             }
 
-            feedbackEl.innerHTML = "<span class='wrong'>Silakan betulkan jawabannya bersama siswa, lalu klik Periksa Lagi! ✍️</span>";
+            feedbackOutside.innerHTML = "<span class='wrong'>Silakan betulkan jawabannya bersama siswa, lalu klik Periksa Lagi! ✍️</span>";
             recheckBtn.classList.remove('hidden');
         }
 
@@ -1064,28 +1067,29 @@ Uswa"></textarea>
                 recheckBtn.classList.add('hidden');
 
                 pickerTitleText.innerText = "Pilih siswa yang membetulkan jawaban (Poin +5): 👇";
-                feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. Pilih siswa yang diberi poin: 👇</span>";
+                feedbackEl.innerHTML = "<span class='correct'>Hebat! Jawaban sudah benar. 👏</span>";
                 pickerSection.classList.remove('hidden');
             } else {
                 playSound('wrong');       
                 triggerFlashRed();        
-                feedbackEl.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
+                feedbackOutside.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
             }
         }
 
         function aksiPilihAnak(index) {
             pickerSection.classList.add('hidden');
+            feedbackEl.innerHTML = '';
 
             if (!isSalahSesi) {
                 daftarPemain[index].skor += 10;
                 updatePapanSkor();
-                feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
+                feedbackOutside.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🌟</span>`;
                 nextBtn.classList.remove('hidden');
             } else {
                 daftarPemain[index].skor += 5;
                 updatePapanSkor();
                 
-                feedbackEl.innerHTML = `<span class='correct'>Kerja bagus ${daftarPemain[index].nama.toUpperCase()} sudah membetulkan jawaban! Poin +5 👏</span>`;
+                feedbackOutside.innerHTML = `<span class='correct'>Kerja bagus ${daftarPemain[index].nama.toUpperCase()} sudah membetulkan jawaban! Poin +5 👏</span>`;
                 nextBtn.classList.remove('hidden');
             }
         }

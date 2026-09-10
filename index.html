@@ -929,12 +929,12 @@ Uswa"></textarea>
             setTimeout(() => { document.body.classList.remove('flash-red'); }, 350);
         }
 
-        welcomeBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+        // PERBAIKAN: Tombol Masuk sekarang dijamin responsif
+        welcomeBtn.onclick = function() {
             initAudio();
             playClickSound(); 
             welcomeOverlay.classList.add('hidden');
-        });
+        };
 
         function pilihKategori(kode, element) {
             kategoriPilihan = kode;
@@ -1211,7 +1211,6 @@ Uswa"></textarea>
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum tepat, yuk coba periksa lagi angkanya! 🤔</span>";
-                recheckBtn.classList.1 = 'hidden';
                 recheckBtn.classList.remove('hidden');
             }
         }

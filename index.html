@@ -318,23 +318,24 @@
             transition: background 0.5s ease;
         }
 
+        /* Garis Penghubung Panjang (Bentuk /\ Menyatukan Kiri-Atas & Kanan-Atas) */
         .branch-lines {
-            width: 130px;  
-            height: 10px;  
+            width: 175px;  
+            height: 52px;  
             position: relative;
-            margin-bottom: 4px;
+            margin: -6px 0;
         }
         .branch-lines::before, .branch-lines::after {
             content: '';
             position: absolute;
             top: 0;
             width: 6px; 
-            height: 22px; 
+            height: 56px; 
             border-radius: 3px;
             background-color: #94a3b8;
         }
-        .branch-lines::before { left: 18px; transform: rotate(30deg); }
-        .branch-lines::after { right: 18px; transform: rotate(-30deg); }
+        .branch-lines::before { left: 24px; transform: rotate(32deg); transform-origin: top center; }
+        .branch-lines::after { right: 24px; transform: rotate(-32deg); transform-origin: top center; }
 
         .bottom-circles {
             display: flex;
@@ -696,13 +697,12 @@ Uswa"></textarea>
 
         let audioCtx = null;
 
-        // Lingkaran kanan & kiri warnanya SAMA, lingkaran atas kontras
         const circlePalettes = [
-            { top: '#ff6b81', bottom: '#2ed573' }, // Atas Merah Muda, Kiri & Kanan Hijau
-            { top: '#ff4757', bottom: '#1e90ff' }, // Atas Merah, Kiri & Kanan Biru
-            { top: '#9b59b6', bottom: '#e67e22' }, // Atas Ungu, Kiri & Kanan Oranye
-            { top: '#e84393', bottom: '#00cec9' }, // Atas Pink, Kiri & Kanan Toska
-            { top: '#fd79a8', bottom: '#0984e3' }  // Atas Soft Pink, Kiri & Kanan Biru Laut
+            { top: '#ff6b81', bottom: '#2ed573' }, 
+            { top: '#ff4757', bottom: '#1e90ff' }, 
+            { top: '#9b59b6', bottom: '#e67e22' }, 
+            { top: '#e84393', bottom: '#00cec9' }, 
+            { top: '#fd79a8', bottom: '#0984e3' }  
         ];
 
         const additionPairs = [
@@ -954,12 +954,11 @@ Uswa"></textarea>
                 }
             }
 
-            // PILIH WARNA: LINGKARAN KANAN & KIRI DISAMAKAN
             const palette = circlePalettes[Math.floor(Math.random() * circlePalettes.length)];
 
             topValEl.style.background = palette.top;
-            leftValEl.style.background = palette.bottom;   // Lingkaran Kiri
-            rightValEl.style.background = palette.bottom;  // Lingkaran Kanan (SAMA PERSIS DENGAN KIRI)
+            leftValEl.style.background = palette.bottom;   
+            rightValEl.style.background = palette.bottom;  
 
             topValEl.innerHTML = '';
             leftValEl.innerHTML = '';

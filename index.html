@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Ceria!</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Quicksand:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/canvas-confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -280,6 +280,8 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 36px;
+            color: #ffffff; /* Tulisan angka di dalam lingkaran Number Bond menjadi putih */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Bayangan lembut agar teks putih sangat kontras dan cantik dibaca */
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             transition: background 0.6s ease, border-color 0.6s ease, transform 0.3s ease;
         }
@@ -320,7 +322,7 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
             font-size: 34px;
-            color: #2d3436;
+            color: #ffffff; /* Warna input angka yang diketik anak juga putih */
             outline: none;
             border-radius: 50%;
         }
@@ -654,13 +656,12 @@ Uswa"></textarea>
 
         let audioCtx = null;
 
-        // Palet warna modern, cerah, aesthetic, dan cantik untuk anak-anak
         const gorgeousPalettes = [
-            { top: 'linear-gradient(135deg, #ff9a8b 0%, #ff6a88 100%)', borderTop: '#ffccd5', bottom: 'linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%)', borderBottom: '#dbeafe' }, // Sunset Rose & Ocean Blue
-            { top: 'linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%)', borderTop: '#fdf2f8', bottom: 'linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%)', borderBottom: '#eff6ff' }, // Cotton Candy Pink & Sky Blue
-            { top: 'linear-gradient(135deg, #fde047 0%, #eab308 100%)', borderTop: '#fef9c3', bottom: 'linear-gradient(135deg, #34d399 0%, #059669 100%)', borderBottom: '#ecfdf5' }, // Sunny Yellow & Emerald Mint
-            { top: 'linear-gradient(135deg, #c084fc 0%, #9333ea 100%)', borderTop: '#f3e8ff', bottom: 'linear-gradient(135deg, #38bdf8 0%, #0284c7 100%)', borderBottom: '#e0f2fe' }, // Neon Lilac & Bright Cyan
-            { top: 'linear-gradient(135deg, #fb7185 0%, #e11d48 100%)', borderTop: '#ffe4e6', bottom: 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)', borderBottom: '#fef3c7' }  // Vibrant Coral & Warm Amber
+            { top: 'linear-gradient(135deg, #ff9a8b 0%, #ff6a88 100%)', borderTop: '#ffccd5', bottom: 'linear-gradient(135deg, #6ee7b7 0%, #3b82f6 100%)', borderBottom: '#dbeafe' },
+            { top: 'linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%)', borderTop: '#fdf2f8', bottom: 'linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%)', borderBottom: '#eff6ff' },
+            { top: 'linear-gradient(135deg, #fde047 0%, #eab308 100%)', borderTop: '#fef9c3', bottom: 'linear-gradient(135deg, #34d399 0%, #059669 100%)', borderBottom: '#ecfdf5' },
+            { top: 'linear-gradient(135deg, #c084fc 0%, #9333ea 100%)', borderTop: '#f3e8ff', bottom: 'linear-gradient(135deg, #38bdf8 0%, #0284c7 100%)', borderBottom: '#e0f2fe' },
+            { top: 'linear-gradient(135deg, #fb7185 0%, #e11d48 100%)', borderTop: '#ffe4e6', bottom: 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)', borderBottom: '#fef3c7' }
         ];
 
         function initAudio() {
@@ -672,7 +673,7 @@ Uswa"></textarea>
             }
         }
 
-        // Efek Suara Tepuk Tangan & Nada Sukses Gembira
+        // Fungsi efek suara tepuk tangan & melodi sukses gembira
         function playClappingAndCheer() {
             try {
                 initAudio();
@@ -877,7 +878,6 @@ Uswa"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // Memilih palet warna modern, cerah, dan cantik secara acak untuk setiap soal
             const gorgeousPalette = gorgeousPalettes[Math.floor(Math.random() * gorgeousPalettes.length)];
 
             topValEl.style.background = gorgeousPalette.top;
@@ -937,7 +937,7 @@ Uswa"></textarea>
             }
 
             if (jawabanUser === jawabanBenar) {
-                // Efek jawaban benar: Konfeti meriah & Suara tepuk tangan gembira
+                // PANGGIL EFEK KONFETI DAN SUARA TEPUK TANGAN DI SINI SAAT JAWABAN BENAR
                 playClappingAndCheer();
                 triggerConfetti();
                 
@@ -951,7 +951,6 @@ Uswa"></textarea>
                 feedbackEl.innerHTML = "<span class='correct'>Yey, Benar! Pilih siswa yang menjawab: 👇</span>";
                 pickerSection.classList.remove('hidden'); 
             } else {
-                // Jawaban Salah
                 playSound('wrong');
                 triggerFlashRed();
 
@@ -984,7 +983,7 @@ Uswa"></textarea>
             const jawabanBaru = parseInt(activeInput.value);
 
             if (jawabanBaru === jawabanBenar) {
-                // Efek jawaban benar saat periksa ulang: Konfeti meriah & Suara tepuk tangan gembira
+                // PANGGIL EFEK KONFETI DAN SUARA TEPUK TANGAN DI SINI SAAT JAWABAN BENAR KETIKA DIPERIKSA ULANG
                 playClappingAndCheer();
                 triggerConfetti();
 

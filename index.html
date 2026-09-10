@@ -781,7 +781,6 @@ Siti"></textarea>
                 playSound('wrong');
                 triggerFlashRed();
                 feedbackEl.innerHTML = `<span class='wrong'>Wah kurang tepat! Jawabannya: ${jawabanBenar} 💪</span>`;
-                // Tampilkan tombol next agar guru bisa membahas dulu sebelum lanjut
                 nextBtn.classList.remove('hidden');
             }
         }
@@ -791,7 +790,6 @@ Siti"></textarea>
             updatePapanSkor();
             pickerSection.classList.add('hidden');
             feedbackEl.innerHTML = `<span class='correct'>Poin +10 untuk ${daftarPemain[index].nama.toUpperCase()}! 🎈</span>`;
-            // Tampilkan tombol next untuk melanjutkan setelah selesai dibahas
             nextBtn.classList.remove('hidden');
         }
 

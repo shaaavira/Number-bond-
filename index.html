@@ -715,17 +715,17 @@ Uswa"></textarea>
 
         const additionPairs = [
             { left: '👕', right: '👚' }, 
-            { left: '🥛', right: '🍵' }, 
+            { left: '🥐', right: '🥨' }, 
             { left: '🍎', right: '🍏' }, 
-            { left: '🐓', right: '🐔' }, 
+            { left: '🦢', right: '🦆' }, 
             { left: '🍪', right: '🧁' }  
         ];
 
         const subtractionPairs = [
-            { left: '🍏', right: '🍎' }, 
-            { left: '🍳', right: '🥚' }, 
-            { left: '🧃', right: '🥛' }, 
-            { left: '🍩', right: '🍪' }  
+            { left: '🥀', right: '🌹' }, 
+            { left: '🫗', right: '🥛' }, 
+            { left: '🍖', right: '🍗' }, 
+            { left: '🫝', right: '🍎' }  
         ];
 
         let audioCtx = null;
@@ -737,6 +737,29 @@ Uswa"></textarea>
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
+            } catch(e) {}
+        }
+
+        // FUNGSI SUARA KLIK UNTUK TOMBOL "MULAI MASUK"
+        function playClickSound() {
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                let now = audioCtx.currentTime;
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, now);
+                osc.frequency.exponentialRampToValueAtTime(300, now + 0.08);
+                
+                gainNode.gain.setValueAtTime(0.15, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                
+                osc.start(now);
+                osc.stop(now + 0.08);
             } catch(e) {}
         }
 
@@ -791,7 +814,7 @@ Uswa"></textarea>
         welcomeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             initAudio();
-            playClappingAndCheer();
+            playClickSound(); // Menggunakan suara klik, bukan audio Hore
             triggerConfetti();
             welcomeOverlay.classList.add('hidden');
         });

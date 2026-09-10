@@ -305,6 +305,8 @@
             border-radius: 20px;
             padding: 14px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            max-height: 480px;
+            overflow-y: auto;
         }
 
         /* NUMBER BOND */
@@ -441,13 +443,13 @@
             background-color: #ffa502;
             box-shadow: 0 3px 0 #e67e22;
         }
-        .btn-next:active { box-shadow: 0 2px 0 #e67e22; }
+        .btn-next:active { box-shadow: 0 1px 0 #e67e22; }
 
         .btn-retry {
             background-color: #ff7675;
             box-shadow: 0 3px 0 #d63031;
         }
-        .btn-retry:active { box-shadow: 0 2px 0 #d63031; }
+        .btn-retry:active { box-shadow: 0 1px 0 #d63031; }
 
         .btn-recheck {
             background-color: #74b9ff;
@@ -657,11 +659,11 @@ Uswa"></textarea>
                         <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
                         <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Betulkan Jawaban ✍️</button>
                         <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
-                        <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
-                    <div id="formula-check-section" class="hidden" style="margin-top: 6px;">
+                    <div id="formula-check-section" class="hidden" style="margin-top: 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;">
                         <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Jawaban Papan Tulis 🔍</button>
+                        <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Soal ➔</button>
                     </div>
 
                     <div id="picker-section" class="hidden">
@@ -965,7 +967,6 @@ Uswa"></textarea>
             } else {
                 visualIllustrationWrapper.classList.remove('hidden');
                 
-                // Ukuran emoji dibuat lebih besar khusus untuk LE 1 (36px) dan LE 2 (32px)
                 if (kategoriPilihan === 'LE1') {
                     visualGroupLeft.style.fontSize = '36px';
                     visualGroupRight.style.fontSize = '36px';

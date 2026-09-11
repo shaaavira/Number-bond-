@@ -26,7 +26,6 @@
             --visual-dash: #38bdf8;
         }
 
-        /* TEMA WARNA MODERN & CERIA ANAK-ANAK */
         body.theme-LE1 { 
             --bg-gradient: linear-gradient(135deg, #00B4DB 0%, #83F4FF 100%); 
             --container-bg: #0c2d38;
@@ -168,7 +167,6 @@
             font-weight: 700;
         }
 
-        /* LOBBY */
         #lobby-screen {
             display: flex;
             flex-direction: column;
@@ -737,7 +735,6 @@
             50% { transform: translateY(-4px); }
         }
 
-        /* REDESIGNED RESULT SCREEN (VICTORY SURVIVAL) */
         #result-screen {
             display: flex;
             flex-direction: column;
@@ -812,7 +809,6 @@
     </div>
 
     <div class="game-container">
-        <!-- LOBBY -->
         <div id="lobby-screen">
             <div class="lobby-hero-card">
                 <div class="lobby-hero-title">✨ Math Adventure Arena 🚀</div>
@@ -863,7 +859,6 @@ Creeper"></textarea>
             <div id="lobby-error" class="wrong" style="font-size: 12px; font-weight: 800; min-height: 16px;"></div>
         </div>
 
-        <!-- GAME SCREEN -->
         <div id="game-screen" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; position: relative;">
             <button class="btn-back" onclick="kembaliKeLobby()">⬅️ Menu</button>
             
@@ -878,7 +873,7 @@ Creeper"></textarea>
                 <div class="level-info" id="level-text">Level: 1 / 10</div>
             </div>
 
-            <div id="visual-illustration-wrapper" class="">
+            <div id="visual-illustration-wrapper">
                 <div class="visual-illustration-box" id="visual-box-container">
                     <div id="visual-group-left" class="emoji-side"></div>
                     <div id="visual-group-right" class="emoji-side"></div>
@@ -932,7 +927,6 @@ Creeper"></textarea>
             <div style="height: 2px;"></div>
         </div>
 
-        <!-- RESULT (REDESIGNED) -->
         <div id="result-screen" class="hidden">
             <div class="victory-trophy-badge">🏆✨</div>
             <h1 style="font-size: 20px; letter-spacing: 1px;">VICTORY SURVIVAL!</h1>
@@ -1000,20 +994,13 @@ Creeper"></textarea>
             { left: '🌹', right: '🥀' }  
         ];
 
-        const pairColors = [
-            "#3b82f6", "#ef4444", "#10b981", "#f59e0b", 
-            "#8b5cf6", "#ec4899", "#06b6d4", "#f97316"  
-        ];
+        const pairColors = ["#3b82f6", "#ef4444", "#10b981", "#f59e0b", "#8b5cf6", "#ec4899", "#06b6d4", "#f97316"];
 
         let audioCtx = null;
         function initAudio() {
             try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
             } catch(e) {}
         }
 
@@ -1026,14 +1013,11 @@ Creeper"></textarea>
                 osc.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
                 let now = audioCtx.currentTime;
-                
                 osc.type = 'square';
                 osc.frequency.setValueAtTime(440, now);
                 osc.frequency.exponentialRampToValueAtTime(220, now + 0.1);
-                
                 gainNode.gain.setValueAtTime(0.4, now);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-                
                 osc.start(now);
                 osc.stop(now + 0.1);
             } catch(e) {}
@@ -1070,12 +1054,7 @@ Creeper"></textarea>
         function triggerConfetti() {
             try {
                 if (typeof confetti === 'function') {
-                    confetti({ 
-                        particleCount: 160, 
-                        spread: 100, 
-                        origin: { y: 0.6 },
-                        zIndex: 999999 
-                    });
+                    confetti({ particleCount: 160, spread: 100, origin: { y: 0.6 }, zIndex: 999999 });
                 }
             } catch(e) {}
         }
@@ -1207,12 +1186,7 @@ Creeper"></textarea>
             }
 
             posisiKosong = Math.floor(Math.random() * 3);
-
-            if (posisiKosong === 2) {
-                formOperator.innerText = '+'; 
-            } else {
-                formOperator.innerText = '-'; 
-            }
+            formOperator.innerText = (posisiKosong === 2) ? '+' : '-';
 
             visualIllustrationWrapper.classList.remove('hidden');
             if (kategoriPilihan === 'CT') {
@@ -1314,7 +1288,7 @@ Creeper"></textarea>
                 submitBtn.style.display = 'none';
                 isSalahSesi = true;
 
-                feedbackOutside.innerHTML = `<span class='wrong'>Belum pas! Klik tombol di bawah untuk memperbaikinya. 💪</span>`;
+                feedbackOutside.innerHTML = "<span class='wrong'>Belum pas! Klik tombol di bawah untuk memperbaikinya. 💪</span>";
                 retryBtn.classList.remove('hidden');
             }
         }
@@ -1366,9 +1340,7 @@ Creeper"></textarea>
                 
                 recheckBtn.classList.add('hidden');
                 retryBtn.classList.remove('hidden');
-                if (activeInput) {
-                    activeInput.disabled = true;
-                }
+                if (activeInput) activeInput.disabled = true;
             }
         }
 
@@ -1440,7 +1412,7 @@ Creeper"></textarea>
                 let pemenang = daftarPemain.filter(p => p.skor === maksSkor);
 
                 if (maksSkor === 0) {
-                    winnerText.innerHTML = `Belum ada XP yang terkumpul! Ayo coba lagi petualangan survival-nya. 🤗`;
+                    winnerText.innerHTML = "Belum ada XP yang terkumpul! Ayo coba lagi petualangan survival-nya. 🤗";
                 } else if (pemenang.length > 1) {
                     let namaPemenang = pemenang.map(p => p.nama).join(" & ");
                     winnerText.innerHTML = `🤝 <b>VICTORY BERSAMA!</b> 🤝<br><span style="font-size: 15px; color: var(--accent-color); margin-top: 8px; display: block;">Player hebat: ${namaPemenang} (${maksSkor} XP)</span>`;

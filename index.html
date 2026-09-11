@@ -271,10 +271,14 @@
             transform: translateY(-2px);
         }
 
-        .cat-emoji {
-            font-size: 32px;
-            margin-bottom: 8px;
+        /* CSS UNTUK GAMBAR KATEGORI (CUSTOM IMAGE) */
+        .cat-img {
+            width: 38px;
+            height: auto;
             display: block;
+            margin: 0 auto 8px auto;
+            /* Jika pakai gambar piksel/Minecraft, aktifkan baris di bawah: */
+            /* image-rendering: pixelated; */
         }
 
         .cat-title {
@@ -546,8 +550,8 @@
         }
 
         .branch-lines {
-            width: 240px;  /* Lebar bentangan garis kaki */
-            height: 45px;  /* Tinggi area ruang garis */
+            width: 240px;  
+            height: 45px;  
             position: relative;
             margin-top: -12px;
             margin-bottom: -15px;
@@ -558,7 +562,7 @@
             position: absolute;
             bottom: 0;
             width: 6px; 
-            height: 75px; /* <--- GARIS KAKI DIPERPANJANG KE ATAS */
+            height: 75px; 
             border-radius: 3px;
             background-color: var(--border-main); 
             border: 1px solid rgba(0,0,0,0.5);
@@ -569,8 +573,8 @@
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 300px; /* <--- JARAK KIRI DAN KANAN LINGKARAN BAWAH */
-            margin-top: -5px; /* <--- POSISI NAIK KE ATAS */
+            width: 300px; 
+            margin-top: -5px; 
         }
 
         .circle input {
@@ -793,23 +797,27 @@
                 <div class="lobby-section-box" style="flex: 1.2;">
                     <div class="lobby-section-title">🗺️ Kategori Level:</div>
                     <div class="category-grid">
+                        <!-- KATEGORI LE 1 -->
                         <div id="card-LE1" class="cat-card selected" onclick="pilihKategori('LE1', this)">
-                            <span class="cat-emoji">💧</span>
+                            <img src="le1.png" alt="LE 1" class="cat-img">
                             <div class="cat-title">LE 1</div>
                             <div class="cat-desc">Number bond 1-5</div>
                         </div>
+                        <!-- KATEGORI LE 2 -->
                         <div id="card-LE2" class="cat-card" onclick="pilihKategori('LE2', this)">
-                            <span class="cat-emoji">🪵</span>
+                            <img src="le2.png" alt="LE 2" class="cat-img">
                             <div class="cat-title">LE 2</div>
                             <div class="cat-desc">Number bond 1-10</div>
                         </div>
+                        <!-- KATEGORI LE 3 -->
                         <div id="card-LE3" class="cat-card" onclick="pilihKategori('LE3', this)">
-                            <span class="cat-emoji">🍎</span>
+                            <img src="le3.png" alt="LE 3" class="cat-img">
                             <div class="cat-title">LE 3</div>
                             <div class="cat-desc">Number bond 1-20</div>
                         </div>
+                        <!-- KATEGORI CT -->
                         <div id="card-CT" class="cat-card" onclick="pilihKategori('CT', this)">
-                            <span class="cat-emoji">🪙</span>
+                            <img src="ct.png" alt="CT" class="cat-img">
                             <div class="cat-title">CT</div>
                             <div class="cat-desc">Number bond ratusan</div>
                         </div>

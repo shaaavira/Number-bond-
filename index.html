@@ -546,11 +546,11 @@
         }
 
         .branch-lines {
-            width: 140px;  
-            height: 35px;  
+            width: 220px;  /* Lebar garis cabang agar sesuai dengan jarak lingkaran bawah */
+            height: 25px;  
             position: relative;
-            margin-top: -10px;
-            margin-bottom: -10px;
+            margin-top: -5px;
+            margin-bottom: -5px;
             z-index: 1;
         }
         .branch-lines::before, .branch-lines::after {
@@ -558,18 +558,19 @@
             position: absolute;
             bottom: 0;
             width: 6px; 
-            height: 68px; 
+            height: 50px; 
             border-radius: 3px;
             background-color: var(--border-main); 
             border: 1px solid rgba(0,0,0,0.5);
         }
-        .branch-lines::before { left: 20px; transform: rotate(30deg); transform-origin: top center; }
-        .branch-lines::after { right: 20px; transform: rotate(-30deg); transform-origin: top center; }
+        .branch-lines::before { left: 35px; transform: rotate(42deg); transform-origin: top center; }
+        .branch-lines::after { right: 35px; transform: rotate(-42deg); transform-origin: top center; }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 230px; 
+            width: 310px; /* <--- ATUR JARAK KANAN & KIRI DI SINI (Perbesar angka untuk makin renggang, perkecil untuk makin rapat) */
+            margin-top: -15px; /* <--- ATUR POSISI NAIK KE ATAS DI SINI (Ubah jadi angka minus lebih besar misal -25px agar makin ke atas) */
         }
 
         .circle input {

@@ -376,7 +376,7 @@
             display: inline-block;
         }
 
-        /* TABEL GAMBAR (DIPERBESAR & LEBIH LEGA) */
+        /* TABEL GAMBAR / ILUSTRASI */
         .visual-illustration-box {
             background: #182836;
             border: 3px solid #38bdf8;
@@ -390,10 +390,12 @@
             min-height: 85px;
             max-width: 920px;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 4px 12px rgba(56, 189, 248, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
         .emoji-side {
-            font-size: 34px; /* Ukuran emoji diperbesar dari 24px menjadi 34px */
+            font-size: 34px;
             letter-spacing: 4px;
             line-height: 1.4;
             white-space: normal;
@@ -407,6 +409,56 @@
             border: 2px dashed #38bdf8;
             max-width: 440px;
             gap: 6px;
+        }
+
+        /* KHUSUS DESAIN KOTAK CT (RATUSAN) AGAR TIDAK SEPI */
+        .ct-banner-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 4px 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ct-floating-block {
+            font-size: 28px;
+            animation: floatBlock 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+        }
+        .ct-floating-block:nth-child(2) {
+            animation-delay: 1.25s;
+        }
+
+        @keyframes floatBlock {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        .ct-treasure-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ct-main-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            color: #fef08a;
+            text-shadow: 1px 1px #000;
+            letter-spacing: 1px;
+        }
+
+        .ct-sub-desc {
+            font-size: 11px;
+            font-weight: 800;
+            color: #93c5fd;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px dashed #60a5fa;
         }
 
         .game-main-layout {
@@ -706,8 +758,8 @@
     <div id="welcome-overlay">
         <div class="welcome-card">
             <div style="font-size: 32px; margin-bottom: 6px;">🎮✨</div>
-            <div class="welcome-title">CRAFTING NUMBER BOND!</div>
-            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! Siap berhitung bersama jagoan cilik? 🚀</div>
+            <div class="welcome-title">CRAFTING NUMBER BOND WITH MISS RUNI!</div>
+            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! 🚀</div>
             <button class="btn" id="welcome-btn" type="button">Start Game 🎮</button>
         </div>
     </div>
@@ -740,7 +792,7 @@
                             <div class="cat-desc">Number bond 1-20</div>
                         </div>
                         <div id="card-CT" class="cat-card" onclick="pilihKategori('CT', this)">
-                            <span class="cat-emoji">🍊</span>
+                            <span class="cat-emoji">🪙</span>
                             <div class="cat-title">CT</div>
                             <div class="cat-desc">Number bond ratusan</div>
                         </div>
@@ -779,8 +831,8 @@ Creeper"></textarea>
                 <div class="level-info" id="level-text">Level: 1 / 10</div>
             </div>
 
-            <div id="visual-illustration-wrapper" class="hidden">
-                <div class="visual-illustration-box">
+            <div id="visual-illustration-wrapper" class="">
+                <div class="visual-illustration-box" id="visual-box-container">
                     <div id="visual-group-left" class="emoji-side"></div>
                     <div id="visual-group-right" class="emoji-side"></div>
                 </div>
@@ -811,7 +863,7 @@ Creeper"></textarea>
 
                     <div class="input-section">
                         <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
-                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Fix Jawabannya ✍️</button>
+                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Perbaiki Jawabannya ✍️</button>
                         <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
                     </div>
 
@@ -877,6 +929,7 @@ Creeper"></textarea>
         const welcomeOverlay = document.getElementById('welcome-overlay');
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
+        const visualBoxContainer = document.getElementById('visual-box-container');
         const visualGroupLeft = document.getElementById('visual-group-left');
         const visualGroupRight = document.getElementById('visual-group-right');
         const gameMascotEl = document.getElementById('game-mascot');
@@ -886,18 +939,18 @@ Creeper"></textarea>
         audioBenar.load();
 
         const additionPairs = [
-            { left: '🪵', right: '🧱' }, 
-            { left: '🍎', right: '🥕' }, 
-            { left: '💎', right: '🪙' }, 
+            { left: '👓', right: '🕶' }, 
+            { left: '🍎', right: '🍊' }, 
+            { left: '🐓', right: '🦆' }, 
             { left: '⭐', right: '🌙' }, 
-            { left: '🍎', right: '🍎' }  
+            { left: '🎸', right: '🎻' }  
         ];
 
         const subtractionPairs = [
-            { left: '🧱', right: '💣' }, 
+            { left: '🍎', right: '🫝' }, 
             { left: '🥩', right: '🦴' }, 
-            { left: '💎', right: '⛏️' }, 
-            { left: '⭐', right: '✨' }  
+            { left: '🥃', right: '🫗' }, 
+            { left: '🌹', right: '🥀' }  
         ];
 
         const pairColors = [
@@ -1021,8 +1074,8 @@ Creeper"></textarea>
             let namaKatBadge = "LE 1 (Number bond 1-5)";
             let gameMascotEmoji = "💧⭐";
             if (kategoriPilihan === 'LE2') { namaKatBadge = "LE 2 (Number bond 1-10)"; gameMascotEmoji = "🪵🧱"; }
-            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Number bond 1-20)"; gameMascotEmoji = "🍎🗡️"; }
-            if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Number bond ratusan)"; gameMascotEmoji = "🍊🪙"; }
+            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Number bond 1-20)"; gameMascotEmoji = "🍎⚒️"; }
+            if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Number bond ratusan)"; gameMascotEmoji = "🪙💎"; }
             
             document.getElementById('game-category-badge').innerText = `Kategori: ${namaKatBadge}`;
             gameMascotEl.innerText = gameMascotEmoji;
@@ -1115,19 +1168,37 @@ Creeper"></textarea>
                 formOperator.innerText = '-'; 
             }
 
+            // TAMPILAN ILUSTRASI (MENYESUAIKAN KATEGORI CT AGAR TIDAK SEPI)
+            visualIllustrationWrapper.classList.remove('hidden');
             if (kategoriPilihan === 'CT') {
-                visualIllustrationWrapper.classList.add('hidden');
+                visualBoxContainer.innerHTML = `
+                    <div class="ct-banner-container">
+                        <div class="ct-floating-block">🪙</div>
+                        <div class="ct-treasure-info">
+                            <div class="ct-main-title">VAULT RATUSAN MINECRAFT</div>
+                            <div class="ct-sub-desc">Gunakan Logika Puluhan & Ratusan! 🚀</div>
+                        </div>
+                        <div class="ct-floating-block">💎</div>
+                    </div>
+                `;
             } else {
-                visualIllustrationWrapper.classList.remove('hidden');
+                visualBoxContainer.innerHTML = `
+                    <div id="visual-group-left" class="emoji-side"></div>
+                    <div id="visual-group-right" class="emoji-side"></div>
+                `;
                 
+                // Set ulang referensi elemen setelah innerHTML direset
+                const groupLeft = document.getElementById('visual-group-left');
+                const groupRight = document.getElementById('visual-group-right');
+
                 if (posisiKosong === 2) {
                     let chosenPair = additionPairs[Math.floor(Math.random() * additionPairs.length)];
-                    visualGroupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
-                    visualGroupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
+                    groupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
+                    groupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
                 } else {
                     let chosenPair = subtractionPairs[Math.floor(Math.random() * subtractionPairs.length)];
-                    visualGroupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
-                    visualGroupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
+                    groupLeft.innerHTML = chosenPair.left.repeat(nilaiBagianA);
+                    groupRight.innerHTML = chosenPair.right.repeat(nilaiBagianB);
                 }
             }
 

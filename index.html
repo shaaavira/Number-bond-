@@ -546,11 +546,11 @@
         }
 
         .branch-lines {
-            width: 220px;  /* Lebar garis cabang agar sesuai dengan jarak lingkaran bawah */
-            height: 25px;  
+            width: 240px;  /* Lebar bentangan garis kaki */
+            height: 45px;  /* Tinggi area ruang garis */
             position: relative;
-            margin-top: -5px;
-            margin-bottom: -5px;
+            margin-top: -12px;
+            margin-bottom: -15px;
             z-index: 1;
         }
         .branch-lines::before, .branch-lines::after {
@@ -558,19 +558,19 @@
             position: absolute;
             bottom: 0;
             width: 6px; 
-            height: 50px; 
+            height: 75px; /* <--- GARIS KAKI DIPERPANJANG KE ATAS */
             border-radius: 3px;
             background-color: var(--border-main); 
             border: 1px solid rgba(0,0,0,0.5);
         }
-        .branch-lines::before { left: 35px; transform: rotate(42deg); transform-origin: top center; }
-        .branch-lines::after { right: 35px; transform: rotate(-42deg); transform-origin: top center; }
+        .branch-lines::before { left: 45px; transform: rotate(36deg); transform-origin: top center; }
+        .branch-lines::after { right: 45px; transform: rotate(-36deg); transform-origin: top center; }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 310px; /* <--- ATUR JARAK KANAN & KIRI DI SINI (Perbesar angka untuk makin renggang, perkecil untuk makin rapat) */
-            margin-top: -15px; /* <--- ATUR POSISI NAIK KE ATAS DI SINI (Ubah jadi angka minus lebih besar misal -25px agar makin ke atas) */
+            width: 330px; /* <--- JARAK KIRI DAN KANAN LINGKARAN BAWAH */
+            margin-top: -5px; /* <--- POSISI NAIK KE ATAS */
         }
 
         .circle input {
@@ -1342,7 +1342,7 @@ Creeper"></textarea>
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk cek ulang angkanya! 🤔</span>";
-                recheckBtn.classList.remove('hidden');
+                recheckBtn.classList.add('hidden');
             }
         }
 

@@ -90,14 +90,14 @@
             background: var(--container-bg); 
             color: #f8fafc;
             backdrop-filter: blur(16px);
-            padding: 16px 24px;
+            padding: 20px 24px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255,255,255,0.15);
             border: 4px solid var(--border-main); 
             width: 100%;
             max-width: 1080px;
             height: 98vh;
-            max-height: 820px;
+            max-height: 840px;
             text-align: center;
             position: relative;
             display: flex;
@@ -149,7 +149,7 @@
         .subtitle {
             font-size: 11px;
             color: #e2e8f0;
-            margin: 3px 0 5px 0;
+            margin: 4px 0 8px 0;
             font-weight: 700;
         }
 
@@ -161,17 +161,17 @@
             justify-content: space-between;
             width: 100%;
             flex: 1;
-            gap: 10px;
-            padding: 4px 0;
+            gap: 14px;
+            padding: 6px 0;
         }
 
         .lobby-hero-card {
             background: rgba(0, 0, 0, 0.2);
             border: 3px solid var(--border-main);
-            border-radius: 10px;
-            padding: 10px 20px;
+            border-radius: 12px;
+            padding: 12px 20px;
             width: 100%;
-            max-width: 900px;
+            max-width: 940px;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         }
 
@@ -187,14 +187,14 @@
             font-size: 11px;
             font-weight: 700;
             color: #f1f5f9;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .lobby-row-container {
             display: flex;
-            gap: 20px; /* Jarak antar kotak diperlebar */
+            gap: 24px; /* Jarak antar kotak kiri dan kanan diperlebar agar tidak mepet */
             width: 100%;
-            max-width: 900px;
+            max-width: 940px;
             justify-content: center;
             flex: 1;
         }
@@ -202,10 +202,10 @@
         .lobby-section-box {
             background: rgba(0, 0, 0, 0.25);
             border: 2px solid var(--border-main);
-            border-radius: 10px;
-            padding: 16px 20px; /* Padding dalam kotak ditambah */
+            border-radius: 12px;
+            padding: 20px 24px; /* Padding dalam kotak diperluas agar lega */
             text-align: left;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -215,7 +215,7 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 10px;
             color: var(--accent-color);
-            margin-bottom: 12px; /* Jarak judul ke isi diperlonggar */
+            margin-bottom: 16px; /* Jarak judul ke isi diperlonggar */
             display: flex;
             align-items: center;
             gap: 6px;
@@ -224,7 +224,7 @@
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px; /* Jarak antar tombol kategori diperlebar agar tidak mepet */
+            gap: 16px; /* Jarak antar kotak tombol kategori diperlebar lega */
             width: 100%;
             flex: 1;
             align-content: center;
@@ -233,8 +233,8 @@
         .cat-card {
             background: var(--container-bg);
             border: 3px solid var(--border-main);
-            border-radius: 8px;
-            padding: 12px 10px; /* Padding card kategori diperbesar */
+            border-radius: 10px;
+            padding: 16px 12px; /* Padding card kategori diperbesar */
             cursor: pointer;
             text-align: center;
             transition: all 0.15s ease;
@@ -257,8 +257,8 @@
         }
 
         .cat-emoji {
-            font-size: 22px;
-            margin-bottom: 4px; /* Sedikit jarak emoji */
+            font-size: 26px;
+            margin-bottom: 8px; /* Jarak emoji ke judul kategori */
             display: block;
         }
 
@@ -268,14 +268,14 @@
             color: #f1f5f9;
         }
         .cat-card.selected .cat-title { color: #000; font-weight: 900; }
-        .cat-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 3px;}
+        .cat-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 4px;}
         .cat-card.selected .cat-desc { color: #1e293b; }
 
         #lobby-screen textarea {
             width: 100%; 
             flex: 1;
             min-height: 140px; 
-            padding: 10px 12px;
+            padding: 12px 14px;
             border: 2px solid var(--border-main);
             border-radius: 8px;
             font-family: 'Outfit', sans-serif;
@@ -299,7 +299,7 @@
         .input-hint {
             font-size: 10px;
             color: #cbd5e1;
-            margin-top: 6px;
+            margin-top: 8px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -318,34 +318,34 @@
             cursor: pointer;
             box-shadow: 0 5px 0 var(--btn-shadow), 0 8px 16px rgba(0, 0, 0, 0.4);
             transition: all 0.15s ease;
-            margin-top: 8px; /* Jarak atas tombol mulai diperlebar */
+            margin-top: 12px;
             width: 100%;
         }
         .btn-start-game:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--btn-shadow); }
         .btn-start-game:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-shadow); }
 
-        /* TABEL SKOR (DIBEDAKAN WARNANYA DARI TABEL DASAR) */
+        /* TABEL SKOR */
         .leaderboard {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
-            gap: 10px; /* Jarak antar kartu skor diperlebar */
+            gap: 12px;
             background: var(--card-box-bg);
-            padding: 8px 14px; /* Padding atas-bawah diperluas sedikit */
-            border-radius: 8px;
-            margin: 4px 0;
+            padding: 10px 16px;
+            border-radius: 10px;
+            margin: 6px 0;
             overflow-x: auto;
             border: 2px solid var(--accent-color); 
             width: 100%;
-            max-width: 900px;
+            max-width: 940px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
         }
 
         .player-score {
             text-align: center;
             background: var(--container-bg);
-            padding: 6px 14px; /* Padding player score diperlebar */
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
             font-size: 10px;
             font-weight: 700;
             color: #facc15;
@@ -361,34 +361,34 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 11px;
             color: var(--accent-color);
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         .level-info {
             font-family: 'Press Start 2P', monospace;
             color: var(--accent-color);
             font-size: 9px;
-            margin: 4px 0;
+            margin: 6px 0;
             background: rgba(0,0,0,0.25);
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 6px;
             border: 2px solid var(--border-main);
             display: inline-block;
         }
 
-        /* TABEL GAMBAR (DIBEDAKAN WARNANYA DARI TABEL DASAR) */
+        /* TABEL GAMBAR */
         .visual-illustration-box {
             background: #182836;
             border: 3px solid #38bdf8;
-            border-radius: 8px;
-            padding: 8px 16px;
+            border-radius: 10px;
+            padding: 10px 18px;
             margin: 6px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            min-height: 58px;
-            max-width: 820px;
+            gap: 16px;
+            min-height: 64px;
+            max-width: 860px;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 4px 10px rgba(56, 189, 248, 0.15);
         }
 
@@ -402,11 +402,11 @@
             align-items: center;
             justify-content: center;
             background: #0f172a;
-            padding: 5px 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
             border: 2px dashed #38bdf8;
-            max-width: 360px;
-            gap: 2px;
+            max-width: 380px;
+            gap: 3px;
         }
 
         .game-main-layout {
@@ -414,8 +414,8 @@
             width: 100%;
             justify-content: space-between;
             align-items: center;
-            gap: 20px; /* Jarak layout kiri & kanan diperlebar */
-            margin: 4px 0;
+            gap: 24px;
+            margin: 6px 0;
             flex: 1;
         }
 
@@ -426,7 +426,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 4px;
+            padding: 6px;
         }
 
         .right-side-game {
@@ -437,10 +437,10 @@
             justify-content: center;
             background: rgba(0,0,0,0.25);
             border: 2px solid var(--border-main);
-            border-radius: 8px;
-            padding: 16px; /* Padding panel kanan diperluas agar lega */
+            border-radius: 12px;
+            padding: 18px 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            max-height: 440px;
+            max-height: 480px;
             overflow-y: auto;
         }
 
@@ -450,7 +450,7 @@
             align-items: center;
             position: relative;
             transform: scale(1.05);
-            margin: 8px 0;
+            margin: 10px 0;
         }
 
         .circle {
@@ -471,7 +471,6 @@
             z-index: 2;
         }
 
-        /* LINGKARAN ATAS (BERBEDA DARI KIRI/KANAN) */
         #top-val {
             background-color: var(--accent-color) !important;
             color: #0f172a !important;
@@ -522,7 +521,7 @@
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
-        /* TABEL MATH CALCULATION FORMULA (DIBEDAKAN WARNANYA DI SEMUA LEVEL) */
+        /* FORMULA BOX */
         .formula-box {
             display: flex;
             align-items: center;
@@ -531,9 +530,9 @@
             font-size: 12px;
             color: #ffffff;
             background: #271638;
-            padding: 10px 14px; /* Padding formula box diperlebar */
-            border-radius: 6px;
-            margin-bottom: 10px; /* Jarak bawah formula diperlebar */
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
             border: 2px dashed #c084fc;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 4px 10px rgba(192, 132, 252, 0.15);
             width: 100%;
@@ -541,19 +540,19 @@
         
         .formula-box span {
             color: #e879f9;
-            margin: 0 6px; /* Jarak antar elemen formula diperluas */
+            margin: 0 8px;
         }
 
         .form-input {
             width: 48px;
-            height: 36px;
+            height: 38px;
             text-align: center;
             font-family: 'Press Start 2P', monospace;
             font-size: 13px;
             color: #ffffff;
             background: rgba(0,0,0,0.4);
             border: 2px solid #c084fc;
-            border-radius: 4px;
+            border-radius: 6px;
             outline: none;
             transition: all 0.15s ease;
         }
@@ -566,7 +565,7 @@
             background-color: var(--btn-main); 
             color: #fff;
             border: none;
-            padding: 9px 18px; /* Padding tombol sedikit diperbesar */
+            padding: 10px 20px;
             font-family: 'Press Start 2P', monospace;
             font-size: 9px;
             border-radius: 6px;
@@ -604,15 +603,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px; /* Jarak elemen dalam input section diperlonggar */
+            gap: 10px;
             width: 100%;
         }
 
         #picker-section {
             background: var(--container-bg);
-            padding: 10px; /* Padding picker section diperluas */
-            border-radius: 6px;
-            margin-top: 8px; /* Jarak atas diperlebar */
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 10px;
             border: 2px dashed var(--accent-color);
             width: 100%;
         }
@@ -621,15 +620,15 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 9px;
             color: var(--accent-color);
-            margin-bottom: 8px; /* Jarak judul ke tombol nama diperlonggar */
+            margin-bottom: 10px;
         }
 
         .name-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px; /* Jarak antar tombol nama player diperlebar */
-            max-height: 56px;
+            gap: 10px;
+            max-height: 64px;
             overflow-y: auto;
         }
 
@@ -637,10 +636,10 @@
             background-color: var(--btn-main); 
             color: #fff;
             border: none;
-            padding: 6px 12px; /* Padding tombol nama diperbesar agar tidak mepet */
+            padding: 8px 14px;
             font-family: 'Press Start 2P', monospace;
             font-size: 8px;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             box-shadow: 0 3px 0 var(--btn-shadow);
             transition: all 0.1s ease;
@@ -651,7 +650,7 @@
         #feedback {
             font-family: 'Press Start 2P', monospace;
             font-size: 10px;
-            margin-top: 4px;
+            margin-top: 6px;
             min-height: 18px;
         }
 
@@ -675,9 +674,9 @@
             font-size: 15px;
             font-weight: 800;
             color: #f1f5f9;
-            margin: 6px 0;
+            margin: 8px 0;
             background: rgba(0,0,0,0.3);
-            padding: 14px;
+            padding: 16px;
             border-radius: 8px;
             border: 3px dashed var(--accent-color);
             line-height: 1.4;
@@ -749,14 +748,14 @@
                 </div>
 
                 <div class="lobby-section-box" style="flex: 0.8;">
-                    <div>
+                    <div style="display: flex; flex-direction: column; flex: 1;">
                         <div class="lobby-section-title">✏️ Nama Player:</div>
                         <textarea id="player-input-box" placeholder="Steve
 Alex
 Creeper"></textarea>
                         <div class="input-hint">💡 Satu nama per baris (Maks 10)</div>
                     </div>
-                    <div style="text-align: center; margin-top: 10px;">
+                    <div style="text-align: center; margin-top: 12px;">
                         <button class="btn-start-game" onclick="mulaiPermainanDariLobby()">Mulai Petualangan! 🎮</button>
                     </div>
                 </div>
@@ -800,7 +799,7 @@ Creeper"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #cbd5e1; margin-bottom: 8px;">Math Calculation Formula:</div>
+                    <div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #cbd5e1; margin-bottom: 10px;">Math Calculation Formula:</div>
                     
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
@@ -816,7 +815,7 @@ Creeper"></textarea>
                         <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
                     </div>
 
-                    <div id="formula-check-section" class="hidden" style="margin-top: 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;">
+                    <div id="formula-check-section" class="hidden" style="margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%;">
                         <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Rumus Crafting 🔍</button>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Level ➔</button>
                     </div>
@@ -827,7 +826,7 @@ Creeper"></textarea>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
-                    <div id="feedback-outside" style="min-height: 18px; margin-top: 6px;"></div>
+                    <div id="feedback-outside" style="min-height: 18px; margin-top: 8px;"></div>
                 </div>
             </div>
 
@@ -836,7 +835,7 @@ Creeper"></textarea>
 
         <!-- RESULT -->
         <div id="result-screen" class="hidden" style="width: 100%;">
-            <div style="font-size: 32px; margin-bottom: 4px;">🏆🎉</div>
+            <div style="font-size: 32px; margin-bottom: 6px;">🏆🎉</div>
             <h1 style="font-family: 'Press Start 2P', monospace; font-size: 15px;">VICTORY SURVIVAL!</h1>
             <div id="winner-text">Pemenangnya adalah...</div>
             <button class="btn btn-next" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
@@ -1226,8 +1225,9 @@ Creeper"></textarea>
                 activeInput.focus();
             }
 
-            feedbackOutside.innerHTML = "<span class='wrong'>Diskusikan bersama tim, lalu klik Periksa Lagi! ✍️</span>";
+            feedbackOutside.innerHTML = "<span class='wrong'>Diskusikan bersama tim, lalu masukkan jawaban baru! ✍️</span>";
             recheckBtn.classList.remove('hidden'); 
+            submitBtn.style.display = 'none'; // Pastikan tombol utama tetap tersembunyi
         }
 
         function periksaUlangJawaban() {
@@ -1235,6 +1235,11 @@ Creeper"></textarea>
             const activeInput = document.getElementById('user-input');
             if (!activeInput) return;
             const jawabanBaru = parseInt(activeInput.value);
+
+            if (isNaN(jawabanBaru)) {
+                feedbackOutside.innerHTML = "<span class='wrong'>Masukkan angka jawabannya dulu! 🔍</span>";
+                return;
+            }
 
             if (jawabanBaru === jawabanBenar) {
                 playClappingAndCheer();
@@ -1252,8 +1257,9 @@ Creeper"></textarea>
             } else {
                 playSound('wrong');       
                 triggerFlashRed();        
-                feedbackOutside.innerHTML = "<span class='wrong'>Masih salah, ayo cek ulang angkanya! 🤔</span>";
-                recheckBtn.classList.add('hidden');
+                feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk cek ulang angkanya! 🤔</span>";
+                // Tombol recheck tetap muncul agar anak bisa coba lagi sampai benar
+                recheckBtn.classList.remove('hidden');
             }
         }
 

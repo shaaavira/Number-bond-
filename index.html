@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Minecraft!</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/canvas-confetti.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -428,54 +428,58 @@
             transition: border-color 0.5s ease;
         }
 
+        /* --- DESAIN BARU YANG LEBIH KEREN UNTUK CT (RATUSAN) --- */
         .ct-banner-container {
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            padding: 6px 12px;
+            justify-content: center;
+            gap: 20px;
+            padding: 4px 10px;
             position: relative;
             z-index: 2;
         }
 
         .ct-floating-block {
-            font-size: 34px;
-            animation: floatBlock 2.5s ease-in-out infinite;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+            font-size: 38px;
+            animation: floatBlock 2s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
         }
-        .ct-floating-block:nth-child(2) {
-            animation-delay: 1.25s;
+        .ct-floating-block:nth-child(3) {
+            animation-delay: 1s;
         }
 
         @keyframes floatBlock {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(5deg); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.05); }
         }
 
         .ct-treasure-info {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.45);
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 2px solid var(--accent-color);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
         }
 
         .ct-main-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 13px;
+            font-size: 11px;
             color: #fef08a;
             text-shadow: 1px 1px #000;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .ct-sub-desc {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
-            color: #93c5fd;
-            background: rgba(0,0,0,0.4);
-            padding: 6px 14px;
-            border-radius: 8px;
-            border: 1px dashed #60a5fa;
+            color: #86efac;
         }
+        /* ---------------------------------------------------- */
 
         .game-main-layout {
             display: flex;
@@ -737,47 +741,17 @@
             50% { transform: translateY(-4px); }
         }
 
-        /* REDESIGNED CLEAN RESULT SCREEN (CHEST TREASURE THEME) */
-        #result-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            gap: 18px;
-        }
-
-        .victory-chest-badge {
-            font-size: 64px;
-            animation: bounceChest 2s ease-in-out infinite;
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));
-        }
-
-        @keyframes bounceChest {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.08); }
-        }
-
-        .victory-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 3px solid var(--border-main);
-            border-radius: 16px;
-            padding: 24px 32px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            text-align: center;
-        }
-
         #winner-text {
             font-family: 'Outfit', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 800;
             color: #f1f5f9;
-            line-height: 1.6;
-            margin: 0;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.3);
+            padding: 18px;
+            border-radius: 10px;
+            border: 3px dashed var(--accent-color);
+            line-height: 1.4;
         }
 
         #welcome-overlay {
@@ -931,14 +905,12 @@ Creeper"></textarea>
             <div style="height: 2px;"></div>
         </div>
 
-        <!-- RESULT (CLEAN MINECRAFT CHEST THEME) -->
-        <div id="result-screen" class="hidden">
-            <div class="victory-chest-badge">📦✨</div>
-            <h1 style="font-size: 18px; letter-spacing: 1px;">MISI SELESAI!</h1>
-            <div class="victory-card">
-                <div id="winner-text">Hasil akhir permainan...</div>
-            </div>
-            <button class="btn btn-next" style="padding: 14px 28px; font-size: 11px;" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
+        <!-- RESULT -->
+        <div id="result-screen" class="hidden" style="width: 100%;">
+            <div style="font-size: 38px; margin-bottom: 8px;">🏆🎉</div>
+            <h1 style="font-family: 'Press Start 2P', monospace; font-size: 18px;">VICTORY SURVIVAL!</h1>
+            <div id="winner-text">Pemenangnya adalah...</div>
+            <button class="btn btn-next" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
         </div>
     </div>
 
@@ -1069,12 +1041,7 @@ Creeper"></textarea>
         function triggerConfetti() {
             try {
                 if (typeof confetti === 'function') {
-                    confetti({ 
-                        particleCount: 160, 
-                        spread: 100, 
-                        origin: { y: 0.6 },
-                        zIndex: 999999 
-                    });
+                    confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
                 }
             } catch(e) {}
         }
@@ -1219,7 +1186,7 @@ Creeper"></textarea>
                     <div class="ct-banner-container">
                         <div class="ct-floating-block">🪙</div>
                         <div class="ct-treasure-info">
-                            <div class="ct-main-title">VAULT RATUSAN MINECRAFT</div>
+                            <div class="ct-main-title">✨ RICEK RATUSAN KODE ✨</div>
                             <div class="ct-sub-desc">Gunakan Logika Puluhan & Ratusan! 🚀</div>
                         </div>
                         <div class="ct-floating-block">💎</div>
@@ -1276,6 +1243,16 @@ Creeper"></textarea>
                 const activeInput = document.getElementById('user-input');
                 if (activeInput) activeInput.focus();
             }, 100);
+            
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(inp => {
+                inp.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") { 
+                        if (submitBtn.style.display !== 'none') cekJawaban();
+                        else if (!recheckBtn.classList.contains('hidden')) periksaUlangJawaban();
+                    }
+                });
+            });
         }
 
         function cekJawaban() {
@@ -1361,13 +1338,8 @@ Creeper"></textarea>
             } else {
                 playSound('wrong');       
                 triggerFlashRed();        
-                feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk coba betulkan lagi! 🤔</span>";
-                
+                feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk cek ulang angkanya! 🤔</span>";
                 recheckBtn.classList.add('hidden');
-                retryBtn.classList.remove('hidden');
-                if (activeInput) {
-                    activeInput.disabled = true;
-                }
             }
         }
 
@@ -1442,9 +1414,9 @@ Creeper"></textarea>
                     winnerText.innerHTML = `Belum ada XP yang terkumpul! Ayo coba lagi petualangan survival-nya. 🤗`;
                 } else if (pemenang.length > 1) {
                     let namaPemenang = pemenang.map(p => p.nama).join(" & ");
-                    winnerText.innerHTML = `🤝 <b>VICTORY BERSAMA!</b> 🤝<br><span style="font-size: 14px; color: var(--accent-color); margin-top: 8px; display: block;">Player hebat: ${namaPemenang} (${maksSkor} XP)</span>`;
+                    winnerText.innerHTML = `Victory Bersama! 🤝<br>Player hebat: ${namaPemenang} (${maksSkor} XP)`;
                 } else {
-                    winnerText.innerHTML = `👑 <b>MASTER SURVIVAL</b> 👑<br><span style="font-size: 18px; color: #facc15; margin: 10px 0; display: block;">${pemenang[0].nama.toUpperCase()}</span>Berhasil mengumpulkan total <span style="color: var(--accent-color); font-weight: 800;">${maksSkor} XP</span>! 🌟`;
+                    winnerText.innerHTML = `🎉 Selamat Kepada Player <b>${pemenang[0].nama}</b>!<br>Master Survival dengan perolehan ${maksSkor} XP! 🌟👑`;
                 }
             } else {
                 buatSoalBaru();

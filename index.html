@@ -381,34 +381,45 @@
             background: #182836;
             border: 3px solid #38bdf8;
             border-radius: 12px;
-            padding: 14px 24px;
-            margin: 8px auto;
+            padding: 12px 20px;
+            margin: 6px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 24px;
-            min-height: 85px;
+            gap: 16px;
+            min-height: 75px;
             max-width: 920px;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 4px 12px rgba(56, 189, 248, 0.2);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* UKURAN DINAMIS: LE1 & LE2 LEBIH BESAR, LE3 DIKECILKAN SEDIKIT */
+        .visual-illustration-box.size-large .emoji-side {
+            font-size: 40px;
+            padding: 10px 22px;
+            gap: 8px;
+        }
+
+        .visual-illustration-box.size-compact .emoji-side {
+            font-size: 28px;
+            padding: 6px 14px;
+            gap: 4px;
         }
 
         .emoji-side {
-            font-size: 34px;
             letter-spacing: 4px;
-            line-height: 1.4;
+            line-height: 1.3;
             white-space: normal;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             background: #0f172a;
-            padding: 10px 18px;
             border-radius: 10px;
             border: 2px dashed #38bdf8;
             max-width: 440px;
-            gap: 6px;
         }
 
         /* KHUSUS DESAIN KOTAK CT (RATUSAN) AGAR TIDAK SEPI */
@@ -417,7 +428,7 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            padding: 4px 10px;
+            padding: 2px 10px;
             position: relative;
             z-index: 2;
         }
@@ -758,8 +769,8 @@
     <div id="welcome-overlay">
         <div class="welcome-card">
             <div style="font-size: 32px; margin-bottom: 6px;">🎮✨</div>
-            <div class="welcome-title">CRAFTING NUMBER BOND WITH MISS RUNI!</div>
-            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! 🚀</div>
+            <div class="welcome-title">CRAFTING NUMBER BOND!</div>
+            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! Siap berhitung bersama jagoan cilik? 🚀</div>
             <button class="btn" id="welcome-btn" type="button">Start Game 🎮</button>
         </div>
     </div>
@@ -832,7 +843,7 @@ Creeper"></textarea>
             </div>
 
             <div id="visual-illustration-wrapper" class="">
-                <div class="visual-illustration-box" id="visual-box-container">
+                <div class="visual-illustration-box size-large" id="visual-box-container">
                     <div id="visual-group-left" class="emoji-side"></div>
                     <div id="visual-group-right" class="emoji-side"></div>
                 </div>
@@ -863,7 +874,7 @@ Creeper"></textarea>
 
                     <div class="input-section">
                         <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
-                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Perbaiki Jawabannya ✍️</button>
+                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Fix Jawabannya ✍️</button>
                         <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
                     </div>
 
@@ -930,8 +941,6 @@ Creeper"></textarea>
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
         const visualBoxContainer = document.getElementById('visual-box-container');
-        const visualGroupLeft = document.getElementById('visual-group-left');
-        const visualGroupRight = document.getElementById('visual-group-right');
         const gameMascotEl = document.getElementById('game-mascot');
 
         const audioBenar = new Audio('Hore.mp3');
@@ -939,18 +948,18 @@ Creeper"></textarea>
         audioBenar.load();
 
         const additionPairs = [
-            { left: '👓', right: '🕶' }, 
-            { left: '🍎', right: '🍊' }, 
-            { left: '🐓', right: '🦆' }, 
+            { left: '🪵', right: '🧱' }, 
+            { left: '🍎', right: '🥕' }, 
+            { left: '💎', right: '🪙' }, 
             { left: '⭐', right: '🌙' }, 
-            { left: '🎸', right: '🎻' }  
+            { left: '🍎', right: '🍎' }  
         ];
 
         const subtractionPairs = [
-            { left: '🍎', right: '🫝' }, 
+            { left: '🧱', right: '💣' }, 
             { left: '🥩', right: '🦴' }, 
-            { left: '🥃', right: '🫗' }, 
-            { left: '🌹', right: '🥀' }  
+            { left: '💎', right: '⛏️' }, 
+            { left: '⭐', right: '✨' }  
         ];
 
         const pairColors = [
@@ -1074,7 +1083,7 @@ Creeper"></textarea>
             let namaKatBadge = "LE 1 (Number bond 1-5)";
             let gameMascotEmoji = "💧⭐";
             if (kategoriPilihan === 'LE2') { namaKatBadge = "LE 2 (Number bond 1-10)"; gameMascotEmoji = "🪵🧱"; }
-            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Number bond 1-20)"; gameMascotEmoji = "🍎⚒️"; }
+            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Number bond 1-20)"; gameMascotEmoji = "🍎🗡️"; }
             if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Number bond ratusan)"; gameMascotEmoji = "🪙💎"; }
             
             document.getElementById('game-category-badge').innerText = `Kategori: ${namaKatBadge}`;
@@ -1168,8 +1177,16 @@ Creeper"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // TAMPILAN ILUSTRASI (MENYESUAIKAN KATEGORI CT AGAR TIDAK SEPI)
+            // ATUR UKURAN ILUSTRASI (LE1 & LE2 LEBIH BESAR, LE3 DIKECILKAN SEDIKIT)
             visualIllustrationWrapper.classList.remove('hidden');
+            visualBoxContainer.classList.remove('size-large', 'size-compact');
+
+            if (kategoriPilihan === 'LE1' || kategoriPilihan === 'LE2') {
+                visualBoxContainer.classList.add('size-large');
+            } else {
+                visualBoxContainer.classList.add('size-compact');
+            }
+
             if (kategoriPilihan === 'CT') {
                 visualBoxContainer.innerHTML = `
                     <div class="ct-banner-container">
@@ -1187,7 +1204,6 @@ Creeper"></textarea>
                     <div id="visual-group-right" class="emoji-side"></div>
                 `;
                 
-                // Set ulang referensi elemen setelah innerHTML direset
                 const groupLeft = document.getElementById('visual-group-left');
                 const groupRight = document.getElementById('visual-group-right');
 

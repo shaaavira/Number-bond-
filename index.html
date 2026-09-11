@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Number Bond Minecraft!</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
+    <!-- Pemuatan script Canvas Confetti CDN -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/canvas-confetti.min.js"></script>
     <style>
         * {
@@ -952,7 +953,7 @@ Creeper"></textarea>
         const gameMascotEl = document.getElementById('game-mascot');
 
         const audioBenar = new Audio('Hore.mp3');
-        audioBenar.volume = 0.3; 
+        audioBenar.volume = 0.4; 
         audioBenar.load();
 
         const additionPairs = [
@@ -1011,7 +1012,8 @@ Creeper"></textarea>
 
         function playClappingAndCheer() {
             try {
-                audioBenar.currentTime = 0; 
+                // Diatur ke detik ke-1 sesuai permintaan
+                audioBenar.currentTime = 1.0; 
                 audioBenar.play().catch(e => {});
             } catch(e) {}
         }
@@ -1041,11 +1043,31 @@ Creeper"></textarea>
             try {
                 if (typeof confetti === 'function') {
                     confetti({
-                        particleCount: 120,
-                        spread: 80,
+                        particleCount: 160,
+                        spread: 110,
                         origin: { y: 0.6 },
                         zIndex: 999999
                     });
+                    
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 90,
+                            angle: 60,
+                            spread: 60,
+                            origin: { x: 0, y: 0.7 },
+                            zIndex: 999999
+                        });
+                    }, 250);
+
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 90,
+                            angle: 120,
+                            spread: 60,
+                            origin: { x: 1, y: 0.7 },
+                            zIndex: 999999
+                        });
+                    }, 400);
                 }
             } catch(e) {}
         }

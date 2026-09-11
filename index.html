@@ -378,7 +378,7 @@
             display: inline-block;
         }
 
-        /* TABEL GAMBAR / ILUSTRASI DIPERBESAR */
+        /* TABEL GAMBAR / ILUSTRASI DIPERBESAR & SUPORT LE 3 LEBIH KECIL */
         .visual-illustration-box {
             background: #182836;
             border: 3px solid #38bdf8;
@@ -411,6 +411,23 @@
             border: 2px dashed #38bdf8;
             max-width: 520px;
             gap: 8px;
+        }
+
+        /* KHUSUS UKURAN KOTAK GAMBAR EMOJI DI LE 3 SUPAYA JAUH LEBIH KECIL */
+        body.theme-LE3 .visual-illustration-box {
+            padding: 8px 14px !important;
+            min-height: 70px !important;
+            max-width: 750px !important;
+            gap: 14px !important;
+        }
+        body.theme-LE3 .emoji-side {
+            font-size: 22px !important;
+            letter-spacing: 2px !important;
+            padding: 6px 10px !important;
+            gap: 3px !important;
+            max-width: 350px !important;
+            border-width: 1.5px !important;
+            border-radius: 8px !important;
         }
 
         /* KHUSUS DESAIN KOTAK CT (RATUSAN) */
@@ -933,8 +950,6 @@ Creeper"></textarea>
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
         const visualBoxContainer = document.getElementById('visual-box-container');
-        const visualGroupLeft = document.getElementById('visual-group-left');
-        const visualGroupRight = document.getElementById('visual-group-right');
         const gameMascotEl = document.getElementById('game-mascot');
 
         const audioBenar = new Audio('Hore.mp3');
@@ -1044,6 +1059,7 @@ Creeper"></textarea>
 
         welcomeBtn.onclick = function() {
             initAudio();
+            playClickSign = true;
             playClickSound(); 
             welcomeOverlay.classList.add('hidden');
         };
@@ -1171,7 +1187,7 @@ Creeper"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // TAMPILAN ILUSTRASI (MENYESUAIKAN KATEGORI CT AGAR TIDAK SEPI)
+            // TAMPILAN ILUSTRASI (KOTAK GAMBAR EMOJI)
             visualIllustrationWrapper.classList.remove('hidden');
             if (kategoriPilihan === 'CT') {
                 visualBoxContainer.innerHTML = `
@@ -1190,7 +1206,6 @@ Creeper"></textarea>
                     <div id="visual-group-right" class="emoji-side"></div>
                 `;
                 
-                // Set ulang referensi elemen setelah innerHTML direset
                 const groupLeft = document.getElementById('visual-group-left');
                 const groupRight = document.getElementById('visual-group-right');
 
@@ -1332,7 +1347,7 @@ Creeper"></textarea>
                 playSound('wrong');       
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk cek ulang angkanya! 🤔</span>";
-                recheckBtn.classList.remove('hidden');
+                recheckBtn.classList.add('hidden');
             }
         }
 

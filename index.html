@@ -272,7 +272,7 @@
         }
 
         .cat-img {
-            width: 80px;
+            width: 65px;
             height: auto;
             display: block;
             margin: 0 auto 10px auto;
@@ -1034,7 +1034,6 @@ Creeper"></textarea>
             } catch(e) {}
         }
 
-        // Diberikan zIndex besar agar tampil paling depan menembus kotak game
         function triggerConfetti() {
             try {
                 if (typeof confetti === 'function') {
@@ -1245,16 +1244,6 @@ Creeper"></textarea>
                 const activeInput = document.getElementById('user-input');
                 if (activeInput) activeInput.focus();
             }, 100);
-            
-            const inputs = document.querySelectorAll('input[type="number"]');
-            inputs.forEach(inp => {
-                inp.addEventListener("keypress", function(event) {
-                    if (event.key === "Enter") { 
-                        if (submitBtn.style.display !== 'none') cekJawaban();
-                        else if (!recheckBtn.classList.contains('hidden')) periksaUlangJawaban();
-                    }
-                });
-            });
         }
 
         function cekJawaban() {
@@ -1270,7 +1259,7 @@ Creeper"></textarea>
 
             if (jawabanUser === jawabanBenar) {
                 playClappingAndCheer();
-                triggerConfetti(); // <-- Confetti aktif di sini
+                triggerConfetti();
                 
                 activeInput.disabled = true;
                 submitBtn.style.display = 'none';
@@ -1326,7 +1315,7 @@ Creeper"></textarea>
 
             if (jawabanBaru === jawabanBenar) {
                 playClappingAndCheer();
-                triggerConfetti(); // <-- Confetti aktif di sini saat dibetulkan
+                triggerConfetti();
 
                 activeInput.disabled = true;
                 recheckBtn.classList.add('hidden');
@@ -1340,8 +1329,14 @@ Creeper"></textarea>
             } else {
                 playSound('wrong');       
                 triggerFlashRed();        
-                feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk cek ulang angkanya! 🤔</span>";
+                feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk coba betulkan lagi! 🤔</span>";
+                
+                // MUNCULKAN KEMBALI TOMBOL PERBAIKI JIKA MASIH SALAH LAGI
                 recheckBtn.classList.add('hidden');
+                retryBtn.classList.remove('hidden');
+                if (activeInput) {
+                    activeInput.disabled = true;
+                }
             }
         }
 

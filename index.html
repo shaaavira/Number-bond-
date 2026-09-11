@@ -86,18 +86,19 @@
             40%, 80% { transform: translateX(8px); }
         }
 
+        /* UKURAN CONTAINER UTAMA DIPPERBESAR */
         .game-container {
             background: var(--container-bg); 
             color: #f8fafc;
             backdrop-filter: blur(16px);
-            padding: 20px 24px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255,255,255,0.15);
-            border: 4px solid var(--border-main); 
-            width: 100%;
-            max-width: 1080px;
+            padding: 24px 32px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255,255,255,0.15);
+            border: 5px solid var(--border-main); 
+            width: 98vw;
+            max-width: 1350px;
             height: 98vh;
-            max-height: 840px;
+            max-height: 940px;
             text-align: center;
             position: relative;
             display: flex;
@@ -110,15 +111,15 @@
 
         .btn-back {
             position: absolute;
-            top: 14px;
-            left: 18px;
+            top: 18px;
+            left: 22px;
             background: var(--border-main); 
             border: 2px solid var(--accent-color);
-            padding: 6px 14px;
+            padding: 8px 16px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
+            font-size: 10px;
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -134,22 +135,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin: 0;
         }
 
+        /* UKURAN JUDUL DIPPERBESAR */
         h1 {
             font-family: 'Press Start 2P', monospace;
             color: var(--accent-color); 
-            font-size: 17px;
+            font-size: 22px;
             margin: 0;
             text-shadow: 2px 2px rgba(0,0,0,0.5);
         }
 
         .subtitle {
-            font-size: 11px;
+            font-size: 13px;
             color: #e2e8f0;
-            margin: 4px 0 8px 0;
+            margin: 6px 0 10px 0;
             font-weight: 700;
         }
 
@@ -161,40 +163,40 @@
             justify-content: space-between;
             width: 100%;
             flex: 1;
-            gap: 14px;
-            padding: 6px 0;
+            gap: 16px;
+            padding: 8px 0;
         }
 
         .lobby-hero-card {
             background: rgba(0, 0, 0, 0.2);
             border: 3px solid var(--border-main);
-            border-radius: 12px;
-            padding: 12px 20px;
+            border-radius: 14px;
+            padding: 16px 24px;
             width: 100%;
-            max-width: 940px;
+            max-width: 1150px;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         }
 
         .lobby-hero-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 12px;
+            font-size: 14px;
             color: var(--accent-color); 
             margin: 0;
             text-shadow: 1px 1px #000;
         }
 
         .lobby-hero-sub {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
             color: #f1f5f9;
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .lobby-row-container {
             display: flex;
-            gap: 24px;
+            gap: 28px;
             width: 100%;
-            max-width: 940px;
+            max-width: 1150px;
             justify-content: center;
             flex: 1;
         }
@@ -202,8 +204,8 @@
         .lobby-section-box {
             background: rgba(0, 0, 0, 0.25);
             border: 2px solid var(--border-main);
-            border-radius: 12px;
-            padding: 20px 24px;
+            border-radius: 14px;
+            padding: 22px 26px;
             text-align: left;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             display: flex;
@@ -213,7 +215,7 @@
 
         .lobby-section-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
+            font-size: 11px;
             color: var(--accent-color);
             margin-bottom: 16px;
             display: flex;
@@ -233,8 +235,8 @@
         .cat-card {
             background: var(--container-bg);
             border: 3px solid var(--border-main);
-            border-radius: 10px;
-            padding: 16px 12px;
+            border-radius: 12px;
+            padding: 20px 14px;
             cursor: pointer;
             text-align: center;
             transition: all 0.15s ease;
@@ -257,29 +259,29 @@
         }
 
         .cat-emoji {
-            font-size: 26px;
+            font-size: 32px;
             margin-bottom: 8px;
             display: block;
         }
 
         .cat-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
+            font-size: 11px;
             color: #f1f5f9;
         }
         .cat-card.selected .cat-title { color: #000; font-weight: 900; }
-        .cat-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; margin-top: 4px;}
+        .cat-desc { font-size: 11px; color: #cbd5e1; font-weight: 700; margin-top: 6px;}
         .cat-card.selected .cat-desc { color: #1e293b; }
 
         #lobby-screen textarea {
             width: 100%; 
             flex: 1;
-            min-height: 140px; 
-            padding: 12px 14px;
+            min-height: 160px; 
+            padding: 14px 16px;
             border: 2px solid var(--border-main);
-            border-radius: 8px;
+            border-radius: 10px;
             font-family: 'Outfit', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             line-height: 1.4;
             resize: none;
@@ -297,7 +299,7 @@
         }
 
         .input-hint {
-            font-size: 10px;
+            font-size: 11px;
             color: #cbd5e1;
             margin-top: 8px;
             font-weight: 700;
@@ -311,10 +313,10 @@
             background: var(--btn-main); 
             color: #fff;
             border: none;
-            padding: 12px 28px;
+            padding: 14px 28px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 11px;
-            border-radius: 8px;
+            font-size: 12px;
+            border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 5px 0 var(--btn-shadow), 0 8px 16px rgba(0, 0, 0, 0.4);
             transition: all 0.15s ease;
@@ -329,24 +331,24 @@
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
-            gap: 12px;
+            gap: 14px;
             background: var(--card-box-bg);
-            padding: 10px 16px;
-            border-radius: 10px;
-            margin: 6px 0;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin: 8px 0;
             overflow-x: auto;
             border: 2px solid var(--accent-color); 
             width: 100%;
-            max-width: 940px;
+            max-width: 1150px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
         }
 
         .player-score {
             text-align: center;
             background: var(--container-bg);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 10px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 11px;
             font-weight: 700;
             color: #facc15;
             border: 2px solid var(--border-main);
@@ -359,7 +361,7 @@
         .player-score span {
             display: block;
             font-family: 'Press Start 2P', monospace;
-            font-size: 11px;
+            font-size: 12px;
             color: var(--accent-color);
             margin-top: 4px;
         }
@@ -367,74 +369,63 @@
         .level-info {
             font-family: 'Press Start 2P', monospace;
             color: var(--accent-color);
-            font-size: 9px;
+            font-size: 10px;
             margin: 6px 0;
             background: rgba(0,0,0,0.25);
-            padding: 6px 14px;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
             border: 2px solid var(--border-main);
             display: inline-block;
         }
 
-        /* TABEL GAMBAR / ILUSTRASI */
+        /* TABEL GAMBAR / ILUSTRASI DIPERBESAR */
         .visual-illustration-box {
             background: #182836;
             border: 3px solid #38bdf8;
-            border-radius: 12px;
-            padding: 12px 20px;
-            margin: 6px auto;
+            border-radius: 14px;
+            padding: 16px 28px;
+            margin: 10px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
-            min-height: 75px;
-            max-width: 920px;
+            gap: 28px;
+            min-height: 105px;
+            max-width: 1150px;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 4px 12px rgba(56, 189, 248, 0.2);
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        /* UKURAN DINAMIS: LE1 & LE2 LEBIH BESAR, LE3 DIKECILKAN SEDIKIT */
-        .visual-illustration-box.size-large .emoji-side {
-            font-size: 40px;
-            padding: 10px 22px;
-            gap: 8px;
-        }
-
-        .visual-illustration-box.size-compact .emoji-side {
-            font-size: 28px;
-            padding: 6px 14px;
-            gap: 4px;
         }
 
         .emoji-side {
-            letter-spacing: 4px;
-            line-height: 1.3;
+            font-size: 40px;
+            letter-spacing: 6px;
+            line-height: 1.4;
             white-space: normal;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             background: #0f172a;
-            border-radius: 10px;
+            padding: 12px 22px;
+            border-radius: 12px;
             border: 2px dashed #38bdf8;
-            max-width: 440px;
+            max-width: 520px;
+            gap: 8px;
         }
 
-        /* KHUSUS DESAIN KOTAK CT (RATUSAN) AGAR TIDAK SEPI */
+        /* KHUSUS DESAIN KOTAK CT (RATUSAN) */
         .ct-banner-container {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-around;
-            padding: 2px 10px;
+            padding: 6px 12px;
             position: relative;
             z-index: 2;
         }
 
         .ct-floating-block {
-            font-size: 28px;
+            font-size: 34px;
             animation: floatBlock 2.5s ease-in-out infinite;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
         }
@@ -451,24 +442,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .ct-main-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 11px;
+            font-size: 13px;
             color: #fef08a;
             text-shadow: 1px 1px #000;
             letter-spacing: 1px;
         }
 
         .ct-sub-desc {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
             color: #93c5fd;
             background: rgba(0,0,0,0.4);
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
             border: 1px dashed #60a5fa;
         }
 
@@ -477,8 +468,8 @@
             width: 100%;
             justify-content: space-between;
             align-items: center;
-            gap: 24px;
-            margin: 6px 0;
+            gap: 28px;
+            margin: 8px 0;
             flex: 1;
         }
 
@@ -489,7 +480,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 6px;
+            padding: 8px;
         }
 
         .right-side-game {
@@ -500,10 +491,10 @@
             justify-content: center;
             background: rgba(0,0,0,0.25);
             border: 2px solid var(--border-main);
-            border-radius: 12px;
-            padding: 18px 20px;
+            border-radius: 14px;
+            padding: 20px 24px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            max-height: 480px;
+            max-height: 520px;
             overflow-y: auto;
         }
 
@@ -512,20 +503,21 @@
             flex-direction: column;
             align-items: center;
             position: relative;
-            transform: scale(1.05);
-            margin: 10px 0;
+            transform: scale(1.2); /* SKALA NUMBER BOND DIPPERBESAR */
+            margin: 20px 0;
         }
 
+        /* LINGKARAN NUMBER BOND DIPPERBESAR */
         .circle {
-            width: 90px;
-            height: 90px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Press Start 2P', monospace;
             font-weight: 900;
-            font-size: 24px;
+            font-size: 28px;
             color: #ffffff;
             border: 4px solid var(--btn-shadow);
             box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 3px 0 rgba(255,255,255,0.3);
@@ -540,8 +532,8 @@
         }
 
         .branch-lines {
-            width: 120px;  
-            height: 30px;  
+            width: 140px;  
+            height: 35px;  
             position: relative;
             margin-top: -10px;
             margin-bottom: -10px;
@@ -551,19 +543,19 @@
             content: '';
             position: absolute;
             bottom: 0;
-            width: 5px; 
-            height: 56px; 
-            border-radius: 2px;
+            width: 6px; 
+            height: 68px; 
+            border-radius: 3px;
             background-color: var(--border-main); 
             border: 1px solid rgba(0,0,0,0.5);
         }
-        .branch-lines::before { left: 18px; transform: rotate(30deg); transform-origin: top center; }
-        .branch-lines::after { right: 18px; transform: rotate(-30deg); transform-origin: top center; }
+        .branch-lines::before { left: 20px; transform: rotate(30deg); transform-origin: top center; }
+        .branch-lines::after { right: 20px; transform: rotate(-30deg); transform-origin: top center; }
 
         .bottom-circles {
             display: flex;
             justify-content: space-between;
-            width: 200px; 
+            width: 230px; 
         }
 
         .circle input {
@@ -574,7 +566,7 @@
             text-align: center;
             font-family: 'Press Start 2P', monospace;
             font-weight: 900;
-            font-size: 22px;
+            font-size: 26px;
             color: inherit;
             outline: none;
             border-radius: 50%;
@@ -584,18 +576,18 @@
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
 
-        /* FORMULA BOX */
+        /* FORMULA BOX DIPPERBESAR */
         .formula-box {
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Press Start 2P', monospace;
-            font-size: 12px;
+            font-size: 13px;
             color: #ffffff;
             background: #271638;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 14px;
             border: 2px dashed #c084fc;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 4px 10px rgba(192, 132, 252, 0.15);
             width: 100%;
@@ -603,19 +595,19 @@
         
         .formula-box span {
             color: #e879f9;
-            margin: 0 8px;
+            margin: 0 10px;
         }
 
         .form-input {
-            width: 48px;
-            height: 38px;
+            width: 56px;
+            height: 44px;
             text-align: center;
             font-family: 'Press Start 2P', monospace;
-            font-size: 13px;
+            font-size: 14px;
             color: #ffffff;
             background: rgba(0,0,0,0.4);
             border: 2px solid #c084fc;
-            border-radius: 6px;
+            border-radius: 8px;
             outline: none;
             transition: all 0.15s ease;
         }
@@ -628,10 +620,10 @@
             background-color: var(--btn-main); 
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 22px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
-            border-radius: 6px;
+            font-size: 10px;
+            border-radius: 8px;
             cursor: pointer;
             box-shadow: 0 4px 0 var(--btn-shadow);
             transition: all 0.15s ease;
@@ -666,24 +658,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
         }
 
         #picker-section {
             background: var(--container-bg);
-            padding: 14px;
-            border-radius: 8px;
-            margin-top: 10px;
+            padding: 16px;
+            border-radius: 10px;
+            margin-top: 12px;
             border: 2px dashed var(--accent-color);
             width: 100%;
         }
 
         .picker-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
+            font-size: 10px;
             color: var(--accent-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .name-buttons {
@@ -691,7 +683,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
-            max-height: 64px;
+            max-height: 75px;
             overflow-y: auto;
         }
 
@@ -699,10 +691,10 @@
             background-color: var(--btn-main); 
             color: #fff;
             border: none;
-            padding: 8px 14px;
+            padding: 10px 16px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 8px;
-            border-radius: 6px;
+            font-size: 9px;
+            border-radius: 8px;
             cursor: pointer;
             box-shadow: 0 3px 0 var(--btn-shadow);
             transition: all 0.1s ease;
@@ -712,9 +704,9 @@
 
         #feedback {
             font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
+            font-size: 11px;
             margin-top: 6px;
-            min-height: 18px;
+            min-height: 20px;
         }
 
         .correct { color: #4ade80; }
@@ -722,7 +714,7 @@
         .hidden { display: none !important; }
 
         .mascot-inline {
-            font-size: 20px;
+            font-size: 24px;
             display: inline-block;
             vertical-align: middle;
             animation: floatMascot 3s ease-in-out infinite;
@@ -734,13 +726,13 @@
 
         #winner-text {
             font-family: 'Outfit', sans-serif;
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 800;
             color: #f1f5f9;
-            margin: 8px 0;
+            margin: 10px 0;
             background: rgba(0,0,0,0.3);
-            padding: 16px;
-            border-radius: 8px;
+            padding: 18px;
+            border-radius: 10px;
             border: 3px dashed var(--accent-color);
             line-height: 1.4;
         }
@@ -754,23 +746,23 @@
         }
 
         .welcome-card {
-            background: var(--container-bg); padding: 26px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%;
+            background: var(--container-bg); padding: 32px; border-radius: 16px; text-align: center; max-width: 440px; width: 90%;
             box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-            border: 4px solid var(--border-main);
+            border: 5px solid var(--border-main);
             z-index: 100000;
             position: relative;
         }
-        .welcome-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--accent-color); margin-bottom: 8px; line-height: 1.4; text-shadow: 1px 1px #000; }
-        .welcome-desc { font-size: 11px; color: #f1f5f9; margin-bottom: 14px; font-weight: 700; line-height: 1.4; }
+        .welcome-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--accent-color); margin-bottom: 10px; line-height: 1.4; text-shadow: 1px 1px #000; }
+        .welcome-desc { font-size: 12px; color: #f1f5f9; margin-bottom: 16px; font-weight: 700; line-height: 1.4; }
     </style>
 </head>
 <body class="theme-LE1">
 
     <div id="welcome-overlay">
         <div class="welcome-card">
-            <div style="font-size: 32px; margin-bottom: 6px;">🎮✨</div>
-            <div class="welcome-title">CRAFTING NUMBER BOND!</div>
-            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! Siap berhitung bersama jagoan cilik? 🚀</div>
+            <div style="font-size: 38px; margin-bottom: 8px;">🎮✨</div>
+            <div class="welcome-title">CRAFTING NUMBER BOND WITH MISS RUNI!</div>
+            <div class="welcome-desc">Petualangan matematika seru di dunia Minecraft! 🚀</div>
             <button class="btn" id="welcome-btn" type="button">Start Game 🎮</button>
         </div>
     </div>
@@ -818,13 +810,13 @@ Alex
 Creeper"></textarea>
                         <div class="input-hint">💡 Satu nama per baris (Maks 10)</div>
                     </div>
-                    <div style="text-align: center; margin-top: 12px;">
+                    <div style="text-align: center; margin-top: 14px;">
                         <button class="btn-start-game" onclick="mulaiPermainanDariLobby()">Mulai Petualangan! 🎮</button>
                     </div>
                 </div>
             </div>
 
-            <div id="lobby-error" class="wrong" style="font-size: 11px; font-weight: 800; min-height: 14px;"></div>
+            <div id="lobby-error" class="wrong" style="font-size: 12px; font-weight: 800; min-height: 16px;"></div>
         </div>
 
         <!-- GAME SCREEN -->
@@ -843,7 +835,7 @@ Creeper"></textarea>
             </div>
 
             <div id="visual-illustration-wrapper" class="">
-                <div class="visual-illustration-box size-large" id="visual-box-container">
+                <div class="visual-illustration-box" id="visual-box-container">
                     <div id="visual-group-left" class="emoji-side"></div>
                     <div id="visual-group-right" class="emoji-side"></div>
                 </div>
@@ -862,7 +854,7 @@ Creeper"></textarea>
                 </div>
 
                 <div class="right-side-game">
-                    <div style="font-family: 'Press Start 2P', monospace; font-size: 8px; color: #cbd5e1; margin-bottom: 10px;">Math Calculation Formula:</div>
+                    <div style="font-family: 'Press Start 2P', monospace; font-size: 9px; color: #cbd5e1; margin-bottom: 12px;">Math Calculation Formula:</div>
                     
                     <div id="formula-display" class="formula-box">
                         <input type="number" id="form-val1" class="form-input" autocomplete="off" placeholder="?">
@@ -874,11 +866,11 @@ Creeper"></textarea>
 
                     <div class="input-section">
                         <button class="btn" id="submit-btn" onclick="cekJawaban()">Periksa! ✨</button>
-                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Fix Jawabannya ✍️</button>
+                        <button class="btn btn-retry hidden" id="retry-btn" onclick="mulaiBetulkanJawaban()">Perbaiki Jawabannya ✍️</button>
                         <button class="btn btn-recheck hidden" id="recheck-btn" onclick="periksaUlangJawaban()">Periksa Lagi 🔍</button>
                     </div>
 
-                    <div id="formula-check-section" class="hidden" style="margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%;">
+                    <div id="formula-check-section" class="hidden" style="margin-top: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%;">
                         <button class="btn btn-recheck" onclick="cekFormulaJawaban()">Cek Rumus Crafting 🔍</button>
                         <button class="btn btn-next hidden" id="next-btn" onclick="lanjutkanSoal()">Lanjut Level ➔</button>
                     </div>
@@ -889,7 +881,7 @@ Creeper"></textarea>
                         <div class="name-buttons" id="name-buttons-container"></div>
                     </div>
 
-                    <div id="feedback-outside" style="min-height: 18px; margin-top: 8px;"></div>
+                    <div id="feedback-outside" style="min-height: 20px; margin-top: 8px;"></div>
                 </div>
             </div>
 
@@ -898,8 +890,8 @@ Creeper"></textarea>
 
         <!-- RESULT -->
         <div id="result-screen" class="hidden" style="width: 100%;">
-            <div style="font-size: 32px; margin-bottom: 6px;">🏆🎉</div>
-            <h1 style="font-family: 'Press Start 2P', monospace; font-size: 15px;">VICTORY SURVIVAL!</h1>
+            <div style="font-size: 38px; margin-bottom: 8px;">🏆🎉</div>
+            <h1 style="font-family: 'Press Start 2P', monospace; font-size: 18px;">VICTORY SURVIVAL!</h1>
             <div id="winner-text">Pemenangnya adalah...</div>
             <button class="btn btn-next" onclick="kembaliKeLobby()">Main Lagi 🔄</button>
         </div>
@@ -941,6 +933,8 @@ Creeper"></textarea>
         const welcomeBtn = document.getElementById('welcome-btn');
         const visualIllustrationWrapper = document.getElementById('visual-illustration-wrapper');
         const visualBoxContainer = document.getElementById('visual-box-container');
+        const visualGroupLeft = document.getElementById('visual-group-left');
+        const visualGroupRight = document.getElementById('visual-group-right');
         const gameMascotEl = document.getElementById('game-mascot');
 
         const audioBenar = new Audio('Hore.mp3');
@@ -948,18 +942,18 @@ Creeper"></textarea>
         audioBenar.load();
 
         const additionPairs = [
-            { left: '🪵', right: '🧱' }, 
-            { left: '🍎', right: '🥕' }, 
-            { left: '💎', right: '🪙' }, 
+            { left: '👓', right: '🕶' }, 
+            { left: '🍎', right: '🍊' }, 
+            { left: '🐓', right: '🦆' }, 
             { left: '⭐', right: '🌙' }, 
-            { left: '🍎', right: '🍎' }  
+            { left: '🎸', right: '🎻' }  
         ];
 
         const subtractionPairs = [
-            { left: '🧱', right: '💣' }, 
+            { left: '🍎', right: '🫝' }, 
             { left: '🥩', right: '🦴' }, 
-            { left: '💎', right: '⛏️' }, 
-            { left: '⭐', right: '✨' }  
+            { left: '🥃', right: '🫗' }, 
+            { left: '🌹', right: '🥀' }  
         ];
 
         const pairColors = [
@@ -1083,7 +1077,7 @@ Creeper"></textarea>
             let namaKatBadge = "LE 1 (Number bond 1-5)";
             let gameMascotEmoji = "💧⭐";
             if (kategoriPilihan === 'LE2') { namaKatBadge = "LE 2 (Number bond 1-10)"; gameMascotEmoji = "🪵🧱"; }
-            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Number bond 1-20)"; gameMascotEmoji = "🍎🗡️"; }
+            if (kategoriPilihan === 'LE3') { namaKatBadge = "LE 3 (Number bond 1-20)"; gameMascotEmoji = "🍎⚒️"; }
             if (kategoriPilihan === 'CT') { namaKatBadge = "CT (Number bond ratusan)"; gameMascotEmoji = "🪙💎"; }
             
             document.getElementById('game-category-badge').innerText = `Kategori: ${namaKatBadge}`;
@@ -1177,16 +1171,8 @@ Creeper"></textarea>
                 formOperator.innerText = '-'; 
             }
 
-            // ATUR UKURAN ILUSTRASI (LE1 & LE2 LEBIH BESAR, LE3 DIKECILKAN SEDIKIT)
+            // TAMPILAN ILUSTRASI (MENYESUAIKAN KATEGORI CT AGAR TIDAK SEPI)
             visualIllustrationWrapper.classList.remove('hidden');
-            visualBoxContainer.classList.remove('size-large', 'size-compact');
-
-            if (kategoriPilihan === 'LE1' || kategoriPilihan === 'LE2') {
-                visualBoxContainer.classList.add('size-large');
-            } else {
-                visualBoxContainer.classList.add('size-compact');
-            }
-
             if (kategoriPilihan === 'CT') {
                 visualBoxContainer.innerHTML = `
                     <div class="ct-banner-container">
@@ -1204,6 +1190,7 @@ Creeper"></textarea>
                     <div id="visual-group-right" class="emoji-side"></div>
                 `;
                 
+                // Set ulang referensi elemen setelah innerHTML direset
                 const groupLeft = document.getElementById('visual-group-left');
                 const groupRight = document.getElementById('visual-group-right');
 

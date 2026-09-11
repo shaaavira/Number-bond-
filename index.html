@@ -428,7 +428,7 @@
             transition: border-color 0.5s ease;
         }
 
-        /* --- DESAIN BARU YANG LEBIH KEREN UNTUK CT (RATUSAN) --- */
+        /* BANNER KHUSUS CT (RATUSAN) */
         .ct-banner-container {
             width: 100%;
             display: flex;
@@ -479,7 +479,6 @@
             font-weight: 800;
             color: #86efac;
         }
-        /* ---------------------------------------------------- */
 
         .game-main-layout {
             display: flex;
@@ -1012,7 +1011,7 @@ Creeper"></textarea>
 
         function playClappingAndCheer() {
             try {
-                audioBenar.currentTime = 1.0; 
+                audioBenar.currentTime = 0; 
                 audioBenar.play().catch(e => {});
             } catch(e) {}
         }
@@ -1041,7 +1040,12 @@ Creeper"></textarea>
         function triggerConfetti() {
             try {
                 if (typeof confetti === 'function') {
-                    confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+                    confetti({
+                        particleCount: 120,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        zIndex: 999999
+                    });
                 }
             } catch(e) {}
         }
@@ -1141,10 +1145,12 @@ Creeper"></textarea>
             feedbackOutside.innerHTML = '';
             pickerSection.classList.add('hidden');
             formulaCheckSection.classList.add('hidden');
+            
             submitBtn.style.display = 'inline-block';
             retryBtn.classList.add('hidden');
             recheckBtn.classList.add('hidden');
             nextBtn.classList.add('hidden');
+            
             isSalahSesi = false;
             
             levelText.innerText = `Crafting Level: ${soalKe} / ${totalSoal}`;
@@ -1340,6 +1346,7 @@ Creeper"></textarea>
                 triggerFlashRed();        
                 feedbackOutside.innerHTML = "<span class='wrong'>Masih belum pas, yuk cek ulang angkanya! 🤔</span>";
                 recheckBtn.classList.add('hidden');
+                retryBtn.classList.remove('hidden');
             }
         }
 

@@ -271,15 +271,13 @@
             transform: translateY(-2px);
         }
 
-                /* CSS UNTUK GAMBAR KATEGORI (CUSTOM IMAGE) */
+        /* CSS UNTUK GAMBAR KATEGORI (CUSTOM IMAGE) */
         .cat-img {
-            width: 65px; /* Diubah jadi 65px agar jauh lebih jelas */
+            width: 65px;
             height: auto;
             display: block;
             margin: 0 auto 10px auto;
-            image-rendering: pixelated; /* Mempertajam tampilan gambar piksel Minecraft */
-        }
-
+            image-rendering: pixelated;
         }
 
         .cat-title {
@@ -1280,7 +1278,7 @@ Creeper"></textarea>
 
             if (jawabanUser === jawabanBenar) {
                 playClappingAndCheer();
-                triggerConfetti();
+                triggerConfetti(); // <-- Confetti aktif kembali di sini!
                 
                 activeInput.disabled = true;
                 submitBtn.style.display = 'none';
@@ -1336,7 +1334,7 @@ Creeper"></textarea>
 
             if (jawabanBaru === jawabanBenar) {
                 playClappingAndCheer();
-                triggerConfetti();
+                triggerConfetti(); // <-- Confetti aktif kembali di sini saat jawaban diperbaiki!
 
                 activeInput.disabled = true;
                 recheckBtn.classList.add('hidden');
